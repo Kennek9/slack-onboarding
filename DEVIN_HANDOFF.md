@@ -5,6 +5,8 @@
 仓库：https://github.com/Kennek9/slack-onboarding
 正式网站：https://kennek9.github.io/slack-onboarding/
 
+仓库已做安全清理并重写历史。如果你已有本地副本，请重新克隆；从新的 main 开始，不要把清理前的旧分支合并回来。
+
 先阅读 AGENTS.md、README.md 和 dist/index.html。源码是无依赖的静态网站，HTML/CSS/JS 都在 dist/index.html；不要一开始迁移框架或全面重写。
 
 启动：
