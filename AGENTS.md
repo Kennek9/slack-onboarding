@@ -31,5 +31,6 @@
 - 合并或推送 main 会触发 GitHub Pages 生产发布。只有 Actions 成功后，才能报告正式网站已更新。
 - 发布目录是 dist，工作流在 .github/workflows/pages.yml。PR 和其他分支不发布生产站。
 - 仓库现为公开；示例继续使用部门/职责代称，不提交真实内部聊天或凭据。
+- 不写入内部群聊、话题、文档的定位链接或 ID；公开页面仅保留部门场景说明和官方教程。
 - Sites 旧站独立维护，不会随 main 自动更新。
 - 未经要求，不改 .openai/hosting.json 的 project_id，不添加凭据或更改线上访问范围。

@@ -25,4 +25,4 @@ node scripts/check.mjs
 
 发布由 GitHub Pages 承担：合并或推送 main 会触发 .github/workflows/pages.yml，先检查 JavaScript 语法，再只发布 dist。Actions 成功后，正式网站才会更新。PR 和其他分支不发布生产站，当前也没有 PR 预览。请把“合并 main”视为生产发布，不要仅凭推送成功报告已上线。
 
-仓库已公开，继续使用部门/职责代称，不提交真实内部聊天或凭据。旧 Sites 网址是独立快照，不会自动更新；保留 .openai/hosting.json 的 project_id。
+仓库已公开，继续使用部门/职责代称，不提交真实内部聊天、群聊/话题/文档的定位链接或 ID，也不把 API 密钥、访问令牌写入前端。所有交互保持本地演示。旧 Sites 网址是独立快照，不会自动更新；保留 .openai/hosting.json 的 project_id。

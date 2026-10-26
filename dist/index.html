@@ -756,7 +756,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     </footer>
   </div>
   <dialog class="sheet" id="agenda-dialog" aria-labelledby="agenda-title"><div class="sheet-header"><h2 id="agenda-title">讲解目录</h2><button class="close-button" data-close="agenda-dialog" aria-label="关闭目录">×</button></div><div class="agenda-grid"><section class="agenda-group"><h3>沟通规则</h3><div class="topics"><button class="topic" data-topic="entry" aria-pressed="true"><span class="num">01</span><span><strong>频道与私信</strong><small>市场 · KOL</small></span></button><button class="topic" data-topic="thread" aria-pressed="false"><span class="num">02</span><span><strong>Thread 回复</strong><small>CX · 内容</small></span></button><button class="topic" data-topic="mention" aria-pressed="false"><span class="num">03</span><span><strong>@ 与邀请</strong><small>市场 · 设计</small></span></button><button class="topic" data-topic="privacy" aria-pressed="false"><span class="num">04</span><span><strong>可见范围</strong><small>设计 · 研发</small></span></button><button class="topic" data-topic="follow" aria-pressed="false"><span class="num">05</span><span><strong>通知与跟进</strong><small>研发 · 跨部门</small></span></button></div></section><section class="agenda-group"><h3>日常协作</h3><div class="topics"><button class="topic" data-topic="documents" aria-pressed="false"><span class="num">06</span><span><strong>文档分工</strong><small>内容 · CX</small></span></button><button class="topic" data-topic="sharing" aria-pressed="false"><span class="num">07</span><span><strong>共享权限</strong><small>CX · 内容</small></span></button><button class="topic" data-topic="video" aria-pressed="false"><span class="num">08</span><span><strong>语音与视频</strong><small>设计 · 研发</small></span></button><button class="topic" data-topic="calendar" aria-pressed="false"><span class="num">09</span><span><strong>日历与会议</strong><small>产品 · 跨国研发</small></span></button><button class="topic" data-topic="search" aria-pressed="false"><span class="num">10</span><span><strong>搜索资料</strong><small>研发 · 设计</small></span></button></div></section><section class="agenda-group"><h3>提效工具</h3><div class="topics"><button class="topic" data-topic="typeless" aria-pressed="false"><span class="num">11</span><span><strong>Typeless</strong><small>各部门</small></span></button><button class="topic" data-topic="slackbot" aria-pressed="false"><span class="num">12</span><span><strong>Slackbot</strong><small>各部门</small></span></button></div></section></div><p class="sheet-footnote">按优先级讲解，也可直接跳到需要的主题。</p></dialog>
-  <dialog class="sheet" id="notes-dialog" aria-labelledby="notes-title"><div class="sheet-header"><h2 id="notes-title">当前页补充说明</h2><button class="close-button" data-close="notes-dialog" aria-label="关闭补充说明">×</button></div><div class="caption"><a id="source-link" target="_blank" rel="noopener noreferrer"></a><span>历史场景改写 · 频道名为建议 · 本地示意</span></div><div id="extra"></div><details class="cutover" id="cutover"><summary>切换前，公司还需要确定什么？</summary><div class="cutover-grid"><div><strong>正式切换日</strong><p>新消息从哪天发 Slack，旧群何时停止新增。</p></div><div><strong>历史资料入口</strong><p>旧消息、附件、文档哪些迁移，哪些继续在飞书查。</p></div><div><strong>任务与工作流</strong><p>任务、审批、Base 和机器人通知分别由什么承接。</p></div><div><strong>公司账号与访问范围</strong><p>文件归属、外部协作者、App 安装与 AI 权限。</p></div></div><a href="https://slack.com/intl/zh-cn/help/articles/360035354694-使用-CSV-或文本文件将数据移动至-Slack" target="_blank" rel="noopener noreferrer">官方通用导入说明 · 仅基本频道、用户和消息 ↗</a></details></dialog>
+  <dialog class="sheet" id="notes-dialog" aria-labelledby="notes-title"><div class="sheet-header"><h2 id="notes-title">当前页补充说明</h2><button class="close-button" data-close="notes-dialog" aria-label="关闭补充说明">×</button></div><div class="caption"><span id="source-label"></span><span id="source-note">历史场景改写 · 频道名为建议 · 本地示意</span></div><div id="extra"></div><details class="cutover" id="cutover"><summary>切换前，公司还需要确定什么？</summary><div class="cutover-grid"><div><strong>正式切换日</strong><p>新消息从哪天发 Slack，旧群何时停止新增。</p></div><div><strong>历史资料入口</strong><p>旧消息、附件、文档哪些迁移，哪些继续在飞书查。</p></div><div><strong>任务与工作流</strong><p>任务、审批、Base 和机器人通知分别由什么承接。</p></div><div><strong>公司账号与访问范围</strong><p>文件归属、外部协作者、App 安装与 AI 权限。</p></div></div><a href="https://slack.com/intl/zh-cn/help/articles/360035354694-使用-CSV-或文本文件将数据移动至-Slack" target="_blank" rel="noopener noreferrer">官方通用导入说明 · 仅基本频道、用户和消息 ↗</a></details></dialog>
   <dialog class="sheet" id="reference-dialog" aria-labelledby="reference-title"><div class="sheet-header"><h2 id="reference-title">会后查阅 · 中文资料</h2><button class="close-button" data-close="reference-dialog" aria-label="关闭中文资料">×</button></div><details id="resource-details"><summary>官方中文资料</summary><div class="resource-grid">
         <a href="https://slack.com/intl/zh-cn/help/articles/360017938993" target="_blank" rel="noopener noreferrer">频道是什么 ↗</a>
         <a href="https://slack.com/intl/zh-cn/help/articles/212281468-了解私信" target="_blank" rel="noopener noreferrer">DM 与多人私信↗</a>
@@ -780,91 +780,88 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   <dialog class="native-huddle-dialog" id="native-huddle-dialog" aria-labelledby="native-huddle-title"><div class="call-window" id="native-huddle-content"></div></dialog>
   <script>
     const icon = name => `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
-    const source = (chat, position) => `#`;
-    const contentThread = '#';
-    const cxSource = '#';
     const topics = {
       entry: {
         title: '持续协作用频道，临时沟通用 DM。', subtitle: 'KOL 素材审核、名单确认、三人对齐，分别放哪里？', department: '市场 · KOL',
         variants: [['channel','Channel','频道'],['dm','DM','一对一'],['group','Group DM','多人私信']],
-        sourceName: 'KOL 宣发 app 侧素材对齐 · 8/15', sourceUrl: source('[internal-chat-id-removed]',26),
+        sourceName: '市场 · KOL 素材协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/360017938993',
         takeaway: 'Channel 也是群聊，按项目或主题组织。', note: '多人 DM 更像临时小群；长期协作建议建频道。'
       },
       privacy: {
         title: '锁图标，表示私密频道。', subtitle: '设计系统给研发使用：谁能发现，谁能加入？', department: '设计 · 研发',
         variants: [['public','公开频道'],['private','私密频道']],
-        sourceName: '设计系统同步美国同事 · 10/23', sourceUrl: source('[internal-chat-id-removed]',11),
+        sourceName: '设计 · 研发协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/360017938993',
         takeaway: '公开：工作区普通成员可查找、查看、加入。', note: '私密：仅成员可见，需已有成员邀请；访客另有访问限制。'
       },
       mention: {
         title: '@ 人，不等于拉人进频道。', subtitle: '市场与 KOL 对接同事一起确认宣传素材。', department: '市场 · 设计',
         variants: [['outside','尚未加入'],['member','已经是成员']],
-        sourceName: 'KOL 宣发 app 侧素材对齐 · 8/15', sourceUrl: source('[internal-chat-id-removed]',28),
+        sourceName: '市场 · KOL 素材协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/360002063088',
         takeaway: '非成员被 @ 后，不会自动加入。', note: '先检查成员状态，再选择邀请；仅输入名字不代表对方已收到。'
       },
       thread: {
         title: '回复在 Thread，主频道只见回复数。', subtitle: 'CX 转来“内容主题重复”的反馈，内容团队回应。', department: 'CX · 内容',
         variants: [['collapsed','频道里'],['expanded','展开 Thread']],
-        sourceName: '#content-feedback · 10/8', sourceUrl: contentThread,
+        sourceName: 'CX · 内容反馈',
         official: 'https://slack.com/intl/zh-cn/help/articles/115000769927',
         takeaway: '重要结论，可以同时发回频道。', note: 'Thread = 消息列。参与、发起或被 @ 后，默认会收到新回复通知。'
       },
       video: {
         title: '临时通话，用 Huddle。', subtitle: '设计给 Dev 讲解新设计系统，边看组件边讨论。', department: '设计 · 研发',
         variants: [['design','设计评审'],['firmware','固件排查']],
-        sourceName: '设计系统同步美国同事 · 10/23', sourceUrl: source('[internal-chat-id-removed]',11),
+        sourceName: '设计 · 研发协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团',
         takeaway: '频道或 DM 顶部的耳机 → 开启语音。', note: '进入后可开摄像头、共享屏幕；这里只展示界面，不调用设备。'
       },
       documents: {
         title: 'Slack 讨论，Google Docs 写正文。', subtitle: '内容审核与 CX 周报，文档和讨论各放各的位置。', department: '内容 · CX',
         variants: [['content','内容审核'],['cx','CX 周报']],
-        sourceName: 'Content All in One · 10/22', sourceUrl: source('[internal-chat-id-removed]',70),
+        sourceName: '内容 · 稿件审核',
         official: 'https://slack.com/intl/zh-cn/help/articles/205875058',
         takeaway: '正文和具体评论留在文档，进展回原讨论。', note: '本页建议：正式文档用 Google Docs；Slack Canvas 可写轻量说明，能力依套餐。'
       },
       sharing: {
         title: '创建时就确定：给谁看，能做什么。', subtitle: 'CX 周报发进频道前，先把协作者加到文档。', department: 'CX · 内容',
         variants: [['restricted','只有作者'],['shared','已加协作者']],
-        sourceName: 'CX Feedback · 8/19', sourceUrl: cxSource,
+        sourceName: 'CX · 周报协作',
         official: 'https://support.google.com/a/users/answer/9283053?hl=zh-Hans',
         takeaway: '在频道里 ≠ 有文档权限。', note: '发链接前确认共享对象与角色；打不开时先检查登录账号。'
       },
       follow: {
         title: '重要频道设提醒，行动项加待办。', subtitle: '研发发布固件进展，相关同事需要接住后续。', department: '研发 · 跨部门',
         variants: [['mentions','仅提及与 DM'],['channel','重点频道全提醒'],['todo','个人待办']],
-        sourceName: '固件 OTA 策略 · 10/22', sourceUrl: source('[internal-chat-id-removed]',65),
+        sourceName: '研发 · 固件发布',
         official: 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知',
         takeaway: '加入频道，不代表每条新消息都会提醒。', note: '通知 → 提及与私信；重点频道可单独设为全部通知。'
       },
       search: {
         title: '用频道、关键词和日期，找回结论。', subtitle: '查固件灰度范围，或找设计系统的 Figma 入口。', department: '研发 · 设计',
         variants: [['firmware','固件进展'],['design','设计资料']],
-        sourceName: '固件 OTA 策略 · 10/22', sourceUrl: source('[internal-chat-id-removed]',65),
+        sourceName: '研发 · 固件发布',
         official: 'https://slack.com/intl/zh-cn/help/articles/202528808-在-Slack-中搜索-Search-in-Slack-',
         takeaway: '搜不到时，先确认频道、关键词与访问权限。', note: '搜索限于已保留、你有权访问的内容；飞书历史需另行迁移或回原处查。'
       },
       typeless: {
         title: '把话说进输入框，再检查文字。', subtitle: 'Typeless 用于输入；Huddle 用于通话。', department: '各部门 · 语音输入',
         variants: [['setup','安装与设置'],['slack','Slack 回复'],['docs','Docs 评审']],
-        sourceLabel: '官方教程', sourceName: 'Typeless · 安装与设置', sourceUrl: 'https://www.typeless.com/zh-cn/help/installation-and-setup',
+        sourceLabel: '官方教程', sourceName: 'Typeless · 安装与设置',
         official: 'https://www.typeless.com/zh-cn/help/quickstart/dictate',
         takeaway: '光标放入输入框 → 听写 → 检查文字 → 确认发送。', note: '默认：Mac 按一下 Fn 开始，再按一次结束；Windows 为右 Alt。以本机设置为准。'
       },
       slackbot: {
         title: '让 Slackbot 找资料、理结论、起草更新。', subtitle: '给具体频道或原消息，要求附来源。', department: '各部门 · Slackbot',
         variants: [['ask','找消息与结论'],['draft','起草更新'],['apps','App 通知']],
-        sourceLabel: '官方教程', sourceName: 'Slackbot · 中文说明', sourceUrl: 'https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作',
+        sourceLabel: '官方教程', sourceName: 'Slackbot · 中文说明',
         official: 'https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作',
         takeaway: 'Slackbot 的回答范围受你的访问权限限制。', note: 'AI 能力取决于套餐、试用及管理员设置；公司是否已开放待确认。'
       },
       calendar: {
         title: '预约会议，在 Google Calendar 创建。', subtitle: 'App progress sync：北京、英国、洛杉矶同一场。', department: '产品 · 跨国研发',
         variants: [['connect','接入日历'],['app','在 Slack 约会议'],['web','在 Calendar 网页约']],
-        sourceName: 'App progress sync · 9/28–29', sourceUrl: source('[internal-chat-id-removed]',24),
+        sourceName: '产品 · 跨时区同步',
         official: 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历',
         takeaway: '发到频道 ≠ 邀请频道所有人参会。', note: '参会人要单独添加；会议链接可用 Google Meet 或 Huddle。'
       }
@@ -954,9 +951,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       document.querySelector('#detail-subtitle').textContent = topic.subtitle;
       document.querySelector('#department').textContent = topic.department;
       switches.innerHTML = topic.variants.map(([id,label,note]) => `<button class="switch" data-variant="${id}" aria-pressed="${variant === id}">${label}${note ? `<small>${note}</small>` : ''}</button>`).join('');
-      document.querySelector('#source-link').textContent = `${topic.sourceLabel || '飞书来源'}：${topic.sourceName} ↗`;
-      document.querySelector('#source-link').href = topic.sourceUrl;
-      document.querySelector('.caption > span').textContent = topic.sourceLabel ? '使用方式示意 · 不连接真实账号' : '历史场景改写 · 频道名为建议 · 本地示意';
+      document.querySelector('#source-label').textContent = `${topic.sourceLabel || '部门场景'}：${topic.sourceName}`;
+      document.querySelector('#source-note').textContent = topic.sourceLabel ? '使用方式示意 · 不连接真实账号' : '历史场景改写 · 频道名为建议 · 本地示意';
       document.querySelector('#official-link').href = topic.official;
       document.querySelector('#official-link').firstChild.textContent = '中文教程 ';
       document.querySelector('#takeaway-title').textContent = topic.takeaway;
@@ -1007,8 +1003,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         if (firmware) {
           document.querySelector('#detail-subtitle').textContent = 'OTA 固件升级，研发和产品一起确认重连、超时和展示。';
           document.querySelector('#department').textContent = '固件研发 · 产品';
-          document.querySelector('#source-link').textContent = '飞书来源：固件 OTA 策略 · 10/22 ↗';
-          document.querySelector('#source-link').href = source('[internal-chat-id-removed]',61);
+          document.querySelector('#source-label').textContent = '部门场景：研发 · 固件发布';
         }
         const mainMessage = firmware
           ? message('研发','固件研发同事','升级过程包含重连，页面会显示 rebooting；需要一起确认超时和展示。')
@@ -1022,8 +1017,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const fileTitle = cx ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇';
         const request = cx ? '上周的邮件问题分类和社交媒体反馈整理好了。细节在周报里，相关问题在这条消息下讨论。' : '这轮 30 篇 Devotional 已准备好。请在文档评论里写具体修改意见，审核结果回这条消息同步。';
         if (cx) {
-          document.querySelector('#source-link').textContent = '飞书来源：CX Feedback · 8/19 ↗';
-          document.querySelector('#source-link').href = cxSource;
+          document.querySelector('#source-label').textContent = '部门场景：CX · 周报协作';
         }
         const body = message(cx ? 'CX' : '内容',cx ? 'CX 团队' : '内容制作团队',request) + `<button class="native-file" data-action="open-doc" aria-label="打开${fileTitle}"><span class="doc-symbol">${icon('doc')}</span><div><strong>${fileTitle}</strong><small>Google Docs · 点击打开文档演示</small></div>${icon('external')}</button><button class="native-reply-count" data-action="doc-thread">${1 + replyMessages.length} 条回复 · ${cx ? '产品团队' : '审核团队'}</button>`;
         const response = cx ? '我会看周报中的具体反馈；需要跟进的问题会在这里继续回复。' : '30 篇已审完，具体修改意见已留在文档评论里。';
@@ -1060,8 +1054,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
           : message('研发','固件研发 · 10/22','27 版本的测试与生产环境均已配置升级。') + message('研发','固件研发 · 10/22','dev 为全量；生产环境按指定设备做灰度。','green')}</div>`;
         stage.innerHTML = shell('搜索式与结果示意',body,'先缩小频道和日期，再打开原消息确认上下文。',{icon:'message',channel:design ? 'design-system' : 'proj-ring-ota'});
         if (design) {
-          document.querySelector('#source-link').textContent = '飞书来源：设计系统同步美国同事 · 10/23 ↗';
-          document.querySelector('#source-link').href = source('[internal-chat-id-removed]',12);
+          document.querySelector('#source-label').textContent = '部门场景：设计 · 研发协作';
         }
       }
 
@@ -1075,8 +1068,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
           const body = `<div class="spoken"><small>口述内容 · 根据部门协作改写</small>${spoken}</div><div class="key-path">光标放在${docs ? '文档评论框' : 'Slack 回复框'} → 按听写快捷键说话 → 再按一次结束</div><div class="follow-actions"><button class="button secondary" data-action="typeless-preview">${typelessPreview ? '收起文字示意' : '查看文字示意'}</button></div>${typelessPreview ? `<div class="draft-box"><label for="typeless-output">${docs ? '文档评论框' : 'Slack 回复框'} · 文字效果示意</label><textarea id="typeless-output" readonly>${written}</textarea><p class="setup-note">检查数字、术语和语气，再在原工具中确认发送。</p></div>` : ''}`;
           if (docs) stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('doc')}Google Docs · 内容审核</div><span class="window-label">示意</span></div><div class="window-body">${body}</div><div class="window-footer">${icon('arrow')}这里展示输入方式，不会录音或调用 Typeless。</div></section>`;
           else stage.innerHTML = shell('design-system · Thread 回复',body,'这里展示输入方式，不会录音或调用 Typeless。',{channel:'design-system'});
-          document.querySelector('#source-link').textContent = docs ? '飞书来源：Content All in One · 10/22 ↗' : '飞书来源：设计系统同步美国同事 · 10/23 ↗';
-          document.querySelector('#source-link').href = docs ? source('[internal-chat-id-removed]',70) : source('[internal-chat-id-removed]',11);
+          document.querySelector('#source-label').textContent = docs ? '部门场景：内容 · 稿件审核' : '部门场景：设计 · 研发协作';
         }
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>专业词经常识别错？</summary><p>将 Glorify、Figma、OTA 等词加入 Typeless Dictionary。快捷键冲突时，在设置中修改。<a href="https://www.typeless.com/zh-cn/help/quickstart/history-and-dictionary" target="_blank" rel="noopener noreferrer">词典中文教程 ↗</a></p></details>`;
       }
