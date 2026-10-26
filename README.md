@@ -30,6 +30,7 @@ node scripts/check.mjs
 
 - `dist/index.html`：网站完整源码，HTML、CSS、JavaScript 均在此文件。
 - `.github/workflows/pages.yml`：检查 JavaScript 语法，并将 `dist` 自动发布到 GitHub Pages。
+- `dist/skills/lark-to-gdrive/SKILL.md`：团队迁移 Skill 的公开版，可在“文档分工 → 搬旧文档”或“中文资料”查看用法并下载。网页不执行迁移；原始文件保持不变，公开版去掉内部环境信息，并要求本人授权、先试迁、删除与覆盖另行确认。
 - `.openai/hosting.json`：现有 Sites 项目标识和静态目录；不是凭据。
 - `scripts/check.mjs`：离线 JavaScript 语法检查。
 

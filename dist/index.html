@@ -343,6 +343,27 @@
     .sheet .resource-grid { gap: 9px 25px; }
     .sheet .resource-grid a { font-size: 15px; min-height: 40px; }
     .sheet-footnote { font-size: 12px; color: var(--muted); margin: 17px 0 0; }
+    .takeaway-links { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px 14px; flex-shrink: 0; }
+    #migration-open[hidden] { display: none; }
+    .migration-resource { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
+    .migration-resource strong { display: block; font-size: 16px; }
+    .migration-resource small { color: var(--muted); font-size: 13px; }
+    #migration-dialog { width: min(780px,calc(100% - 32px)); }
+    .migration-lead { margin: 0 0 22px; font-size: 17px; }
+    .migration-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; list-style: none; padding: 0; margin: 0 0 22px; }
+    .migration-steps li { border-top: 2px solid var(--purple); padding-top: 12px; }
+    .migration-steps strong { display: block; font-size: 17px; }
+    .migration-steps span { display: block; margin-top: 5px; font-size: 14px; color: var(--muted); }
+    .migration-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; }
+    .migration-actions a:not(.button) { color: var(--purple); font-size: 14px; }
+    .migration-prompt { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 12px; }
+    .migration-prompt summary { cursor: pointer; min-height: 40px; font-size: 15px; }
+    .migration-prompt textarea { display: block; width: 100%; min-height: 165px; resize: vertical; margin: 0 0 12px; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font: inherit; font-size: 14px; line-height: 1.7; }
+    @media (max-width: 600px) {
+      .migration-steps { grid-template-columns: 1fr; gap: 14px; }
+      .migration-resource { align-items: flex-start; flex-direction: column; }
+      .takeaway-links { justify-content: flex-start; margin-top: 8px; }
+    }
     @media (min-width: 1000px) and (min-height: 700px) {
       .wrap { height: 100dvh; min-height: 0; }
       .top { min-height: 65px; flex-shrink: 0; }
@@ -743,7 +764,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <div class="detail-heading"><div><h2 id="detail-title"></h2><p id="detail-subtitle"></p></div><span class="dept" id="department"></span></div>
         <div class="switches" id="switches" aria-label="切换呈现方式"></div>
         <div class="stage" id="stage"></div>
-        <div class="takeaway"><div><strong id="takeaway-title"></strong><p id="takeaway-note"></p></div><a id="official-link" target="_blank" rel="noopener noreferrer">中文教程 <svg aria-hidden="true"><use href="#i-external"/></svg></a></div>
+        <div class="takeaway"><div><strong id="takeaway-title"></strong><p id="takeaway-note"></p></div><div class="takeaway-links"><button class="button secondary" id="migration-open" data-open-migration hidden>搬旧文档</button><a id="official-link" target="_blank" rel="noopener noreferrer">中文教程 <svg aria-hidden="true"><use href="#i-external"/></svg></a></div></div>
         <p id="status" class="sr-only" role="status" aria-live="polite"></p>
       </section>
       <noscript>请启用 JavaScript，使用按沟通规则、日常协作、提效工具排序的宣讲页面。</noscript>
@@ -774,7 +795,22 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">Typeless 安装与权限 ↗</a>
         <a href="https://www.typeless.com/zh-cn/help/quickstart/dictate" target="_blank" rel="noopener noreferrer">Typeless 中文语音输入教程 ↗</a>
         <a href="https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作" target="_blank" rel="noopener noreferrer">Slackbot 中文教程 ↗</a>
-      </div></details><p class="sheet-footnote">来源为 Slack、Google、Typeless 官方中文帮助。公司频道、套餐与 App 配置仍需确认。</p></dialog>
+      </div></details><section class="migration-resource"><div><strong>飞书 → Google Drive</strong><small>团队迁移 Skill · 转为原生 Google 格式</small></div><button class="button secondary" data-open-migration>用法与下载 →</button></section><p class="sheet-footnote">中文教程来自官方；迁移 Skill 由团队提供。公司频道、套餐与 App 配置仍需确认。</p></dialog>
+  <dialog class="sheet" id="migration-dialog" aria-labelledby="migration-title">
+    <div class="sheet-header"><h2 id="migration-title">飞书文档 → Google Drive</h2><button class="close-button" data-close="migration-dialog" aria-label="关闭迁移说明">×</button></div>
+    <p class="migration-lead">转为可编辑的 Docs / Sheets / Slides。</p>
+    <ol class="migration-steps">
+      <li><strong>下载 Skill</strong><span>交给支持本地工具的 AI 助手</span></li>
+      <li><strong>确认账号</strong><span>飞书 + 公司 Google 账号</span></li>
+      <li><strong>先迁一篇</strong><span>核对内容、格式与共享权限</span></li>
+    </ol>
+    <div class="migration-actions"><a class="button" href="./skills/lark-to-gdrive/SKILL.md" download="lark-to-gdrive-SKILL.md">下载 Skill · 公开版</a><a href="https://support.google.com/drive/answer/2424368?hl=zh-Hans" target="_blank" rel="noopener noreferrer">Google 导入中文说明 ↗</a></div>
+    <p class="sheet-footnote">需已登录 lark-cli。保留飞书原文；复杂嵌入块需复查，迁移后重新确认共享。</p>
+    <details class="migration-prompt"><summary>给 AI 助手的指令</summary><label class="sr-only" for="migration-prompt">迁移指令</label><textarea id="migration-prompt" readonly>请加载我提供的 lark-to-gdrive Skill，将指定飞书文档迁移为原生 Google Docs / Sheets / Slides，存入我确认的公司 Google Drive 文件夹。
+先试迁一篇，核对内容、表格、图片和共享权限后，再处理我确认的清单。保留原文，任何覆盖或删除先确认。
+飞书链接：[填写]
+目标文件夹：[填写]</textarea><button class="button secondary" id="copy-migration-prompt">复制指令</button><p class="sheet-footnote" id="migration-copy-status" role="status" aria-live="polite">授权和迁移由本人在 AI 助手中完成，网页不会读取或上传文件。</p></details>
+  </dialog>
   <dialog class="google-doc-dialog" id="document-dialog" aria-labelledby="document-dialog-title"><div class="browser-address">Google Docs · 文档界面示意<button class="button secondary" id="return-slack">返回 Slack</button></div><header class="google-doc-header"><span class="doc-symbol"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><div><strong id="document-dialog-title"></strong><small>文档正文和评论在这里；消息讨论仍在 Slack</small></div><button class="button secondary" id="doc-share-toggle">共享</button></header><div class="google-doc-layout"><article class="google-paper"><small>根据部门协作改写 · 片段示意</small><h3 id="document-page-title"></h3><p id="document-page-text"></p><div id="doc-sharing-panel" hidden><h4>有权访问的用户</h4><p>作者：公司 Google 账号</p><p>审核协作者：评论者</p><a href="https://support.google.com/a/users/answer/9283053?hl=zh-Hans" target="_blank" rel="noopener noreferrer">Google 共享设置中文教程 ↗</a></div></article><aside class="google-comments"><div class="google-comment"><strong id="document-comment-author">审核同事</strong><p id="document-comment-example"></p><span>评论对应文档内容</span></div><form id="document-comment-form"><label for="document-comment-input">添加评论</label><textarea id="document-comment-input" maxlength="1000" rows="3" placeholder="写具体修改意见…" required></textarea><button class="button" type="submit">评论</button></form><div id="document-saved-comment"></div></aside></div></dialog>
   <dialog class="sheet native-detail-dialog" id="channel-detail-dialog" aria-labelledby="channel-detail-title"><div class="sheet-header"><h2 id="channel-detail-title"></h2><button class="close-button" data-close="channel-detail-dialog" aria-label="关闭对话详情">×</button></div><div class="native-detail-tabs"><button data-info-tab="about" aria-pressed="true">关于</button><button data-info-tab="members" aria-pressed="false">成员</button><button data-info-tab="settings" aria-pressed="false">设置</button></div><div id="channel-detail-body"></div></dialog>
   <dialog class="native-huddle-dialog" id="native-huddle-dialog" aria-labelledby="native-huddle-title"><div class="call-window" id="native-huddle-content"></div></dialog>
@@ -954,6 +990,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       document.querySelector('#source-label').textContent = `${topic.sourceLabel || '部门场景'}：${topic.sourceName}`;
       document.querySelector('#source-note').textContent = topic.sourceLabel ? '使用方式示意 · 不连接真实账号' : '历史场景改写 · 频道名为建议 · 本地示意';
       document.querySelector('#official-link').href = topic.official;
+      document.querySelector('#migration-open').hidden = activeTopic !== 'documents';
       document.querySelector('#official-link').firstChild.textContent = '中文教程 ';
       document.querySelector('#takeaway-title').textContent = topic.takeaway;
       document.querySelector('#takeaway-note').textContent = topic.note;
@@ -1327,6 +1364,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     document.querySelector('#reference-open').addEventListener('click', () => {
       document.querySelector('#resource-details').open = true;
       document.querySelector('#reference-dialog').showModal();
+    });
+    document.querySelectorAll('[data-open-migration]').forEach(button => button.addEventListener('click', () => document.querySelector('#migration-dialog').showModal()));
+    document.querySelector('#copy-migration-prompt').addEventListener('click', () => {
+      const prompt = document.querySelector('#migration-prompt');
+      const status = document.querySelector('#migration-copy-status');
+      prompt.focus();
+      prompt.select();
+      status.textContent = '已选中，可按 ⌘C / Ctrl+C 复制。';
+      if (navigator.clipboard) navigator.clipboard.writeText(prompt.value).then(() => { status.textContent = '已复制，粘贴到 AI 助手即可。'; }, () => { status.textContent = '已选中，可按 ⌘C / Ctrl+C 复制。'; });
     });
     document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.close).close()));
     document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('click', event => {
