@@ -860,7 +860,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       habits: {
         title: '没有的功能，不代表坏了。', subtitle: '飞书里习惯的这几样，在 Slack 换做法。', department: '各部门 · 切换',
-        variants: [['habits','习惯对照'],['work','审批去哪']],
+        variants: [['habits','习惯对照']],
         sourceName: '各部门 · 迁移常见问题',
         official: 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack'
       },
@@ -1013,6 +1013,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const body = message('CX','CX 团队',text,'blue') + `<button class="native-reply-count" data-action="thread">${count} 条回复 · 内容团队</button>`;
         const thread = variant === 'expanded' ? replyPane('CX 团队',text,[{role:'内容团队',text:'没有重复发布，但主题相近会有重复感。后续会覆盖更多经卷。'}]) : '';
         stage.innerHTML = shell('content-feedback',body,{channel:'content-feedback',thread});
+        document.querySelector('#extra').innerHTML = `<details class="extra"><summary>回复都进「消息列」</summary><p>侧栏的「消息列」集中显示你参与或被 @ 的所有话题，不用逐个频道翻。</p></details>`;
       }
 
       if (activeTopic === 'video') {
@@ -1066,13 +1067,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       }
 
       if (activeTopic === 'habits') {
-        const rows = variant === 'work'
-          ? `<div class="follow-row"><span>审批、报销</span><strong>不在 Slack · 原系统照旧，待确认</strong></div><div class="follow-row"><span>打卡、考勤</span><strong>回考勤系统</strong></div><div class="follow-row"><span>多维表格 Base</span><strong>Google Sheets 或原工具，待确认</strong></div><div class="follow-row"><span>妙记会议纪要</span><strong>Meet 录制或人工纪要，待确认</strong></div>`
-          : `<div class="follow-row"><span>已读（对方看到没）</span><strong>没有 · 用表情回应或回复确认</strong></div><div class="follow-row"><span>加急（Buzz）</span><strong>没有 · 急事 @ 人或开 Huddle</strong></div><div class="follow-row"><span>群公告 / 置顶</span><strong>Pin 或频道 Canvas</strong></div><div class="follow-row"><span>消息自动翻译</span><strong>无内置 · 需翻译工具</strong></div><div class="follow-row"><span>外部联系人私聊</span><strong>Slack Connect · 需邀请</strong></div>`;
+        const rows = `<div class="follow-row"><span>已读（对方看到没）</span><strong>没有 · 用表情回应或回复确认</strong></div><div class="follow-row"><span>加急（Buzz）</span><strong>没有 · 急事 @ 人或开 Huddle</strong></div><div class="follow-row"><span>群公告 / 置顶</span><strong>Pin 或频道 Canvas</strong></div><div class="follow-row"><span>消息自动翻译</span><strong>无内置 · 需翻译工具</strong></div><div class="follow-row"><span>外部联系人私聊</span><strong>Slack Connect · 需邀请</strong></div>`;
         stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('arrow')}飞书 → Slack 对照</div><span class="window-label">演示</span></div><div class="window-body"><div class="follow-state">${rows}</div></div></section>`;
-        if (variant === 'work') {
-          document.querySelector('#detail-title').textContent = '这些功能不在 Slack 里。';
-        }
       }
 
       if (activeTopic === 'typeless') {
