@@ -225,11 +225,6 @@
     .present-actions { display: flex; align-items: center; gap: 8px; }
     .top-link { border: 1px solid transparent; border-radius: 6px; background: transparent; color: #645b6b; padding: 7px 12px; font-size: 13px; }
     #presentation-mode { border-color: #d7ccde; background: white; }
-    .chapters { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; padding: 12px 0; }
-    .chapter { display: flex; align-items: baseline; gap: 10px; min-height: 38px; padding: 5px 12px; background: transparent; color: #756b7a; border: 1px solid transparent; border-radius: 7px; text-align: left; }
-    .chapter > span { font-size: 11px; opacity: .8; font-variant-numeric: tabular-nums; }
-    .chapter strong { font-size: 14px; font-weight: 600; white-space: nowrap; }
-    .chapter[aria-pressed="true"] { background: #eee7f1; color: var(--purple); border-color: #e0d5e5; }
     .layout { display: block; flex: 1; min-width: 0; }
     .detail { display: grid; grid-template-rows: auto auto minmax(0,1fr) auto; gap: 0; min-width: 0; }
     .detail-heading { padding: 2px 0 10px; min-height: 50px; }
@@ -253,9 +248,10 @@
     .message p { font-size: var(--talk-body); line-height: 1.65; margin-top: 5px; }
     .message + .message { margin-top: 18px; }
     .status-line { font-size: var(--talk-small); padding: 9px 13px; }
-    .takeaway { min-height: 46px; padding: 9px 16px; margin-top: 12px; gap: 14px; justify-content: flex-start; }
-    .takeaway strong { font-size: var(--talk-body); font-weight: 600; line-height: 1.45; }
-    .takeaway-note { font-size: var(--talk-small); line-height: 1.5; color: #6b6858; }
+    .takeaway { min-height: 40px; padding: 7px 14px; margin-top: 12px; gap: 14px; }
+    .spot { outline: 2px solid #d64545; outline-offset: 4px; border-radius: 8px; }
+    .native-side-row.unread { color: #fff; font-weight: 600; }
+    .native-badge { margin-left: auto; background: #cd2553; color: #fff; border-radius: 9px; min-width: 16px; padding: 0 4px; font-size: 10px; line-height: 16px; text-align: center; }
     .takeaway a { font-size: var(--talk-small); }
     .button { font-size: var(--talk-small); min-height: 38px; padding: 6px 14px; }
     .mini-link { font-size: var(--talk-small); min-height: 34px; }
@@ -360,7 +356,6 @@
     @media (min-width: 1000px) and (min-height: 700px) {
       .wrap { height: 100dvh; min-height: 0; }
       .top { min-height: 54px; flex-shrink: 0; }
-      .chapters { flex-shrink: 0; padding: 10px 0; }
       .layout { min-height: 0; }
       .detail { height: 100%; min-height: 0; }
       .stage { min-height: 0; }
@@ -379,7 +374,6 @@
       .detail-heading h2 { font-size: 24px; }
       .switches { margin-bottom: 8px; }
       .takeaway { min-height: 42px; margin-top: 10px; padding: 7px 14px; }
-      .takeaway-note { font-size: 11px; }
       .takeaway strong { font-size: 14px; }
     }
     @media (max-width: 999px) {
@@ -388,9 +382,6 @@
       .top h1 { font-size: 16px; margin-left: 0; }
       .present-actions { margin-left: auto; gap: 3px; }
       .top-link { padding: 5px 8px; font-size: 12px; }
-      .chapters { gap: 7px; padding: 12px 0; }
-      .chapter { gap: 7px; padding: 6px 8px; }
-      .chapter strong { font-size: 13px; }
       .detail-heading h2 { font-size: 23px; }
       .dept { display: none; }
       .stage { min-height: 350px; }
@@ -407,10 +398,6 @@
       .top h1 { font-size: 15px; margin-left: auto; margin-right: 0; }
       .present-actions { width: 100%; justify-content: space-between; }
       .present-actions .top-link { flex: 1; font-size: 11px; }
-      .chapters { gap: 5px; padding: 13px 0; }
-      .chapter { gap: 5px; min-height: 41px; justify-content: center; padding: 5px; }
-      .chapter > span { font-size: 10px; }
-      .chapter strong { font-size: 12px; }
       .detail-heading { padding-top: 4px; min-height: 46px; }
       .detail-heading h2 { font-size: 21px; }
       .switches { gap: 4px; margin-bottom: 10px; }
@@ -423,7 +410,6 @@
       .message { gap: 10px; }
       .takeaway { flex-wrap: wrap; padding: 10px 12px; }
       .takeaway strong { font-size: 14px; }
-      .takeaway-note { font-size: 12px; }
       .takeaway a { min-height: 34px; margin-top: 6px; }
       .setup-row { grid-template-columns: 27px minmax(0,1fr); gap: 10px; }
       .setup-row a { grid-column: 2; min-height: 34px; }
@@ -462,7 +448,6 @@
     .focus-mode .top { min-height: 46px; padding: 0; }
     .focus-mode .top .brand, .focus-mode .top h1, .focus-mode .present-actions > :not(#presentation-mode) { display: none; }
     .focus-mode .present-actions { margin-left: auto; width: auto; }
-    .focus-mode .chapters { padding-top: 7px; padding-bottom: 9px; }
     @media (min-width: 1000px) {
       .setup { width: 100%; max-width: none; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; gap: 17px; }
       .setup-row { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: #faf8fc; }
@@ -755,29 +740,25 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <button class="top-link" id="presentation-mode" aria-label="进入投屏模式" aria-pressed="false" title="放大内容并隐藏辅助操作，Esc 退出">投屏模式</button>
       </div>
     </header>
-    <nav class="chapters" aria-label="按优先级安排的讲解章节">
-      <button class="chapter" data-chapter="0" aria-pressed="true"><span>01</span><strong>沟通规则</strong></button>
-      <button class="chapter" data-chapter="1" aria-pressed="false"><span>02</span><strong>日常协作</strong></button>
-      <button class="chapter" data-chapter="2" aria-pressed="false"><span>03</span><strong>提效工具</strong></button>
-    </nav>
+
     <main class="layout">
       <section class="detail" aria-labelledby="detail-title">
         <div class="detail-heading"><h2 id="detail-title"></h2><span class="dept" id="department"></span></div>
         <div class="switches" id="switches" aria-label="切换呈现方式"></div>
         <div class="stage" id="stage"></div>
-        <div class="takeaway"><strong id="takeaway-title"></strong><span class="takeaway-note" id="takeaway-note"></span><div class="takeaway-links"><button class="button secondary" id="migration-open" data-open-migration hidden>搬旧文档</button><a id="official-link" target="_blank" rel="noopener noreferrer">中文教程 <svg aria-hidden="true"><use href="#i-external"/></svg></a></div></div>
+        <div class="takeaway"><div class="takeaway-links"><button class="button secondary" id="migration-open" data-open-migration hidden>搬旧文档</button><a id="official-link" target="_blank" rel="noopener noreferrer">中文教程 <svg aria-hidden="true"><use href="#i-external"/></svg></a></div></div>
         <p id="status" class="sr-only" role="status" aria-live="polite"></p>
       </section>
       <noscript>请启用 JavaScript，使用按沟通规则、日常协作、提效工具排序的宣讲页面。</noscript>
     </main>
     <footer class="deck-toolbar" aria-label="宣讲翻页">
       <div class="deck-progress" aria-hidden="true"><span id="deck-progress-fill"></span></div>
-      <div class="page-position"><span id="page-number">01</span><span class="page-total">/ 13</span><span id="page-label">频道与私信</span></div>
+      <div class="page-position"><span id="page-number">01</span><span class="page-total">/ 12</span><span id="page-label">频道与私信</span></div>
       <span class="keyboard-hint">← → 切换 · 空格下一页</span>
       <div class="page-actions"><button class="button secondary" id="previous" disabled>← 上一页</button><button class="button" id="next">下一页 →</button></div>
     </footer>
   </div>
-  <dialog class="sheet" id="agenda-dialog" aria-labelledby="agenda-title"><div class="sheet-header"><h2 id="agenda-title">讲解目录</h2><button class="close-button" data-close="agenda-dialog" aria-label="关闭目录">×</button></div><div class="agenda-grid"><section class="agenda-group"><h3>沟通规则</h3><div class="topics"><button class="topic" data-topic="entry" aria-pressed="true"><span class="num">01</span><span><strong>频道与私信</strong><small>市场 · KOL</small></span></button><button class="topic" data-topic="thread" aria-pressed="false"><span class="num">02</span><span><strong>Thread 回复</strong><small>CX · 内容</small></span></button><button class="topic" data-topic="mention" aria-pressed="false"><span class="num">03</span><span><strong>@ 与邀请</strong><small>市场 · 设计</small></span></button><button class="topic" data-topic="privacy" aria-pressed="false"><span class="num">04</span><span><strong>可见范围</strong><small>设计 · 研发</small></span></button><button class="topic" data-topic="follow" aria-pressed="false"><span class="num">05</span><span><strong>通知与跟进</strong><small>研发 · 跨部门</small></span></button><button class="topic" data-topic="habits" aria-pressed="false"><span class="num">06</span><span><strong>与飞书的差异</strong><small>各部门</small></span></button></div></section><section class="agenda-group"><h3>日常协作</h3><div class="topics"><button class="topic" data-topic="documents" aria-pressed="false"><span class="num">07</span><span><strong>文档分工</strong><small>内容 · CX</small></span></button><button class="topic" data-topic="sharing" aria-pressed="false"><span class="num">08</span><span><strong>共享权限</strong><small>CX · 内容</small></span></button><button class="topic" data-topic="video" aria-pressed="false"><span class="num">09</span><span><strong>语音与视频</strong><small>设计 · 研发</small></span></button><button class="topic" data-topic="calendar" aria-pressed="false"><span class="num">10</span><span><strong>日历与会议</strong><small>产品 · 跨国研发</small></span></button><button class="topic" data-topic="search" aria-pressed="false"><span class="num">11</span><span><strong>搜索资料</strong><small>研发 · 设计</small></span></button></div></section><section class="agenda-group"><h3>提效工具</h3><div class="topics"><button class="topic" data-topic="typeless" aria-pressed="false"><span class="num">12</span><span><strong>Typeless</strong><small>各部门</small></span></button><button class="topic" data-topic="slackbot" aria-pressed="false"><span class="num">13</span><span><strong>Slackbot</strong><small>各部门</small></span></button></div></section></div><p class="sheet-footnote">按优先级讲解，也可直接跳到需要的主题。</p></dialog>
+  <dialog class="sheet" id="agenda-dialog" aria-labelledby="agenda-title"><div class="sheet-header"><h2 id="agenda-title">讲解目录</h2><button class="close-button" data-close="agenda-dialog" aria-label="关闭目录">×</button></div><div class="agenda-grid"><section class="agenda-group"><h3>沟通规则</h3><div class="topics"><button class="topic" data-topic="entry" aria-pressed="true"><span class="num">01</span><span><strong>频道与私信</strong><small>市场 · KOL</small></span></button><button class="topic" data-topic="thread" aria-pressed="false"><span class="num">02</span><span><strong>Thread 回复</strong><small>CX · 内容</small></span></button><button class="topic" data-topic="mention" aria-pressed="false"><span class="num">03</span><span><strong>@ 与邀请</strong><small>市场 · 设计</small></span></button><button class="topic" data-topic="privacy" aria-pressed="false"><span class="num">04</span><span><strong>可见范围</strong><small>设计 · 研发</small></span></button><button class="topic" data-topic="follow" aria-pressed="false"><span class="num">05</span><span><strong>通知与跟进</strong><small>研发 · 跨部门</small></span></button><button class="topic" data-topic="habits" aria-pressed="false"><span class="num">06</span><span><strong>与飞书的差异</strong><small>各部门</small></span></button></div></section><section class="agenda-group"><h3>日常协作</h3><div class="topics"><button class="topic" data-topic="documents" aria-pressed="false"><span class="num">07</span><span><strong>文档分工</strong><small>内容 · CX</small></span></button><button class="topic" data-topic="sharing" aria-pressed="false"><span class="num">08</span><span><strong>共享权限</strong><small>CX · 内容</small></span></button><button class="topic" data-topic="video" aria-pressed="false"><span class="num">09</span><span><strong>语音与视频</strong><small>设计 · 研发</small></span></button><button class="topic" data-topic="calendar" aria-pressed="false"><span class="num">10</span><span><strong>日历与会议</strong><small>产品 · 跨国研发</small></span></button></div></section><section class="agenda-group"><h3>提效工具</h3><div class="topics"><button class="topic" data-topic="typeless" aria-pressed="false"><span class="num">11</span><span><strong>Typeless</strong><small>各部门</small></span></button><button class="topic" data-topic="apps" aria-pressed="false"><span class="num">12</span><span><strong>应用目录</strong><small>各部门</small></span></button></div></section></div><p class="sheet-footnote">按优先级讲解，也可直接跳到需要的主题。</p></dialog>
   <dialog class="sheet" id="notes-dialog" aria-labelledby="notes-title"><div class="sheet-header"><h2 id="notes-title">当前页补充说明</h2><button class="close-button" data-close="notes-dialog" aria-label="关闭补充说明">×</button></div><div class="caption"><span id="source-label"></span><span id="source-note">历史场景改写 · 频道名为建议 · 本地示意</span></div><div id="extra"></div><details class="cutover" id="cutover"><summary>切换前，公司还需要确定什么？</summary><div class="cutover-grid"><div><strong>正式切换日</strong><p>新消息从哪天发 Slack，旧群何时停止新增。</p></div><div><strong>历史资料入口</strong><p>旧消息、附件、文档哪些迁移，哪些继续在飞书查。</p></div><div><strong>任务与工作流</strong><p>任务、审批、Base 和机器人通知分别由什么承接。</p></div><div><strong>公司账号与访问范围</strong><p>文件归属、外部协作者、App 安装与 AI 权限。</p></div></div><a href="https://slack.com/intl/zh-cn/help/articles/360035354694-使用-CSV-或文本文件将数据移动至-Slack" target="_blank" rel="noopener noreferrer">官方通用导入说明 · 仅基本频道、用户和消息 ↗</a></details></dialog>
   <dialog class="sheet" id="reference-dialog" aria-labelledby="reference-title"><div class="sheet-header"><h2 id="reference-title">会后查阅 · 中文资料</h2><button class="close-button" data-close="reference-dialog" aria-label="关闭中文资料">×</button></div><details id="resource-details"><summary>官方中文资料</summary><div class="resource-grid">
         <a href="https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack" target="_blank" rel="noopener noreferrer">使用 Slack · 功能分类总目录，查功能从这里进 ↗</a>
@@ -814,7 +795,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 飞书链接：[填写]
 目标文件夹：[填写]</textarea><button class="button secondary" id="copy-migration-prompt">复制指令</button><p class="sheet-footnote" id="migration-copy-status" role="status" aria-live="polite">授权和迁移由本人在 AI 助手中完成，网页不会读取或上传文件。</p></details>
   </dialog>
-  <dialog class="google-doc-dialog" id="document-dialog" aria-labelledby="document-dialog-title"><div class="browser-address">Google Docs · 文档界面示意<button class="button secondary" id="return-slack">返回 Slack</button></div><header class="google-doc-header"><span class="doc-symbol"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><div><strong id="document-dialog-title"></strong><small>文档正文和评论在这里；消息讨论仍在 Slack</small></div><button class="button secondary" id="doc-share-toggle">共享</button></header><div class="google-doc-layout"><article class="google-paper"><small>根据部门协作改写 · 片段示意</small><h3 id="document-page-title"></h3><p id="document-page-text"></p><div id="doc-sharing-panel" hidden><h4>有权访问的用户</h4><p>作者：公司 Google 账号</p><p>审核协作者：评论者</p><a href="https://support.google.com/a/users/answer/9283053?hl=zh-Hans" target="_blank" rel="noopener noreferrer">Google 共享设置中文教程 ↗</a></div></article><aside class="google-comments"><div class="google-comment"><strong id="document-comment-author">审核同事</strong><p id="document-comment-example"></p><span>评论对应文档内容</span></div><form id="document-comment-form"><label for="document-comment-input">添加评论</label><textarea id="document-comment-input" maxlength="1000" rows="3" placeholder="写具体修改意见…" required></textarea><button class="button" type="submit">评论</button></form><div id="document-saved-comment"></div></aside></div></dialog>
+  <dialog class="google-doc-dialog" id="document-dialog" aria-labelledby="document-dialog-title"><div class="browser-address">Google Docs · 文档界面示意<button class="button secondary" id="return-slack">返回 Slack</button></div><header class="google-doc-header"><span class="doc-symbol"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><div><strong id="document-dialog-title"></strong><small>文档正文和评论在这里；消息讨论仍在 Slack</small></div><button class="button secondary" id="doc-share-toggle">共享</button></header><div class="google-doc-layout"><article class="google-paper"><small>根据部门协作改写 · 片段示意</small><h3 id="document-page-title"></h3><p id="document-page-text"></p><div id="doc-sharing-panel" hidden><h4>有权访问的用户</h4><p>作者：公司 Google 账号</p><p>Glorify 成员（链接）：评论者</p><a href="https://support.google.com/a/users/answer/9283053?hl=zh-Hans" target="_blank" rel="noopener noreferrer">Google 共享设置中文教程 ↗</a></div></article><aside class="google-comments"><div class="google-comment"><strong id="document-comment-author">审核同事</strong><p id="document-comment-example"></p><span>评论对应文档内容</span></div><form id="document-comment-form"><label for="document-comment-input">添加评论</label><textarea id="document-comment-input" maxlength="1000" rows="3" placeholder="写具体修改意见…" required></textarea><button class="button" type="submit">评论</button></form><div id="document-saved-comment"></div></aside></div></dialog>
   <dialog class="sheet native-detail-dialog" id="channel-detail-dialog" aria-labelledby="channel-detail-title"><div class="sheet-header"><h2 id="channel-detail-title"></h2><button class="close-button" data-close="channel-detail-dialog" aria-label="关闭对话详情">×</button></div><div class="native-detail-tabs"><button data-info-tab="about" aria-pressed="true">关于</button><button data-info-tab="members" aria-pressed="false">成员</button><button data-info-tab="settings" aria-pressed="false">设置</button></div><div id="channel-detail-body"></div></dialog>
   <dialog class="native-huddle-dialog" id="native-huddle-dialog" aria-labelledby="native-huddle-title"><div class="call-window" id="native-huddle-content"></div></dialog>
   <script>
@@ -824,101 +805,83 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         title: '持续协作用频道，临时沟通用 DM。', subtitle: '素材、名单、三人对齐，分别放哪里？', department: '市场 · KOL',
         variants: [['channel','Channel','频道'],['dm','DM','一对一'],['group','Group DM','多人私信']],
         sourceName: '市场 · KOL 素材协作',
-        official: 'https://slack.com/intl/zh-cn/help/articles/360017938993',
-        takeaway: 'Channel 也是群聊，按项目组织。', note: '多人 DM 是临时小群；新成员可回看历史。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/360017938993'
       },
       privacy: {
         title: '锁图标 = 私密频道。', subtitle: '设计系统给研发使用：谁能发现，谁能加入？', department: '设计 · 研发',
         variants: [['public','公开频道'],['private','私密频道']],
         sourceName: '设计 · 研发协作',
-        official: 'https://slack.com/intl/zh-cn/help/articles/360017938993',
-        takeaway: '公开：成员可查找、查看、加入。', note: '私密仅成员可见、需邀请；锁 ≠ 静音或限制发言。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/360017938993'
       },
       mention: {
         title: '@ 人 ≠ 拉人进频道。', subtitle: '市场与 KOL 对接同事一起确认宣传素材。', department: '市场 · 设计',
         variants: [['outside','尚未加入'],['member','已经是成员']],
         sourceName: '市场 · KOL 素材协作',
-        official: 'https://slack.com/intl/zh-cn/help/articles/360002063088',
-        takeaway: '非成员被 @ 后，不会自动加入。', note: '仅输入名字不代表已收到；多人 DM 同理。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/360002063088'
       },
       thread: {
         title: '回复在 Thread，主频道只见回复数。', subtitle: 'CX 转来“内容主题重复”的反馈，内容团队回应。', department: 'CX · 内容',
         variants: [['collapsed','频道里'],['expanded','展开 Thread']],
         sourceName: 'CX · 内容反馈',
-        official: 'https://slack.com/intl/zh-cn/help/articles/115000769927',
-        takeaway: '重要结论，可以同时发回频道。', note: '参与、发起或被 @ 后，默认收到新回复通知。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/115000769927'
       },
       video: {
         title: '临时通话，用 Huddle。', subtitle: '设计给 Dev 讲解新设计系统，边看组件边讨论。', department: '设计 · 研发',
         variants: [['design','设计评审'],['firmware','固件排查']],
         sourceName: '设计 · 研发协作',
-        official: 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团',
-        takeaway: '频道或 DM 顶部的耳机 → 开启语音。', note: '可开摄像头、共享屏幕；本页不调用设备。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团'
       },
       documents: {
         title: 'Slack 讨论，Google Docs 写正文。', subtitle: '文档和讨论各放各的位置。', department: '内容 · CX',
         variants: [['content','内容审核'],['cx','CX 周报']],
         sourceName: '内容 · 稿件审核',
-        official: 'https://slack.com/intl/zh-cn/help/articles/205875058',
-        takeaway: '正文和评论留在文档，进展回原讨论。', note: '正式文档用 Google Docs；Canvas 写轻量说明，能力依套餐。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/205875058'
       },
       sharing: {
         title: '创建时就确定：给谁看，能做什么。', subtitle: 'CX 周报发进频道前，先把协作者加到文档。', department: 'CX · 内容',
         variants: [['restricted','只有作者'],['shared','已加协作者']],
         sourceName: 'CX · 周报协作',
-        official: 'https://support.google.com/a/users/answer/9283053?hl=zh-Hans',
-        takeaway: '在频道里 ≠ 有文档权限。', note: '发前确认共享对象与角色；打不开先检查登录账号。'
+        official: 'https://support.google.com/a/users/answer/9283053?hl=zh-Hans'
       },
       follow: {
         title: '重要频道设提醒，行动项加待办。', subtitle: '研发发布固件进展，相关同事需要接住后续。', department: '研发 · 跨部门',
         variants: [['mentions','仅提及与 DM'],['channel','重点频道全提醒'],['todo','个人待办']],
         sourceName: '研发 · 固件发布',
-        official: 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知',
-        takeaway: '加入频道 ≠ 每条消息都提醒。', note: '个人档案 → 首选项 → 通知；重点频道可设全部通知。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知'
       },
       habits: {
         title: '没有的功能，不代表坏了。', subtitle: '飞书里习惯的这几样，在 Slack 换做法。', department: '各部门 · 切换',
         variants: [['habits','习惯对照'],['work','审批去哪']],
         sourceName: '各部门 · 迁移常见问题',
-        official: 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack',
-        takeaway: '重要的事，用表情、回复或 @ 确认。', note: '审批、打卡、翻译回各自系统，或待公司另行安排。'
+        official: 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack'
       },
-      search: {
-        title: '用频道、关键词和日期，找回结论。', subtitle: '查固件灰度范围，或找设计系统的 Figma 入口。', department: '研发 · 设计',
-        variants: [['firmware','固件进展'],['design','设计资料']],
-        sourceName: '研发 · 固件发布',
-        official: 'https://slack.com/intl/zh-cn/help/articles/202528808-在-Slack-中搜索-Search-in-Slack-',
-        takeaway: '搜不到，先确认频道、关键词与权限。', note: '搜索限于你有权访问的内容；飞书历史需另行迁移。'
+      apps: {
+        title: '需要什么，在应用目录添加。', subtitle: 'Drive、Meet、Jira 等按需安装。', department: '各部门 · 应用',
+        variants: [['dir','应用目录']],
+        sourceName: 'Slack · 应用目录',
+        official: 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区'
       },
       typeless: {
         title: '把话说进输入框，再检查文字。', subtitle: 'Typeless 用于输入；Huddle 用于通话。', department: '各部门 · 语音输入',
         variants: [['setup','安装与设置'],['slack','Slack 回复'],['docs','Docs 评审']],
         sourceLabel: '官方教程', sourceName: 'Typeless · 安装与设置',
-        official: 'https://www.typeless.com/zh-cn/help/quickstart/dictate',
-        takeaway: '输入框 → 听写 → 检查文字 → 发送。', note: 'Mac 按 Fn，Windows 按右 Alt；以本机设置为准。'
+        official: 'https://www.typeless.com/zh-cn/help/quickstart/dictate'
       },
-      slackbot: {
-        title: '让 Slackbot 找资料、理结论、起草更新。', subtitle: '给具体频道或原消息，要求附来源。', department: '各部门 · Slackbot',
-        variants: [['ask','找消息与结论'],['draft','起草更新'],['apps','应用']],
-        sourceLabel: '官方教程', sourceName: 'Slackbot · 中文说明',
-        official: 'https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作',
-        takeaway: 'Slackbot 的回答范围受你的访问权限限制。', note: 'AI 能力依套餐与管理员设置；是否开放待确认。'
-      },
+
       calendar: {
         title: '预约会议，在 Google Calendar 创建。', subtitle: 'App progress sync：北京、英国、洛杉矶同一场。', department: '产品 · 跨国研发',
         variants: [['connect','接入日历'],['app','在 Slack 约会议'],['web','在 Calendar 网页约']],
         sourceName: '产品 · 跨时区同步',
-        official: 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历',
-        takeaway: '发到频道 ≠ 邀请所有人参会。', note: '参会人单独添加；链接用 Meet 或 Huddle。'
+        official: 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历'
       }
     };
     const chapters = [
       { title: '沟通规则', ids: ['entry', 'thread', 'mention', 'privacy', 'follow', 'habits'] },
-      { title: '日常协作', ids: ['documents', 'sharing', 'video', 'calendar', 'search'] },
-      { title: '提效工具', ids: ['typeless', 'slackbot'] }
+      { title: '日常协作', ids: ['documents', 'sharing', 'video', 'calendar'] },
+      { title: '提效工具', ids: ['typeless', 'apps'] }
     ];
     const presentationOrder = chapters.flatMap(chapter => chapter.ids);
-    const topicLabels = {"entry": "频道与私信", "thread": "Thread 回复", "mention": "@ 与邀请", "privacy": "可见范围", "follow": "通知与跟进", "habits": "与飞书的差异", "documents": "文档分工", "sharing": "共享权限", "video": "语音与视频", "calendar": "日历与会议", "search": "搜索资料", "typeless": "Typeless", "slackbot": "Slackbot"};
+    const topicLabels = {"entry": "频道与私信", "thread": "Thread 回复", "mention": "@ 与邀请", "privacy": "可见范围", "follow": "通知与跟进", "habits": "与飞书的差异", "documents": "文档分工", "sharing": "共享权限", "video": "语音与视频", "calendar": "日历与会议", "typeless": "Typeless", "apps": "应用目录"};
     let nativeTab = 'messages';
     let nativeHuddleChannel = '';
     let localMessages = [];
@@ -945,8 +908,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     let eventShared = true;
     let calendarConnectOpen = false;
     let eventPreview = false;
-    const addedApps = new Set();
     const stage = document.querySelector('#stage');
+    const spot = sel => { if (sel) stage.querySelector(sel)?.classList.add('spot'); };
     const switches = document.querySelector('#switches');
 
     function message(initials, author, text, tone = '') {
@@ -969,7 +932,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const typeIcon = options.icon || 'hash';
       const channel = options.channel || title.replace(' · Thread 回复','');
       const isApp = typeIcon === 'calendar';
-      const isBot = activeTopic === 'slackbot';
       let shownBody = body;
       if (nativeTab === 'files') {
         shownBody = activeTopic === 'documents' ? `<button class="native-file" data-action="open-doc"><span class="doc-symbol">${icon('doc')}</span><div><strong>${variant === 'cx' ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇'}</strong><small>Google Docs · 频道分享的文件</small></div>${icon('external')}</button>` : `<div class="native-empty">本场景无其他文件。</div>`;
@@ -985,8 +947,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         ['design-system','设计系统','privacy','public'],
         ['proj-ring-ota','固件升级','video','firmware']
       ];
-      const sidebar = `<aside class="native-sidebar"><button class="native-workspace" data-jump="entry" data-jump-variant="channel">Glorify <span>⌄</span></button><div class="native-side-title">频道</div>${channelList.map(([name,label,topicId,mode]) => `<button class="native-side-row ${channel === name ? 'selected' : ''}" data-jump="${topicId}" data-jump-variant="${mode}">${icon(activeTopic === 'privacy' && variant === 'private' && name === 'design-system' ? 'lock' : 'hash')}<span>${name}</span></button>`).join('')}<div class="native-side-title">私信</div><button class="native-side-row ${activeTopic === 'entry' && variant === 'dm' ? 'selected' : ''}" data-jump="entry" data-jump-variant="dm"><span class="presence"></span>市场同事</button><button class="native-side-row ${activeTopic === 'entry' && variant === 'group' ? 'selected' : ''}" data-jump="entry" data-jump-variant="group">${icon('people')}产品、市场、KOL</button><div class="native-side-title">应用</div><button class="native-side-row ${activeTopic === 'calendar' ? 'selected' : ''}" data-jump="calendar" data-jump-variant="connect">${icon('calendar')}Google Calendar</button><button class="native-side-row ${activeTopic === 'slackbot' ? 'selected' : ''}" data-jump="slackbot" data-jump-variant="ask">${icon('message')}Slackbot</button><small class="native-side-foot">演示工作区 · 非真实消息</small></aside>`;
-      return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search" data-jump="search" data-jump-variant="firmware">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button><button data-jump="slackbot" data-jump-variant="apps" aria-label="应用">${icon('grid')}<small>应用</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button></div></div><div class="native-tabs"><button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button></div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || isBot || nativeTab !== 'messages' ? '' : composeBox()}</section>${thread}</div></div>`;
+      const sidebar = `<aside class="native-sidebar"><button class="native-workspace" data-jump="entry" data-jump-variant="channel">Glorify <span>⌄</span></button><div class="native-side-title">频道</div>${channelList.map(([name,label,topicId,mode]) => `<button class="native-side-row ${channel === name ? 'selected' : ''} ${activeTopic === 'follow' && name === 'proj-ring-ota' ? 'unread' : ''}" data-jump="${topicId}" data-jump-variant="${mode}">${icon(activeTopic === 'privacy' && variant === 'private' && name === 'design-system' ? 'lock' : 'hash')}<span>${name}</span>${activeTopic === 'follow' && name === 'content-feedback' ? '<span class="native-badge">1</span>' : ''}</button>`).join('')}<div class="native-side-title">私信</div><button class="native-side-row ${activeTopic === 'entry' && variant === 'dm' ? 'selected' : ''}" data-jump="entry" data-jump-variant="dm"><span class="presence"></span>市场同事</button><button class="native-side-row ${activeTopic === 'entry' && variant === 'group' ? 'selected' : ''}" data-jump="entry" data-jump-variant="group">${icon('people')}产品、市场、KOL</button><div class="native-side-title">应用</div><button class="native-side-row ${activeTopic === 'calendar' ? 'selected' : ''}" data-jump="calendar" data-jump-variant="connect">${icon('calendar')}Google Calendar</button><small class="native-side-foot">演示工作区 · 非真实消息</small></aside>`;
+      return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button><button data-jump="apps" data-jump-variant="dir" aria-label="应用">${icon('grid')}<small>应用</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button></div></div><div class="native-tabs"><button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button></div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || nativeTab !== 'messages' ? '' : composeBox()}</section>${thread}</div></div>`;
     }
 
     function render() {
@@ -1002,8 +964,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       document.querySelector('#official-link').href = topic.official;
       document.querySelector('#migration-open').hidden = activeTopic !== 'documents';
       document.querySelector('#official-link').firstChild.textContent = '中文教程 ';
-      document.querySelector('#takeaway-title').textContent = topic.takeaway;
-      document.querySelector('#takeaway-note').textContent = topic.note;
       document.querySelector('#extra').innerHTML = '';
 
       if (activeTopic === 'entry') {
@@ -1074,7 +1034,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (activeTopic === 'sharing') {
         const shared = variant === 'shared';
         const roleLabel = {view:'查看者',comment:'评论者',edit:'编辑者'}[shareRole];
-        const body = `<div class="share-box"><h3>共享「CX 反馈周报」</h3><div class="share-owner"><span>作者 · 公司 Google 账号</span><small>所有者</small></div>${shared ? `<div class="share-recipient"><span>内容协作者 · 公司账号</span><label class="sr-only" for="share-role">协作者权限</label><select id="share-role"><option value="view" ${shareRole === 'view' ? 'selected' : ''}>查看者</option><option value="comment" ${shareRole === 'comment' ? 'selected' : ''}>评论者</option><option value="edit" ${shareRole === 'edit' ? 'selected' : ''}>编辑者</option></select></div>` : '<div class="status-line">本例：个人盘中新建，仅作者有权限。</div>'}<div class="share-status ${shared ? 'good' : ''}">${icon(shared ? 'check' : 'lock')}协作者打开链接：${shared ? `可访问 · ${roleLabel}` : '需要申请访问'}</div><div style="margin-top:13px"><button class="button secondary" data-action="document">${icon('doc')}查看对方视角</button></div>${documentOpen ? `<div class="preview-doc">${shared ? `<h4>CX 反馈周报</h4><p>邮件问题分类 · 社交媒体反馈</p>${shareRole === 'comment' ? '<div class="comment">评论者：能看、能评论，不能改正文。</div>' : shareRole === 'edit' ? '<div class="comment">编辑者：能修改正文，也能评论。</div>' : '<div class="comment">查看者：能看，不能评论或修改正文。</div>'}` : '<h4>需要访问权限</h4><p>文件已发到 Slack，文档本身仍未授权。</p>'}</div>` : ''}</div>`;
+        const body = `<div class="share-box"><h3>共享「CX 反馈周报」</h3><div class="share-owner"><span>作者 · 公司 Google 账号</span><small>所有者</small></div>${shared ? `<div class="share-recipient"><span>Glorify 成员 · 链接共享</span><label class="sr-only" for="share-role">协作者权限</label><select id="share-role"><option value="view" ${shareRole === 'view' ? 'selected' : ''}>查看者</option><option value="comment" ${shareRole === 'comment' ? 'selected' : ''}>评论者</option><option value="edit" ${shareRole === 'edit' ? 'selected' : ''}>编辑者</option></select></div>` : '<div class="status-line">本例：个人盘中新建，仅作者有权限。</div>'}<div class="share-status ${shared ? 'good' : ''}">${icon(shared ? 'check' : 'lock')}Glorify 成员打开链接：${shared ? `可访问 · ${roleLabel}` : '需要申请访问'}</div><div style="margin-top:13px"><button class="button secondary" data-action="document">${icon('doc')}查看对方视角</button></div>${documentOpen ? `<div class="preview-doc">${shared ? `<h4>CX 反馈周报</h4><p>邮件问题分类 · 社交媒体反馈</p>${shareRole === 'comment' ? '<div class="comment">评论者：能看、能评论，不能改正文。</div>' : shareRole === 'edit' ? '<div class="comment">编辑者：能修改正文，也能评论。</div>' : '<div class="comment">查看者：能看，不能评论或修改正文。</div>'}` : '<h4>需要访问权限</h4><p>文件已发到 Slack，文档本身仍未授权。</p>'}</div>` : ''}</div>`;
         stage.innerHTML = `<section class="window google-document-surface"><div class="google-doc-header"><span class="doc-symbol">${icon('doc')}</span><strong>CX 反馈周报</strong><span>Google Docs · 共享设置示意</span></div><div class="window-body">${body}</div></section>`;
       }
 
@@ -1082,12 +1042,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const isTodo = variant === 'todo';
         const body = message('研发','固件研发同事','27 版本已升级：dev 全量，生产按指定设备灰度。') + (isTodo
           ? `<div class="follow-state"><div class="follow-row"><span>个人待办：跟进灰度测试</span><strong>${todoAdded ? '已加入 · 仅自己' : '尚未加入'}</strong></div><div class="follow-row"><span>提醒</span><strong>${todoReminder ? '已设置 · 示例时间' : '未设置'}</strong></div></div><div class="follow-actions"><button class="button secondary" data-action="todo">${todoAdded ? '移出个人待办' : '加入个人待办'}</button>${todoAdded ? `<button class="button secondary" data-action="todo-remind">${todoReminder ? '取消提醒' : '另设提醒'}</button>` : ''}</div>`
-          : `<div class="follow-state"><div class="follow-row"><span>频道里的普通更新</span><strong>${variant === 'channel' ? '按频道设置提醒' : '不触发横幅'}</strong></div><div class="follow-row"><span>@ 自己 / 私信 / 关注的 Thread</span><strong>按通知设置提醒</strong></div></div><div class="status-line">Activity 集中看提及、回复和提醒。</div>`);
+          : `<div class="follow-state"><div class="follow-row"><span>@ 我 / 私信 / 关注的 Thread</span><strong>立即提醒 · 数字角标</strong></div><div class="follow-row"><span>重点频道（全部通知）</span><strong>${variant === 'channel' ? '每条提醒' : '本频道未开'}</strong></div><div class="follow-row"><span>普通更新</span><strong>只加粗，不提醒</strong></div></div><div class="status-line">加粗 = 有新消息；数字角标 = 有人 @ 你。</div>`);
         stage.innerHTML = shell('proj-ring-ota',body,{channel:'proj-ring-ota'});
         if (isTodo) {
           document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/55757634348435-“留待以后处理”现已改为“待办清单”';
-          document.querySelector('#takeaway-title').textContent = '添加待办，默认不会自动设置提醒。';
-          document.querySelector('#takeaway-note').textContent = '待办不替同事派任务。Later 正逐步改为待办清单，界面可能不同。';
         }
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>回复在哪里集中看？</summary><p>打开 Activity（活动），查看提及、私信、回复与提醒。<a href="https://slack.com/intl/zh-cn/help/articles/19693583638803-在“活动”视图中完成你的工作" target="_blank" rel="noopener noreferrer">活动视图中文教程 ↗</a></p></details>`;
       }
@@ -1095,30 +1053,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (activeTopic === 'habits') {
         const rows = variant === 'work'
           ? `<div class="follow-row"><span>审批、报销</span><strong>不在 Slack · 原系统照旧，待确认</strong></div><div class="follow-row"><span>打卡、考勤</span><strong>回考勤系统</strong></div><div class="follow-row"><span>多维表格 Base</span><strong>Google Sheets 或原工具，待确认</strong></div><div class="follow-row"><span>妙记会议纪要</span><strong>Meet 录制或人工纪要，待确认</strong></div>`
-          : `<div class="follow-row"><span>已读回执</span><strong>没有 · 用表情回应或回复确认</strong></div><div class="follow-row"><span>加急（Buzz）</span><strong>没有 · 急事 @ 人或开 Huddle</strong></div><div class="follow-row"><span>群公告 / 置顶</span><strong>Pin 或频道 Canvas</strong></div><div class="follow-row"><span>消息自动翻译</span><strong>无内置 · 需翻译工具</strong></div><div class="follow-row"><span>外部联系人私聊</span><strong>Slack Connect · 需邀请，依套餐</strong></div>`;
+          : `<div class="follow-row"><span>已读回执</span><strong>没有 · 用表情回应或回复确认</strong></div><div class="follow-row"><span>加急（Buzz）</span><strong>没有 · 急事 @ 人或开 Huddle</strong></div><div class="follow-row"><span>群公告 / 置顶</span><strong>Pin 或频道 Canvas</strong></div><div class="follow-row"><span>消息自动翻译</span><strong>无内置 · 需翻译工具</strong></div><div class="follow-row"><span>外部联系人私聊</span><strong>Slack Connect · 需邀请</strong></div>`;
         stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('arrow')}飞书 → Slack 对照</div><span class="window-label">演示</span></div><div class="window-body"><div class="follow-state">${rows}</div></div></section>`;
         if (variant === 'work') {
           document.querySelector('#detail-title').textContent = '这些功能不在 Slack 里。';
-          document.querySelector('#takeaway-title').textContent = '先问清承接系统，再动手。';
-          document.querySelector('#takeaway-note').textContent = '审批、打卡、Base、妙记的承接方案由公司确认。';
-        }
-      }
-
-      if (activeTopic === 'search') {
-        const design = variant === 'design';
-        const query = design ? 'in:design-system Figma' : 'in:proj-ring-ota after:2026-10-01 27';
-        const body = `<code class="search-query">${query}</code><div class="search-help"><span>in: 频道</span><span>after: 日期之后</span><span>其余：关键词</span></div><div class="search-results">${design
-          ? message('设计','设计团队 · 10/23','设计系统 Figma 已分享，研发可以使用并反馈问题。')
-          : message('研发','固件研发 · 10/22','27 版本的测试与生产环境均已配置升级。') + message('研发','固件研发 · 10/22','dev 为全量；生产环境按指定设备做灰度。','green')}</div>`;
-        stage.innerHTML = shell('搜索式与结果示意',body,{icon:'message',channel:design ? 'design-system' : 'proj-ring-ota'});
-        if (design) {
-          document.querySelector('#source-label').textContent = '部门场景：设计 · 研发协作';
         }
       }
 
       if (activeTopic === 'typeless') {
         if (variant === 'setup') {
-          stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('mic')}Typeless · 独立安装</div><span class="window-label">官方入口</span></div><div class="window-body"><div class="setup"><div class="setup-row"><span class="setup-number">1</span><div><strong>下载并登录</strong><p>按设备选版本。</p></div><a href="https://www.typeless.com/zh-cn/downloads" target="_blank" rel="noopener noreferrer">官方下载 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">2</span><div><strong>完成系统权限设置</strong><p>Mac 需麦克风与辅助功能权限。</p></div><a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">中文安装说明 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">3</span><div><strong>确认听写快捷键</strong><p>在 Settings → Keyboard shortcuts 查看或修改。</p></div><a href="https://www.typeless.com/zh-cn/help/quickstart/settings" target="_blank" rel="noopener noreferrer">中文设置说明 ${icon('external')}</a></div></div></div></section>`;
+          stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('mic')}Typeless · 独立安装</div><span class="window-label">官方入口</span></div><div class="window-body"><div class="status-line" style="margin-top:0">说话比打字快，适合长回复和口述想法。</div><div class="setup"><div class="setup-row"><span class="setup-number">1</span><div><strong>下载并登录</strong><p>按设备选版本。</p></div><a href="https://www.typeless.com/zh-cn/downloads" target="_blank" rel="noopener noreferrer">官方下载 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">2</span><div><strong>完成系统权限设置</strong><p>Mac 需麦克风与辅助功能权限。</p></div><a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">中文安装说明 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">3</span><div><strong>确认听写快捷键</strong><p>在 Settings → Keyboard shortcuts 查看或修改。</p></div><a href="https://www.typeless.com/zh-cn/help/quickstart/settings" target="_blank" rel="noopener noreferrer">中文设置说明 ${icon('external')}</a></div></div></div></section>`;
         } else {
           const docs = variant === 'docs';
           const spoken = docs ? '这轮三十篇内容已经审完了，具体修改意见我留在文档评论里面了。' : '这版设计系统研发可以先用起来，有使用上的问题，就在这个讨论下面反馈。';
@@ -1131,26 +1075,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>专业词经常识别错？</summary><p>将 Glorify、Figma、OTA 等词加入 Typeless Dictionary。快捷键冲突时，在设置中修改。<a href="https://www.typeless.com/zh-cn/help/quickstart/history-and-dictionary" target="_blank" rel="noopener noreferrer">词典中文教程 ↗</a></p></details>`;
       }
 
-      if (activeTopic === 'slackbot') {
-        if (variant === 'apps') {
-          const appList = [
-            ['calendar','Google Calendar','日程、邀请与提醒。','#eef3fd','#4e74ae'],
-            ['doc','Google 云端硬盘','文档评论、分享与访问申请。','#eef4e6','#4c613b'],
-            ['video','Google Meet','发起与加入视频会议。','#e8f0f6','#3a6a8a'],
-            ['check','Jira Cloud','任务通知与链接预览。','#e8eaf6','#4a5aa8']
-          ];
-          stage.innerHTML = shell('代理与工具 · 应用',`<div class="app-dir"><div class="app-search">${icon('search')}按应用名称或类型搜索</div><div class="app-dir-head">推荐添加 · 演示列表</div><div class="app-list">${appList.map(([ic,name,desc,bg,fg]) => `<div class="app-row"><span class="app-icon" style="background:${bg};color:${fg}">${icon(ic)}</span><div><strong>${name}</strong><small>${desc}</small></div><button class="button secondary" data-action="app-add" data-app="${name}" aria-pressed="${addedApps.has(name)}">${addedApps.has(name) ? '已添加' : '添加'}</button></div>`).join('')}</div></div>`,{icon:'grid'});
-          document.querySelector('#detail-title').textContent = '需要什么，在应用目录添加。';
-          document.querySelector('#department').textContent = '各部门 · 应用';
-          document.querySelector('#takeaway-title').textContent = '应用 → 添加 Drive、Meet、Jira 等。';
-          document.querySelector('#takeaway-note').textContent = '通知来自各应用本身；能否安装依管理员设置。';
-          document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区';
-          document.querySelector('#official-link').firstChild.textContent = '添加应用中文教程 ';
-        } else {
-          const draft = variant === 'draft';
-          const prompt = draft ? '根据我提供的固件升级讨论，起草一条进度更新。区分 dev 全量与生产灰度；不补充未确认的发布时间，附原消息链接。' : '在我能访问的设计系统讨论中，找到最新 Figma 入口，列出待研发确认的问题，并附原消息链接。';
-          stage.innerHTML = shell('Slackbot · AI 助手',`<div class="calendar-notice">右上角或侧栏顶部打开 Slackbot；无入口先确认套餐与管理员设置。</div><div class="draft-box"><label for="bot-prompt">${draft ? '研发进度更新' : '设计与研发资料'} · 提问示例</label><textarea id="bot-prompt" readonly>${prompt}</textarea><div class="follow-actions"><button class="button secondary" data-action="select-prompt">选中文字</button></div></div><div class="status-line">附上频道或原消息链接；先看来源，再采用结论。</div>`,{icon:'message',channel:draft ? 'proj-ring-ota' : 'design-system'});
-        }
+      if (activeTopic === 'apps') {
+        const appList = [
+          ['calendar','Google Calendar','日程、邀请与提醒。','#eef3fd','#4e74ae','https://slack.com/marketplace/ADZ494LHY-google-calendar'],
+          ['doc','Google 云端硬盘','文档评论、分享与访问申请。','#eef4e6','#4c613b','https://slack.com/marketplace/A6NL8MJ6Q-google-drive'],
+          ['video','Google Meet','发起与加入视频会议。','#e8f0f6','#3a6a8a','https://slack.com/marketplace/search?q=Google%20Meet'],
+          ['check','Jira Cloud','任务通知与链接预览。','#e8eaf6','#4a5aa8','https://slack.com/marketplace/A2RPP3NFR-jira-cloud']
+        ];
+        stage.innerHTML = shell('代理与工具 · 应用',`<div class="app-dir"><div class="app-dir-head">推荐添加 · 演示列表</div><div class="app-list">${appList.map(([ic,name,desc,bg,fg,url]) => `<div class="app-row"><span class="app-icon" style="background:${bg};color:${fg}">${icon(ic)}</span><div><strong>${name}</strong><small>${desc}</small></div><a class="button secondary" href="${url}" target="_blank" rel="noopener noreferrer">安装 ↗</a></div>`).join('')}</div><div class="status-line">通知来自各应用本身；能否安装依管理员设置。找内部资料用 Tada。</div></div>`,{icon:'grid',composer:false});
+        document.querySelector('#official-link').firstChild.textContent = '添加应用中文教程 ';
       }
 
       if (activeTopic === 'calendar') {
@@ -1160,8 +1093,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
           const calendarGuide = topics.calendar.official;
           const setup = `<div class="calendar-app-home"><div class="calendar-app-icon">${icon('calendar')}</div><h3>Google Calendar</h3><p>连接公司日历，在 Slack 看会议和提醒。</p><button class="button" data-action="calendar-connect">Connect an account · 连接账号</button><div class="calendar-connect-help" ${calendarConnectOpen ? '' : 'hidden'}><strong>在真实 Slack 中继续</strong><p>选公司 Google 账号授权，回 App 主页 Connect Calendar。</p><a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">官方中文连接教程 ↗</a></div><a class="mini-link" href="https://slack.com/marketplace/ADZ494LHY-google-calendar" target="_blank" rel="noopener noreferrer">还没有这个 App？前往安装 ↗</a></div>`;
           stage.innerHTML = shell('Google Calendar',setup,{icon:'calendar',channel:'app-progress',composer:false});
-          document.querySelector('#takeaway-title').textContent = '连接后，可在 Slack 看日程、收提醒。';
-          document.querySelector('#takeaway-note').textContent = '连接是个人操作；频道通知需另设置。';
           document.querySelector('#extra').innerHTML = `<details class="extra"><summary>把日程提醒发到频道？</summary><p>Google Calendar → 将 App 添加到频道 → Settings → Channel Notifications，选择频道与提醒。<a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></p></details>`;
         } else {
         const zones = {beijing:['22:00–23:00','北京 · UTC+8'],london:['15:00–16:00','英国 · 当地夏令时'],la:['07:00–08:00','洛杉矶 · 当地夏令时']};
@@ -1170,19 +1101,18 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         stage.innerHTML = shell(isApp ? 'Google Calendar' : 'Google Calendar · 网页',body,{icon:'calendar',channel:'app-progress'});
         }
       }
+      spot({entry:'.native-side-row.selected',privacy:'.visibility',mention:'.invite, .status-line',thread:'.native-reply-count, .native-thread',video:'.call-start',documents:'.native-file',sharing:'.share-box',follow:'.follow-state',habits:'.follow-state',typeless:'.setup, .spoken',apps:'.app-list',calendar:'.calendar-app-home, .calendar-box'}[activeTopic]);
       updateDeck();
       document.querySelector('#status').textContent = `${document.querySelector('#department').textContent}：${document.querySelector('#detail-title').textContent} ${topic.variants.find(item => item[0] === variant)?.[1] || ''}`;
     }
 
     function updateDeck() {
       const index = presentationOrder.indexOf(activeTopic);
-      const chapterIndex = chapters.findIndex(chapter => chapter.ids.includes(activeTopic));
       document.querySelector('#page-number').textContent = String(index + 1).padStart(2, '0');
       document.querySelector('#page-label').textContent = topicLabels[activeTopic];
       document.querySelector('#deck-progress-fill').style.width = `${(index + 1) / presentationOrder.length * 100}%`;
       document.querySelector('#previous').disabled = index === 0;
       document.querySelector('#next').disabled = index === presentationOrder.length - 1;
-      document.querySelectorAll('[data-chapter]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.chapter) === chapterIndex)));
     }
 
     function turnPage(direction) {
@@ -1215,7 +1145,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       todoAdded = false;
       todoReminder = false;
       typelessPreview = false;
-      addedApps.clear();
       render();
       const agenda = document.querySelector('#agenda-dialog');
       if (agenda.open) agenda.close();
@@ -1277,7 +1206,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (action === 'calendar-connect') { calendarConnectOpen = !calendarConnectOpen; render(); return; }
       if (action === 'native-huddle') { nativeHuddleChannel = document.querySelector('.native-channel-title').textContent.trim(); renderNativeHuddle(); document.querySelector('#native-huddle-dialog').showModal(); return; }
 
-      if (action === 'select-prompt') { document.querySelector('#bot-prompt').select(); return; }
       if (action === 'todo') { todoAdded = !todoAdded; if (!todoAdded) todoReminder = false; }
       if (action === 'todo-remind') todoReminder = !todoReminder;
       if (action === 'typeless-preview') typelessPreview = !typelessPreview;
@@ -1290,7 +1218,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (action === 'mic') muted = !muted;
       if (action === 'document') documentOpen = !documentOpen;
       if (action === 'event') eventPreview = !eventPreview;
-      if (action === 'app-add') { const id = button.dataset.app; addedApps.has(id) ? addedApps.delete(id) : addedApps.add(id); }
       render();
       const replacement = stage.querySelector(`[data-action="${action}"]`);
       if (replacement) replacement.focus({preventScroll:true});
@@ -1354,15 +1281,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     });
     function openChannelDetails() {
       document.querySelector('#channel-detail-title').textContent = document.querySelector('.native-channel-title').textContent.trim();
-      document.querySelector('[data-info-tab="members"]').hidden = activeTopic === 'calendar' || activeTopic === 'slackbot';
+      document.querySelector('[data-info-tab="members"]').hidden = activeTopic === 'calendar';
       showChannelInfo('about');
       document.querySelector('#channel-detail-dialog').showModal();
     }
     function showChannelInfo(tab) {
       document.querySelectorAll('[data-info-tab]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.infoTab === tab)));
       const isPrivate = activeTopic === 'privacy' && variant === 'private';
-      if (activeTopic === 'calendar' || activeTopic === 'slackbot') {
-        document.querySelector('#channel-detail-body').innerHTML = `<div class="native-info-row"><strong>${activeTopic === 'calendar' ? 'Google Calendar App' : 'Slackbot'}</strong><p>${activeTopic === 'calendar' ? '在应用主页连接个人日历；工作区安装由有权限的同事完成。' : 'AI 能力依套餐与管理员设置；回答范围受你的访问权限限制。'}</p><a href="${topics[activeTopic].official}" target="_blank" rel="noopener noreferrer">官方中文说明 ↗</a></div>`;
+      if (activeTopic === 'calendar') {
+        document.querySelector('#channel-detail-body').innerHTML = `<div class="native-info-row"><strong>Google Calendar App</strong><p>在应用主页连接个人日历；工作区安装由有权限的同事完成。</p><a href="${topics[activeTopic].official}" target="_blank" rel="noopener noreferrer">官方中文说明 ↗</a></div>`;
         return;
       }
       document.querySelector('#channel-detail-body').innerHTML = tab === 'members'
@@ -1391,7 +1318,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     });
     document.querySelector('#previous').addEventListener('click', () => turnPage(-1));
     document.querySelector('#next').addEventListener('click', () => turnPage(1));
-    document.querySelectorAll('[data-chapter]').forEach(button => button.addEventListener('click', () => changeTopic(chapters[Number(button.dataset.chapter)].ids[0])));
     document.querySelector('#agenda-open').addEventListener('click', () => document.querySelector('#agenda-dialog').showModal());
     document.querySelector('#notes-open').addEventListener('click', () => document.querySelector('#notes-dialog').showModal());
     document.querySelector('#reference-open').addEventListener('click', () => {
