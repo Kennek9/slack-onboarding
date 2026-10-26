@@ -3,7 +3,7 @@
 你接手这个项目，后续我会和你一起迭代。
 
 仓库：https://github.com/Kennek9/slack-onboarding
-当前线上版：https://glorify-workspace-onboarding.gezicheng1999.chatgpt.site
+正式网站：https://kennek9.github.io/slack-onboarding/
 
 先阅读 AGENTS.md、README.md 和 dist/index.html。源码是无依赖的静态网站，HTML/CSS/JS 都在 dist/index.html；不要一开始迁移框架或全面重写。
 
@@ -21,6 +21,8 @@ node scripts/check.mjs
 
 本轮先启动网站、核对仓库与线上基线，简短说明你理解的结构和可运行状态，然后等我给具体修改要求。收到要求后，按本次范围实施并验证：文件→文档评论→回原 Thread、回复/同步、Huddle、目录与键盘、1920×1080 投屏和 1366×768 笔记本，以及受影响的手机布局。
 
-改动用分支提交 PR，报告改了什么、实际验证了什么、还有什么没验证。不要自行合并或部署。
+改动用分支提交 PR，报告改了什么、实际验证了什么、还有什么没验证。未经我明确授权，不要合并 main。
 
-特别注意：当前 GitHub 和 Sites 没有自动部署绑定。推送或合并代码不会自动刷新现有 Sites 网站。不要修改 .openai/hosting.json 的 project_id，不要添加部署凭据；需要更新线上版时单独说明发布步骤。
+发布由 GitHub Pages 承担：合并或推送 main 会触发 .github/workflows/pages.yml，先检查 JavaScript 语法，再只发布 dist。Actions 成功后，正式网站才会更新。PR 和其他分支不发布生产站，当前也没有 PR 预览。请把“合并 main”视为生产发布，不要仅凭推送成功报告已上线。
+
+仓库已公开，继续使用部门/职责代称，不提交真实内部聊天或凭据。旧 Sites 网址是独立快照，不会自动更新；保留 .openai/hosting.json 的 project_id。

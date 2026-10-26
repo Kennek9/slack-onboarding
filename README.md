@@ -2,7 +2,8 @@
 
 面向从 Lark 切换到 Slack、Google Workspace 的同事。用于办公室投屏，也支持会后自助查看。
 
-- 线上演示：https://glorify-workspace-onboarding.gezicheng1999.chatgpt.site
+- 正式网站：https://kennek9.github.io/slack-onboarding/
+- Sites 旧版（独立维护）：https://glorify-workspace-onboarding.gezicheng1999.chatgpt.site
 - 本仓库：https://github.com/Kennek9/slack-onboarding
 - Devin 交接：[DEVIN_HANDOFF.md](DEVIN_HANDOFF.md)
 - 修改约束：[AGENTS.md](AGENTS.md)
@@ -28,6 +29,7 @@ node scripts/check.mjs
 ## 文件
 
 - `dist/index.html`：网站完整源码，HTML、CSS、JavaScript 均在此文件。
+- `.github/workflows/pages.yml`：检查 JavaScript 语法，并将 `dist` 自动发布到 GitHub Pages。
 - `.openai/hosting.json`：现有 Sites 项目标识和静态目录；不是凭据。
 - `scripts/check.mjs`：离线 JavaScript 语法检查。
 
@@ -55,13 +57,17 @@ node scripts/check.mjs
 6. 目录、资料弹窗、键盘翻页、刷新定位与投屏退出。
 7. 1920×1080 投屏和 1366×768 笔记本可用；390×844 手机、768×1024 平板无横向溢出。
 
-## GitHub 与 Sites 的发布关系
+## 发布到 GitHub Pages
 
-**GitHub 更新目前不会自动更新现有 Sites 网址。** 本仓库没有 GitHub Actions 部署流水线，也没有绑定外部自动部署平台。
+本仓库已公开，正式网站由 GitHub Pages 托管。`main` 是生产分支。
 
-当前流程是：修改代码 → 验证 → 提交 GitHub → 在有 Sites 权限的环境中同步源码、保存版本并发布 → 核对线上结果。`.openai/hosting.json` 仅保留现有站点身份，不会触发自动上线。
+修改流程：Devin 在分支修改 → 验证并提交 PR → 经用户授权合并 `main` → GitHub Actions 自动检查并发布 → 刷新正式网站查看。
 
-如以后配置 Vercel 等 Git 自动部署平台，再单独更新发布说明。配置完成前，不要把“代码已推送”表述为“网页已更新”。
+每次推送到 `main` 都会触发 [Deploy GitHub Pages](https://github.com/Kennek9/slack-onboarding/actions/workflows/pages.yml)。只有工作流成功，才表示网页已经更新。失败时查看该次运行日志，线上保留上次成功版本。
+
+工作流只发布 `dist`；PR 和其他分支不会发布生产站，当前没有配置 PR 预览。需要重新发布时，可在 Actions 中选择 `main` 手动运行同一工作流。
+
+现有 Sites 旧站独立维护，不会随 `main` 自动更新。`.openai/hosting.json` 仅保留旧站身份，不触发 GitHub Pages 发布。
 
 ## 来源
 
