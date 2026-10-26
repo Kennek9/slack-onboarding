@@ -50,7 +50,6 @@
     .detail { min-width: 0; }
     .detail-heading { min-height: 76px; padding: 0 0 17px; display: flex; justify-content: space-between; gap: 18px; align-items: center; }
     .detail-heading h2 { font-size: 22px; letter-spacing: -.035em; line-height: 1.45; margin: 0 0 3px; font-weight: 600; }
-    .detail-heading p { margin: 0; font-size: 12px; color: var(--muted); }
     .dept { font-size: 10px; padding: 5px 9px; background: #eee9ef; border-radius: 5px; white-space: nowrap; color: #69586f; }
     .switches { display: flex; align-items: center; gap: 5px; margin-bottom: 13px; flex-wrap: wrap; }
     .switch { min-height: 39px; border: 1px solid transparent; border-radius: 6px; padding: 6px 13px; background: transparent; font-size: 12px; color: var(--muted); }
@@ -82,13 +81,10 @@
     .byline small { font-size: 9px; color: var(--muted); }
     .message p { font-size: 13px; line-height: 1.9; margin: 5px 0 0; overflow-wrap: anywhere; }
     .mention { color: #306582; background: #edf4f8; padding: 1px 3px; border-radius: 3px; }
-    .window-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; padding: 10px 22px; min-height: 43px; display: flex; align-items: center; gap: 8px; }
-    .window-footer svg { width: 13px; height: 13px; }
     .caption { margin: 10px 0 0; color: var(--muted); font-size: 10px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
     .caption a { text-underline-offset: 3px; }
     .takeaway { margin: 20px 0 0; display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 17px 20px; background: #eeeddf; border-radius: 9px; }
     .takeaway strong { display: block; font-size: 13px; font-weight: 600; }
-    .takeaway p { margin: 3px 0 0; color: #6b6858; font-size: 11px; }
     .takeaway a { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; white-space: nowrap; color: #5f5166; min-height: 44px; }
     .takeaway svg { width: 14px; height: 14px; }
     .extra { font-size: 11px; color: var(--muted); margin-top: 11px; }
@@ -127,17 +123,17 @@
     .broadcast input { accent-color: var(--purple); width: 15px; height: 15px; margin: 0; }
     .broadcast-message { margin-top: 16px; padding: 13px; background: #eff4e7; border-left: 2px solid #8b9f60; border-radius: 4px; font-size: 11px; }
     .broadcast-message small { display: block; color: #6b7859; font-size: 9px; }
-    .call-start { display: flex; gap: 18px; align-items: center; padding: 17px 20px; margin-top: 20px; border-radius: 8px; background: #f3eff5; }
-    .call-start > svg { width: 32px; height: 32px; color: #7c6088; }
+    .call-start { display: flex; gap: 15px; align-items: center; padding: 13px 16px; margin-top: 16px; border-radius: 8px; background: #f3eff5; }
+    .call-start > svg { width: 26px; height: 26px; color: #7c6088; }
     .call-start p { margin: 0; font-size: 11px; color: var(--muted); }
     .call-start strong { font-size: 12px; display: block; font-weight: 500; }
     .call-start button { margin-left: auto; }
-    .call-window { border-radius: 10px; background: #25182d; padding: 17px; margin-top: 17px; color: #f0e7f4; }
+    .call-window { border-radius: 10px; background: #25182d; padding: 14px; margin-top: 14px; color: #f0e7f4; }
     .call-top { display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: #c4b3ce; }
-    .call-person { min-height: 103px; display: grid; place-items: center; padding: 16px; }
-    .call-avatar { border-radius: 50%; background: #6a4978; width: 56px; height: 56px; display: grid; place-items: center; font-family: Georgia, serif; font-size: 20px; }
-    .call-person span { font-size: 10px; margin-top: 7px; }
-    .camera-preview { width: 100%; min-height: 95px; border-radius: 7px; border: 1px dashed #8e729f; background: #42314d; display: grid; place-items: center; font-size: 11px; color: #e3d2ec; }
+    .call-person { min-height: 90px; display: grid; place-items: center; padding: 14px; }
+    .call-avatar { border-radius: 50%; background: #6a4978; width: 46px; height: 46px; display: grid; place-items: center; font-family: Georgia, serif; font-size: 17px; }
+    .call-person span { font-size: 10px; margin-top: 6px; }
+    .camera-preview { width: 100%; min-height: 80px; border-radius: 7px; border: 1px dashed #8e729f; background: #42314d; display: grid; place-items: center; font-size: 11px; color: #e3d2ec; }
     .call-controls { display: flex; justify-content: center; gap: 9px; }
     .call-control { display: flex; align-items: center; gap: 6px; min-height: 39px; padding: 7px 10px; border: 1px solid #66506f; border-radius: 6px; background: #483451; color: white; font-size: 10px; }
     .call-control[aria-pressed="true"] { background: #e8efcf; border-color: #e8efcf; color: #344627; }
@@ -219,146 +215,143 @@
     .cutover a { display: inline-block; margin-top: 12px; color: var(--purple); text-decoration: underline; text-underline-offset: 3px; }
     /* Presentation layout: one point and one example per screen. */
     :root {
-      --talk-body: clamp(18px, 1.65vw, 28px);
-      --talk-small: clamp(14px, 1.15vw, 20px);
+      --talk-body: clamp(15px, 1.05vw, 20px);
+      --talk-small: clamp(12px, 0.85vw, 15px);
     }
     .wrap { width: min(1800px, calc(100% - 80px)); min-height: 100dvh; display: flex; flex-direction: column; }
-    .top { min-height: 72px; border-bottom: 1px solid var(--line); }
-    .top h1 { font-size: 20px; letter-spacing: -.035em; font-weight: 550; margin: 0 auto 0 30px; }
+    .top { min-height: 58px; border-bottom: 1px solid var(--line); }
+    .top h1 { font-size: 17px; letter-spacing: -.035em; font-weight: 550; margin: 0 auto 0 30px; }
     .brand-label { font-size: 12px; }
     .present-actions { display: flex; align-items: center; gap: 8px; }
     .top-link { border: 1px solid transparent; border-radius: 6px; background: transparent; color: #645b6b; padding: 7px 12px; font-size: 13px; }
     #presentation-mode { border-color: #d7ccde; background: white; }
-    .chapters { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; padding: 18px 0; }
-    .chapter { display: flex; align-items: baseline; gap: 11px; min-height: 43px; padding: 6px 13px; background: transparent; color: #756b7a; border: 1px solid transparent; border-radius: 7px; text-align: left; }
-    .chapter > span { font-size: 12px; opacity: .8; font-variant-numeric: tabular-nums; }
-    .chapter strong { font-size: 16px; font-weight: 600; white-space: nowrap; }
-    .chapter small { font-size: 12px; }
+    .chapters { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; padding: 12px 0; }
+    .chapter { display: flex; align-items: baseline; gap: 10px; min-height: 38px; padding: 5px 12px; background: transparent; color: #756b7a; border: 1px solid transparent; border-radius: 7px; text-align: left; }
+    .chapter > span { font-size: 11px; opacity: .8; font-variant-numeric: tabular-nums; }
+    .chapter strong { font-size: 14px; font-weight: 600; white-space: nowrap; }
     .chapter[aria-pressed="true"] { background: #eee7f1; color: var(--purple); border-color: #e0d5e5; }
     .layout { display: block; flex: 1; min-width: 0; }
     .detail { display: grid; grid-template-rows: auto auto minmax(0,1fr) auto; gap: 0; min-width: 0; }
-    .detail-heading { padding: 6px 0 17px; min-height: 97px; }
-    .detail-heading h2 { font-size: clamp(30px,2.7vw,48px); font-weight: 650; letter-spacing: -.045em; line-height: 1.25; margin-bottom: 10px; }
-    .detail-heading p { font-size: var(--talk-small); color: #6d6473; }
-    .dept { font-size: var(--talk-small); padding: 6px 11px; }
-    .switches { gap: 7px; margin-bottom: 15px; }
-    .switch { min-height: 44px; padding: 7px 15px; font-size: var(--talk-small); }
+    .detail-heading { padding: 2px 0 10px; min-height: 50px; }
+    .detail-heading h2 { font-size: clamp(22px,1.8vw,32px); font-weight: 650; letter-spacing: -.045em; line-height: 1.25; margin: 0; }
+    .dept { font-size: var(--talk-small); padding: 5px 9px; }
+    .switches { gap: 6px; margin-bottom: 10px; }
+    .switch { min-height: 38px; padding: 5px 12px; font-size: var(--talk-small); }
     .switch small { font-size: .85em; }
     .stage { min-height: 360px; grid-template-columns: 1fr; box-shadow: 0 8px 28px #321b3805; }
     .stage .sidebar { display: none; }
     .window { min-height: 0; }
-    .window-header { height: 57px; min-height: 57px; padding: 0 27px; }
+    .window-header { height: 48px; min-height: 48px; padding: 0 22px; }
     .window-title { font-size: calc(var(--talk-body) + 1px); }
-    .window-title svg { width: 21px; height: 21px; }
-    .window-label { font-size: 12px; }
-    .window-body { padding: 22px 30px; width: 100%; max-width: 1320px; margin-inline: auto; }
-    .window-footer { padding: 11px 27px; font-size: var(--talk-small); min-height: 45px; }
-    .avatar { width: 42px; height: 42px; font-size: 12px; }
-    .message { gap: 14px; }
+    .window-title svg { width: 18px; height: 18px; }
+    .window-label { font-size: 11px; }
+    .window-body { padding: 16px 24px; width: 100%; max-width: 1500px; margin-inline: auto; }
+    .avatar { width: 36px; height: 36px; font-size: 11px; }
+    .message { gap: 12px; }
     .byline strong { font-size: var(--talk-small); }
-    .byline small { font-size: 12px; }
-    .message p { font-size: var(--talk-body); line-height: 1.7; margin-top: 7px; }
-    .message + .message { margin-top: 24px; }
-    .status-line { font-size: var(--talk-small); padding: 12px 16px; }
-    .takeaway { min-height: 88px; padding: 15px 20px; margin-top: 18px; gap: 25px; }
+    .byline small { font-size: 11px; }
+    .message p { font-size: var(--talk-body); line-height: 1.65; margin-top: 5px; }
+    .message + .message { margin-top: 18px; }
+    .status-line { font-size: var(--talk-small); padding: 9px 13px; }
+    .takeaway { min-height: 46px; padding: 9px 16px; margin-top: 12px; gap: 14px; justify-content: flex-start; }
     .takeaway strong { font-size: var(--talk-body); font-weight: 600; line-height: 1.45; }
-    .takeaway p { font-size: var(--talk-small); line-height: 1.55; margin-top: 6px; }
+    .takeaway-note { font-size: var(--talk-small); line-height: 1.5; color: #6b6858; }
     .takeaway a { font-size: var(--talk-small); }
-    .button { font-size: var(--talk-small); min-height: 44px; padding: 8px 17px; }
-    .mini-link { font-size: var(--talk-small); min-height: 40px; }
-    .visibility { margin-left: 56px; max-width: 700px; }
-    .visibility-row { font-size: var(--talk-body); gap: 25px; padding-bottom: 9px; }
+    .button { font-size: var(--talk-small); min-height: 38px; padding: 6px 14px; }
+    .mini-link { font-size: var(--talk-small); min-height: 34px; }
+    .visibility { margin-left: 46px; max-width: 560px; }
+    .visibility-row { font-size: var(--talk-body); gap: 25px; padding-bottom: 7px; }
     .invite-title { font-size: var(--talk-body); }
     .invite p { font-size: var(--talk-small); }
-    .thread-head { padding: 8px 17px; font-size: var(--talk-small); }
-    .thread-card .message { padding: 17px; }
+    .thread-head { padding: 7px 14px; font-size: var(--talk-small); }
+    .thread-card .message { padding: 13px; }
     .thread-card .message p { font-size: var(--talk-body); }
     .broadcast { font-size: var(--talk-small); }
     .broadcast-message { font-size: var(--talk-small); }
-    .broadcast-message small { font-size: 12px; }
+    .broadcast-message small { font-size: 11px; }
     .call-start strong { font-size: var(--talk-body); }
     .call-start p { font-size: var(--talk-small); }
     .call-top, .call-person span { font-size: var(--talk-small); }
-    .call-person { min-height: 110px; }
-    .call-control { min-height: 44px; font-size: var(--talk-small); padding: 8px 13px; }
+    .call-person { min-height: 90px; }
+    .call-control { min-height: 38px; font-size: var(--talk-small); padding: 6px 11px; }
     .share-preview, .camera-preview { font-size: var(--talk-small); }
-    .tool { padding: 22px; }
-    .tool h3 { font-size: calc(var(--talk-body) + 4px); }
+    .tool { padding: 18px; }
+    .tool h3 { font-size: calc(var(--talk-body) + 3px); }
     .tool p, .tool .tool-kicker, .handoff { font-size: var(--talk-small); }
-    .share-box, .calendar-box { max-width: 800px; padding: 20px; }
+    .share-box, .calendar-box { max-width: 640px; padding: 16px; }
     .share-box h3, .calendar-box h3 { font-size: calc(var(--talk-body) + 2px); }
     .share-owner, .share-recipient span, .share-status, .preview-doc p, .comment { font-size: var(--talk-small); }
-    .share-owner small { font-size: 12px; }
-    select { font-size: var(--talk-small); min-height: 42px; }
+    .share-owner small { font-size: 11px; }
+    select { font-size: var(--talk-small); min-height: 38px; }
     .setup { max-width: 1000px; gap: 7px; }
-    .setup-row { padding: 13px 0; gap: 16px; grid-template-columns: 34px minmax(0,1fr) auto; }
-    .setup-number { width: 31px; height: 31px; font-size: 14px; }
+    .setup-row { padding: 11px 0; gap: 14px; grid-template-columns: 30px minmax(0,1fr) auto; }
+    .setup-number { width: 27px; height: 27px; font-size: 12px; }
     .setup-row strong { font-size: var(--talk-body); }
     .setup-row p, .setup-row a, .setup-note { font-size: var(--talk-small); }
-    .setup-row a { min-height: 44px; }
+    .setup-row a { min-height: 38px; }
     .calendar-notice, .preview-notice { font-size: var(--talk-small); }
     .event-row { font-size: var(--talk-body); }
     .event-row small, .event-zone span { font-size: var(--talk-small); }
-    .tag { font-size: 12px; }
+    .tag { font-size: 11px; }
     .follow-row, .follow-row strong { font-size: var(--talk-body); }
     .search-query { font-size: var(--talk-body); }
     .search-help { font-size: var(--talk-small); }
     .spoken { font-size: var(--talk-body); }
-    .spoken small { font-size: 12px; }
+    .spoken small { font-size: 11px; }
     .key-path { font-size: var(--talk-small); }
     .draft-box label, .draft-box textarea { font-size: var(--talk-body); }
-    .draft-box textarea { min-height: 100px; }
-    .deck-toolbar { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 79px; padding-top: 10px; margin-top: 20px; }
+    .draft-box textarea { min-height: 82px; }
+    .deck-toolbar { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 62px; padding-top: 8px; margin-top: 14px; }
     .deck-progress { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 2px; background: #e6dfe9; overflow: hidden; }
     .deck-progress span { display: block; width: 8.333%; height: 100%; background: var(--purple); }
     .page-position { display: flex; align-items: baseline; gap: 9px; }
-    #page-number { font-size: 26px; line-height: 1; font-variant-numeric: tabular-nums; color: var(--purple); }
-    .page-total { font-size: 14px; color: var(--muted); }
-    #page-label { margin-left: 13px; font-size: 14px; color: #65596e; }
-    .keyboard-hint { color: var(--muted); font-size: 12px; }
-    .page-actions { display: flex; gap: 9px; }
-    .page-actions .button { min-width: 116px; font-size: 14px; }
+    #page-number { font-size: 20px; line-height: 1; font-variant-numeric: tabular-nums; color: var(--purple); }
+    .page-total { font-size: 12px; color: var(--muted); }
+    #page-label { margin-left: 11px; font-size: 12px; color: #65596e; }
+    .keyboard-hint { color: var(--muted); font-size: 11px; }
+    .page-actions { display: flex; gap: 8px; }
+    .page-actions .button { min-width: 104px; font-size: 12px; }
     .page-actions button:disabled { opacity: .4; cursor: default; }
-    .sheet { width: min(1100px,calc(100% - 48px)); max-height: calc(100dvh - 80px); overflow-y: auto; border: 1px solid #dfd6e4; border-radius: 16px; padding: 25px 30px; color: var(--ink); background: var(--paper); box-shadow: 0 30px 100px #2d193a33; }
+    .sheet { width: min(1100px,calc(100% - 48px)); max-height: calc(100dvh - 80px); overflow-y: auto; border: 1px solid #dfd6e4; border-radius: 16px; padding: 22px 26px; color: var(--ink); background: var(--paper); box-shadow: 0 30px 100px #2d193a33; }
     .sheet::backdrop { background: #24172b70; backdrop-filter: blur(3px); }
-    .sheet-header { position: sticky; top: 0; z-index: 2; background: var(--paper); padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
-    .sheet-header h2 { font-size: 25px; margin: 0; letter-spacing: -.025em; }
-    .sheet .close-button { font-size: 27px; min-height: 44px; min-width: 44px; }
-    .agenda-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; }
-    .agenda-group h3 { font-size: 16px; color: var(--purple); font-weight: 600; padding-left: 12px; margin: 0 0 12px; }
+    .sheet-header { position: sticky; top: 0; z-index: 2; background: var(--paper); padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+    .sheet-header h2 { font-size: 21px; margin: 0; letter-spacing: -.025em; }
+    .sheet .close-button { font-size: 24px; min-height: 44px; min-width: 44px; }
+    .agenda-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+    .agenda-group h3 { font-size: 14px; color: var(--purple); font-weight: 600; padding-left: 12px; margin: 0 0 10px; }
     .sheet .topics { grid-template-columns: 1fr; gap: 6px; }
-    .sheet .topic { min-height: 62px; padding: 10px 12px; }
-    .sheet .topic strong { font-size: 16px; }
-    .sheet .topic small { display: block; font-size: 12px; }
-    .sheet .topic .num { display: inline; font-size: 12px; }
+    .sheet .topic { min-height: 56px; padding: 9px 12px; }
+    .sheet .topic strong { font-size: 14px; }
+    .sheet .topic small { display: block; font-size: 11px; }
+    .sheet .topic .num { display: inline; font-size: 11px; }
     .sheet .topic > span:last-child { display: block; text-align: left; }
-    .sheet .caption { font-size: 14px; line-height: 1.8; margin-bottom: 17px; }
-    .sheet .extra { font-size: 15px; }
-    .sheet .extra summary { min-height: 44px; }
-    .sheet .extra p { font-size: 15px; max-width: none; }
-    .sheet .cutover { margin: 22px 0 0; padding-top: 18px; font-size: 15px; }
-    .sheet .cutover-grid strong { font-size: 16px; }
-    .sheet .cutover-grid p, .sheet .cutover a { font-size: 14px; }
+    .sheet .caption { font-size: 13px; line-height: 1.8; margin-bottom: 15px; }
+    .sheet .extra { font-size: 13px; }
+    .sheet .extra summary { min-height: 40px; }
+    .sheet .extra p { font-size: 13px; max-width: none; }
+    .sheet .cutover { margin: 20px 0 0; padding-top: 16px; font-size: 13px; }
+    .sheet .cutover-grid strong { font-size: 14px; }
+    .sheet .cutover-grid p, .sheet .cutover a { font-size: 13px; }
     .sheet #resource-details > summary { display: none; }
-    .sheet .resource-grid { gap: 9px 25px; }
-    .sheet .resource-grid a { font-size: 15px; min-height: 40px; }
-    .sheet-footnote { font-size: 12px; color: var(--muted); margin: 17px 0 0; }
-    .takeaway-links { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px 14px; flex-shrink: 0; }
+    .sheet .resource-grid { gap: 8px 25px; }
+    .sheet .resource-grid a { font-size: 13px; min-height: 36px; }
+    .sheet-footnote { font-size: 11px; color: var(--muted); margin: 15px 0 0; }
+    .takeaway-links { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px 14px; flex-shrink: 0; margin-left: auto; }
     #migration-open[hidden] { display: none; }
-    .migration-resource { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
-    .migration-resource strong { display: block; font-size: 16px; }
-    .migration-resource small { color: var(--muted); font-size: 13px; }
-    #migration-dialog { width: min(780px,calc(100% - 32px)); }
-    .migration-lead { margin: 0 0 22px; font-size: 17px; }
-    .migration-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; list-style: none; padding: 0; margin: 0 0 22px; }
-    .migration-steps li { border-top: 2px solid var(--purple); padding-top: 12px; }
-    .migration-steps strong { display: block; font-size: 17px; }
-    .migration-steps span { display: block; margin-top: 5px; font-size: 14px; color: var(--muted); }
+    .migration-resource { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 16px; }
+    .migration-resource strong { display: block; font-size: 15px; }
+    .migration-resource small { color: var(--muted); font-size: 12px; }
+    #migration-dialog { width: min(720px,calc(100% - 32px)); }
+    .migration-lead { margin: 0 0 20px; font-size: 15px; }
+    .migration-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; list-style: none; padding: 0; margin: 0 0 20px; }
+    .migration-steps li { border-top: 2px solid var(--purple); padding-top: 11px; }
+    .migration-steps strong { display: block; font-size: 15px; }
+    .migration-steps span { display: block; margin-top: 5px; font-size: 13px; color: var(--muted); }
     .migration-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; }
-    .migration-actions a:not(.button) { color: var(--purple); font-size: 14px; }
-    .migration-prompt { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 12px; }
-    .migration-prompt summary { cursor: pointer; min-height: 40px; font-size: 15px; }
-    .migration-prompt textarea { display: block; width: 100%; min-height: 165px; resize: vertical; margin: 0 0 12px; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font: inherit; font-size: 14px; line-height: 1.7; }
+    .migration-actions a:not(.button) { color: var(--purple); font-size: 13px; }
+    .migration-prompt { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 11px; }
+    .migration-prompt summary { cursor: pointer; min-height: 38px; font-size: 13px; }
+    .migration-prompt textarea { display: block; width: 100%; min-height: 150px; resize: vertical; margin: 0 0 12px; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font: inherit; font-size: 13px; line-height: 1.7; }
     @media (max-width: 600px) {
       .migration-steps { grid-template-columns: 1fr; gap: 14px; }
       .migration-resource { align-items: flex-start; flex-direction: column; }
@@ -366,48 +359,44 @@
     }
     @media (min-width: 1000px) and (min-height: 700px) {
       .wrap { height: 100dvh; min-height: 0; }
-      .top { min-height: 65px; flex-shrink: 0; }
-      .chapters { flex-shrink: 0; padding: 13px 0; }
+      .top { min-height: 54px; flex-shrink: 0; }
+      .chapters { flex-shrink: 0; padding: 10px 0; }
       .layout { min-height: 0; }
       .detail { height: 100%; min-height: 0; }
       .stage { min-height: 0; }
       .window-body { overflow-y: auto; scrollbar-gutter: stable; }
-      .window-footer { flex-shrink: 0; }
-      .deck-toolbar { flex-shrink: 0; min-height: 72px; margin-top: 17px; }
+      .deck-toolbar { flex-shrink: 0; min-height: 58px; margin-top: 12px; }
     }
     @media (max-width: 1250px) {
       .wrap { width: calc(100% - 48px); }
-      .top h1 { margin-left: 20px; font-size: 17px; }
+      .top h1 { margin-left: 20px; font-size: 16px; }
       .brand-label { display: none; }
-      .chapter small { display: none; }
-      .detail-heading { min-height: 85px; }
-      .dept { font-size: 12px; }
+      .detail-heading { min-height: 46px; }
+      .dept { font-size: 11px; }
     }
     @media (max-height: 850px) and (min-width: 1000px) {
-      .detail-heading { min-height: 77px; padding-bottom: 10px; }
-      .detail-heading h2 { font-size: 31px; margin-bottom: 6px; }
-      .detail-heading p { font-size: 14px; }
-      .switches { margin-bottom: 10px; }
-      .takeaway { min-height: 76px; margin-top: 12px; padding: 11px 17px; }
-      .takeaway p { font-size: 13px; }
-      .takeaway strong { font-size: 17px; }
+      .detail-heading { min-height: 42px; padding-bottom: 7px; }
+      .detail-heading h2 { font-size: 24px; }
+      .switches { margin-bottom: 8px; }
+      .takeaway { min-height: 42px; margin-top: 10px; padding: 7px 14px; }
+      .takeaway-note { font-size: 11px; }
+      .takeaway strong { font-size: 14px; }
     }
     @media (max-width: 999px) {
       .wrap { width: calc(100% - 36px); }
-      .top { min-height: 67px; flex-wrap: wrap; padding: 11px 0; }
-      .top h1 { font-size: 17px; margin-left: 0; }
+      .top { min-height: 60px; flex-wrap: wrap; padding: 9px 0; }
+      .top h1 { font-size: 16px; margin-left: 0; }
       .present-actions { margin-left: auto; gap: 3px; }
       .top-link { padding: 5px 8px; font-size: 12px; }
-      .chapters { gap: 7px; padding: 15px 0; }
+      .chapters { gap: 7px; padding: 12px 0; }
       .chapter { gap: 7px; padding: 6px 8px; }
-      .chapter strong { font-size: 14px; }
-      .detail-heading h2 { font-size: 29px; }
+      .chapter strong { font-size: 13px; }
+      .detail-heading h2 { font-size: 23px; }
       .dept { display: none; }
-      .detail-heading p { font-size: 14px; }
       .stage { min-height: 350px; }
-      .window-body { padding: 20px; }
-      .window-header, .window-footer { padding-left: 20px; padding-right: 20px; }
-      .takeaway { min-height: 83px; }
+      .window-body { padding: 15px; }
+      .window-header { padding-left: 16px; padding-right: 16px; }
+      .takeaway { min-height: 60px; }
       .keyboard-hint { display: none; }
       .sheet { max-height: calc(100dvh - 48px); }
     }
@@ -422,21 +411,19 @@
       .chapter { gap: 5px; min-height: 41px; justify-content: center; padding: 5px; }
       .chapter > span { font-size: 10px; }
       .chapter strong { font-size: 12px; }
-      .detail-heading { padding-top: 5px; min-height: 78px; }
-      .detail-heading h2 { font-size: 25px; }
-      .detail-heading p { font-size: 12px; }
-      .switches { gap: 4px; margin-bottom: 12px; }
-      .switch { min-height: 40px; padding: 6px 10px; font-size: 11px; }
+      .detail-heading { padding-top: 4px; min-height: 46px; }
+      .detail-heading h2 { font-size: 21px; }
+      .switches { gap: 4px; margin-bottom: 10px; }
+      .switch { min-height: 36px; padding: 5px 10px; font-size: 11px; }
       .window-title { font-size: 15px; }
-      .window-body { padding: 17px 14px; }
-      .window-header, .window-footer { padding-left: 14px; padding-right: 14px; }
-      .window-footer { font-size: 11px; }
+      .window-body { padding: 14px; }
+      .window-header { padding-left: 14px; padding-right: 14px; }
       .stage { min-height: 320px; }
       .avatar { width: 34px; height: 34px; font-size: 10px; }
       .message { gap: 10px; }
-      .takeaway { display: block; padding: 14px; }
-      .takeaway strong { font-size: 15px; }
-      .takeaway p { font-size: 12px; }
+      .takeaway { flex-wrap: wrap; padding: 10px 12px; }
+      .takeaway strong { font-size: 14px; }
+      .takeaway-note { font-size: 12px; }
       .takeaway a { min-height: 34px; margin-top: 6px; }
       .setup-row { grid-template-columns: 27px minmax(0,1fr); gap: 10px; }
       .setup-row a { grid-column: 2; min-height: 34px; }
@@ -457,13 +444,13 @@
       .sheet .cutover-grid { grid-template-columns: 1fr; }
       .share-box h3, .calendar-box h3 { font-size: 17px; }
       .draft-box textarea { font-size: 14px; }
-      .deck-toolbar { gap: 10px; min-height: 75px; }
+      .deck-toolbar { gap: 10px; min-height: 60px; }
       .page-position { gap: 5px; }
-      #page-number { font-size: 23px; }
+      #page-number { font-size: 18px; }
       .page-total { font-size: 12px; }
       #page-label { display: none; }
       .page-actions { gap: 6px; }
-      .page-actions .button { min-width: 95px; font-size: 12px; padding: 8px 12px; }
+      .page-actions .button { min-width: 92px; font-size: 12px; padding: 7px 11px; }
       .agenda-grid { grid-template-columns: 1fr; gap: 21px; }
       .sheet { width: calc(100% - 24px); padding: 18px; max-height: calc(100dvh - 32px); }
       .sheet-header h2 { font-size: 21px; }
@@ -476,10 +463,9 @@
     .focus-mode .top .brand, .focus-mode .top h1, .focus-mode .present-actions > :not(#presentation-mode) { display: none; }
     .focus-mode .present-actions { margin-left: auto; width: auto; }
     .focus-mode .chapters { padding-top: 7px; padding-bottom: 9px; }
-    .focus-mode .chapter small { display: none; }
     @media (min-width: 1000px) {
       .setup { width: 100%; max-width: none; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; gap: 17px; }
-      .setup-row { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 20px; background: #faf8fc; }
+      .setup-row { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: #faf8fc; }
       .setup-row > div { flex: 1; }
       .setup-row a { margin-top: auto; }
       .setup > .setup-note { grid-column: 1 / -1; }
@@ -490,130 +476,128 @@
       .stage.thread-open .broadcast-message { grid-column: 1; margin-top: 0; }
     }
     @media (max-height: 850px) and (min-width: 1000px) {
-      :root { --talk-body: clamp(17px,1.5vw,22px); --talk-small: clamp(13px,1.05vw,16px); }
-      .window-header { height: 46px; min-height: 46px; }
-      .window-footer { display: none; }
-      .window-body { padding: 15px 22px; }
-      .setup-row { padding: 14px; gap: 8px; }
-      .setup-number { width: 27px; height: 27px; }
-      .setup-row a { min-height: 35px; }
-      .setup-row p { font-size: 14px; line-height: 1.7; }
-      .setup > .setup-note { font-size: 12px; }
+      :root { --talk-body: clamp(14px,0.95vw,17px); --talk-small: clamp(11px,0.8vw,13px); }
+      .window-header { height: 42px; min-height: 42px; }
+      .window-body { padding: 12px 18px; }
+      .setup-row { padding: 12px; gap: 7px; }
+      .setup-number { width: 24px; height: 24px; }
+      .setup-row a { min-height: 32px; }
+      .setup-row p { font-size: 12px; line-height: 1.7; }
+      .setup > .setup-note { font-size: 11px; }
     }
 
     .stage { display: flex; min-width: 0; border-color: #d4cbd7; }
     .stage > .slack-ui { flex: 1; min-width: 0; }
     .stage > .window { width: 100%; }
-    .slack-ui { display: grid; grid-template-rows: 39px minmax(0,1fr); background: #fff; min-height: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", sans-serif; }
-    .native-topbar { background: #350d36; color: #eadfec; display: flex; align-items: center; gap: 17px; padding: 4px 15px; }
-    .native-history { font-size: 17px; opacity: .8; width: 60px; }
-    .native-search { display: flex; align-items: center; gap: 9px; height: 29px; border: 1px solid #846087; border-radius: 5px; background: #5a365e; color: #f5edf6; width: min(660px,60%); margin-left: auto; margin-right: auto; font-size: 13px; padding: 3px 13px; text-align: left; }
-    .native-search svg { width: 14px; height: 14px; }
-    .native-search kbd { background: transparent; color: #e2cfe5; border: 0; margin-left: auto; font-size: 11px; }
-    .native-demo { font-size: 11px; }
-    .native-grid { display: grid; grid-template-columns: 56px 205px minmax(0,1fr); min-height: 0; }
-    .native-grid.has-reply { grid-template-columns: 56px 205px minmax(0,1fr) 430px; }
-    .native-rail { background: #3e1242; display: flex; flex-direction: column; align-items: stretch; padding: 15px 4px; gap: 14px; }
-    .native-rail button { color: #e1d2e6; background: none; border: 0; min-height: 43px; padding: 4px 0; display: grid; justify-items: center; gap: 4px; }
-    .native-rail button svg { width: 23px; height: 23px; }
-    .native-rail small { font-size: 10px; }
-    .native-sidebar { background: #4a2651; color: #e7dfe9; display: flex; flex-direction: column; overflow-y: auto; padding: 10px 9px; }
-    .native-workspace { color: #fff; font-size: 19px; font-weight: 650; background: none; border: 0; display: flex; justify-content: space-between; padding: 8px; text-align: left; min-height: 42px; }
-    .native-side-title { font-size: 12px; color: #d2c0d8; margin: 14px 8px 5px; }
-    .native-side-row { background: transparent; border: 0; display: flex; align-items: center; gap: 8px; border-radius: 4px; padding: 6px 8px; min-height: 33px; color: #ded0e4; font-size: 13px; text-align: left; overflow-wrap: anywhere; }
-    .native-side-row svg { width: 15px; height: 15px; }
+    .slack-ui { display: grid; grid-template-rows: 34px minmax(0,1fr); background: #fff; min-height: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", sans-serif; }
+    .native-topbar { background: #350d36; color: #eadfec; display: flex; align-items: center; gap: 13px; padding: 3px 12px; }
+    .native-history { font-size: 14px; opacity: .8; width: 52px; }
+    .native-search { display: flex; align-items: center; gap: 8px; height: 26px; border: 1px solid #846087; border-radius: 5px; background: #5a365e; color: #f5edf6; width: min(620px,60%); margin-left: auto; margin-right: auto; font-size: 12px; padding: 2px 11px; text-align: left; }
+    .native-search svg { width: 13px; height: 13px; }
+    .native-search kbd { background: transparent; color: #e2cfe5; border: 0; margin-left: auto; font-size: 10px; }
+    .native-demo { font-size: 10px; }
+    .native-grid { display: grid; grid-template-columns: 52px 185px minmax(0,1fr); min-height: 0; }
+    .native-grid.has-reply { grid-template-columns: 52px 185px minmax(0,1fr) 400px; }
+    .native-rail { background: #3e1242; display: flex; flex-direction: column; align-items: stretch; padding: 12px 4px; gap: 11px; }
+    .native-rail button { color: #e1d2e6; background: none; border: 0; min-height: 38px; padding: 3px 0; display: grid; justify-items: center; gap: 3px; }
+    .native-rail button svg { width: 20px; height: 20px; }
+    .native-rail small { font-size: 9px; }
+    .native-sidebar { background: #4a2651; color: #e7dfe9; display: flex; flex-direction: column; overflow-y: auto; padding: 9px 8px; }
+    .native-workspace { color: #fff; font-size: 16px; font-weight: 650; background: none; border: 0; display: flex; justify-content: space-between; padding: 6px; text-align: left; min-height: 36px; }
+    .native-side-title { font-size: 11px; color: #d2c0d8; margin: 12px 8px 4px; }
+    .native-side-row { background: transparent; border: 0; display: flex; align-items: center; gap: 7px; border-radius: 4px; padding: 5px 7px; min-height: 29px; color: #ded0e4; font-size: 12px; text-align: left; overflow-wrap: anywhere; }
+    .native-side-row svg { width: 14px; height: 14px; }
     .native-side-row.selected { background: #886a95; color: #fff; }
     .native-side-row:hover, .native-rail button:hover { background: #714778; color: white; }
     .presence { width: 7px; height: 7px; border-radius: 50%; background: #8db47b; margin: 0 4px; }
-    .native-side-foot { margin: auto 8px 0; padding-top: 20px; font-size: 10px; color: #d2c0d8; }
-    .slack-ui .window-header { height: 50px; min-height: 50px; padding: 0 19px; }
-    .native-channel-title { border: 0; background: none; padding: 6px 0; color: #1d1c1d; font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; text-align: left; }
+    .native-side-foot { margin: auto 8px 0; padding-top: 14px; font-size: 9px; color: #d2c0d8; }
+    .slack-ui .window-header { height: 44px; min-height: 44px; padding: 0 15px; }
+    .native-channel-title { border: 0; background: none; padding: 5px 0; color: #1d1c1d; font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 6px; text-align: left; }
     .native-header-actions { display: flex; align-items: center; gap: 4px; }
-    .native-tabs { display: flex; gap: 21px; padding: 0 20px; min-height: 32px; border-bottom: 1px solid #ddd; font-size: 13px; color: #6a626f; }
+    .native-tabs { display: flex; gap: 17px; padding: 0 16px; min-height: 28px; border-bottom: 1px solid #ddd; font-size: 12px; color: #6a626f; }
     .native-tabs span { padding: 3px 0; }
     .native-tabs .active { border-bottom: 2px solid #1264a3; color: #1d1c1d; font-weight: 600; }
-    .slack-ui .window-body { padding: 20px; max-width: none; overflow-y: auto; }
-    .slack-ui .window-footer { font-size: 11px; min-height: 29px; padding: 5px 17px; color: #746d79; }
-    .slack-ui .message p { font-size: clamp(17px,1.2vw,23px); line-height: 1.6; }
-    .slack-ui .byline strong { font-size: 16px; }
-    .slack-ui .message + .message { margin-top: 20px; }
-    .native-message-reply { min-height: 28px; padding: 2px 0; background: none; border: 0; color: #1264a3; font-size: 12px; display: flex; align-items: center; gap: 5px; }
-    .native-message-reply svg { width: 14px; height: 14px; }
-    .native-file { display: flex; align-items: center; gap: 12px; width: min(470px,calc(100% - 55px)); background: #fff; border: 1px solid #d9d6db; border-radius: 7px; padding: 14px; text-align: left; margin: 11px 0 5px 55px; min-height: 70px; color: #1d1c1d; }
-    .native-file strong { font-size: 17px; display: block; font-weight: 600; }
-    .native-file small { display: block; color: #716978; font-size: 12px; margin-top: 3px; }
-    .native-file > svg { margin-left: auto; width: 17px; height: 17px; color: #807487; }
+    .slack-ui .window-body { padding: 15px; max-width: none; overflow-y: auto; }
+    .slack-ui .message p { font-size: clamp(14px,0.9vw,17px); line-height: 1.6; }
+    .slack-ui .byline strong { font-size: 13px; }
+    .slack-ui .message + .message { margin-top: 15px; }
+    .native-message-reply { min-height: 26px; padding: 2px 0; background: none; border: 0; color: #1264a3; font-size: 11px; display: flex; align-items: center; gap: 5px; }
+    .native-message-reply svg { width: 13px; height: 13px; }
+    .native-file { display: flex; align-items: center; gap: 10px; width: min(420px,calc(100% - 47px)); background: #fff; border: 1px solid #d9d6db; border-radius: 7px; padding: 11px; text-align: left; margin: 8px 0 4px 48px; min-height: 56px; color: #1d1c1d; }
+    .native-file strong { font-size: 14px; display: block; font-weight: 600; }
+    .native-file small { display: block; color: #716978; font-size: 11px; margin-top: 2px; }
+    .native-file > svg { margin-left: auto; width: 15px; height: 15px; color: #807487; }
     .native-file:hover { border-color: #1264a3; background: #fbfdff; }
-    .native-reply-count { margin-left: 55px; min-height: 35px; padding: 3px 0; background: none; border: 0; font-size: 14px; color: #1264a3; }
-    .native-composer { margin: 8px 18px 10px; border: 1px solid #a8a0ad; border-radius: 7px; background: #fff; padding: 9px 12px 4px; flex-shrink: 0; }
+    .native-reply-count { margin-left: 48px; min-height: 30px; padding: 3px 0; background: none; border: 0; font-size: 12px; color: #1264a3; }
+    .native-composer { margin: 6px 14px 8px; border: 1px solid #a8a0ad; border-radius: 7px; background: #fff; padding: 7px 10px 3px; flex-shrink: 0; }
     .native-composer:focus-within { outline: 2px solid #1264a3; outline-offset: 1px; }
-    .native-composer textarea { display: block; width: 100%; background: none; border: 0; resize: none; outline: none; font-size: 15px; line-height: 1.55; min-height: 40px; color: #1d1c1d; }
-    .composer-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #7b7380; font-size: 16px; }
-    .native-send { display: grid; place-items: center; background: #007a5a; color: white; border: 0; min-height: 33px; min-width: 40px; border-radius: 4px; }
+    .native-composer textarea { display: block; width: 100%; background: none; border: 0; resize: none; outline: none; font-size: 13px; line-height: 1.5; min-height: 32px; color: #1d1c1d; }
+    .composer-tools { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #7b7380; font-size: 13px; }
+    .native-send { display: grid; place-items: center; background: #007a5a; color: white; border: 0; min-height: 29px; min-width: 34px; border-radius: 4px; }
     .native-send:disabled { background: #e8e5e9; color: #8c858f; cursor: default; }
     .native-thread { border-left: 1px solid #d3ced8; display: flex; flex-direction: column; min-width: 0; min-height: 0; background: white; }
-    .native-thread > header { height: 50px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 17px; border-bottom: 1px solid #e5e1e8; }
-    .native-thread header strong { font-size: 18px; }
-    .native-thread header small { font-size: 12px; color: #807587; font-weight: 400; margin-left: 5px; }
-    .native-thread-body { flex: 1; min-height: 0; overflow-y: auto; padding: 17px; }
-    .reply-root strong, .native-reply strong { font-size: 15px; }
-    .reply-root p, .native-reply p { font-size: 16px; line-height: 1.7; margin: 6px 0 0; overflow-wrap: anywhere; }
-    .reply-divider { font-size: 11px; color: #8c8192; margin: 19px 0; padding-top: 12px; border-top: 1px solid #e8e3eb; }
-    .native-reply { display: flex; align-items: flex-start; gap: 9px; margin-top: 16px; }
-    .native-reply .avatar { width: 32px; height: 32px; font-size: 11px; }
-    .native-thread .native-composer { margin: 8px 12px 12px; }
-    .native-thread .broadcast { font-size: 11px; border-top: 0; padding: 6px 0; min-height: 32px; }
+    .native-thread > header { height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; border-bottom: 1px solid #e5e1e8; }
+    .native-thread header strong { font-size: 15px; }
+    .native-thread header small { font-size: 11px; color: #807587; font-weight: 400; margin-left: 5px; }
+    .native-thread-body { flex: 1; min-height: 0; overflow-y: auto; padding: 14px; }
+    .reply-root strong, .native-reply strong { font-size: 13px; }
+    .reply-root p, .native-reply p { font-size: 14px; line-height: 1.6; margin: 5px 0 0; overflow-wrap: anywhere; }
+    .reply-divider { font-size: 10px; color: #8c8192; margin: 15px 0; padding-top: 10px; border-top: 1px solid #e8e3eb; }
+    .native-reply { display: flex; align-items: flex-start; gap: 8px; margin-top: 13px; }
+    .native-reply .avatar { width: 28px; height: 28px; font-size: 10px; }
+    .native-thread .native-composer { margin: 6px 10px 10px; }
+    .native-thread .broadcast { font-size: 10px; border-top: 0; padding: 5px 0; min-height: 28px; }
     .stage.thread-open .slack-ui .window-body { display: block; }
-    .google-doc-dialog { width: min(1200px,calc(100% - 50px)); max-height: calc(100dvh - 55px); overflow-y: auto; padding: 0; border: 1px solid #b8b1c0; border-radius: 13px; color: #25212a; background: #f5f7fb; box-shadow: 0 22px 90px #2d193b44; }
+    .google-doc-dialog { width: min(1050px,calc(100% - 50px)); max-height: calc(100dvh - 45px); overflow-y: auto; padding: 0; border: 1px solid #b8b1c0; border-radius: 13px; color: #25212a; background: #f5f7fb; box-shadow: 0 22px 90px #2d193b44; }
     .google-doc-dialog::backdrop { background: #24172c80; }
-    .browser-address { display: flex; align-items: center; justify-content: space-between; gap: 15px; background: #e8eaf0; color: #6f6878; padding: 10px 20px; font-size: 13px; }
-    .google-doc-header { display: flex; align-items: center; gap: 13px; padding: 17px 22px; background: #fff; border-bottom: 1px solid #dcdfe7; }
-    .google-doc-header strong { font-size: 20px; }
-    .google-doc-header small { display: block; color: #7b7384; font-size: 12px; margin-top: 3px; }
-    .google-doc-header > span:not(.doc-symbol) { font-size: 12px; color: #81778a; }
+    .browser-address { display: flex; align-items: center; justify-content: space-between; gap: 13px; background: #e8eaf0; color: #6f6878; padding: 8px 16px; font-size: 12px; }
+    .google-doc-header { display: flex; align-items: center; gap: 10px; padding: 13px 18px; background: #fff; border-bottom: 1px solid #dcdfe7; }
+    .google-doc-header strong { font-size: 16px; }
+    .google-doc-header small { display: block; color: #7b7384; font-size: 11px; margin-top: 2px; }
+    .google-doc-header > span:not(.doc-symbol) { font-size: 11px; color: #81778a; }
     .google-doc-header > button { margin-left: auto; }
-    .google-doc-layout { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: 26px; padding: 25px; }
-    .google-paper { min-height: 350px; padding: 35px; background: white; border: 1px solid #e0e2e8; }
-    .google-paper > small { font-size: 11px; color: #8b8193; }
-    .google-paper h3 { font-size: 28px; font-weight: 550; margin: 25px 0; }
-    .google-paper > p { font-size: 19px; line-height: 2; background: #fff9d6; }
-    .google-comment { background: #fff; border: 1px solid #d6dce8; border-radius: 7px; padding: 17px; margin-bottom: 20px; }
-    .google-comment strong { font-size: 15px; }
-    .google-comment p { font-size: 17px; line-height: 1.8; }
-    .google-comment span { color: #8a8092; font-size: 11px; }
-    .google-comments label { display: block; font-size: 14px; margin: 0 0 8px; }
-    .google-comments textarea { width: 100%; min-height: 85px; border: 1px solid #b6c2d9; border-radius: 5px; padding: 10px; font: inherit; font-size: 15px; display: block; margin-bottom: 11px; }
-    #document-saved-comment { font-size: 15px; color: #3d5a3e; margin-top: 20px; overflow-wrap: anywhere; }
-    .calendar-app-home { max-width: 620px; margin: 10px auto; display: flex; align-items: flex-start; flex-direction: column; gap: 13px; }
-    .calendar-app-icon { background: #eef3fd; color: #4e74ae; border-radius: 11px; padding: 11px; }
-    .calendar-app-icon svg { width: 33px; height: 33px; }
-    .calendar-app-home h3 { font-size: 25px; margin: 0; }
-    .calendar-app-home p { font-size: 17px; color: #74677d; margin: 0; line-height: 1.8; }
-    .calendar-connect-help { border-left: 3px solid #1264a3; background: #f0f5fc; padding: 12px 16px; }
+    .google-doc-layout { display: grid; grid-template-columns: minmax(0,1fr) 290px; gap: 20px; padding: 20px; }
+    .google-paper { min-height: 280px; padding: 26px; background: white; border: 1px solid #e0e2e8; }
+    .google-paper > small { font-size: 10px; color: #8b8193; }
+    .google-paper h3 { font-size: 21px; font-weight: 550; margin: 18px 0; }
+    .google-paper > p { font-size: 15px; line-height: 1.9; background: #fff9d6; }
+    .google-comment { background: #fff; border: 1px solid #d6dce8; border-radius: 7px; padding: 13px; margin-bottom: 15px; }
+    .google-comment strong { font-size: 13px; }
+    .google-comment p { font-size: 14px; line-height: 1.7; }
+    .google-comment span { color: #8a8092; font-size: 10px; }
+    .google-comments label { display: block; font-size: 12px; margin: 0 0 7px; }
+    .google-comments textarea { width: 100%; min-height: 70px; border: 1px solid #b6c2d9; border-radius: 5px; padding: 9px; font: inherit; font-size: 13px; display: block; margin-bottom: 10px; }
+    #document-saved-comment { font-size: 13px; color: #3d5a3e; margin-top: 14px; overflow-wrap: anywhere; }
+    .calendar-app-home { max-width: 540px; margin: 8px auto; display: flex; align-items: flex-start; flex-direction: column; gap: 10px; }
+    .calendar-app-icon { background: #eef3fd; color: #4e74ae; border-radius: 10px; padding: 9px; }
+    .calendar-app-icon svg { width: 27px; height: 27px; }
+    .calendar-app-home h3 { font-size: 19px; margin: 0; }
+    .calendar-app-home p { font-size: 14px; color: #74677d; margin: 0; line-height: 1.7; }
+    .calendar-connect-help { border-left: 3px solid #1264a3; background: #f0f5fc; padding: 10px 13px; }
     .calendar-connect-help[hidden] { display: none; }
-    .calendar-connect-help strong { font-size: 16px; }
-    .calendar-connect-help a { color: #1264a3; font-size: 15px; }
+    .calendar-connect-help strong { font-size: 13px; }
+    .calendar-connect-help a { color: #1264a3; font-size: 12px; }
     @media (max-width: 1500px) and (min-width: 1000px) {
-      .native-grid { grid-template-columns: 46px 180px minmax(0,1fr); }
-      .native-grid.has-reply { grid-template-columns: 46px 170px minmax(0,1fr) 330px; }
+      .native-grid { grid-template-columns: 46px 170px minmax(0,1fr); }
+      .native-grid.has-reply { grid-template-columns: 46px 160px minmax(0,1fr) 320px; }
       .native-side-row { font-size: 11px; }
-      .native-workspace { font-size: 16px; }
-      .slack-ui .window-body { padding: 14px; }
-      .slack-ui .message p { font-size: 17px; }
-      .native-file strong { font-size: 15px; }
-      .native-channel-title { font-size: 17px; }
-      .reply-root p, .native-reply p { font-size: 14px; }
-      .native-composer textarea { font-size: 13px; min-height: 32px; }
+      .native-workspace { font-size: 15px; }
+      .slack-ui .window-body { padding: 13px; }
+      .slack-ui .message p { font-size: 15px; }
+      .native-file strong { font-size: 13px; }
+      .native-channel-title { font-size: 15px; }
+      .reply-root p, .native-reply p { font-size: 13px; }
+      .native-composer textarea { font-size: 12px; min-height: 30px; }
       .native-composer { margin-top: 5px; padding-top: 6px; }
     }
     @media (max-width: 999px) {
-      .native-grid { grid-template-columns: 42px 150px minmax(0,1fr); }
-      .native-grid.has-reply { grid-template-columns: 42px 150px minmax(0,1fr); }
+      .native-grid { grid-template-columns: 40px 140px minmax(0,1fr); }
+      .native-grid.has-reply { grid-template-columns: 40px 140px minmax(0,1fr); }
       .native-grid.has-reply > .window { display: none; }
       .native-thread { grid-column: 3; }
       .native-side-row { font-size: 10px; }
-      .native-workspace { font-size: 15px; }
-      .slack-ui .message p { font-size: 16px; }
+      .native-workspace { font-size: 14px; }
+      .slack-ui .message p { font-size: 14px; }
       .stage { min-height: 420px; }
       .native-grid { min-height: 360px; }
     }
@@ -629,7 +613,7 @@
       .native-rail button svg { width: 19px; height: 19px; }
       .native-rail small { font-size: 8px; }
       .native-channel-title { font-size: 14px; }
-      .slack-ui .window-header { padding: 0 11px; height: 45px; min-height: 45px; }
+      .slack-ui .window-header { padding: 0 11px; height: 40px; min-height: 40px; }
       .native-header-actions .close-button { min-width: 28px; }
       .native-tabs { font-size: 11px; padding-inline: 12px; gap: 14px; }
       .slack-ui .window-body { padding: 13px 10px; }
@@ -653,39 +637,51 @@
       .google-doc-header small { font-size: 10px; }
       .google-doc-layout { grid-template-columns: 1fr; padding: 13px; gap: 15px; }
       .google-paper { min-height: 180px; padding: 19px; }
-      .google-paper h3 { font-size: 22px; margin: 18px 0; }
+      .google-paper h3 { font-size: 18px; margin: 15px 0; }
       .google-paper > p { font-size: 15px; }
       .google-comment p { font-size: 14px; }
       .calendar-app-home p { font-size: 14px; }
     }
     .native-tabs button { border: 0; background: none; color: inherit; font: inherit; padding: 3px 0; cursor: pointer; }
     .native-tabs button.active { border-bottom: 2px solid #1264a3; color: #1d1c1d; font-weight: 600; }
-    .native-empty { padding: 35px 10px; color: #7c7283; font-size: 16px; }
-    .native-canvas { max-width: 800px; padding: 20px; }
-    .native-canvas > small { color: #807489; font-size: 12px; }
-    .native-canvas h3 { font-size: 26px; }
-    .native-canvas p { font-size: 19px; line-height: 1.8; }
-    .native-detail-dialog { max-width: 700px; }
-    .native-detail-tabs { display: flex; border-bottom: 1px solid var(--line); gap: 20px; margin-bottom: 20px; }
-    .native-detail-tabs button { border: 0; border-bottom: 2px solid transparent; background: none; color: #6f6279; padding: 10px; font-size: 15px; }
+    .native-empty { padding: 28px 10px; color: #7c7283; font-size: 13px; }
+    .app-dir { max-width: 700px; margin-inline: auto; }
+    .app-dir-head { font-size: 11px; color: var(--muted); margin-top: 15px; }
+    .app-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 7px; padding: 8px 12px; font-size: 13px; color: var(--muted); background: #faf8fc; }
+    .app-search svg { width: 14px; height: 14px; }
+    .app-list { margin-top: 6px; border-top: 1px solid var(--line); }
+    .app-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .app-icon { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0; }
+    .app-icon svg { width: 17px; height: 17px; }
+    .app-row strong { font-size: 14px; font-weight: 600; display: block; }
+    .app-row small { font-size: 12px; color: var(--muted); }
+    .app-row .button { margin-left: auto; }
+    .app-row .button[aria-pressed="true"] { background: #edf3e4; border-color: #cdddb4; color: #4c603c; }
+    .native-canvas { max-width: 720px; padding: 16px; }
+    .native-canvas > small { color: #807489; font-size: 11px; }
+    .native-canvas h3 { font-size: 20px; }
+    .native-canvas p { font-size: 14px; line-height: 1.7; }
+    .native-detail-dialog { max-width: 640px; }
+    .native-detail-tabs { display: flex; border-bottom: 1px solid var(--line); gap: 16px; margin-bottom: 16px; }
+    .native-detail-tabs button { border: 0; border-bottom: 2px solid transparent; background: none; color: #6f6279; padding: 8px; font-size: 13px; }
     .native-detail-tabs button[aria-pressed="true"] { border-bottom-color: #1264a3; color: #1d1c1d; font-weight: 600; }
-    .native-info-row { padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .native-info-row strong { font-size: 15px; }
-    .native-info-row p { font-size: 17px; line-height: 1.8; margin: 6px 0; }
-    .native-info-row small { color: #8d8196; font-size: 12px; }
-    .native-huddle-dialog { width: min(760px,calc(100% - 35px)); padding: 0; border: 1px solid #4b3455; border-radius: 13px; background: #25182d; color: #f0e7f4; }
+    .native-info-row { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .native-info-row strong { font-size: 13px; }
+    .native-info-row p { font-size: 14px; line-height: 1.7; margin: 5px 0; }
+    .native-info-row small { color: #8d8196; font-size: 11px; }
+    .native-huddle-dialog { width: min(660px,calc(100% - 35px)); padding: 0; border: 1px solid #4b3455; border-radius: 13px; background: #25182d; color: #f0e7f4; }
     .native-huddle-dialog::backdrop { background: #21172880; }
-    .native-huddle-dialog .call-window { margin: 0; padding: 25px; }
-    .native-huddle-dialog .call-person { min-height: 230px; }
+    .native-huddle-dialog .call-window { margin: 0; padding: 20px; }
+    .native-huddle-dialog .call-person { min-height: 190px; }
     .huddle-leave { background: #a3383d; border-color: #a3383d; }
     @media (max-height: 850px) and (min-width: 1000px) {
-      .slack-ui .native-composer { display: flex; align-items: center; gap: 7px; margin: 5px 12px 9px; padding: 6px 9px; }
-      .slack-ui .native-composer textarea { min-height: 28px; flex: 1; }
+      .slack-ui .native-composer { display: flex; align-items: center; gap: 6px; margin: 4px 10px 8px; padding: 5px 8px; }
+      .slack-ui .native-composer textarea { min-height: 26px; flex: 1; }
       .slack-ui .composer-tools > span { display: none; }
       .native-thread .native-composer { display: block; }
       .native-thread .native-composer .composer-tools { justify-content: flex-end; }
-      .slack-ui .native-tabs { min-height: 27px; }
-      .slack-ui .window-header { height: 43px; min-height: 43px; }
+      .slack-ui .native-tabs { min-height: 24px; }
+      .slack-ui .window-header { height: 38px; min-height: 38px; }
     }
     .slack-ui .message { position: relative; }
     .native-message-reply { position: absolute; top: -9px; right: 0; border: 1px solid #d6d1da; border-radius: 5px; background: #fff; padding: 4px 9px; opacity: 0; color: #675e6d; }
@@ -741,6 +737,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 </symbol><symbol id="i-send" viewBox="0 0 24 24">
   <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
   <path d="M6 12h16" />
+</symbol><symbol id="i-grid" viewBox="0 0 24 24">
+  <rect x="3" y="3" width="7" height="7" rx="1"/>
+  <rect x="14" y="3" width="7" height="7" rx="1"/>
+  <rect x="14" y="14" width="7" height="7" rx="1"/>
+  <rect x="3" y="14" width="7" height="7" rx="1"/>
 </symbol>
   </svg>
   <div class="wrap">
@@ -755,16 +756,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       </div>
     </header>
     <nav class="chapters" aria-label="按优先级安排的讲解章节">
-      <button class="chapter" data-chapter="0" aria-pressed="true"><span>01</span><strong>沟通规则</strong><small>先把消息发对</small></button>
-      <button class="chapter" data-chapter="1" aria-pressed="false"><span>02</span><strong>日常协作</strong><small>接上文档、通话与日历</small></button>
-      <button class="chapter" data-chapter="2" aria-pressed="false"><span>03</span><strong>提效工具</strong><small>Typeless 与 Slackbot</small></button>
+      <button class="chapter" data-chapter="0" aria-pressed="true"><span>01</span><strong>沟通规则</strong></button>
+      <button class="chapter" data-chapter="1" aria-pressed="false"><span>02</span><strong>日常协作</strong></button>
+      <button class="chapter" data-chapter="2" aria-pressed="false"><span>03</span><strong>提效工具</strong></button>
     </nav>
     <main class="layout">
       <section class="detail" aria-labelledby="detail-title">
-        <div class="detail-heading"><div><h2 id="detail-title"></h2><p id="detail-subtitle"></p></div><span class="dept" id="department"></span></div>
+        <div class="detail-heading"><h2 id="detail-title"></h2><span class="dept" id="department"></span></div>
         <div class="switches" id="switches" aria-label="切换呈现方式"></div>
         <div class="stage" id="stage"></div>
-        <div class="takeaway"><div><strong id="takeaway-title"></strong><p id="takeaway-note"></p></div><div class="takeaway-links"><button class="button secondary" id="migration-open" data-open-migration hidden>搬旧文档</button><a id="official-link" target="_blank" rel="noopener noreferrer">中文教程 <svg aria-hidden="true"><use href="#i-external"/></svg></a></div></div>
+        <div class="takeaway"><strong id="takeaway-title"></strong><span class="takeaway-note" id="takeaway-note"></span><div class="takeaway-links"><button class="button secondary" id="migration-open" data-open-migration hidden>搬旧文档</button><a id="official-link" target="_blank" rel="noopener noreferrer">中文教程 <svg aria-hidden="true"><use href="#i-external"/></svg></a></div></div>
         <p id="status" class="sr-only" role="status" aria-live="polite"></p>
       </section>
       <noscript>请启用 JavaScript，使用按沟通规则、日常协作、提效工具排序的宣讲页面。</noscript>
@@ -795,6 +796,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">Typeless 安装与权限 ↗</a>
         <a href="https://www.typeless.com/zh-cn/help/quickstart/dictate" target="_blank" rel="noopener noreferrer">Typeless 中文语音输入教程 ↗</a>
         <a href="https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作" target="_blank" rel="noopener noreferrer">Slackbot 中文教程 ↗</a>
+        <a href="https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack" target="_blank" rel="noopener noreferrer">官方使用指南 · 分类目录 ↗</a>
+        <a href="https://slack.com/intl/zh-cn/help" target="_blank" rel="noopener noreferrer">Slack 帮助中心首页 ↗</a>
       </div></details><section class="migration-resource"><div><strong>飞书 → Google Drive</strong><small>团队迁移 Skill · 转为原生 Google 格式</small></div><button class="button secondary" data-open-migration>用法与下载 →</button></section><p class="sheet-footnote">中文教程来自官方；迁移 Skill 由团队提供。公司频道、套餐与 App 配置仍需确认。</p></dialog>
   <dialog class="sheet" id="migration-dialog" aria-labelledby="migration-title">
     <div class="sheet-header"><h2 id="migration-title">飞书文档 → Google Drive</h2><button class="close-button" data-close="migration-dialog" aria-label="关闭迁移说明">×</button></div>
@@ -818,88 +821,88 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     const icon = name => `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
     const topics = {
       entry: {
-        title: '持续协作用频道，临时沟通用 DM。', subtitle: 'KOL 素材审核、名单确认、三人对齐，分别放哪里？', department: '市场 · KOL',
+        title: '持续协作用频道，临时沟通用 DM。', subtitle: '素材、名单、三人对齐，分别放哪里？', department: '市场 · KOL',
         variants: [['channel','Channel','频道'],['dm','DM','一对一'],['group','Group DM','多人私信']],
         sourceName: '市场 · KOL 素材协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/360017938993',
-        takeaway: 'Channel 也是群聊，按项目或主题组织。', note: '多人 DM 更像临时小群；长期协作建议建频道。'
+        takeaway: 'Channel 也是群聊，按项目组织。', note: '多人 DM 是临时小群；新成员可回看历史。'
       },
       privacy: {
-        title: '锁图标，表示私密频道。', subtitle: '设计系统给研发使用：谁能发现，谁能加入？', department: '设计 · 研发',
+        title: '锁图标 = 私密频道。', subtitle: '设计系统给研发使用：谁能发现，谁能加入？', department: '设计 · 研发',
         variants: [['public','公开频道'],['private','私密频道']],
         sourceName: '设计 · 研发协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/360017938993',
-        takeaway: '公开：工作区普通成员可查找、查看、加入。', note: '私密：仅成员可见，需已有成员邀请；访客另有访问限制。'
+        takeaway: '公开：成员可查找、查看、加入。', note: '私密仅成员可见、需邀请；锁 ≠ 静音或限制发言。'
       },
       mention: {
-        title: '@ 人，不等于拉人进频道。', subtitle: '市场与 KOL 对接同事一起确认宣传素材。', department: '市场 · 设计',
+        title: '@ 人 ≠ 拉人进频道。', subtitle: '市场与 KOL 对接同事一起确认宣传素材。', department: '市场 · 设计',
         variants: [['outside','尚未加入'],['member','已经是成员']],
         sourceName: '市场 · KOL 素材协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/360002063088',
-        takeaway: '非成员被 @ 后，不会自动加入。', note: '先检查成员状态，再选择邀请；仅输入名字不代表对方已收到。'
+        takeaway: '非成员被 @ 后，不会自动加入。', note: '仅输入名字不代表已收到；多人 DM 同理。'
       },
       thread: {
         title: '回复在 Thread，主频道只见回复数。', subtitle: 'CX 转来“内容主题重复”的反馈，内容团队回应。', department: 'CX · 内容',
         variants: [['collapsed','频道里'],['expanded','展开 Thread']],
         sourceName: 'CX · 内容反馈',
         official: 'https://slack.com/intl/zh-cn/help/articles/115000769927',
-        takeaway: '重要结论，可以同时发回频道。', note: 'Thread = 消息列。参与、发起或被 @ 后，默认会收到新回复通知。'
+        takeaway: '重要结论，可以同时发回频道。', note: '参与、发起或被 @ 后，默认收到新回复通知。'
       },
       video: {
         title: '临时通话，用 Huddle。', subtitle: '设计给 Dev 讲解新设计系统，边看组件边讨论。', department: '设计 · 研发',
         variants: [['design','设计评审'],['firmware','固件排查']],
         sourceName: '设计 · 研发协作',
         official: 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团',
-        takeaway: '频道或 DM 顶部的耳机 → 开启语音。', note: '进入后可开摄像头、共享屏幕；这里只展示界面，不调用设备。'
+        takeaway: '频道或 DM 顶部的耳机 → 开启语音。', note: '可开摄像头、共享屏幕；本页不调用设备。'
       },
       documents: {
-        title: 'Slack 讨论，Google Docs 写正文。', subtitle: '内容审核与 CX 周报，文档和讨论各放各的位置。', department: '内容 · CX',
+        title: 'Slack 讨论，Google Docs 写正文。', subtitle: '文档和讨论各放各的位置。', department: '内容 · CX',
         variants: [['content','内容审核'],['cx','CX 周报']],
         sourceName: '内容 · 稿件审核',
         official: 'https://slack.com/intl/zh-cn/help/articles/205875058',
-        takeaway: '正文和具体评论留在文档，进展回原讨论。', note: '本页建议：正式文档用 Google Docs；Slack Canvas 可写轻量说明，能力依套餐。'
+        takeaway: '正文和评论留在文档，进展回原讨论。', note: '正式文档用 Google Docs；Canvas 写轻量说明，能力依套餐。'
       },
       sharing: {
         title: '创建时就确定：给谁看，能做什么。', subtitle: 'CX 周报发进频道前，先把协作者加到文档。', department: 'CX · 内容',
         variants: [['restricted','只有作者'],['shared','已加协作者']],
         sourceName: 'CX · 周报协作',
         official: 'https://support.google.com/a/users/answer/9283053?hl=zh-Hans',
-        takeaway: '在频道里 ≠ 有文档权限。', note: '发链接前确认共享对象与角色；打不开时先检查登录账号。'
+        takeaway: '在频道里 ≠ 有文档权限。', note: '发前确认共享对象与角色；打不开先检查登录账号。'
       },
       follow: {
         title: '重要频道设提醒，行动项加待办。', subtitle: '研发发布固件进展，相关同事需要接住后续。', department: '研发 · 跨部门',
         variants: [['mentions','仅提及与 DM'],['channel','重点频道全提醒'],['todo','个人待办']],
         sourceName: '研发 · 固件发布',
         official: 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知',
-        takeaway: '加入频道，不代表每条新消息都会提醒。', note: '通知 → 提及与私信；重点频道可单独设为全部通知。'
+        takeaway: '加入频道 ≠ 每条消息都提醒。', note: '个人档案 → 首选项 → 通知；重点频道可设全部通知。'
       },
       search: {
         title: '用频道、关键词和日期，找回结论。', subtitle: '查固件灰度范围，或找设计系统的 Figma 入口。', department: '研发 · 设计',
         variants: [['firmware','固件进展'],['design','设计资料']],
         sourceName: '研发 · 固件发布',
         official: 'https://slack.com/intl/zh-cn/help/articles/202528808-在-Slack-中搜索-Search-in-Slack-',
-        takeaway: '搜不到时，先确认频道、关键词与访问权限。', note: '搜索限于已保留、你有权访问的内容；飞书历史需另行迁移或回原处查。'
+        takeaway: '搜不到，先确认频道、关键词与权限。', note: '搜索限于你有权访问的内容；飞书历史需另行迁移。'
       },
       typeless: {
         title: '把话说进输入框，再检查文字。', subtitle: 'Typeless 用于输入；Huddle 用于通话。', department: '各部门 · 语音输入',
         variants: [['setup','安装与设置'],['slack','Slack 回复'],['docs','Docs 评审']],
         sourceLabel: '官方教程', sourceName: 'Typeless · 安装与设置',
         official: 'https://www.typeless.com/zh-cn/help/quickstart/dictate',
-        takeaway: '光标放入输入框 → 听写 → 检查文字 → 确认发送。', note: '默认：Mac 按一下 Fn 开始，再按一次结束；Windows 为右 Alt。以本机设置为准。'
+        takeaway: '输入框 → 听写 → 检查文字 → 发送。', note: 'Mac 按 Fn，Windows 按右 Alt；以本机设置为准。'
       },
       slackbot: {
         title: '让 Slackbot 找资料、理结论、起草更新。', subtitle: '给具体频道或原消息，要求附来源。', department: '各部门 · Slackbot',
-        variants: [['ask','找消息与结论'],['draft','起草更新'],['apps','App 通知']],
+        variants: [['ask','找消息与结论'],['draft','起草更新'],['apps','应用']],
         sourceLabel: '官方教程', sourceName: 'Slackbot · 中文说明',
         official: 'https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作',
-        takeaway: 'Slackbot 的回答范围受你的访问权限限制。', note: 'AI 能力取决于套餐、试用及管理员设置；公司是否已开放待确认。'
+        takeaway: 'Slackbot 的回答范围受你的访问权限限制。', note: 'AI 能力依套餐与管理员设置；是否开放待确认。'
       },
       calendar: {
         title: '预约会议，在 Google Calendar 创建。', subtitle: 'App progress sync：北京、英国、洛杉矶同一场。', department: '产品 · 跨国研发',
         variants: [['connect','接入日历'],['app','在 Slack 约会议'],['web','在 Calendar 网页约']],
         sourceName: '产品 · 跨时区同步',
         official: 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历',
-        takeaway: '发到频道 ≠ 邀请频道所有人参会。', note: '参会人要单独添加；会议链接可用 Google Meet 或 Huddle。'
+        takeaway: '发到频道 ≠ 邀请所有人参会。', note: '参会人单独添加；链接用 Meet 或 Huddle。'
       }
     };
     const chapters = [
@@ -935,6 +938,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     let eventShared = true;
     let calendarConnectOpen = false;
     let eventPreview = false;
+    const addedApps = new Set();
     const stage = document.querySelector('#stage');
     const switches = document.querySelector('#switches');
 
@@ -954,16 +958,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       return `<aside class="native-thread" aria-label="右侧 Thread"><header><strong>消息列 <small>Thread</small></strong><button class="close-button" data-action="close-reply" aria-label="关闭消息列">${icon('close')}</button></header><div class="native-thread-body"><div class="reply-root"><strong>${author}</strong><p>${text}</p></div><div class="reply-divider">${existing.length + replyMessages.length} 条回复</div>${existing.map(reply => `<article class="native-reply"><div class="avatar green">${reply.role.slice(0,2)}</div><div><strong>${reply.role}</strong><p>${reply.text}</p></div></article>`).join('')}${replyMessages.map(text => `<article class="native-reply"><div class="avatar blue">协作</div><div><strong>协作同事 · 演示</strong><p>${escapeText(text)}</p></div></article>`).join('')}</div>${composeBox(true)}</aside>`;
     }
 
-    function shell(title, body, footer, options = {}) {
+    function shell(title, body, options = {}) {
       const typeIcon = options.icon || 'hash';
       const channel = options.channel || title.replace(' · Thread 回复','');
       const isApp = typeIcon === 'calendar';
       const isBot = activeTopic === 'slackbot';
       let shownBody = body;
       if (nativeTab === 'files') {
-        shownBody = activeTopic === 'documents' ? `<button class="native-file" data-action="open-doc"><span class="doc-symbol">${icon('doc')}</span><div><strong>${variant === 'cx' ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇'}</strong><small>Google Docs · 此频道分享的文件</small></div>${icon('external')}</button>` : `<div class="native-empty">这个演示场景没有附带其他文件。</div>`;
+        shownBody = activeTopic === 'documents' ? `<button class="native-file" data-action="open-doc"><span class="doc-symbol">${icon('doc')}</span><div><strong>${variant === 'cx' ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇'}</strong><small>Google Docs · 频道分享的文件</small></div>${icon('external')}</button>` : `<div class="native-empty">本场景无其他文件。</div>`;
       }
-      if (nativeTab === 'canvas') shownBody = `<article class="native-canvas"><small>Canvas · 轻量说明示例</small><h3>${channel}</h3><p>${topics[activeTopic].subtitle}</p><p>具体讨论回到原消息的 Thread；正式文档沿用团队约定的 Google Docs 入口。</p></article>`;
+      if (nativeTab === 'canvas') shownBody = `<article class="native-canvas"><small>Canvas · 轻量说明示例</small><h3>${channel}</h3><p>${topics[activeTopic].subtitle}</p><p>讨论回原消息 Thread；正式文档用 Google Docs。</p></article>`;
       if (isApp && nativeTab === 'files') shownBody = message('日历','Google Calendar · 演示通知','App progress sync<br>09 / 29 · 北京 22:00 / 英国 15:00 / 洛杉矶 07:00<br>App Demo · Mood + Body 设计');
       if (isApp && nativeTab === 'canvas') shownBody = `<div class="native-canvas"><h3>Google Calendar</h3><p>连接个人日历，接收邀请、提醒和日程变更。</p><a class="mini-link" href="${topics.calendar.official}" target="_blank" rel="noopener noreferrer">官方中文设置教程 ↗</a></div>`;
       const thread = options.thread || (genericThreadOpen ? replyPane(selectedReply.author, escapeText(selectedReply.text)) : '');
@@ -975,7 +979,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         ['proj-ring-ota','固件升级','video','firmware']
       ];
       const sidebar = `<aside class="native-sidebar"><button class="native-workspace" data-jump="entry" data-jump-variant="channel">Glorify <span>⌄</span></button><div class="native-side-title">频道</div>${channelList.map(([name,label,topicId,mode]) => `<button class="native-side-row ${channel === name ? 'selected' : ''}" data-jump="${topicId}" data-jump-variant="${mode}">${icon(activeTopic === 'privacy' && variant === 'private' && name === 'design-system' ? 'lock' : 'hash')}<span>${name}</span></button>`).join('')}<div class="native-side-title">私信</div><button class="native-side-row ${activeTopic === 'entry' && variant === 'dm' ? 'selected' : ''}" data-jump="entry" data-jump-variant="dm"><span class="presence"></span>市场同事</button><button class="native-side-row ${activeTopic === 'entry' && variant === 'group' ? 'selected' : ''}" data-jump="entry" data-jump-variant="group">${icon('people')}产品、市场、KOL</button><div class="native-side-title">应用</div><button class="native-side-row ${activeTopic === 'calendar' ? 'selected' : ''}" data-jump="calendar" data-jump-variant="connect">${icon('calendar')}Google Calendar</button><button class="native-side-row ${activeTopic === 'slackbot' ? 'selected' : ''}" data-jump="slackbot" data-jump-variant="ask">${icon('message')}Slackbot</button><small class="native-side-foot">演示工作区 · 非真实消息</small></aside>`;
-      return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search" data-jump="search" data-jump-variant="firmware">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button></div></div><div class="native-tabs"><button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button></div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || isBot || nativeTab !== 'messages' ? '' : composeBox()}<div class="window-footer">${footer}</div></section>${thread}</div></div>`;
+      return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search" data-jump="search" data-jump-variant="firmware">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button><button data-jump="slackbot" data-jump-variant="apps" aria-label="应用">${icon('grid')}<small>应用</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button></div></div><div class="native-tabs"><button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button></div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || isBot || nativeTab !== 'messages' ? '' : composeBox()}</section>${thread}</div></div>`;
     }
 
     function render() {
@@ -984,7 +988,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       stage.classList.toggle('tool-stage', (activeTopic === 'typeless' && variant !== 'slack') || activeTopic === 'sharing');
       document.querySelectorAll('[data-topic]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.topic === activeTopic)));
       document.querySelector('#detail-title').textContent = topic.title;
-      document.querySelector('#detail-subtitle').textContent = topic.subtitle;
       document.querySelector('#department').textContent = topic.department;
       switches.innerHTML = topic.variants.map(([id,label,note]) => `<button class="switch" data-variant="${id}" aria-pressed="${variant === id}">${label}${note ? `<small>${note}</small>` : ''}</button>`).join('');
       document.querySelector('#source-label').textContent = `${topic.sourceLabel || '部门场景'}：${topic.sourceName}`;
@@ -1000,21 +1003,21 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const isChannel = variant === 'channel';
         const isGroup = variant === 'group';
         const body = isChannel
-          ? message('市场','市场团队','这份是已签约 KOL 清单，不是最终发布名单；实际发布人选仍需确认。') + `<div class="native-file"><span class="doc-symbol">${icon('doc')}</span><div><strong>KOL 已签约清单</strong><small>素材与发布名单需要分别确认</small></div></div>` + message('产品','产品设计','KOL 拍完戒指宣传视频后发到这里，我们先确认是否符合 App / 戒指的展示预期。','green')
+          ? message('市场','市场团队','已签约 KOL 清单在这里；最终发布人选另行确认。') + `<div class="native-file"><span class="doc-symbol">${icon('doc')}</span><div><strong>KOL 已签约清单</strong><small>素材与发布名单需要分别确认</small></div></div>` + message('产品','产品设计','KOL 宣传视频拍好后发这里，先确认是否符合展示预期。','green')
           : isGroup
-            ? message('市场','市场团队','产品设计、市场和 KOL 对接同事先在这里确认这一批素材。') + message('产品','产品设计','先把素材入口给我；审核意见会回到项目频道，方便其他同事查。','green')
-            : message('产品','产品设计','这批 KOL 的发布名单确定了吗？我先看哪份资料？') + message('市场','市场团队','发布名单还没定。可以先看已签约清单，素材信息找 KOL 对接同事。','green');
+            ? message('市场','市场团队','三方先在这里确认这批素材。') + message('产品','产品设计','素材入口先发我；审核意见回项目频道，方便查。','green')
+            : message('产品','产品设计','这批 KOL 发布名单定了吗？先看哪份资料？') + message('市场','市场团队','还没定。先看已签约清单，素材找 KOL 对接同事。','green');
         if (!isChannel) {
           document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/212281468-了解私信';
           document.querySelector('#official-link').firstChild.textContent = 'DM 中文教程 ';
         }
-        stage.innerHTML = shell(isChannel ? 'proj-kol' : isGroup ? '产品、市场、KOL 对接' : '市场同事',body,isChannel ? '项目上下文留在频道；新成员按权限加入后可回看。' : 'DM 是私信，多人 DM 是较小范围的临时对话。',{icon:isChannel ? 'hash' : 'people',channel:isChannel ? 'proj-kol' : ''});
+        stage.innerHTML = shell(isChannel ? 'proj-kol' : isGroup ? '产品、市场、KOL 对接' : '市场同事',body,{icon:isChannel ? 'hash' : 'people',channel:isChannel ? 'proj-kol' : ''});
       }
 
       if (activeTopic === 'privacy') {
         const isPrivate = variant === 'private';
-        const body = message('设计','设计同事','新设计系统正在完善，方便 Dev 尽快用起来，也欢迎反馈。') + `<div class="visibility"><div class="visibility-row"><span>未加入的普通成员</span><strong>${isPrivate ? '看不到私密内容' : '可搜索、查看'}</strong></div><div class="visibility-row"><span>加入方式</span><strong>${isPrivate ? '由已有成员邀请' : '可自行加入'}</strong></div><div class="visibility-row"><span>频道状态</span><strong>${isPrivate ? 'Private · 私密' : 'Public · 工作区内公开'}</strong></div></div>`;
-        stage.innerHTML = shell('design-system',body,isPrivate ? '锁图标表示私密；与静音、收藏、限制发言是不同设置。' : '公开范围是工作区，不是整个互联网。',{icon:isPrivate ? 'lock' : 'hash',channel:'design-system'});
+        const body = message('设计','设计同事','新设计系统在完善，Dev 可先用，欢迎反馈。') + `<div class="visibility"><div class="visibility-row"><span>未加入的普通成员</span><strong>${isPrivate ? '看不到私密内容' : '可搜索、查看'}</strong></div><div class="visibility-row"><span>加入方式</span><strong>${isPrivate ? '由已有成员邀请' : '可自行加入'}</strong></div><div class="visibility-row"><span>频道状态</span><strong>${isPrivate ? 'Private · 私密' : 'Public · 工作区内公开'}</strong></div></div>`;
+        stage.innerHTML = shell('design-system',body,{icon:isPrivate ? 'lock' : 'hash',channel:'design-system'});
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>管理员可以随时进入任何频道吗？</summary><p>管理员身份不自动授予所有私密内容的阅读权。部分套餐和授权支持管理私密频道或导出数据。公司实际配置待确认。<a href="https://slack.com/intl/zh-cn/help/articles/360047512554-使用频道管理工具" target="_blank" rel="noopener noreferrer">官方权限说明 ↗</a></p></details>`;
       }
 
@@ -1022,63 +1025,62 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>@channel 和 @here 有什么区别？</summary><p>@channel：频道全体成员。@here：当前在线成员。优先 @ 具体负责人；群体提及不在 Thread 中触发通知，通知暂停时也不会提醒。<a href="https://slack.com/intl/zh-cn/help/articles/202009646-通知频道或工作区" target="_blank" rel="noopener noreferrer">中文说明 ↗</a></p></details>`;
         const inChannel = variant === 'member' || invited;
         const body = message('市场','市场同事','<span class="mention">@KOL对接</span> 这边需要对齐 KOL 素材与 App 展示。') + (inChannel
-          ? `<div class="status-line good">${invited ? '邀请后：KOL 对接同事已成为成员（示意）' : '本例：KOL 对接同事已是成员，提及会触发通知。'}</div>`
-          : `<div class="invite"><div class="invite-title">本例：KOL 对接同事还不在频道中</div><p>@ 不会自动入群；默认不会通知非成员。</p><div class="invite-actions"><button class="button" data-action="invite">邀请到频道</button><button class="button secondary" data-action="keep">保留提及</button></div>${inviteDecision ? `<div class="status-line">${inviteDecision}</div>` : ''}</div>`);
-        stage.innerHTML = shell('proj-kol',body,'多人 DM 中 @ 一个不在对话的人，也不会把他加入。');
+          ? `<div class="status-line good">${invited ? '已成为成员（示意）' : 'KOL 对接同事已是成员，提及会触发通知。'}</div>`
+          : `<div class="invite"><div class="invite-title">KOL 对接同事还不在频道中</div><p>@ 不会自动入群；默认不通知非成员。</p><div class="invite-actions"><button class="button" data-action="invite">邀请到频道</button><button class="button secondary" data-action="keep">保留提及</button></div>${inviteDecision ? `<div class="status-line">${inviteDecision}</div>` : ''}</div>`);
+        stage.innerHTML = shell('proj-kol',body);
       }
 
       if (activeTopic === 'thread') {
-        const text = '有用户反馈：每日内容的主题有重复感，希望覆盖更广的经文与内容。请内容团队看一下。';
+        const text = '用户反馈：每日内容主题有重复感，希望覆盖更广的经文。请内容团队看一下。';
         const count = 1 + replyMessages.length;
         const body = message('CX','CX 团队',text,'blue') + `<button class="native-reply-count" data-action="thread">${count} 条回复 · 内容团队</button>`;
-        const thread = variant === 'expanded' ? replyPane('CX 团队',text,[{role:'内容团队',text:'没有重复发布相同灵修，但相近主题可能带来重复感。后续内容会考虑更多经卷和主题。'}]) : '';
-        stage.innerHTML = shell('content-feedback',body,'主频道显示回复数；完整讨论在右侧消息列中。',{channel:'content-feedback',thread});
+        const thread = variant === 'expanded' ? replyPane('CX 团队',text,[{role:'内容团队',text:'没有重复发布，但主题相近会有重复感。后续会覆盖更多经卷。'}]) : '';
+        stage.innerHTML = shell('content-feedback',body,{channel:'content-feedback',thread});
       }
 
       if (activeTopic === 'video') {
         const firmware = variant === 'firmware';
         if (firmware) {
-          document.querySelector('#detail-subtitle').textContent = 'OTA 固件升级，研发和产品一起确认重连、超时和展示。';
           document.querySelector('#department').textContent = '固件研发 · 产品';
           document.querySelector('#source-label').textContent = '部门场景：研发 · 固件发布';
         }
         const mainMessage = firmware
-          ? message('研发','固件研发同事','升级过程包含重连，页面会显示 rebooting；需要一起确认超时和展示。')
-          : message('设计','设计同事','设计系统已整理，设计分享 Figma，方便 Dev 使用和反馈。');
-        const call = `<div class="call-start">${icon('headphones')}<div><strong>${firmware ? '一起确认 OTA 升级状态' : '一起看设计系统'}</strong><p>从当前频道开始语音，再按需开视频或共享屏幕。</p></div><button class="button" data-action="native-huddle">${icon('headphones')}开启 Huddle</button></div>`;
-        stage.innerHTML = shell(firmware ? 'proj-ring-ota' : 'design-system',mainMessage + call,'临时讨论用 Huddle；有固定时间的会议放进日历。',{channel:firmware ? 'proj-ring-ota' : 'design-system',action:`<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`});
+          ? message('研发','固件研发同事','升级含重连，页面显示 rebooting；需确认超时和展示。')
+          : message('设计','设计同事','设计系统已整理，Figma 已分享，Dev 可使用并反馈。');
+        const call = `<div class="call-start">${icon('headphones')}<div><strong>${firmware ? '一起确认 OTA 升级状态' : '一起看设计系统'}</strong><p>频道内开语音，再按需开视频或共享。</p></div><button class="button" data-action="native-huddle">${icon('headphones')}开启 Huddle</button></div>`;
+        stage.innerHTML = shell(firmware ? 'proj-ring-ota' : 'design-system',mainMessage + call,{channel:firmware ? 'proj-ring-ota' : 'design-system',action:`<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`});
       }
 
       if (activeTopic === 'documents') {
         const cx = variant === 'cx';
         const fileTitle = cx ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇';
-        const request = cx ? '上周的邮件问题分类和社交媒体反馈整理好了。细节在周报里，相关问题在这条消息下讨论。' : '这轮 30 篇 Devotional 已准备好。请在文档评论里写具体修改意见，审核结果回这条消息同步。';
+        const request = cx ? '邮件问题分类和社媒反馈已整理好。细节在周报，问题在这条消息下讨论。' : '这轮 30 篇 Devotional 已备好。修改意见写进文档评论，结果回本消息同步。';
         if (cx) {
           document.querySelector('#source-label').textContent = '部门场景：CX · 周报协作';
         }
-        const body = message(cx ? 'CX' : '内容',cx ? 'CX 团队' : '内容制作团队',request) + `<button class="native-file" data-action="open-doc" aria-label="打开${fileTitle}"><span class="doc-symbol">${icon('doc')}</span><div><strong>${fileTitle}</strong><small>Google Docs · 点击打开文档演示</small></div>${icon('external')}</button><button class="native-reply-count" data-action="doc-thread">${1 + replyMessages.length} 条回复 · ${cx ? '产品团队' : '审核团队'}</button>`;
-        const response = cx ? '我会看周报中的具体反馈；需要跟进的问题会在这里继续回复。' : '30 篇已审完，具体修改意见已留在文档评论里。';
+        const body = message(cx ? 'CX' : '内容',cx ? 'CX 团队' : '内容制作团队',request) + `<button class="native-file" data-action="open-doc" aria-label="打开${fileTitle}"><span class="doc-symbol">${icon('doc')}</span><div><strong>${fileTitle}</strong><small>Google Docs · 打开演示</small></div>${icon('external')}</button><button class="native-reply-count" data-action="doc-thread">${1 + replyMessages.length} 条回复 · ${cx ? '产品团队' : '审核团队'}</button>`;
+        const response = cx ? '我会看周报中的反馈；需要跟进的在这里回复。' : '30 篇已审完，具体修改意见已留在文档评论里。';
         const thread = docThreadOpen ? replyPane(cx ? 'CX 团队' : '内容制作团队',request,[{role:cx ? '产品团队' : '审核团队',text:response}]) : '';
-        stage.innerHTML = shell(cx ? 'team-cx' : 'team-content',body,'文件卡片打开文档；回到原消息下同步结果。',{channel:cx ? 'team-cx' : 'team-content',thread});
+        stage.innerHTML = shell(cx ? 'team-cx' : 'team-content',body,{channel:cx ? 'team-cx' : 'team-content',thread});
       }
 
       if (activeTopic === 'sharing') {
         const shared = variant === 'shared';
         const roleLabel = {view:'查看者',comment:'评论者',edit:'编辑者'}[shareRole];
         const body = `<div class="share-box"><h3>共享「CX 反馈周报」</h3><div class="share-owner"><span>作者 · 公司 Google 账号</span><small>所有者</small></div>${shared ? `<div class="share-recipient"><span>内容协作者 · 公司账号</span><label class="sr-only" for="share-role">协作者权限</label><select id="share-role"><option value="view" ${shareRole === 'view' ? 'selected' : ''}>查看者</option><option value="comment" ${shareRole === 'comment' ? 'selected' : ''}>评论者</option><option value="edit" ${shareRole === 'edit' ? 'selected' : ''}>编辑者</option></select></div>` : '<div class="status-line">本例：个人盘中新建，仅作者有权限。</div>'}<div class="share-status ${shared ? 'good' : ''}">${icon(shared ? 'check' : 'lock')}协作者打开链接：${shared ? `可访问 · ${roleLabel}` : '需要申请访问'}</div><div style="margin-top:13px"><button class="button secondary" data-action="document">${icon('doc')}查看对方视角</button></div>${documentOpen ? `<div class="preview-doc">${shared ? `<h4>CX 反馈周报</h4><p>邮件问题分类 · 社交媒体反馈</p>${shareRole === 'comment' ? '<div class="comment">评论者：能看、能评论，不能改正文。</div>' : shareRole === 'edit' ? '<div class="comment">编辑者：能修改正文，也能评论。</div>' : '<div class="comment">查看者：能看，不能评论或修改正文。</div>'}` : '<h4>需要访问权限</h4><p>文件已发到 Slack，文档本身仍未授权。</p>'}</div>` : ''}</div>`;
-        stage.innerHTML = `<section class="window google-document-surface"><div class="google-doc-header"><span class="doc-symbol">${icon('doc')}</span><strong>CX 反馈周报</strong><span>Google Docs · 共享设置示意</span></div><div class="window-body">${body}</div><div class="window-footer">创建时确定共享对象与角色，再把链接发回 Slack。</div></section>`;
+        stage.innerHTML = `<section class="window google-document-surface"><div class="google-doc-header"><span class="doc-symbol">${icon('doc')}</span><strong>CX 反馈周报</strong><span>Google Docs · 共享设置示意</span></div><div class="window-body">${body}</div></section>`;
       }
 
       if (activeTopic === 'follow') {
         const isTodo = variant === 'todo';
-        const body = message('研发','固件研发同事','27 版本已配置升级：dev 环境全量，生产环境按指定设备灰度。') + (isTodo
+        const body = message('研发','固件研发同事','27 版本已升级：dev 全量，生产按指定设备灰度。') + (isTodo
           ? `<div class="follow-state"><div class="follow-row"><span>个人待办：跟进灰度测试</span><strong>${todoAdded ? '已加入 · 仅自己' : '尚未加入'}</strong></div><div class="follow-row"><span>提醒</span><strong>${todoReminder ? '已设置 · 示例时间' : '未设置'}</strong></div></div><div class="follow-actions"><button class="button secondary" data-action="todo">${todoAdded ? '移出个人待办' : '加入个人待办'}</button>${todoAdded ? `<button class="button secondary" data-action="todo-remind">${todoReminder ? '取消提醒' : '另设提醒'}</button>` : ''}</div>`
-          : `<div class="follow-state"><div class="follow-row"><span>频道里的普通更新</span><strong>${variant === 'channel' ? '按频道设置提醒' : '不触发横幅（本例）'}</strong></div><div class="follow-row"><span>@ 自己 / 私信 / 关注的 Thread</span><strong>按通知设置提醒</strong></div></div><div class="status-line">Activity（活动）集中查看提及、回复和提醒。</div>`);
-        stage.innerHTML = shell('proj-ring-ota',body,isTodo ? '个人待办不会替你给同事派任务；跨人交接仍需明确负责人。' : '个人档案 → 首选项 → 通知；也检查系统通知、手机通知与暂停时段。',{channel:'proj-ring-ota'});
+          : `<div class="follow-state"><div class="follow-row"><span>频道里的普通更新</span><strong>${variant === 'channel' ? '按频道设置提醒' : '不触发横幅'}</strong></div><div class="follow-row"><span>@ 自己 / 私信 / 关注的 Thread</span><strong>按通知设置提醒</strong></div></div><div class="status-line">Activity 集中看提及、回复和提醒。</div>`);
+        stage.innerHTML = shell('proj-ring-ota',body,{channel:'proj-ring-ota'});
         if (isTodo) {
           document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/55757634348435-“留待以后处理”现已改为“待办清单”';
           document.querySelector('#takeaway-title').textContent = '添加待办，默认不会自动设置提醒。';
-          document.querySelector('#takeaway-note').textContent = '2026 年 10 月起逐步将 Later / 留待以后处理改为待办清单，界面可能不同。';
+          document.querySelector('#takeaway-note').textContent = '待办不替同事派任务。Later 正逐步改为待办清单，界面可能不同。';
         }
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>回复在哪里集中看？</summary><p>打开 Activity（活动），查看提及、私信、回复与提醒。<a href="https://slack.com/intl/zh-cn/help/articles/19693583638803-在“活动”视图中完成你的工作" target="_blank" rel="noopener noreferrer">活动视图中文教程 ↗</a></p></details>`;
       }
@@ -1086,10 +1088,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (activeTopic === 'search') {
         const design = variant === 'design';
         const query = design ? 'in:design-system Figma' : 'in:proj-ring-ota after:2026-10-01 27';
-        const body = `<code class="search-query">${query}</code><div class="search-help"><span>in: 频道</span><span>after: 日期之后</span><span>其余内容：关键词</span></div><div class="search-results">${design
+        const body = `<code class="search-query">${query}</code><div class="search-help"><span>in: 频道</span><span>after: 日期之后</span><span>其余：关键词</span></div><div class="search-results">${design
           ? message('设计','设计团队 · 10/23','设计系统 Figma 已分享，研发可以使用并反馈问题。')
           : message('研发','固件研发 · 10/22','27 版本的测试与生产环境均已配置升级。') + message('研发','固件研发 · 10/22','dev 为全量；生产环境按指定设备做灰度。','green')}</div>`;
-        stage.innerHTML = shell('搜索式与结果示意',body,'先缩小频道和日期，再打开原消息确认上下文。',{icon:'message',channel:design ? 'design-system' : 'proj-ring-ota'});
+        stage.innerHTML = shell('搜索式与结果示意',body,{icon:'message',channel:design ? 'design-system' : 'proj-ring-ota'});
         if (design) {
           document.querySelector('#source-label').textContent = '部门场景：设计 · 研发协作';
         }
@@ -1097,14 +1099,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
       if (activeTopic === 'typeless') {
         if (variant === 'setup') {
-          stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('mic')}Typeless · 独立安装</div><span class="window-label">官方入口</span></div><div class="window-body"><div class="setup"><div class="setup-row"><span class="setup-number">1</span><div><strong>下载并登录</strong><p>选择自己设备的版本。</p></div><a href="https://www.typeless.com/zh-cn/downloads" target="_blank" rel="noopener noreferrer">官方下载 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">2</span><div><strong>完成系统权限设置</strong><p>Mac 需要麦克风与辅助功能权限。</p></div><a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">中文安装说明 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">3</span><div><strong>确认听写快捷键</strong><p>在 Settings → Keyboard shortcuts 查看或修改。</p></div><a href="https://www.typeless.com/zh-cn/help/quickstart/settings" target="_blank" rel="noopener noreferrer">中文设置说明 ${icon('external')}</a></div></div></div><div class="window-footer">${icon('arrow')}先安装系统级工具，再到 Slack 或 Docs 的输入框使用。</div></section>`;
+          stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('mic')}Typeless · 独立安装</div><span class="window-label">官方入口</span></div><div class="window-body"><div class="setup"><div class="setup-row"><span class="setup-number">1</span><div><strong>下载并登录</strong><p>按设备选版本。</p></div><a href="https://www.typeless.com/zh-cn/downloads" target="_blank" rel="noopener noreferrer">官方下载 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">2</span><div><strong>完成系统权限设置</strong><p>Mac 需麦克风与辅助功能权限。</p></div><a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">中文安装说明 ${icon('external')}</a></div><div class="setup-row"><span class="setup-number">3</span><div><strong>确认听写快捷键</strong><p>在 Settings → Keyboard shortcuts 查看或修改。</p></div><a href="https://www.typeless.com/zh-cn/help/quickstart/settings" target="_blank" rel="noopener noreferrer">中文设置说明 ${icon('external')}</a></div></div></div></section>`;
         } else {
           const docs = variant === 'docs';
           const spoken = docs ? '这轮三十篇内容已经审完了，具体修改意见我留在文档评论里面了。' : '这版设计系统研发可以先用起来，有使用上的问题，就在这个讨论下面反馈。';
           const written = docs ? '已完成这轮 30 篇内容审核，具体修改意见已留在文档评论中。' : '这版设计系统可供研发使用。如有问题，请在此讨论下反馈。';
-          const body = `<div class="spoken"><small>口述内容 · 根据部门协作改写</small>${spoken}</div><div class="key-path">光标放在${docs ? '文档评论框' : 'Slack 回复框'} → 按听写快捷键说话 → 再按一次结束</div><div class="follow-actions"><button class="button secondary" data-action="typeless-preview">${typelessPreview ? '收起文字示意' : '查看文字示意'}</button></div>${typelessPreview ? `<div class="draft-box"><label for="typeless-output">${docs ? '文档评论框' : 'Slack 回复框'} · 文字效果示意</label><textarea id="typeless-output" readonly>${written}</textarea><p class="setup-note">检查数字、术语和语气，再在原工具中确认发送。</p></div>` : ''}`;
-          if (docs) stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('doc')}Google Docs · 内容审核</div><span class="window-label">示意</span></div><div class="window-body">${body}</div><div class="window-footer">${icon('arrow')}这里展示输入方式，不会录音或调用 Typeless。</div></section>`;
-          else stage.innerHTML = shell('design-system · Thread 回复',body,'这里展示输入方式，不会录音或调用 Typeless。',{channel:'design-system'});
+          const body = `<div class="spoken"><small>口述内容 · 根据部门协作改写</small>${spoken}</div><div class="key-path">${docs ? '文档评论框' : 'Slack 回复框'} → 听写快捷键 → 说完再按一次；本页不调用 Typeless。</div><div class="follow-actions"><button class="button secondary" data-action="typeless-preview">${typelessPreview ? '收起文字示意' : '查看文字示意'}</button></div>${typelessPreview ? `<div class="draft-box"><label for="typeless-output">${docs ? '文档评论框' : 'Slack 回复框'} · 文字效果示意</label><textarea id="typeless-output" readonly>${written}</textarea><p class="setup-note">检查数字、术语、语气，再确认发送。</p></div>` : ''}`;
+          if (docs) stage.innerHTML = `<section class="window"><div class="window-header"><div class="window-title">${icon('doc')}Google Docs · 内容审核</div><span class="window-label">示意</span></div><div class="window-body">${body}</div></section>`;
+          else stage.innerHTML = shell('design-system · Thread 回复',body,{channel:'design-system'});
           document.querySelector('#source-label').textContent = docs ? '部门场景：内容 · 稿件审核' : '部门场景：设计 · 研发协作';
         }
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>专业词经常识别错？</summary><p>将 Glorify、Figma、OTA 等词加入 Typeless Dictionary。快捷键冲突时，在设置中修改。<a href="https://www.typeless.com/zh-cn/help/quickstart/history-and-dictionary" target="_blank" rel="noopener noreferrer">词典中文教程 ↗</a></p></details>`;
@@ -1112,12 +1114,23 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
       if (activeTopic === 'slackbot') {
         if (variant === 'apps') {
-          stage.innerHTML = shell('Apps · 通知来自各自应用',`<div class="split"><div class="tool google">${icon('calendar')}<h3>Google Calendar</h3><p>会议邀请、开始提醒、日程变更。</p><a class="mini-link" href="${topics.calendar.official}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></div><div class="tool google">${icon('doc')}<h3>Google Drive</h3><p>文档评论、分享与访问申请。</p><a class="mini-link" href="${topics.documents.official}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></div></div>`,'机器人发来的通知，要看应用名；不是都来自 Slackbot。',{icon:'calendar'});
-          document.querySelector('#takeaway-title').textContent = 'Slackbot 与 Calendar / Drive App 是不同入口。';
+          const appList = [
+            ['calendar','Google Calendar','日程、邀请与提醒。','#eef3fd','#4e74ae'],
+            ['doc','Google 云端硬盘','文档评论、分享与访问申请。','#eef4e6','#4c613b'],
+            ['video','Google Meet','发起与加入视频会议。','#e8f0f6','#3a6a8a'],
+            ['check','Jira Cloud','任务通知与链接预览。','#e8eaf6','#4a5aa8']
+          ];
+          stage.innerHTML = shell('代理与工具 · 应用',`<div class="app-dir"><div class="app-search">${icon('search')}按应用名称或类型搜索</div><div class="app-dir-head">推荐添加 · 演示列表</div><div class="app-list">${appList.map(([ic,name,desc,bg,fg]) => `<div class="app-row"><span class="app-icon" style="background:${bg};color:${fg}">${icon(ic)}</span><div><strong>${name}</strong><small>${desc}</small></div><button class="button secondary" data-action="app-add" data-app="${name}" aria-pressed="${addedApps.has(name)}">${addedApps.has(name) ? '已添加' : '添加'}</button></div>`).join('')}</div></div>`,{icon:'grid'});
+          document.querySelector('#detail-title').textContent = '需要什么，在应用目录添加。';
+          document.querySelector('#department').textContent = '各部门 · 应用';
+          document.querySelector('#takeaway-title').textContent = '应用 → 添加 Drive、Meet、Jira 等。';
+          document.querySelector('#takeaway-note').textContent = '通知来自各应用本身；能否安装依管理员设置。';
+          document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区';
+          document.querySelector('#official-link').firstChild.textContent = '添加应用中文教程 ';
         } else {
           const draft = variant === 'draft';
           const prompt = draft ? '根据我提供的固件升级讨论，起草一条进度更新。区分 dev 全量与生产灰度；不补充未确认的发布时间，附原消息链接。' : '在我能访问的设计系统讨论中，找到最新 Figma 入口，列出待研发确认的问题，并附原消息链接。';
-          stage.innerHTML = shell('Slackbot · AI 助手',`<div class="calendar-notice">桌面端：右上角或侧栏顶部打开 Slackbot。没有入口时，先确认套餐和管理员设置。</div><div class="draft-box"><label for="bot-prompt">${draft ? '研发进度更新' : '设计与研发资料'} · 提问示例</label><textarea id="bot-prompt" readonly>${prompt}</textarea><div class="follow-actions"><button class="button secondary" data-action="select-prompt">选中文字</button></div></div><div class="status-line">把频道或原消息链接补进请求；先看来源，再采用结论。</div>`,'把问题用于 Slackbot，并补上实际频道或原消息链接。',{icon:'message',channel:draft ? 'proj-ring-ota' : 'design-system'});
+          stage.innerHTML = shell('Slackbot · AI 助手',`<div class="calendar-notice">右上角或侧栏顶部打开 Slackbot；无入口先确认套餐与管理员设置。</div><div class="draft-box"><label for="bot-prompt">${draft ? '研发进度更新' : '设计与研发资料'} · 提问示例</label><textarea id="bot-prompt" readonly>${prompt}</textarea><div class="follow-actions"><button class="button secondary" data-action="select-prompt">选中文字</button></div></div><div class="status-line">附上频道或原消息链接；先看来源，再采用结论。</div>`,{icon:'message',channel:draft ? 'proj-ring-ota' : 'design-system'});
         }
       }
 
@@ -1125,18 +1138,17 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const isApp = variant === 'app';
         if (variant === 'connect') {
           document.querySelector('#detail-title').textContent = '先接入日历，再约会议。';
-          document.querySelector('#detail-subtitle').textContent = '已有的 Google 日历，关联到 Slack 即可。';
           const calendarGuide = topics.calendar.official;
-          const setup = `<div class="calendar-app-home"><div class="calendar-app-icon">${icon('calendar')}</div><h3>Google Calendar</h3><p>把公司日历连接到 Slack，查看会议和接收提醒。</p><button class="button" data-action="calendar-connect">Connect an account · 连接账号</button><div class="calendar-connect-help" ${calendarConnectOpen ? '' : 'hidden'}><strong>在真实 Slack 中继续</strong><p>选择公司 Google 账号并完成授权，然后回 App 主页选择 Connect Calendar。</p><a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">官方中文连接教程 ↗</a></div><a class="mini-link" href="https://slack.com/marketplace/ADZ494LHY-google-calendar" target="_blank" rel="noopener noreferrer">还没有这个 App？前往安装 ↗</a></div>`;
-          stage.innerHTML = shell('Google Calendar',setup,'连接账号是个人操作；工作区需先安装 Calendar App。',{icon:'calendar',channel:'app-progress',composer:false});
+          const setup = `<div class="calendar-app-home"><div class="calendar-app-icon">${icon('calendar')}</div><h3>Google Calendar</h3><p>连接公司日历，在 Slack 看会议和提醒。</p><button class="button" data-action="calendar-connect">Connect an account · 连接账号</button><div class="calendar-connect-help" ${calendarConnectOpen ? '' : 'hidden'}><strong>在真实 Slack 中继续</strong><p>选公司 Google 账号授权，回 App 主页 Connect Calendar。</p><a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">官方中文连接教程 ↗</a></div><a class="mini-link" href="https://slack.com/marketplace/ADZ494LHY-google-calendar" target="_blank" rel="noopener noreferrer">还没有这个 App？前往安装 ↗</a></div>`;
+          stage.innerHTML = shell('Google Calendar',setup,{icon:'calendar',channel:'app-progress',composer:false});
           document.querySelector('#takeaway-title').textContent = '连接后，可在 Slack 看日程、收提醒。';
-          document.querySelector('#takeaway-note').textContent = '分享到频道的日程通知需另设置；关联账号不会自动通知整个频道。';
+          document.querySelector('#takeaway-note').textContent = '连接是个人操作；频道通知需另设置。';
           document.querySelector('#extra').innerHTML = `<details class="extra"><summary>把日程提醒发到频道？</summary><p>Google Calendar → 将 App 添加到频道 → Settings → Channel Notifications，选择频道与提醒。<a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></p></details>`;
         } else {
         const zones = {beijing:['22:00–23:00','北京 · UTC+8'],london:['15:00–16:00','英国 · 当地夏令时'],la:['07:00–08:00','洛杉矶 · 当地夏令时']};
         const [time, zoneLabel] = zones[timezone];
-        const body = `<div class="calendar-notice">${isApp ? 'Apps → Google Calendar → 创建事件；需先安装 App 并连接公司账号。' : '也可直接在 Google Calendar 网页创建，Slack App 不是唯一入口。'}</div><div class="calendar-box"><h3>App progress sync <span class="tag">历史场景</span></h3><div class="event-row">${icon('calendar')}<div>2026 / 09 / 29 · ${time}<small>${zoneLabel}</small></div></div><div class="event-row">${icon('people')}<div>参会人：产品同事、研发同事<small>会议组织：产品设计同事</small></div></div><div class="event-row">${icon('doc')}<div>App Demo · Mood + Body 设计<small>会议链接：创建时添加 Meet 或 Huddle 链接</small></div></div><div class="event-zone"><span>同一场会议</span><label class="sr-only" for="timezone">显示时区</label><select id="timezone"><option value="beijing" ${timezone === 'beijing' ? 'selected' : ''}>北京</option><option value="london" ${timezone === 'london' ? 'selected' : ''}>英国</option><option value="la" ${timezone === 'la' ? 'selected' : ''}>洛杉矶</option></select></div><label class="broadcast"><input type="checkbox" id="event-shared" ${eventShared ? 'checked' : ''}>分享到 #app-progress</label><button class="button secondary" data-action="event">查看邀请预览</button>${eventPreview ? `<div class="preview-notice">邀请对象：产品同事、研发同事。${eventShared ? '频道中另发一张会议卡片。' : '不发频道卡片。'}<br>仅本地预览，不会创建真实日程。</div>` : ''}</div>`;
-        stage.innerHTML = shell(isApp ? 'Google Calendar' : 'Google Calendar · 网页',body,'受邀人可在 Calendar 或 Slack 的日历通知中接受 / 拒绝。',{icon:'calendar',channel:'app-progress'});
+        const body = `<div class="calendar-notice">${isApp ? 'Apps → Google Calendar → 创建事件；需先安装并连接账号。' : '也可在 Calendar 网页创建。'}</div><div class="calendar-box"><h3>App progress sync <span class="tag">历史场景</span></h3><div class="event-row">${icon('calendar')}<div>2026 / 09 / 29 · ${time}<small>${zoneLabel}</small></div></div><div class="event-row">${icon('people')}<div>参会人：产品同事、研发同事<small>会议组织：产品设计同事</small></div></div><div class="event-row">${icon('doc')}<div>App Demo · Mood + Body 设计<small>会议链接：创建时添加 Meet 或 Huddle 链接</small></div></div><div class="event-zone"><span>同一场会议</span><label class="sr-only" for="timezone">显示时区</label><select id="timezone"><option value="beijing" ${timezone === 'beijing' ? 'selected' : ''}>北京</option><option value="london" ${timezone === 'london' ? 'selected' : ''}>英国</option><option value="la" ${timezone === 'la' ? 'selected' : ''}>洛杉矶</option></select></div><label class="broadcast"><input type="checkbox" id="event-shared" ${eventShared ? 'checked' : ''}>分享到 #app-progress</label><button class="button secondary" data-action="event">查看邀请预览</button>${eventPreview ? `<div class="preview-notice">邀请对象：产品同事、研发同事。${eventShared ? '频道中另发一张会议卡片。' : '不发频道卡片。'}<br>仅本地预览，不会创建真实日程。</div>` : ''}</div>`;
+        stage.innerHTML = shell(isApp ? 'Google Calendar' : 'Google Calendar · 网页',body,{icon:'calendar',channel:'app-progress'});
         }
       }
       updateDeck();
@@ -1184,6 +1196,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       todoAdded = false;
       todoReminder = false;
       typelessPreview = false;
+      addedApps.clear();
       render();
       const agenda = document.querySelector('#agenda-dialog');
       if (agenda.open) agenda.close();
@@ -1250,7 +1263,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (action === 'todo-remind') todoReminder = !todoReminder;
       if (action === 'typeless-preview') typelessPreview = !typelessPreview;
       if (action === 'invite') { invited = true; variant = 'member'; }
-      if (action === 'keep') inviteDecision = '保留提及：没有邀请，也不会通知非成员。';
+      if (action === 'keep') inviteDecision = '保留提及：不邀请，也不通知。';
       if (action === 'thread') variant = 'expanded';
       if (action === 'collapse') variant = 'collapsed';
       if (action === 'camera') cameraOn = !cameraOn;
@@ -1258,6 +1271,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (action === 'mic') muted = !muted;
       if (action === 'document') documentOpen = !documentOpen;
       if (action === 'event') eventPreview = !eventPreview;
+      if (action === 'app-add') { const id = button.dataset.app; addedApps.has(id) ? addedApps.delete(id) : addedApps.add(id); }
       render();
       const replacement = stage.querySelector(`[data-action="${action}"]`);
       if (replacement) replacement.focus({preventScroll:true});
