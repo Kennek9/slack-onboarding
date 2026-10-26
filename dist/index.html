@@ -645,6 +645,18 @@
     .native-tabs button { border: 0; background: none; color: inherit; font: inherit; padding: 3px 0; cursor: pointer; }
     .native-tabs button.active { border-bottom: 2px solid #1264a3; color: #1d1c1d; font-weight: 600; }
     .native-empty { padding: 28px 10px; color: #7c7283; font-size: 13px; }
+    .app-dir { max-width: 700px; margin-inline: auto; }
+    .app-dir-head { font-size: 11px; color: var(--muted); margin-top: 15px; }
+    .app-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 7px; padding: 8px 12px; font-size: 13px; color: var(--muted); background: #faf8fc; }
+    .app-search svg { width: 14px; height: 14px; }
+    .app-list { margin-top: 6px; border-top: 1px solid var(--line); }
+    .app-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .app-icon { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0; }
+    .app-icon svg { width: 17px; height: 17px; }
+    .app-row strong { font-size: 14px; font-weight: 600; display: block; }
+    .app-row small { font-size: 12px; color: var(--muted); }
+    .app-row .button { margin-left: auto; }
+    .app-row .button[aria-pressed="true"] { background: #edf3e4; border-color: #cdddb4; color: #4c603c; }
     .native-canvas { max-width: 720px; padding: 16px; }
     .native-canvas > small { color: #807489; font-size: 11px; }
     .native-canvas h3 { font-size: 20px; }
@@ -725,6 +737,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 </symbol><symbol id="i-send" viewBox="0 0 24 24">
   <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
   <path d="M6 12h16" />
+</symbol><symbol id="i-grid" viewBox="0 0 24 24">
+  <rect x="3" y="3" width="7" height="7" rx="1"/>
+  <rect x="14" y="3" width="7" height="7" rx="1"/>
+  <rect x="14" y="14" width="7" height="7" rx="1"/>
+  <rect x="3" y="14" width="7" height="7" rx="1"/>
 </symbol>
   </svg>
   <div class="wrap">
@@ -779,6 +796,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <a href="https://www.typeless.com/zh-cn/help/installation-and-setup" target="_blank" rel="noopener noreferrer">Typeless 安装与权限 ↗</a>
         <a href="https://www.typeless.com/zh-cn/help/quickstart/dictate" target="_blank" rel="noopener noreferrer">Typeless 中文语音输入教程 ↗</a>
         <a href="https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作" target="_blank" rel="noopener noreferrer">Slackbot 中文教程 ↗</a>
+        <a href="https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack" target="_blank" rel="noopener noreferrer">官方使用指南 · 分类目录 ↗</a>
+        <a href="https://slack.com/intl/zh-cn/help" target="_blank" rel="noopener noreferrer">Slack 帮助中心首页 ↗</a>
       </div></details><section class="migration-resource"><div><strong>飞书 → Google Drive</strong><small>团队迁移 Skill · 转为原生 Google 格式</small></div><button class="button secondary" data-open-migration>用法与下载 →</button></section><p class="sheet-footnote">中文教程来自官方；迁移 Skill 由团队提供。公司频道、套餐与 App 配置仍需确认。</p></dialog>
   <dialog class="sheet" id="migration-dialog" aria-labelledby="migration-title">
     <div class="sheet-header"><h2 id="migration-title">飞书文档 → Google Drive</h2><button class="close-button" data-close="migration-dialog" aria-label="关闭迁移说明">×</button></div>
@@ -873,7 +892,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       slackbot: {
         title: '让 Slackbot 找资料、理结论、起草更新。', subtitle: '给具体频道或原消息，要求附来源。', department: '各部门 · Slackbot',
-        variants: [['ask','找消息与结论'],['draft','起草更新'],['apps','App 通知']],
+        variants: [['ask','找消息与结论'],['draft','起草更新'],['apps','应用']],
         sourceLabel: '官方教程', sourceName: 'Slackbot · 中文说明',
         official: 'https://slack.com/intl/zh-cn/help/articles/202026038-如何与-Slackbot-协同工作',
         takeaway: 'Slackbot 的回答范围受你的访问权限限制。', note: 'AI 能力依套餐与管理员设置；是否开放待确认。'
@@ -919,6 +938,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     let eventShared = true;
     let calendarConnectOpen = false;
     let eventPreview = false;
+    const addedApps = new Set();
     const stage = document.querySelector('#stage');
     const switches = document.querySelector('#switches');
 
@@ -959,7 +979,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         ['proj-ring-ota','固件升级','video','firmware']
       ];
       const sidebar = `<aside class="native-sidebar"><button class="native-workspace" data-jump="entry" data-jump-variant="channel">Glorify <span>⌄</span></button><div class="native-side-title">频道</div>${channelList.map(([name,label,topicId,mode]) => `<button class="native-side-row ${channel === name ? 'selected' : ''}" data-jump="${topicId}" data-jump-variant="${mode}">${icon(activeTopic === 'privacy' && variant === 'private' && name === 'design-system' ? 'lock' : 'hash')}<span>${name}</span></button>`).join('')}<div class="native-side-title">私信</div><button class="native-side-row ${activeTopic === 'entry' && variant === 'dm' ? 'selected' : ''}" data-jump="entry" data-jump-variant="dm"><span class="presence"></span>市场同事</button><button class="native-side-row ${activeTopic === 'entry' && variant === 'group' ? 'selected' : ''}" data-jump="entry" data-jump-variant="group">${icon('people')}产品、市场、KOL</button><div class="native-side-title">应用</div><button class="native-side-row ${activeTopic === 'calendar' ? 'selected' : ''}" data-jump="calendar" data-jump-variant="connect">${icon('calendar')}Google Calendar</button><button class="native-side-row ${activeTopic === 'slackbot' ? 'selected' : ''}" data-jump="slackbot" data-jump-variant="ask">${icon('message')}Slackbot</button><small class="native-side-foot">演示工作区 · 非真实消息</small></aside>`;
-      return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search" data-jump="search" data-jump-variant="firmware">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button></div></div><div class="native-tabs"><button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button></div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || isBot || nativeTab !== 'messages' ? '' : composeBox()}</section>${thread}</div></div>`;
+      return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search" data-jump="search" data-jump-variant="firmware">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button><button data-jump="slackbot" data-jump-variant="apps" aria-label="应用">${icon('grid')}<small>应用</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button></div></div><div class="native-tabs"><button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button></div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || isBot || nativeTab !== 'messages' ? '' : composeBox()}</section>${thread}</div></div>`;
     }
 
     function render() {
@@ -1094,8 +1114,19 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
       if (activeTopic === 'slackbot') {
         if (variant === 'apps') {
-          stage.innerHTML = shell('Apps · 通知来自各自应用',`<div class="split"><div class="tool google">${icon('calendar')}<h3>Google Calendar</h3><p>会议邀请、开始提醒、日程变更。</p><a class="mini-link" href="${topics.calendar.official}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></div><div class="tool google">${icon('doc')}<h3>Google Drive</h3><p>文档评论、分享与访问申请。</p><a class="mini-link" href="${topics.documents.official}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></div></div>`,{icon:'calendar'});
-          document.querySelector('#takeaway-title').textContent = 'Slackbot 与 Calendar / Drive 是不同入口。';
+          const appList = [
+            ['calendar','Google Calendar','日程、邀请与提醒。','#eef3fd','#4e74ae'],
+            ['doc','Google 云端硬盘','文档评论、分享与访问申请。','#eef4e6','#4c613b'],
+            ['video','Google Meet','发起与加入视频会议。','#e8f0f6','#3a6a8a'],
+            ['check','Jira Cloud','任务通知与链接预览。','#e8eaf6','#4a5aa8']
+          ];
+          stage.innerHTML = shell('代理与工具 · 应用',`<div class="app-dir"><div class="app-search">${icon('search')}按应用名称或类型搜索</div><div class="app-dir-head">推荐添加 · 演示列表</div><div class="app-list">${appList.map(([ic,name,desc,bg,fg]) => `<div class="app-row"><span class="app-icon" style="background:${bg};color:${fg}">${icon(ic)}</span><div><strong>${name}</strong><small>${desc}</small></div><button class="button secondary" data-action="app-add" data-app="${name}" aria-pressed="${addedApps.has(name)}">${addedApps.has(name) ? '已添加' : '添加'}</button></div>`).join('')}</div></div>`,{icon:'grid'});
+          document.querySelector('#detail-title').textContent = '需要什么，在应用目录添加。';
+          document.querySelector('#department').textContent = '各部门 · 应用';
+          document.querySelector('#takeaway-title').textContent = '应用 → 添加 Drive、Meet、Jira 等。';
+          document.querySelector('#takeaway-note').textContent = '通知来自各应用本身；能否安装依管理员设置。';
+          document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区';
+          document.querySelector('#official-link').firstChild.textContent = '添加应用中文教程 ';
         } else {
           const draft = variant === 'draft';
           const prompt = draft ? '根据我提供的固件升级讨论，起草一条进度更新。区分 dev 全量与生产灰度；不补充未确认的发布时间，附原消息链接。' : '在我能访问的设计系统讨论中，找到最新 Figma 入口，列出待研发确认的问题，并附原消息链接。';
@@ -1165,6 +1196,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       todoAdded = false;
       todoReminder = false;
       typelessPreview = false;
+      addedApps.clear();
       render();
       const agenda = document.querySelector('#agenda-dialog');
       if (agenda.open) agenda.close();
@@ -1239,6 +1271,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (action === 'mic') muted = !muted;
       if (action === 'document') documentOpen = !documentOpen;
       if (action === 'event') eventPreview = !eventPreview;
+      if (action === 'app-add') { const id = button.dataset.app; addedApps.has(id) ? addedApps.delete(id) : addedApps.add(id); }
       render();
       const replacement = stage.querySelector(`[data-action="${action}"]`);
       if (replacement) replacement.focus({preventScroll:true});
