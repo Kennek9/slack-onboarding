@@ -630,6 +630,15 @@
     .native-tabs button { border: 0; background: none; color: inherit; font: inherit; padding: 3px 0; cursor: pointer; }
     .native-tabs button.active { border-bottom: 2px solid #1264a3; color: #1d1c1d; font-weight: 600; }
     .native-empty { padding: 28px 10px; color: #7c7283; font-size: 13px; }
+    .native-bookmarks { display: flex; align-items: center; gap: 6px; margin: -4px 0 8px; color: #7c7283; font-size: 11px; }
+    .native-bookmarks svg { width: 12px; height: 12px; }
+    .native-bookmark { border: 0; background: transparent; color: #4e74ae; font-size: 11px; font-weight: 600; padding: 0; }
+    .drive-card { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-top: 10px; }
+    .drive-head { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+    .drive-head svg { width: 15px; height: 15px; color: #4e74ae; }
+    .drive-card p { font-size: 13px; line-height: 1.7; margin: 0 0 6px; }
+    .drive-hint { color: var(--muted); font-size: 11px !important; }
+    .drive-card .button { margin-top: 4px; }
     .app-dir { max-width: 700px; margin-inline: auto; }
     .app-dir-head { font-size: 11px; color: var(--muted); margin-top: 15px; }
     .app-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 7px; padding: 8px 12px; font-size: 13px; color: var(--muted); background: #faf8fc; }
@@ -833,7 +842,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       documents: {
         title: '聊天在 Slack，正文在 Google Docs。', subtitle: '文档归文档，讨论归讨论。', department: '内容 · CX',
-        variants: [['content','内容审核'],['cx','CX 周报']],
+        variants: [['content','内容审核'],['cx','CX 周报'],['drive','Drive 通知']],
         sourceName: '内容 · 稿件审核',
         official: 'https://slack.com/intl/zh-cn/help/articles/205875058'
       },
@@ -908,6 +917,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     let eventShared = true;
     let calendarConnectOpen = false;
     let eventPreview = false;
+    let driveGranted = false;
     const stage = document.querySelector('#stage');
     const spot = sel => { if (sel) stage.querySelector(sel)?.classList.add('spot'); };
     const switches = document.querySelector('#switches');
@@ -1020,15 +1030,20 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
       if (activeTopic === 'documents') {
         const cx = variant === 'cx';
-        const fileTitle = cx ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇';
+        const fileTitle = (cx || variant === 'drive') ? 'CX 反馈周报' : 'Devotional 审核稿 · 30 篇';
+        const pin = `<div class="native-bookmarks">${icon('doc')}<button class="native-bookmark" data-action="open-doc">已置顶 · ${fileTitle}</button></div>`;
+        if (variant === 'drive') {
+          stage.innerHTML = shell('team-cx',pin + `<div class="drive-card"><div class="drive-head">${icon('doc')}Google Drive 应用</div><p>内容同事 评论了「CX 反馈周报」：</p><div class="comment">「第二段的分类口径建议再统一。」</div><p class="drive-hint">在下方输入框直接回评论</p></div><div class="drive-card"><div class="drive-head">${icon('lock')}访问申请</div><p>研发同事 请求查看「CX 反馈周报」</p><button class="button secondary" data-action="drive-grant">${driveGranted ? '已授权' : '授予访问权限'}</button></div><div class="status-line">评论和授权都在 Slack 里办，不用切到 Docs。</div>`,{channel:'team-cx'});
+        } else {
         const request = cx ? '邮件问题分类和社媒反馈已整理好。细节在周报，问题在这条消息下讨论。' : '这轮 30 篇 Devotional 已备好。修改意见写进文档评论，结果回本消息同步。';
         if (cx) {
           document.querySelector('#source-label').textContent = '部门场景：CX · 周报协作';
         }
-        const body = message(cx ? 'CX' : '内容',cx ? 'CX 团队' : '内容制作团队',request) + `<button class="native-file" data-action="open-doc" aria-label="打开${fileTitle}"><span class="doc-symbol">${icon('doc')}</span><div><strong>${fileTitle}</strong><small>Google Docs · 打开演示</small></div>${icon('external')}</button><button class="native-reply-count" data-action="doc-thread">${1 + replyMessages.length} 条回复 · ${cx ? '产品团队' : '审核团队'}</button>`;
+        const body = pin + message(cx ? 'CX' : '内容',cx ? 'CX 团队' : '内容制作团队',request) + `<button class="native-file" data-action="open-doc" aria-label="打开${fileTitle}"><span class="doc-symbol">${icon('doc')}</span><div><strong>${fileTitle}</strong><small>Google Docs · 打开演示</small></div>${icon('external')}</button><button class="native-reply-count" data-action="doc-thread">${1 + replyMessages.length} 条回复 · ${cx ? '产品团队' : '审核团队'}</button>`;
         const response = cx ? '我会看周报中的反馈；需要跟进的在这里回复。' : '30 篇已审完，具体修改意见已留在文档评论里。';
         const thread = docThreadOpen ? replyPane(cx ? 'CX 团队' : '内容制作团队',request,[{role:cx ? '产品团队' : '审核团队',text:response}]) : '';
         stage.innerHTML = shell(cx ? 'team-cx' : 'team-content',body,{channel:cx ? 'team-cx' : 'team-content',thread});
+        }
       }
 
       if (activeTopic === 'sharing') {
@@ -1042,12 +1057,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const isTodo = variant === 'todo';
         const body = message('研发','固件研发同事','27 版本上了：dev 全量，生产只给指定设备。') + (isTodo
           ? `<div class="follow-state"><div class="follow-row"><span>个人待办：跟进灰度测试</span><strong>${todoAdded ? '已加入 · 仅自己' : '尚未加入'}</strong></div><div class="follow-row"><span>提醒</span><strong>${todoReminder ? '已设置 · 示例时间' : '未设置'}</strong></div></div><div class="follow-actions"><button class="button secondary" data-action="todo">${todoAdded ? '移出个人待办' : '加入个人待办'}</button>${todoAdded ? `<button class="button secondary" data-action="todo-remind">${todoReminder ? '取消提醒' : '另设提醒'}</button>` : ''}</div>`
-          : `<div class="follow-state"><div class="follow-row"><span>@ 我 / 私信 / 关注的 Thread</span><strong>立即提醒 · 数字角标</strong></div><div class="follow-row"><span>重点频道（全部通知）</span><strong>${variant === 'channel' ? '每条提醒' : '本频道未开'}</strong></div><div class="follow-row"><span>普通更新</span><strong>只加粗，不提醒</strong></div></div><div class="status-line">加粗 = 有新消息；数字角标 = 有人 @ 你。</div>`);
+          : `<div class="follow-state"><div class="follow-row"><span>@ 我 / 私信 / 关注的 Thread</span><strong>立即提醒 · 数字角标</strong></div><div class="follow-row"><span>重点频道（全部通知）</span><strong>${variant === 'channel' ? '每条提醒' : '本频道未开'}</strong></div><div class="follow-row"><span>普通更新</span><strong>只加粗，不提醒</strong></div></div><div class="status-line">默认只有 @ 和私信会提醒。加粗 = 有新消息；数字角标 = 有人 @ 你。</div>`);
         stage.innerHTML = shell('proj-ring-ota',body,{channel:'proj-ring-ota'});
         if (isTodo) {
           document.querySelector('#official-link').href = 'https://slack.com/intl/zh-cn/help/articles/55757634348435-“留待以后处理”现已改为“待办清单”';
         }
-        document.querySelector('#extra').innerHTML = `<details class="extra"><summary>回复在哪里集中看？</summary><p>打开 Activity（活动），查看提及、私信、回复与提醒。<a href="https://slack.com/intl/zh-cn/help/articles/19693583638803-在“活动”视图中完成你的工作" target="_blank" rel="noopener noreferrer">活动视图中文教程 ↗</a></p></details>`;
+        document.querySelector('#extra').innerHTML = `<details class="extra"><summary>回复在哪里集中看？</summary><p>打开 Activity（活动），查看提及、私信、回复与提醒。<a href="https://slack.com/intl/zh-cn/help/articles/19693583638803-在“活动”视图中完成你的工作" target="_blank" rel="noopener noreferrer">活动视图中文教程 ↗</a></p></details><details class="extra"><summary>频道名旁的星星是什么？</summary><p>点星标把常用频道置顶到侧栏。侧栏的 ✨ 是 Slackbot；Recap 是它的每日频道摘要，属 AI 套餐，公司是否开放待确认。</p></details>`;
       }
 
       if (activeTopic === 'habits') {
@@ -1145,6 +1160,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       todoAdded = false;
       todoReminder = false;
       typelessPreview = false;
+      driveGranted = false;
       render();
       const agenda = document.querySelector('#agenda-dialog');
       if (agenda.open) agenda.close();
@@ -1165,6 +1181,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (activeTopic === 'video') { cameraOn = false; screenOn = false; muted = false; }
       documentOpen = false;
       typelessPreview = false;
+      driveGranted = false;
       render();
       switches.querySelector(`[data-variant="${variant}"]`).focus({preventScroll:true});
     });
@@ -1218,6 +1235,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (action === 'mic') muted = !muted;
       if (action === 'document') documentOpen = !documentOpen;
       if (action === 'event') eventPreview = !eventPreview;
+      if (action === 'drive-grant') driveGranted = !driveGranted;
       render();
       const replacement = stage.querySelector(`[data-action="${action}"]`);
       if (replacement) replacement.focus({preventScroll:true});
