@@ -630,6 +630,10 @@
     .native-tabs button { border: 0; background: none; color: inherit; font: inherit; padding: 3px 0; cursor: pointer; }
     .native-tabs button.active { border-bottom: 2px solid #1264a3; color: #1d1c1d; font-weight: 600; }
     .native-empty { padding: 28px 10px; color: #7c7283; font-size: 13px; }
+    .threads-item { border-bottom: 1px solid var(--line); padding: 12px 0; }
+    .threads-item strong { font-size: 12px; color: #4e74ae; }
+    .threads-item p { font-size: 13px; line-height: 1.7; margin: 3px 0 2px; }
+    .threads-item small { color: var(--muted); font-size: 11px; }
     .native-bookmarks { display: flex; align-items: center; gap: 6px; margin: -4px 0 8px; color: #7c7283; font-size: 11px; }
     .native-bookmarks svg { width: 12px; height: 12px; }
     .native-bookmark { border: 0; background: transparent; color: #4e74ae; font-size: 11px; font-weight: 600; padding: 0; }
@@ -906,7 +910,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       thread: {
         title: '细节回进话题里，频道不刷屏。', subtitle: '客服转来“内容重复”的反馈，内容同事回。', department: 'CX · 内容',
-        variants: [['collapsed','频道里'],['expanded','展开话题']],
+        variants: [['collapsed','频道里'],['expanded','展开话题'],['threads','消息列']],
         sourceName: 'CX · 内容反馈',
         official: 'https://slack.com/intl/zh-cn/help/articles/115000769927'
       },
@@ -1034,7 +1038,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         ['design-system','设计系统','privacy','public'],
         ['proj-ring-ota','固件升级','video','firmware']
       ];
-      const sidebar = `<aside class="native-sidebar"><button class="native-workspace" data-jump="entry" data-jump-variant="channel">Glorify <span>⌄</span></button><div class="native-side-title">频道</div>${isTranslate ? ['sw-team','random'].map(name => `<button class="native-side-row ${channel === name ? 'selected' : ''}" data-t-action="channel" data-channel="${name}">${icon('hash')}${name}</button>`).join('') : ''}${channelList.map(([name,label,topicId,mode]) => `<button class="native-side-row ${channel === name ? 'selected' : ''} ${activeTopic === 'follow' && name === 'proj-ring-ota' ? 'unread' : ''}" data-jump="${topicId}" data-jump-variant="${mode}">${icon(activeTopic === 'privacy' && variant === 'private' && name === 'design-system' ? 'lock' : 'hash')}<span>${name}</span>${activeTopic === 'follow' && name === 'content-feedback' ? '<span class="native-badge">1</span>' : ''}</button>`).join('')}<div class="native-side-title">私信</div><button class="native-side-row ${activeTopic === 'entry' && variant === 'dm' ? 'selected' : ''}" data-jump="entry" data-jump-variant="dm"><span class="presence"></span>市场同事</button><button class="native-side-row ${activeTopic === 'entry' && variant === 'group' ? 'selected' : ''}" data-jump="entry" data-jump-variant="group">${icon('people')}产品、市场、KOL</button><div class="native-side-title">应用</div><button class="native-side-row ${activeTopic === 'calendar' ? 'selected' : ''}" data-jump="calendar" data-jump-variant="connect">${icon('calendar')}Google Calendar</button><button class="native-side-row ${isTranslate && variant === 'settings' ? 'selected' : ''}" data-jump="translate" data-jump-variant="settings">${icon('message')}Translate</button><small class="native-side-foot">演示工作区 · 非真实消息</small></aside>`;
+      const sidebar = `<aside class="native-sidebar"><button class="native-workspace" data-jump="entry" data-jump-variant="channel">Glorify <span>⌄</span></button><button class="native-side-row ${activeTopic === 'thread' && variant === 'threads' ? 'selected' : ''}" data-jump="thread" data-jump-variant="threads">${icon('message')}<span>消息列</span></button><div class="native-side-title">频道</div>${isTranslate ? ['sw-team','random'].map(name => `<button class="native-side-row ${channel === name ? 'selected' : ''}" data-t-action="channel" data-channel="${name}">${icon('hash')}${name}</button>`).join('') : ''}${channelList.map(([name,label,topicId,mode]) => `<button class="native-side-row ${channel === name ? 'selected' : ''} ${activeTopic === 'follow' && name === 'proj-ring-ota' ? 'unread' : ''}" data-jump="${topicId}" data-jump-variant="${mode}">${icon(activeTopic === 'privacy' && variant === 'private' && name === 'design-system' ? 'lock' : 'hash')}<span>${name}</span>${activeTopic === 'follow' && name === 'content-feedback' ? '<span class="native-badge">1</span>' : ''}</button>`).join('')}<div class="native-side-title">私信</div><button class="native-side-row ${activeTopic === 'entry' && variant === 'dm' ? 'selected' : ''}" data-jump="entry" data-jump-variant="dm"><span class="presence"></span>市场同事</button><button class="native-side-row ${activeTopic === 'entry' && variant === 'group' ? 'selected' : ''}" data-jump="entry" data-jump-variant="group">${icon('people')}产品、市场、KOL</button><div class="native-side-title">应用</div><button class="native-side-row ${activeTopic === 'calendar' ? 'selected' : ''}" data-jump="calendar" data-jump-variant="connect">${icon('calendar')}Google Calendar</button><small class="native-side-foot">演示工作区 · 非真实消息</small></aside>`;
       return `<div class="slack-ui"><div class="native-topbar"><span class="native-history">←　→</span><button class="native-search">${icon('search')}<span>搜索 Glorify</span><kbd>⌘ K</kbd></button><span class="native-demo">互动演示</span></div><div class="native-grid ${thread ? 'has-reply' : ''}"><nav class="native-rail" aria-label="Slack 主导航"><button data-jump="entry" data-jump-variant="channel" aria-label="主页">${icon('home')}<small>主页</small></button><button data-jump="entry" data-jump-variant="dm" aria-label="私信">${icon('people')}<small>私信</small></button><button data-jump="follow" data-jump-variant="mentions" aria-label="活动">${icon('bell')}<small>活动</small></button><button data-jump="documents" data-jump-variant="content" aria-label="文件">${icon('doc')}<small>文件</small></button><button data-jump="apps" data-jump-variant="dir" aria-label="应用">${icon('grid')}<small>应用</small></button></nav>${sidebar}<section class="window"><div class="window-header"><button class="native-channel-title" data-action="channel-details">${icon(typeIcon)}${title}</button><div class="native-header-actions">${isTranslate ? '<span class="window-label">演示</span>' : `${options.action || `<button class="close-button" data-action="native-huddle" aria-label="开启 Huddle">${icon('headphones')}</button>`}<button class="close-button" data-action="channel-details" aria-label="查看对话详情">${icon('people')}</button>`}</div></div><div class="native-tabs">${isTranslate ? '<span class="translate-demo-label">预设演示 · 不连接真实 Slack 或翻译服务</span>' : `<button class="${nativeTab === 'messages' ? 'active' : ''}" data-native-tab="messages">${isApp ? '主页' : '消息'}</button><button class="${nativeTab === 'files' ? 'active' : ''}" data-native-tab="files">${isApp ? '消息' : '文件与链接'}</button><button class="${nativeTab === 'canvas' ? 'active' : ''}" data-native-tab="canvas">${isApp ? '关于' : 'Canvas'}</button>`}</div><div class="window-body">${shownBody}${broadcastMessages.map(text => `<div class="broadcast-message"><small>协作同事 · 来自消息列</small>${escapeText(text)}</div>`).join('')}${localMessages.map(text => message('协作','协作同事 · 演示',escapeText(text))).join('')}</div>${options.composer === false || isApp || nativeTab !== 'messages' ? '' : composeBox()}</section>${thread}</div></div>`;
     }
 
@@ -1194,7 +1198,13 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         const count = 1 + replyMessages.length;
         const body = message('CX','CX 团队',text,'blue') + `<button class="native-reply-count" data-action="thread">${count} 条回复 · 内容团队</button>`;
         const thread = variant === 'expanded' ? replyPane('CX 团队',text,[{role:'内容团队',text:'没有重复发布，但主题相近会有重复感。后续会覆盖更多经卷。'}]) : '';
+        if (variant === 'threads') {
+          const items = `<div class="threads-item"><div><strong># content-feedback</strong><p>CX 团队：用户反馈每日内容主题有重复感…</p><small>1 条回复 · 内容团队</small></div></div><div class="threads-item"><div><strong># proj-ring-ota</strong><p>固件研发同事：27 版本上了：dev 全量，生产只给指定设备。</p><small>2 条回复</small></div></div><div class="status-line">你参与或被 @ 的话题都在这，点一条直接回去回。</div>`;
+          stage.innerHTML = shell('消息列',items,{icon:'message',channel:'content-feedback',composer:false});
+          document.querySelector('#detail-title').textContent = '所有话题，都在消息列。';
+        } else {
         stage.innerHTML = shell('content-feedback',body,{channel:'content-feedback',thread});
+        }
         document.querySelector('#extra').innerHTML = `<details class="extra"><summary>回复都进「消息列」</summary><p>侧栏的「消息列」集中显示你参与或被 @ 的所有话题，不用逐个频道翻。</p></details>`;
       }
 
@@ -1294,7 +1304,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         stage.innerHTML = shell(isApp ? 'Google Calendar' : 'Google Calendar · 网页',body,{icon:'calendar',channel:'app-progress'});
         }
       }
-      spot({install:'.setup',entry:'.native-side-row.selected',privacy:'.visibility',mention:'.invite, .status-line',thread:'.native-reply-count, .native-thread',video:'.call-start',documents:'.native-file',sharing:'.share-box',follow:'.follow-state',habits:'.follow-state',typeless:'.setup, .spoken',apps:'.app-list',calendar:'.calendar-app-home, .calendar-box'}[activeTopic]);
+      spot({install:'.setup',entry:'.native-side-row.selected',privacy:'.visibility',mention:'.invite, .status-line',thread:'.native-reply-count, .native-thread, .threads-item',video:'.call-start',documents:'.native-file',sharing:'.share-box',follow:'.follow-state',habits:'.follow-state',typeless:'.setup, .spoken',apps:'.app-list',calendar:'.calendar-app-home, .calendar-box'}[activeTopic]);
       updateDeck();
       document.querySelector('#status').textContent = `${document.querySelector('#department').textContent}：${document.querySelector('#detail-title').textContent} ${topic.variants.find(item => item[0] === variant)?.[1] || ''}`;
     }
