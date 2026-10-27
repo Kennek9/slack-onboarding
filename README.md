@@ -42,7 +42,7 @@ node scripts/check.mjs
 
 Translate 教程直达：`#translate`。应用为 Mark Carey Consulting Inc. 开发的第三方 Translate，并非 Slack 原生翻译。教程包含自动翻译、消息操作、`/translate` 表单与命令、可选的个人授权、Home/主页设置与 FAQ，以及约 60 秒的四段可点击演示。
 
-自动翻译范围仅按本次用户确认写明 `#sw-team` 和 `#random`，其他频道未确认。个人未授权仍有独立译文；若想追加到自己的原消息，需本人授权代操作，并查看权限和展示设置。演示使用无敏感信息的预设中英文，不执行安装、授权、频道配置、真实发消息或翻译 API 调用。
+已只读核对 Translate 的频道启用通知：`#sw-team` 和 `#random` 为全体频道成员开启按需翻译成英文，成员不用逐人设置或个人授权。英文翻中文是否已为全员启用，以及其他频道、私聊，尚未确认。没做个人授权时译文另发消息；若想接在自己的原文下，再按需由本人授权，并查看权限和展示设置。网页使用无敏感的预设示例，不执行安装、授权、频道配置、真实发消息或翻译 API 调用；不公开内部通知原文、定位链接或 ID。
 
 用法与授权依据：[Slack Marketplace](https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info)、[开发者说明（英文）](https://translate.technology/)。开发者文档含旧界面示意，教程不将其按钮位置当作当前界面保证。
 

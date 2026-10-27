@@ -863,11 +863,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   <dialog class="native-huddle-dialog" id="native-huddle-dialog" aria-labelledby="native-huddle-title"><div class="call-window" id="native-huddle-content"></div></dialog>
   <dialog class="sheet translate-form-dialog" id="translate-form-dialog" aria-labelledby="translate-form-title">
     <div class="sheet-header"><h2 id="translate-form-title">Translate · 表单演示</h2><button class="close-button" data-close="translate-form-dialog" aria-label="关闭翻译表单">×</button></div>
-    <p>真实 Slack：输入 <code>/translate</code> 打开表单，选目标语言、输入文本，再决定是否发布译文。</p>
+    <p>在 Slack 输入 <code>/translate</code>，选语言、填文字，再决定要不要发到频道。</p>
     <form id="translate-example-form">
       <label for="translate-target">目标语言</label><select id="translate-target"><option value="en">English · en</option><option value="zh">中文 · zh</option></select>
       <label for="translate-text">文本 · 预设示例</label><textarea id="translate-text" rows="3" readonly>明天下午三点讨论新版首页。</textarea>
-      <p class="translate-note">本页只展示预设文本；真实 Slack 中可输入自己的文本。表单为示意，以应用当前界面为准。</p>
+      <p class="translate-note">本页用预设文本演示，不翻译自定义内容。实际表单以当前应用为准。</p>
       <button class="button" type="submit">查看示例译文（演示）</button>
     </form>
   </dialog>
@@ -877,7 +877,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       translate: {
         title: 'Translate · 中英翻译', subtitle: '自动、单条与手动翻译；个人授权可选。', department: '跨语言协作 · 演示',
         variants: [['auto','自动翻译'],['message','已有消息'],['manual','手动翻译'],['authorization','展示与授权'],['settings','设置与FAQ'],['demo','60秒演示']],
-        sourceLabel: '官方说明 + 本次频道确认', sourceName: 'Translate · Mark Carey Consulting Inc.',
+        sourceLabel: '官方说明 + 已核对的频道通知', sourceName: 'Translate · Mark Carey Consulting Inc.',
         official: 'https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info'
       },
       install: {
@@ -1046,7 +1046,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     let translateState = { ...translateDefaults };
 
     function translateMessage(author, text, appended = '') {
-      return `<article class="translate-message"><div class="avatar ${author === 'Translate' ? 'green' : ''}" aria-hidden="true">${author.slice(0,2)}</div><div><strong>${author}</strong><p>${escapeText(text)}</p>${appended ? `<div class="translate-appended"><small>追加的译文 · 演示</small><p>${escapeText(appended)}</p></div>` : ''}</div></article>`;
+      return `<article class="translate-message"><div class="avatar ${author === 'Translate' ? 'green' : ''}" aria-hidden="true">${author.slice(0,2)}</div><div><strong>${author}</strong><p>${escapeText(text)}</p>${appended ? `<div class="translate-appended"><small>译文 · 演示</small><p>${escapeText(appended)}</p></div>` : ''}</div></article>`;
     }
 
     function translatePair(display) {
@@ -1057,33 +1057,33 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     }
 
     function translateExistingMessage() {
-      return `<p class="translate-instruction">从消息操作菜单找 <strong>Translate this message</strong>。具体入口以当前 Slack 界面为准。</p>${translateMessage('研发团队', translateExamples.zh.source)}<button class="button secondary" data-t-action="message-menu">消息操作（演示）</button>${translateState.messagePhase === 'menu' ? '<div class="translate-menu" role="group" aria-label="消息操作示意"><button class="button secondary" data-t-action="message-translate">Translate this message</button></div>' : ''}${translateState.messagePhase === 'translated' ? `<div class="translate-preview" role="status"><small>中文译文示例</small><p>${translateExamples.zh.result}</p></div>` : ''}`;
+      return `<p class="translate-instruction">消息菜单里找 <strong>Translate this message</strong>，翻译这一条。入口以你当前的 Slack 为准。</p>${translateMessage('研发团队', translateExamples.zh.source)}<button class="button secondary" data-t-action="message-menu">展开菜单（演示）</button>${translateState.messagePhase === 'menu' ? '<div class="translate-menu" role="group" aria-label="消息操作示意"><button class="button secondary" data-t-action="message-translate">Translate this message</button></div>' : ''}${translateState.messagePhase === 'translated' ? `<div class="translate-preview" role="status"><small>中文译文示例</small><p>${translateExamples.zh.result}</p></div>` : ''}`;
     }
 
     function translateDisplay() {
-      return `<div class="translate-display-controls" role="group" aria-label="两种译文展示示例"><button class="button secondary" data-t-action="display" data-format="separate" aria-pressed="${translateState.display === 'separate'}">独立消息示例</button><button class="button secondary" data-t-action="display" data-format="appended" aria-pressed="${translateState.display === 'appended'}">追加原文示例</button></div><div class="translate-pair">${translatePair(translateState.display)}</div><p class="translate-auth-note"><strong>个人授权是可选项，不授权也能翻译。</strong>未个人授权的成员，译文仍以独立消息出现。若要追加到自己的原消息，需本人授权 Translate 代其操作，并确认展示设置；授权前先查看权限。</p><a class="mini-link" href="${topics.translate.official}" target="_blank" rel="noopener noreferrer">查看应用身份与权限 ↗</a><small class="translate-note">上面的按钮只切换演示，没有执行授权。</small>`;
+      return `<div class="translate-display-controls" role="group" aria-label="两种译文展示示例"><button class="button secondary" data-t-action="display" data-format="separate" aria-pressed="${translateState.display === 'separate'}">另发译文</button><button class="button secondary" data-t-action="display" data-format="appended" aria-pressed="${translateState.display === 'appended'}">接在原文下</button></div><div class="translate-pair">${translatePair(translateState.display)}</div><p class="translate-auth-note"><strong>不授权，也会有译文。</strong>没授权时，译文另发一条。想接在自己的原消息下面，再由本人授权 Translate 代操作，并确认展示设置。先看权限，按需决定。</p><a class="mini-link" href="${topics.translate.official}" target="_blank" rel="noopener noreferrer">查看应用与权限 ↗</a><small class="translate-note">按钮只切换演示，不会授权。</small>`;
     }
 
     function renderTranslate() {
       let body = '';
-      const scope = '<p class="translate-scope">已确认中英自动翻译：<strong>#sw-team · #random</strong><span>其他频道未确认</span></p>';
+      const scope = '<p class="translate-scope">已开：<strong>#sw-team · #random</strong><span>全员按需译成英文</span></p>';
       if (variant === 'auto') {
-        body = `${scope}<p class="translate-instruction">在已配置频道正常发消息即可，<strong>不需要每次输入命令。</strong></p><p class="translate-auth-note"><strong>未个人授权也会有译文。</strong>此例独立发出；想追加到自己的原消息，需本人授权。授权可选，先查看权限。</p>${translateState.autoShown ? `<div class="translate-pair">${translatePair('separate')}</div>` : `<div class="translate-compose"><small>待发送的中文示例</small><p>${translateExamples.en.source}</p></div>`}<div class="translate-actions"><button class="button" data-t-action="auto">${translateState.autoShown ? '重播示例' : '发送示例（演示）'}</button></div>`;
+        body = `${scope}<p class="translate-instruction">正常发消息就行，<strong>不用每人设置，也不用输命令。</strong></p><p class="translate-auth-note"><strong>不授权也能用。</strong>译文另发一条。想接在自己原消息下面，再按需授权，先看权限。</p><p class="translate-note">英文自动翻中文，还没确认全员开启。其他频道、私聊也未确认。</p>${translateState.autoShown ? `<div class="translate-pair">${translatePair('separate')}</div>` : `<div class="translate-compose"><small>待发送的中文示例</small><p>${translateExamples.en.source}</p></div>`}<div class="translate-actions"><button class="button" data-t-action="auto">${translateState.autoShown ? '重播示例' : '发送示例（演示）'}</button></div>`;
       }
       if (variant === 'message') body = translateExistingMessage();
       if (variant === 'manual') {
         const sample = translateExamples[translateState.target];
-        body = `<p class="translate-instruction"><code>/translate</code> 打开表单：选目标语言、输入文本，之后可选择发布译文。</p><button class="button" data-t-action="form">输入 /translate（演示）</button><div class="translate-command"><label for="translate-command">也可以直接输入命令</label><textarea id="translate-command" rows="2" readonly>/translate en 明天下午三点讨论新版首页。</textarea><p><strong>en</strong> 是目标语言代码；命令中不需要方括号。</p><div class="translate-actions"><button class="button secondary" data-t-action="select-command">选中命令</button><button class="button secondary" data-t-action="command">查看命令结果（演示）</button></div></div>${translateState.manualPhase !== 'ready' ? `<div class="translate-preview" role="status"><small>译文预览 · 预设演示</small><p>${sample.result}</p>${translateState.manualPhase === 'preview' ? '<button class="button" data-t-action="publish">发布这段译文（演示）</button>' : '<strong>已写入本页演示频道，未发送到 Slack。</strong>'}</div>` : ''}${translateState.manualPhase === 'posted' ? translateMessage('Translate', sample.result) : ''}`;
+        body = `<p class="translate-instruction">输入 <code>/translate</code>，选语言、填文字。想发到频道，再选择发布。</p><button class="button" data-t-action="form">输入 /translate（演示）</button><div class="translate-command"><label for="translate-command">也可直接输入</label><textarea id="translate-command" rows="2" readonly>/translate en 明天下午三点讨论新版首页。</textarea><p><strong>en</strong> 是英文的语言代码；不用加方括号。</p><div class="translate-actions"><button class="button secondary" data-t-action="select-command">选中命令</button><button class="button secondary" data-t-action="command">查看命令结果（演示）</button></div></div>${translateState.manualPhase !== 'ready' ? `<div class="translate-preview" role="status"><small>译文预览 · 预设演示</small><p>${sample.result}</p>${translateState.manualPhase === 'preview' ? '<button class="button" data-t-action="publish">发布这段译文（演示）</button>' : '<strong>只发到本页演示，没发到 Slack。</strong>'}</div>` : ''}${translateState.manualPhase === 'posted' ? translateMessage('Translate', sample.result) : ''}`;
       }
       if (variant === 'authorization') body = translateDisplay();
       if (variant === 'settings') {
-        body = `${scope}<p class="translate-instruction">应用列表 → Translate → <strong>Home / 主页</strong>，查看语言与自动翻译相关设置。</p><div class="translate-settings"><div><strong>个人设置</strong><p>本人语言偏好、本人消息相关设置。个人设置不代表整频道已开启。</p></div><div><strong>频道配置</strong><p>频道是否自动翻译、目标语言与作用范围。范围以实际配置为准。</p></div></div><p class="translate-note">这里只说明设置类别，不仿造真实设置页；具体选项以应用当前界面为准。</p><div class="translate-faq"><details><summary>为什么没有自动翻译？</summary><p>先确认频道：目前仅确认 #sw-team 和 #random。应用活跃于多个频道，不等于这些频道都已配置自动翻译。已确认频道仍无译文时，请负责人核对配置和应用可用状态；本教程不能判断实际故障。</p></details><details><summary>为什么译文单独出现？</summary><p>没有个人授权仍可翻译，译文会作为独立消息。要追加到自己的原消息，需要本人授权 Translate 代其操作，并确认展示设置。授权可选，先查看权限。</p></details><details><summary>如何手动翻译？</summary><p>输入 /translate 打开表单，或用 /translate en 加文本。已有消息从消息操作菜单找 Translate this message；具体入口以当前界面为准。</p></details><details><summary>重要信息要核对什么？</summary><p>日期、时间、金额和专有名词要逐项核对原文；有歧义时让对方确认，不直接把译文当成最终结论。</p></details></div>`;
+        body = `${scope}<p class="translate-instruction">应用列表 → Translate → <strong>Home / 主页</strong>，查看语言和自动翻译设置。</p><div class="translate-settings"><div><strong>个人设置</strong><p>选自己的语言、自己消息怎么翻。不代表整频道都开了。</p></div><div><strong>频道设置</strong><p>决定这个频道给谁翻、翻成什么语言。</p></div></div><p class="translate-note">这是设置说明；实际入口以当前应用为准。</p><div class="translate-faq"><details><summary>大家要先设置吗？</summary><p>这两频道已给全员开启。进频道发消息就行，不用每人设置或授权。</p></details><details><summary>为什么没自动翻？</summary><p>目前只确认这两频道按需译成英文。原文已是英文，可能不再另翻。英文翻中文、其他频道和私聊别默认已开；有应用也不等于开了自动翻译。异常请找频道负责人核对。</p></details><details><summary>为什么译文另发一条？</summary><p>没授权也能用，只是译文另发。想接在自己的原文下，再按需授权，先看权限。</p></details><details><summary>怎么手动翻？</summary><p>输入 /translate，选语言、填文字。已有消息找 Translate this message，入口以当前界面为准。</p></details><details><summary>重要信息要核对什么？</summary><p>日期、时间、金额、产品名等专有名词，记得对照原文。不确定就问对方。</p></details></div>`;
       }
       if (variant === 'demo') {
         const steps = ['0–15秒 · 发中文','15–30秒 · 看英文','30–45秒 · 单条翻译','45–60秒 · 展示与授权'];
         let scene = '';
-        if (translateState.demoStep === 0) scene = `<p class="translate-instruction">在已配置的 #${translateState.channel} 中，正常发送中文示例。</p><div class="translate-compose"><small>中文示例 · 演示</small><p>${translateExamples.en.source}</p></div>`;
-        if (translateState.demoStep === 1) scene = `<p class="translate-instruction">无需命令，自动出现英文。这里展示未个人授权时的独立译文。</p>${translatePair('separate')}`;
+        if (translateState.demoStep === 0) scene = `<p class="translate-instruction">#sw-team / #random 不用每人先设置，直接发中文。</p><div class="translate-compose"><small>中文示例 · 演示</small><p>${translateExamples.en.source}</p></div>`;
+        if (translateState.demoStep === 1) scene = `<p class="translate-instruction">这条自动译成英文。没授权也能用，译文另发一条。</p>${translatePair('separate')}`;
         if (translateState.demoStep === 2) scene = translateExistingMessage();
         if (translateState.demoStep === 3) scene = translateDisplay();
         body = `<p class="translate-note">约60秒讲解 · 手动推进 · 预设示例</p><ol class="translate-timeline">${steps.map((label,index) => `<li ${index === translateState.demoStep ? 'aria-current="step"' : ''}>${label}</li>`).join('')}</ol><div class="translate-demo-scene">${scene}</div><div class="translate-actions translate-demo-controls"><button class="button secondary" data-t-action="demo-back" ${translateState.demoStep === 0 ? 'disabled' : ''}>上一段</button><button class="button" data-t-action="demo-next">${['模拟发送中文 →','翻译已有消息 →','看两种展示 →','重播60秒演示'][translateState.demoStep]}</button></div>`;
@@ -1151,7 +1151,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       if (activeTopic === 'translate') {
         stage.innerHTML = renderTranslate();
         document.querySelector('#official-link').firstChild.textContent = 'Translate 官方说明（英文） ';
-        document.querySelector('#extra').innerHTML = '<h3>60秒讲解节奏</h3><p>0–15秒：正常发中文；15–30秒：看英文译文；30–45秒：从消息操作里选 Translate this message；45–60秒：对比独立消息与追加原文，说明授权可选。</p><h3>来源与范围</h3><p>频道范围来自本次确认：仅 #sw-team、#random；其他频道未确认。用法与授权区别依据官方说明，开发者文档含旧界面示意，实际入口以当前 Slack 为准。</p><a href="https://translate.technology/" target="_blank" rel="noopener noreferrer">开发者使用说明（英文） ↗</a>';
+        document.querySelector('#extra').innerHTML = '<h3>60秒讲解节奏</h3><p>0–15秒：正常发中文；15–30秒：看英文译文；30–45秒：从消息操作里选 Translate this message；45–60秒：对比独立消息与追加原文，说明授权可选。</p><h3>来源与范围</h3><p>已核对频道通知：#sw-team、#random 已为全员开启按需译成英文，不用逐人设置。英文翻中文是否全员开启，以及其他频道、私聊，尚未确认。授权可选；实际入口以当前 Slack 为准。</p><a href="https://translate.technology/" target="_blank" rel="noopener noreferrer">开发者使用说明（英文） ↗</a>';
       }
 
       if (activeTopic === 'install') {
