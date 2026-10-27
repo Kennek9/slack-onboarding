@@ -1304,7 +1304,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         stage.innerHTML = shell(isApp ? 'Google Calendar' : 'Google Calendar · 网页',body,{icon:'calendar',channel:'app-progress'});
         }
       }
-      spot({install:'.setup',entry:'.native-side-row.selected',privacy:'.visibility',mention:'.invite, .status-line',thread:'.native-reply-count, .native-thread, .threads-item',video:'.call-start',documents:'.native-file',sharing:'.share-box',follow:'.follow-state',habits:'.follow-state',typeless:'.setup, .spoken',apps:'.app-list',calendar:'.calendar-app-home, .calendar-box'}[activeTopic]);
+      spot({install:'.setup',entry:'.native-side-row.selected',privacy:'.visibility',mention:'.invite, .status-line',thread:'.native-reply-count, .native-thread, .threads-item',video:'.call-start',documents:'.native-file',sharing:'.share-box',follow:'.follow-state',habits:'.follow-state',typeless:'.setup, .spoken',apps:'.app-list',translate:'.translate-pair, .translate-compose, .translate-settings, .translate-command, .translate-message',calendar:'.calendar-app-home, .calendar-box'}[activeTopic]);
       updateDeck();
       document.querySelector('#status').textContent = `${document.querySelector('#department').textContent}：${document.querySelector('#detail-title').textContent} ${topic.variants.find(item => item[0] === variant)?.[1] || ''}`;
     }
