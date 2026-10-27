@@ -38,7 +38,13 @@ node scripts/check.mjs
 
 ## 内容与操作
 
-12 个主题按优先级分为沟通规则、日常协作、提效工具。包含频道与 DM、Thread、提及与邀请、可见范围、提醒与待办、文档与共享、Huddle、Calendar、搜索、Typeless、Slackbot。
+14 个主题按优先级分为沟通规则、日常协作、提效工具。保留下载 Slack、频道与 DM、话题回复、提及与邀请、可见范围、通知与跟进、与飞书的差异、文档与共享、Huddle、Calendar、Typeless、应用目录，并加入 Translate 中英翻译。
+
+Translate 教程直达：`#translate`。应用为 Mark Carey Consulting Inc. 开发的第三方 Translate，并非 Slack 原生翻译。教程包含自动翻译、消息操作、`/translate` 表单与命令、可选的个人授权、Home/主页设置与 FAQ，以及约 60 秒的四段可点击演示。
+
+自动翻译范围仅按本次用户确认写明 `#sw-team` 和 `#random`，其他频道未确认。个人未授权仍有独立译文；若想追加到自己的原消息，需本人授权代操作，并查看权限和展示设置。演示使用无敏感信息的预设中英文，不执行安装、授权、频道配置、真实发消息或翻译 API 调用。
+
+用法与授权依据：[Slack Marketplace](https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info)、[开发者说明（英文）](https://translate.technology/)。开发者文档含旧界面示意，教程不将其按钮位置当作当前界面保证。
 
 - 左右方向键或底部按钮翻页；输入框内不抢占方向键。
 - 空格在普通页面或下一页按钮上可翻页。
