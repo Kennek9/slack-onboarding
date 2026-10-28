@@ -29,7 +29,7 @@ node scripts/check.mjs
 ## 文件
 
 - `dist/index.html`：网站完整源码，HTML、CSS、JavaScript 均在此文件。页面内容在脚本里的 `slides` 数组，一页一项。
-- `dist/assets/`：页面用的真实截图（已裁掉工作区、频道和文档 ID）。
+- `dist/assets/`：页面用的真实截图（已裁掉工作区、频道和文档 ID）。页面优先使用同名 WebP，保留原图作为回退，并在翻页前预取相邻图片。
 - `.github/workflows/pages.yml`：检查 JavaScript 语法，并将 `dist` 自动发布到 GitHub Pages。
 - `dist/skills/lark-to-gdrive/SKILL.md`：用户提供的团队迁移 Skill 原文件，可从迁移页面下载。网页不执行迁移；使用说明提醒先试迁、单独处理超出大小限制的内嵌表格，并在删除前确认。
 - `.openai/hosting.json`：现有 Sites 项目标识和静态目录；不是凭据。

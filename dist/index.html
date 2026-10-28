@@ -54,6 +54,7 @@
 
     .shot { position: relative; display: block; margin: 0; padding: 0; border: 0; width: min(100%, calc((100vh - 290px) * var(--r))); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
     .shot-caption + .shot { width: min(100%, calc((100vh - 330px) * var(--r))); }
+    .shot picture { display: block; }
     .shot img { display: block; width: 100%; height: auto; }
     .shot-crop { display: block; width: 100%; overflow: hidden; }
     .shot-detail { position: absolute; right: 2%; bottom: 8%; width: 42%; aspect-ratio: 540 / 150; overflow: hidden; border: 2px solid var(--purple); border-radius: 8px; background: white; box-shadow: 0 4px 16px #321b3840; pointer-events: none; }
@@ -467,16 +468,52 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
+    let prefetchTimer;
 
     const escapeText = value => String(value).replace(/[&<>"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+    // 同名 WebP 用于加快加载；原图留给不支持 WebP 的浏览器。
+    const optimizedImages = new Set([
+      'assets/app-directory-redacted.webp',
+      'assets/calendar-event.webp',
+      'assets/calendar-home.webp',
+      'assets/calendar-hours.webp',
+      'assets/calendar-timezone.webp',
+      'assets/channel-notifications.webp',
+      'assets/channel-private-hd.webp',
+      'assets/channel-public-hd.webp',
+      'assets/drive-context-redacted.webp',
+      'assets/drive-notifications.webp',
+      'assets/google-share.webp',
+      'assets/huddle-channel-context.webp',
+      'assets/meet-command.webp',
+      'assets/mention-prompt-redacted.webp',
+      'assets/minutes-example.webp',
+      'assets/notify-context-redacted.webp',
+      'assets/recap-entry.webp',
+      'assets/sidebar-context-redacted.webp',
+      'assets/sidebar-hd.webp',
+      'assets/slack-login.webp',
+      'assets/tada-meet-panel-hd.webp',
+      'assets/unread-bold-and-activity.webp',
+      'assets/working-hours-warning.webp'
+    ]);
+    const optimizedSrc = src => {
+      const candidate = src.replace(/\.(?:png|jpe?g)$/i, '.webp');
+      return optimizedImages.has(candidate) ? candidate : src;
+    };
+    const imageHtml = (src, alt) => {
+      const optimized = optimizedSrc(src);
+      const image = `<img src="${src}" alt="${escapeText(alt)}" decoding="async">`;
+      return optimized === src ? image : `<picture><source srcset="${optimized}" type="image/webp">${image}</picture>`;
+    };
     const external = (label, url, className) => `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)} <svg aria-hidden="true"><use href="#i-external"/></svg></a>`;
 
     function shotHtml(shot) {
       if (shot.missing) return `<div class="shot-missing" style="--w:${shot.w}px"><strong>待补截图</strong><span>${escapeText(shot.missing)}</span></div>`;
       const neutralFocus = shot.neutralFocus ? `<span class="neutral-focus" style="left:${shot.neutralFocus.x}%;top:${shot.neutralFocus.y}%;width:${shot.neutralFocus.w}%;height:${shot.neutralFocus.h}%"></span>` : '';
-      const image = `<img src="${shot.src}" alt="${escapeText(shot.alt)}">`;
+      const image = imageHtml(shot.src, shot.alt);
       const visibleImage = shot.cropHeight ? `<span class="shot-crop" style="aspect-ratio:${shot.size[0]} / ${shot.cropHeight}">${image}</span>` : image;
-      const detail = shot.detail ? `<span class="shot-detail shot-detail--${shot.detail}"><img src="${shot.detailSrc || shot.src}" alt=""><span class="box"></span><span class="shot-detail-label">${escapeText(shot.detailLabel || '右上角放大')}</span></span>` : '';
+      const detail = shot.detail ? `<span class="shot-detail shot-detail--${shot.detail}">${imageHtml(shot.detailSrc || shot.src, '')}<span class="box"></span><span class="shot-detail-label">${escapeText(shot.detailLabel || '右上角放大')}</span></span>` : '';
       const box = shot.box ? `<span class="box" style="left:${shot.box.x}%;top:${shot.box.y}%;width:${shot.box.w}%;height:${shot.box.h}%"></span>` : '';
       const secondBox = shot.secondBox ? `<span class="box" style="left:${shot.secondBox.x}%;top:${shot.secondBox.y}%;width:${shot.secondBox.w}%;height:${shot.secondBox.h}%"></span>` : '';
       return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / (shot.cropHeight || shot.size[1])}">${visibleImage}${neutralFocus}${box}${secondBox}${detail}</button>`;
@@ -500,6 +537,28 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       return `<div class="body full"><div class="links">${slide.links.map(([label, note, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)}<small>${escapeText(note)} ↗</small></a>`).join('')}</div></div>`;
     }
 
+    function prefetchAdjacentImages() {
+      document.querySelectorAll('link[data-slide-prefetch]').forEach(link => link.remove());
+      const sources = new Set();
+      for (const slide of [slides[current - 1], slides[current + 1]]) {
+        if (!slide) continue;
+        const shots = [slide.shot, slide.contextShot, ...(slide.sides || []).map(side => side.shot)];
+        for (const shot of shots) {
+          if (!shot || !shot.src) continue;
+          sources.add(optimizedSrc(shot.src));
+          if (shot.detailSrc) sources.add(optimizedSrc(shot.detailSrc));
+        }
+      }
+      for (const src of sources) {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.as = 'image';
+        link.href = src;
+        link.dataset.slidePrefetch = '';
+        document.head.append(link);
+      }
+    }
+
     function render() {
       const slide = slides[current];
       const section = sections[slide.section];
@@ -515,6 +574,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       document.querySelector('#previous').disabled = current === 0;
       document.querySelector('#next').disabled = current === slides.length - 1;
       document.querySelectorAll('#agenda button').forEach(button => button.setAttribute('aria-current', String(button.dataset.slide === slide.id)));
+      clearTimeout(prefetchTimer);
+      prefetchTimer = setTimeout(prefetchAdjacentImages, 250);
     }
 
     function go(index) {
