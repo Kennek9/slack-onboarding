@@ -53,6 +53,8 @@
     #image-dialog .sheet-header { padding: 8px 16px; }
     #image-dialog .shot { width: min(100%, calc((96vh - 70px) * var(--r))); margin: 0 auto; box-shadow: none; }
     #image-dialog .shot::after { display: none; }
+    .shot .neutral-focus { position: absolute; background: #92d4e3; mix-blend-mode: color; pointer-events: none; }
+    .shot-caption { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
     .shot .box { position: absolute; border: 3px solid var(--focus); border-radius: 7px; pointer-events: none; }
     .shot-missing { display: grid; place-items: center; align-content: center; gap: 6px; width: min(calc(var(--w) * var(--scale)), calc((100vh - 310px) * 1.6)); max-width: 100%; aspect-ratio: 16 / 10; border: 2px dashed #cfc6d4; border-radius: 10px; color: var(--muted); text-align: center; padding: 24px; background: #fffdfb; }
     .shot-missing strong { font-size: 14px; color: var(--ink); }
@@ -73,6 +75,7 @@
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; }
     .card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+    .card .tutorial[download] { font-size: 16px; font-weight: 600; }
     .card h3 { margin: 0 0 12px; font-size: 22px; }
     .card ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; font-size: clamp(16px, 1.1vw, 19px); }
 
@@ -274,7 +277,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'unread', section: 'daily', label: '加粗和数字', type: 'shot',
         title: '加粗是未读，数字提醒你留意',
-        shot: { src: 'assets/unread-bold-and-activity.png', size: [925, 870], alt: 'Slack 侧栏中的加粗未读频道和活动数字角标', w: 925, box: { x: 21, y: 77.5, w: 35, h: 6 } },
+        shot: { src: 'assets/unread-bold-and-activity.png', size: [925, 870], alt: 'Slack 侧栏中的加粗未读频道和活动数字角标', w: 925, neutralFocus: { x: 0, y: 69, w: 15.2, h: 19 }, box: { x: 21, y: 77.5, w: 35, h: 6 } },
         points: ['加粗的频道表示有未读消息', '左侧活动数字表示未读通知', '提醒和角标颜色以个人设置为准'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
@@ -301,15 +304,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       {
         id: 'drive', section: 'documents', label: '文档消息进 Slack', type: 'shot',
-        title: '文档评论和权限申请，在 Slack 里直接处理',
+        title: 'Google Drive 把文档消息发到 Slack',
+        caption: 'Slack「Google 云端硬盘」应用的消息：上方是评论，下方是权限申请（姓名已遮盖）',
         shot: { src: 'assets/drive-notifications.jpg', size: [1349, 592], alt: 'Google Drive 在 Slack 中发来的评论和权限申请，姓名和邮箱已遮盖', w: 1349, box: { x: 9, y: 82, w: 15, h: 11 } },
-        points: ['连接 Google 云端硬盘应用并打开通知', '评论可在消息列回复；权限申请可处理', '实际提醒取决于连接和通知设置'],
+        points: ['在 Slack 的「代理与工具」找到 Google 云端硬盘，连接账号', '上方：收到文档评论，可在消息列中回复', '下方：收到权限申请，有授权权限的人可点击处理'],
         tutorial: ['Google Drive 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/205875058']
       },
       {
         id: 'huddle', section: 'daily', label: 'Huddle 语音', type: 'shot',
         title: '临时聊几句：点频道右上角的耳机',
-        shot: { src: 'assets/huddle-channel-context.jpg', size: [3420, 1350], alt: 'Slack 频道完整界面及右上角抱团入口，名称与消息已模糊', w: 1200, box: { x: 90.1, y: 6.3, w: 2.3, h: 6.5 } },
+        shot: { src: 'assets/huddle-channel-context.jpg', size: [3420, 1350], alt: 'Slack 频道完整界面及右上角抱团入口，名称与消息已模糊', w: 1200, neutralFocus: { x: 0, y: 62, w: 2.45, h: 14 }, box: { x: 90.1, y: 6.3, w: 2.3, h: 6.5 } },
         points: ['点耳机，频道里的人可加入', '可开视频或共享屏幕', 'Tada Meet 不记录 Huddle；需要纪要用 Meet'],
         tutorial: ['Huddle 抱团通话 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团']
       },
@@ -425,7 +429,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'migration', section: 'documents', label: '搬飞书旧文档', type: 'cards', migration: true,
         title: '最后：需要时再搬旧文档',
-        cards: [{ heading: '飞书 → Google Drive', items: ['先选一篇试迁', '核对格式、图片和共享权限', '确认后再处理其他文档'], link: ['Google 导入文件 · 中文教程', 'https://support.google.com/drive/answer/2424368?hl=zh-Hans'] }]
+        cards: [{ heading: '用 lark-to-gdrive Skill 迁移', items: ['下载 Skill，交给支持本地工具的 AI 助手', '确认飞书和 Google 账号，先试迁一篇', '核对内容、格式、图片和权限，再确认批量迁移'], link: ['下载 lark-to-gdrive Skill', './skills/lark-to-gdrive/SKILL.md'], download: 'lark-to-gdrive-SKILL.md' }]
       }
     );
     const order = [
@@ -448,21 +452,22 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
     function shotHtml(shot) {
       if (shot.missing) return `<div class="shot-missing" style="--w:${shot.w}px"><strong>待补截图</strong><span>${escapeText(shot.missing)}</span></div>`;
+      const neutralFocus = shot.neutralFocus ? `<span class="neutral-focus" style="left:${shot.neutralFocus.x}%;top:${shot.neutralFocus.y}%;width:${shot.neutralFocus.w}%;height:${shot.neutralFocus.h}%"></span>` : '';
       const box = shot.box ? `<span class="box" style="left:${shot.box.x}%;top:${shot.box.y}%;width:${shot.box.w}%;height:${shot.box.h}%"></span>` : '';
-      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / shot.size[1]}"><img src="${shot.src}" alt="${escapeText(shot.alt)}">${box}</button>`;
+      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / shot.size[1]}"><img src="${shot.src}" alt="${escapeText(shot.alt)}">${neutralFocus}${box}</button>`;
     }
 
     function bodyHtml(slide) {
       if (slide.type === 'shot') {
         const points = `<ol class="points">${slide.points.map((point, index) => `<li>${slide.emphasis?.includes(index) ? `<strong>${escapeText(point)}</strong>` : escapeText(point)}</li>`).join('')}</ol>`;
         const chips = slide.chips ? `<div class="chips">${slide.chips.map(([label, url, primary]) => `<a class="chip ${primary ? 'primary' : ''}" href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)}</a>`).join('')}</div>` : '';
-        return `<div class="body"><div class="figure-col">${shotHtml(slide.shot)}</div><div class="text-col">${points}${chips}</div></div>`;
+        return `<div class="body"><div class="figure-col">${slide.caption ? `<p class="shot-caption">${escapeText(slide.caption)}</p>` : ''}${shotHtml(slide.shot)}</div><div class="text-col">${points}${chips}</div></div>`;
       }
       if (slide.type === 'compare') {
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'cards') {
-        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${external(card.link[0], card.link[1], 'tutorial')}</div></section>`).join('')}</div></div>`;
+        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : external(card.link[0], card.link[1], 'tutorial')}</div></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'table') {
         return `<div class="body full"><div class="table">${slide.rows.map(([lark, slack]) => `<div class="row"><span>飞书：${escapeText(lark)}</span><strong>${escapeText(slack)}</strong></div>`).join('')}</div></div>`;
@@ -476,7 +481,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const sectionSlides = slides.filter(item => item.section === slide.section);
       const tag = section.tag ? `<span class="tag">${section.tag}</span>` : '';
       const tutorial = slide.tutorial ? external(slide.tutorial[0], slide.tutorial[1], 'tutorial') : '';
-      const migration = slide.migration ? '<button class="button secondary" data-open-migration>搬飞书旧文档</button>' : '';
+      const migration = slide.migration ? `<button class="button secondary" data-open-migration>${slide.id === 'migration' ? '查看 Skill 使用说明' : '搬飞书旧文档'}</button>` : '';
       slideEl.innerHTML = `<div class="kicker"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${tutorial}${migration}</div>`;
       document.querySelector('#page-number').textContent = String(current + 1).padStart(2, '0');
       document.querySelector('#page-total').textContent = `/ ${slides.length}`;
