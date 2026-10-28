@@ -959,7 +959,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
       calendar: {
         title: '约会议，用 Google Calendar。', subtitle: '三地同事约同一场会。', department: '产品 · 跨国研发',
-        variants: [['connect','接入日历'],['app','在 Slack 约会议'],['web','在 Calendar 网页约']],
+        variants: [['connect','接入日历'],['app','在 Slack 约会议'],['web','在 Calendar 网页约'],['hours','标工作时间']],
         sourceName: '产品 · 跨时区同步',
         official: 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历'
       }
@@ -1297,6 +1297,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
           const setup = `<div class="calendar-app-home"><div class="calendar-app-icon">${icon('calendar')}</div><h3>Google Calendar</h3><p>连接公司日历，在 Slack 看会议和提醒。</p><button class="button" data-action="calendar-connect">Connect an account · 连接账号</button><div class="calendar-connect-help" ${calendarConnectOpen ? '' : 'hidden'}><strong>在真实 Slack 中继续</strong><p>选公司 Google 账号授权，回 App 主页 Connect Calendar。</p><a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">官方中文连接教程 ↗</a></div><div class="mini-link" style="display:flex;gap:12px;flex-wrap:wrap"><span>没装的话先装：</span><a href="https://slack.com/marketplace/ADZ494LHY-google-calendar" target="_blank" rel="noopener noreferrer">Calendar ↗</a><a href="https://slack.com/marketplace/A6NL8MJ6Q-google-drive" target="_blank" rel="noopener noreferrer">Drive ↗</a><a href="https://slack.com/marketplace/search?q=Google%20Meet" target="_blank" rel="noopener noreferrer">Meet ↗</a><a href="https://slack.com/marketplace/A2RPP3NFR-jira-cloud" target="_blank" rel="noopener noreferrer">Jira ↗</a></div></div>`;
           stage.innerHTML = shell('Google Calendar',setup,{icon:'calendar',channel:'app-progress',composer:false});
           document.querySelector('#extra').innerHTML = `<details class="extra"><summary>把日程提醒发到频道？</summary><p>Google Calendar → 将 App 添加到频道 → Settings → Channel Notifications，选择频道与提醒。<a href="${calendarGuide}" target="_blank" rel="noopener noreferrer">中文设置说明 ↗</a></p></details>`;
+        } else if (variant === 'hours') {
+          stage.innerHTML = shell('Google Calendar · 工作时间',`<div class="calendar-box"><h3>标上工作时间，别人不用猜时差</h3><div class="event-row">${icon('clock')}<div>我：北京 09:00–18:00<small>设置 → 常规 → 工作时间 → 启用</small></div></div><div class="event-row">${icon('people')}<div>英国、洛杉矶同事各标各的<small>约会议时直接看到你的时段</small></div></div><div class="event-row">${icon('check')}<div>约到你下班外，对方会收到提醒<small>免得半夜开会</small></div></div></div><div class="status-line">工作账号才有这个功能；没看到就找管理员开。</div>`,{icon:'calendar',channel:'app-progress'});
+          document.querySelector('#detail-title').textContent = '标上工作时间，时差别人能看见。';
+          document.querySelector('#official-link').href = 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans';
         } else {
         const zones = {beijing:['22:00–23:00','北京 · UTC+8'],london:['15:00–16:00','英国 · 当地夏令时'],la:['07:00–08:00','洛杉矶 · 当地夏令时']};
         const [time, zoneLabel] = zones[timezone];
