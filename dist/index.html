@@ -63,12 +63,12 @@
     .shot-detail--calendar { width: 33%; aspect-ratio: 280 / 80; }
     .shot-detail--calendar img { width: 433.93%; left: -250%; top: 0; }
     .shot-detail--calendar .box { left: 35%; top: 15%; width: 15%; height: 59%; }
-    .shot-detail--alerts { left: 44%; right: auto; bottom: 2%; width: 38%; aspect-ratio: 640 / 590; }
+    .shot-detail--alerts { left: 44%; right: auto; bottom: 2%; width: 38%; aspect-ratio: 1075 / 1020; }
     .shot-detail--alerts img, .shot-detail--recap img, .shot-detail--thread img { width: 100%; left: 0; top: 0; }
-    .shot-detail--alerts .box { left: 17%; top: 25%; width: 57%; height: 14%; }
-    .shot-detail--recap, .shot-detail--thread { left: 35%; right: auto; bottom: 6%; width: 48%; aspect-ratio: 565 / 230; }
-    .shot-detail--recap .box { left: 3%; top: 56%; width: 42%; height: 23%; }
-    .shot-detail--thread .box { left: 3%; top: 3%; width: 42%; height: 24%; }
+    .shot-detail--alerts .box { left: 18%; top: 28%; width: 47%; height: 14%; }
+    .shot-detail--recap, .shot-detail--thread { left: 35%; right: auto; bottom: 6%; width: 48%; aspect-ratio: 760 / 290; }
+    .shot-detail--recap .box { left: 2%; top: 48%; width: 32%; height: 21%; }
+    .shot-detail--thread .box { left: 2%; top: 2%; width: 25%; height: 19%; }
     .shot-detail--drive { width: 46%; aspect-ratio: 320 / 140; bottom: 10%; }
     .shot-detail--drive img { width: 421.5625%; left: -25%; top: -321.43%; }
     .shot-detail--drive .box { left: 14.7%; top: 31.4%; width: 60%; height: 40.7%; }
@@ -283,15 +283,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'visibility', section: 'daily', label: '公开和私密', type: 'compare',
         title: '# 是公开频道，锁是私密频道',
         sides: [
-          { heading: '# 公开频道', shot: { src: 'assets/channel-public-hd.png', size: [630, 65], alt: '侧栏里带 # 的公开频道', w: 360 }, text: '公司里谁都能搜到，自己就能加入。' },
-          { heading: '🔒 私密频道', shot: { src: 'assets/channel-private-hd.png', size: [630, 73], alt: '侧栏里带锁的私密频道', w: 360 }, text: '只有成员看得到，要成员拉你进来。' }
+          { heading: '# 公开频道', shot: { src: 'assets/channel-public-hd-20261029.png', size: [660, 85], alt: '侧栏里带 # 的公开频道', w: 360 }, text: '公司里谁都能搜到，自己就能加入。' },
+          { heading: '🔒 私密频道', shot: { src: 'assets/channel-private-hd-20261029.png', size: [660, 102], alt: '侧栏里带锁的私密频道', w: 360 }, text: '只有成员看得到，要成员拉你进来。' }
         ],
         tutorial: ['频道是什么 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360017938993']
       },
       {
         id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot', emphasis: [0],
         title: '回复进话题，话题都在「消息列」',
-        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的消息列入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 15.2, w: 5.5, h: 3.2 }, detail: 'thread', detailSrc: 'assets/recap-entry.png', detailLabel: '消息列放大' },
+        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的消息列入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 15.2, w: 5.5, h: 3.2 }, detail: 'thread', detailSrc: 'assets/sidebar-entry-hd-20261029.png', detailLabel: '消息列放大' },
         points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '重要结论勾选「同时发送到频道」'],
         tutorial: ['话题回复 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/115000769927']
       },
@@ -312,14 +312,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'alerts', section: 'daily', label: '重要频道开提醒', type: 'shot', emphasis: [0],
         title: '重要频道，打开全部提醒',
-        shot: { src: 'assets/notify-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整频道界面及通知菜单，通知选项局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 93, y: 5.2, w: 2.3, h: 5.2 }, detail: 'alerts', detailSrc: 'assets/channel-notifications.png', detailLabel: '通知选项放大' },
+        shot: { src: 'assets/notify-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整频道界面及通知菜单，通知选项局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 93, y: 5.2, w: 2.3, h: 5.2 }, detail: 'alerts', detailSrc: 'assets/notification-menu-hd-20261029.png', detailLabel: '通知选项放大' },
         points: ['点频道右上角铃铛 → 所有新帖子', '常用频道点星标，固定在侧栏上方', '不重要的频道可以静音'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
       {
         id: 'recap', section: 'daily', label: '要点回顾', type: 'shot',
         title: '「要点回顾」帮你总结没看的消息',
-        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的要点回顾入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 22.2, w: 5.7, h: 3.3 }, detail: 'recap', detailSrc: 'assets/recap-entry.png', detailLabel: '要点回顾放大' },
+        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的要点回顾入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 22.2, w: 5.7, h: 3.3 }, detail: 'recap', detailSrc: 'assets/sidebar-entry-hd-20261029.png', detailLabel: '要点回顾放大' },
         points: ['侧栏点「要点回顾」', '选几个常看的频道', '先看总结，需要时点回原消息'],
         tutorial: ['官方功能目录 · 中文教程', 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack']
       },
@@ -474,6 +474,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     // 同名 WebP 用于加快加载；原图留给不支持 WebP 的浏览器。
     const optimizedImages = new Set([
       'assets/app-directory-redacted.webp',
+      'assets/channel-public-hd-20261029.webp',
+      'assets/channel-private-hd-20261029.webp',
+      'assets/sidebar-entry-hd-20261029.webp',
+      'assets/notification-menu-hd-20261029.webp',
       'assets/calendar-event.webp',
       'assets/calendar-home.webp',
       'assets/calendar-hours.webp',
