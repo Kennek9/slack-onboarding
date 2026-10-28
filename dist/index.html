@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="从飞书到 Slack：办公室宣讲版。会前准备、在哪说话、别漏消息、一起干活、现场演示，配真实截图和官方中文教程。">
+  <meta name="description" content="从飞书到 Slack：办公室宣讲版。日常沟通、日历与会议、文档协作，配真实截图和中文教程。">
   <meta name="theme-color" content="#faf9f6">
   <title>从飞书到 Slack · Glorify</title>
   <style>
@@ -14,8 +14,6 @@
       --line: #e6e1e8;
       --purple: #49264f;
       --soft: #f0eaf3;
-      --green: #eef3e2;
-      --green-ink: #465c33;
       --focus: #e0322b;
       --scale: 1;
     }
@@ -72,11 +70,6 @@
     .compare section { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
     .compare h3 { margin: 0 0 14px; font-size: 22px; }
     .compare p { margin: 16px 0 0; font-size: clamp(16px, 1.15vw, 20px); }
-
-    .pause { background: var(--green); border-radius: 16px; padding: clamp(24px, 3vw, 44px); max-width: 980px; }
-    .pause-label { font-size: 14px; color: var(--green-ink); font-weight: 600; }
-    .pause ol { margin: 16px 0 0; padding-left: 1.4em; display: grid; gap: 12px; font-size: clamp(18px, 1.5vw, 26px); }
-    .pause p { margin: 22px 0 0; color: var(--green-ink); font-size: 15px; }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; }
     .card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
@@ -226,7 +219,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     // 截图里的红框用百分比坐标：x、y 是左上角，w、h 是宽高，都相对整张图。
     const slides = [
       {
-        id: 'install', section: 'prep', label: '装 Slack 并登录', type: 'shot',
+        id: 'install', section: 'prep', label: '装 Slack 并登录', type: 'shot', emphasis: [2],
         title: '装好 Slack，用公司 Google 账号登录',
         shot: { src: 'assets/slack-login.jpg', size: [870, 525], alt: 'Slack 中文登录页面', w: 870, box: { x: 26, y: 74, w: 23, h: 9 } },
         points: ['电脑、手机各装一个', '登录时选「使用 Google 登录」', '用 @glorify-app.com 公司邮箱'],
@@ -237,22 +230,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'apps', section: 'prep', label: '装常用应用', type: 'shot',
         title: '把常用工具装进 Slack',
         shot: { src: 'assets/app-directory-redacted.png', size: [1024, 891], alt: 'Slack 代理与工具里的应用列表', w: 600, box: { x: 2.6, y: 56.8, w: 5.4, h: 9.6 } },
-        points: ['左侧「代理与工具」→ 应用', '搜索 Google Calendar、Google 云端硬盘、Jira', '点「添加」；装不了找管理员'],
+        points: ['左侧「代理与工具」→ 应用', '搜索 Google Calendar、Google 云端硬盘、Jira', '点「添加」；装不了找 Ken Ge'],
         chips: installLinks.map(([label, url]) => [`${label} ↗`, url]),
         tutorial: ['添加应用 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区']
       },
       {
-        id: 'hours', section: 'meetings', label: '标工作时间', type: 'shot',
+        id: 'hours', section: 'meetings', label: '标工作时间', type: 'shot', emphasis: [0],
         title: '在 Google Calendar 标上工作时间',
         shot: { src: 'assets/calendar-hours.jpg', size: [665, 500], alt: 'Google 日历工作时间和地点设置', w: 665, box: { x: 6, y: 9, w: 21, h: 9 } },
         points: ['设置 → 常规 → 工作时间 → 启用', '按自己所在时区填', '别人约会议时，能看到你几点上下班'],
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
-      },
-      {
-        id: 'pause-prep', section: 'prep', label: '停一下：都进来了吗', type: 'pause',
-        title: '停一下：确认大家都准备好了',
-        tasks: ['打开 Slack，左上角是 Glorify', '侧栏能看到频道列表', '确认 Google Calendar 可以打开'],
-        note: '没弄好的举手，旁边同事帮一下。'
       },
       {
         id: 'where', section: 'daily', label: '频道和私信', type: 'shot',
@@ -271,7 +258,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['频道是什么 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360017938993']
       },
       {
-        id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot',
+        id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot', emphasis: [0],
         title: '回复进话题，话题都在「消息列」',
         shot: { src: 'assets/recap-entry.png', size: [565, 230], alt: 'Slack 侧栏里的消息列入口', w: 565, box: { x: 3, y: 3, w: 42, h: 24 } },
         points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '重要结论勾选「同时发送到频道」'],
@@ -285,20 +272,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['@ 与通知 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360002063088']
       },
       {
-        id: 'pause-talk', section: 'daily', label: '停一下：发一条', type: 'pause',
-        title: '停一下：发一条，回一条',
-        tasks: ['在会上指定的测试频道发一句话', '给旁边同事的消息回一条话题', '打开侧栏「消息列」，找到这条话题'],
-        note: '大家都回过一条再往下讲。'
-      },
-      {
         id: 'unread', section: 'daily', label: '加粗和数字', type: 'shot',
         title: '加粗是未读，数字提醒你留意',
-        shot: { src: 'assets/unread-activity.png', size: [925, 600], alt: 'Slack 活动入口带有数字角标，当前主题显示为蓝色', w: 925, box: { x: 8.5, y: 60, w: 5, h: 8 } },
-        points: ['加粗表示有未读消息', '活动数字表示未读通知，颜色随主题变化', '桌面和手机提醒以个人设置为准'],
+        shot: { src: 'assets/unread-bold-and-activity.png', size: [925, 870], alt: 'Slack 侧栏中的加粗未读频道和活动数字角标', w: 925, box: { x: 21, y: 77.5, w: 35, h: 6 } },
+        points: ['加粗的频道表示有未读消息', '左侧活动数字表示未读通知', '提醒和角标颜色以个人设置为准'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
       {
-        id: 'alerts', section: 'daily', label: '重要频道开提醒', type: 'shot',
+        id: 'alerts', section: 'daily', label: '重要频道开提醒', type: 'shot', emphasis: [0],
         title: '重要频道，打开全部提醒',
         shot: { src: 'assets/channel-notifications.png', size: [640, 590], alt: 'Slack 频道通知菜单', w: 640, box: { x: 17, y: 25, w: 57, h: 14 } },
         points: ['点频道右上角铃铛 → 所有新帖子', '常用频道点星标，固定在侧栏上方', '不重要的频道可以静音'],
@@ -312,13 +293,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['官方功能目录 · 中文教程', 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack']
       },
       {
-        id: 'pause-notice', section: 'daily', label: '停一下：设提醒', type: 'pause',
-        title: '停一下：把提醒设好',
-        tasks: ['给自己部门频道打开「所有新帖子」', '给 2–3 个常用频道点星标'],
-        note: '设完看一眼侧栏，星标频道在最上面。'
-      },
-      {
-        id: 'share', section: 'documents', label: '文档共享', type: 'shot', migration: true,
+        id: 'share', section: 'documents', label: '文档共享', type: 'shot', migration: true, emphasis: [1],
         title: '共享前先选对范围和权限',
         shot: { src: 'assets/google-share.jpg', size: [516, 424], alt: 'Google 文档的共享面板，姓名和邮箱已遮盖', w: 516, box: { x: 4, y: 57, w: 75, h: 21 } },
         points: ['右上角「共享」→ 选协作者或访问范围', '查看者不能评论；需要反馈选评论者', '先确认权限，再把链接发到 Slack'],
@@ -334,35 +309,29 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'huddle', section: 'daily', label: 'Huddle 语音', type: 'shot',
         title: '临时聊几句：点频道右上角的耳机',
-        shot: { src: 'assets/huddle-header.png', size: [470, 175], alt: 'Slack 频道右上角的抱团耳机入口', w: 470, box: { x: 30, y: 12, w: 13, h: 35 } },
+        shot: { src: 'assets/huddle-channel-context.jpg', size: [3420, 1350], alt: 'Slack 频道完整界面及右上角抱团入口，名称与消息已模糊', w: 1200, box: { x: 90.1, y: 6.3, w: 2.3, h: 6.5 } },
         points: ['点耳机，频道里的人可加入', '可开视频或共享屏幕', 'Tada Meet 不记录 Huddle；需要纪要用 Meet'],
         tutorial: ['Huddle 抱团通话 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团']
       },
       {
-        id: 'meeting', section: 'meetings', label: '约会议', type: 'shot',
+        id: 'meeting', section: 'meetings', label: '约会议', type: 'shot', emphasis: [1],
         title: '约会议：Google Calendar 建活动，加 Meet',
         shot: { src: 'assets/calendar-event.jpg', size: [525, 521], alt: 'Google 日历新建活动面板，包含添加 Google Meet 视频会议', w: 525, box: { x: 10, y: 48, w: 47, h: 12 } },
         points: ['新建活动，点「添加 Google Meet 视频会议」', '确认有会议链接，再保存并邀请', '提醒取决于日历与 Slack 应用设置'],
         tutorial: ['Google Calendar 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历']
       },
       {
-        id: 'notes', section: 'meetings', label: '会议纪要', type: 'shot',
+        id: 'notes', section: 'meetings', label: '会议纪要', type: 'shot', emphasis: [1],
         title: 'Tada Meet：一位记录者开启字幕采集',
         shot: { src: 'assets/tada-meet-panel-hd.png', size: [550, 345], alt: 'Tada Meet 真实面板，截图时处于准备字幕状态', w: 550, box: { x: 62, y: 9, w: 20, h: 15 } },
-        points: ['试用中：记录者先安装并连接公司账号', '图中正在准备；正式使用确认记录中、字数增长', '这是采集字幕，不是 Meet 视频录制']
-      },
-      {
-        id: 'pause-work', section: 'documents', label: '停一下：试一次', type: 'pause',
-        title: '停一下：共享文档，确认能打开',
-        tasks: ['新建文档，选择合适的共享对象和权限', '发链接到测试频道', '旁边同事确认能打开；需要评论时选择评论者'],
-        note: '确认对方能访问，再迁移旧文档。'
+        points: ['试用中：找 Ken Ge 开通并连接公司账号', '图中正在准备；正式使用确认记录中、字数增长', '这是采集字幕，不是 Meet 视频录制']
       },
       {
         id: 'demo', section: 'daily', label: '翻译和语音输入', type: 'cards',
         title: '现场演示：翻译和语音输入',
         cards: [
-          { heading: 'Translate 翻译', items: ['#sw-team、#random 发中文，自动出英文', '想手动翻：输入 /translate', '日期、数字、人名对照原文看'], link: ['Translate 说明（英文）', 'https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info'] },
-          { heading: 'Typeless 语音输入', items: ['说中文，直接出英文文字', '在 Slack、文档里都能用', '会前先装好、开麦克风权限'], link: ['Typeless 下载 · 官方页', 'https://www.typeless.com/zh-cn/downloads'] }
+          { heading: 'Translate 翻译', items: ['#sw-team、#random 中文自动译英文，不用每人安装或授权', '未安装：代理与工具 → 应用 → 搜索 Translate → 添加；有问题找 Ken Ge', '/translate 手动翻；日期、数字核对原文；译文追加到原文需授权'], link: ['Translate 应用与安装说明', 'https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info'] },
+          { heading: 'Typeless 语音输入', items: ['官网下载、安装并登录', 'Mac 按提示开启麦克风和辅助功能', '设置目标语言，用翻译快捷键说话'], link: ['Typeless 下载 · 官方页', 'https://www.typeless.com/zh-cn/downloads'] }
         ]
       },
       {
@@ -403,6 +372,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
     slides.push(
       {
+        id: 'calendar-start', section: 'meetings', label: '打开 Google 日历', type: 'shot',
+        title: '约会议前，先打开 Google 日历',
+        shot: { src: 'assets/calendar-home.jpg', size: [1215, 720], alt: 'Google 日历首页和右上角设置入口，账号名称已遮盖', w: 1000, box: { x: 65.7, y: 1.7, w: 3.5, h: 6.5 } },
+        points: ['打开 Google 日历，用公司账号登录', '在 Slack 的 Google Calendar 应用里连接账号', '日历右上角齿轮 → 设置，先设置时区和工作时间'],
+        chips: [['打开 Google 日历', 'https://calendar.google.com/', true]],
+        tutorial: ['Google Calendar 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/206329808']
+      },
+      {
         id: 'timezone', section: 'meetings', label: '设置时区', type: 'shot',
         title: '先确认日历时区，再约跨时区会议',
         shot: { src: 'assets/calendar-timezone.jpg', size: [515, 230], alt: 'Google 日历的主要时区设置，图中时区仅为示例', w: 515, box: { x: 4, y: 40, w: 72, h: 26 } },
@@ -435,7 +412,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'recording', section: 'meetings', label: '会议录制', type: 'cards',
         title: '视频录制与中文字幕纪要是两回事',
         cards: [
-          { heading: 'Meet 视频录制', items: ['电脑端：会议工具 → 录制会议 → 开始', '功能取决于套餐、管理员和主持人权限', '录像保存在组织者的 Google 云端硬盘'], link: ['录制视频会议 · 中文教程', 'https://support.google.com/meet/answer/9308681?hl=zh-Hans'] },
+          { heading: 'Meet 视频录制', items: ['电脑端：会议工具 → 录制会议 → 开始', '功能取决于套餐与会议权限设置', '录像保存在组织者的 Google 云端硬盘'], link: ['录制视频会议 · 中文教程', 'https://support.google.com/meet/answer/9308681?hl=zh-Hans'] },
           { heading: 'Tada 中文字幕纪要', items: ['当前为小范围试用', '记录者开启字幕采集并确认字数增长', '会后生成文档，具体见下一页'], link: ['Meet 字幕 · 中文教程', 'https://support.google.com/meet/answer/15077804?hl=zh-Hans'] }
         ]
       },
@@ -446,28 +423,22 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         points: ['整场结束后生成 Google 文档；优先发 Slack', '未匹配 Slack 时查看公司邮箱', '中文摘要和字幕原文；英文版尚未确认']
       },
       {
-        id: 'pause-meetings', section: 'meetings', label: '停一下：试约会', type: 'pause',
-        title: '停一下：检查时区，试着建会',
-        tasks: ['确认自己的时区和工作时间', '与旁边同事找一个合适时间', '新建活动并确认已添加 Meet 链接'],
-        note: '试用 Tada 的记录者再确认字幕采集状态。'
-      },
-      {
         id: 'migration', section: 'documents', label: '搬飞书旧文档', type: 'cards', migration: true,
         title: '最后：需要时再搬旧文档',
         cards: [{ heading: '飞书 → Google Drive', items: ['先选一篇试迁', '核对格式、图片和共享权限', '确认后再处理其他文档'], link: ['Google 导入文件 · 中文教程', 'https://support.google.com/drive/answer/2424368?hl=zh-Hans'] }]
       }
     );
     const order = [
-      'install', 'apps', 'pause-prep',
-      'where', 'visibility', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo', 'pause-talk', 'pause-notice',
-      'timezone', 'hours', 'availability', 'meet-command', 'meeting', 'meeting-reminder', 'recording', 'notes', 'minutes-result', 'pause-meetings',
-      'share', 'drive', 'pause-work', 'migration',
+      'install', 'apps',
+      'where', 'visibility', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo',
+      'calendar-start', 'timezone', 'hours', 'availability', 'meet-command', 'meeting', 'meeting-reminder', 'recording', 'notes', 'minutes-result',
+      'share', 'drive', 'migration',
       'lark-diff', 'resources',
     ];
     slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
-    const legacyIds = { entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo' };
+    const legacyIds = { entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
@@ -483,15 +454,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
     function bodyHtml(slide) {
       if (slide.type === 'shot') {
-        const points = `<ol class="points">${slide.points.map(point => `<li>${escapeText(point)}</li>`).join('')}</ol>`;
+        const points = `<ol class="points">${slide.points.map((point, index) => `<li>${slide.emphasis?.includes(index) ? `<strong>${escapeText(point)}</strong>` : escapeText(point)}</li>`).join('')}</ol>`;
         const chips = slide.chips ? `<div class="chips">${slide.chips.map(([label, url, primary]) => `<a class="chip ${primary ? 'primary' : ''}" href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)}</a>`).join('')}</div>` : '';
         return `<div class="body"><div class="figure-col">${shotHtml(slide.shot)}</div><div class="text-col">${points}${chips}</div></div>`;
       }
       if (slide.type === 'compare') {
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div></div>`;
-      }
-      if (slide.type === 'pause') {
-        return `<div class="body full"><div class="pause"><div class="pause-label">现在请大家动手</div><ol>${slide.tasks.map(task => `<li>${escapeText(task)}</li>`).join('')}</ol><p>${escapeText(slide.note)}</p></div></div>`;
       }
       if (slide.type === 'cards') {
         return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${external(card.link[0], card.link[1], 'tutorial')}</div></section>`).join('')}</div></div>`;
