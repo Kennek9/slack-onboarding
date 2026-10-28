@@ -30,7 +30,7 @@
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     .wrap { width: min(1760px, calc(100% - 64px)); margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
-    .top { min-height: 60px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .top { min-height: 50px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { display: flex; align-items: baseline; gap: 14px; }
     .wordmark { font-family: Georgia, serif; font-size: 24px; font-weight: 700; letter-spacing: -1.4px; }
     .brand-title { font-size: 14px; color: var(--muted); }
@@ -38,25 +38,30 @@
     .top-link { border: 0; background: none; color: var(--muted); font-size: 13px; min-height: 40px; padding: 0 10px; border-radius: 6px; }
     .top-link:hover { background: var(--soft); color: var(--purple); }
 
-    .slide { flex: 1; padding: 22px 0 18px; display: flex; flex-direction: column; min-height: 0; }
+    .slide { flex: 1; padding: 16px 0 10px; display: flex; flex-direction: column; min-height: 0; }
     .kicker { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
     .kicker strong { color: var(--purple); font-weight: 600; }
     .kicker .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--soft); color: var(--purple); }
-    .slide h2 { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.3; letter-spacing: -.03em; font-weight: 650; margin: 6px 0 20px; }
-    .body { flex: 1; display: flex; gap: 44px; align-items: flex-start; }
-    .body > .figure-col { flex: 0 1 auto; min-width: 0; max-width: calc(100% - 300px); }
-    .body > .text-col { flex: 0 1 400px; min-width: 240px; padding-top: 4px; }
+    .slide h2 { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.3; letter-spacing: -.03em; font-weight: 650; margin: 6px 0 12px; }
+    .body { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) clamp(260px, 20vw, 340px); gap: 22px; align-items: flex-start; }
+    .body > .figure-col { min-width: 0; }
+    .body > .text-col { min-width: 0; padding-top: 4px; }
     .body.full { display: block; }
 
-    .shot { position: relative; display: block; margin: 0; width: min(calc(var(--w) * var(--scale)), calc((100vh - 310px) * var(--r))); max-width: 100%; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
+    .shot { position: relative; display: block; margin: 0; padding: 0; border: 0; width: min(100%, calc((100vh - 275px) * var(--r))); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
     .shot img { display: block; width: 100%; height: auto; }
+    .shot::after { content: "点击放大"; position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; border-radius: 5px; background: #29232ddd; color: white; font-size: 12px; }
+    #image-dialog { width: min(96vw, 1800px); max-width: none; max-height: 96vh; background: #fff; }
+    #image-dialog .sheet-header { padding: 8px 16px; }
+    #image-dialog .shot { width: min(100%, calc((96vh - 70px) * var(--r))); margin: 0 auto; box-shadow: none; }
+    #image-dialog .shot::after { display: none; }
     .shot .box { position: absolute; border: 3px solid var(--focus); border-radius: 7px; pointer-events: none; }
     .shot-missing { display: grid; place-items: center; align-content: center; gap: 6px; width: min(calc(var(--w) * var(--scale)), calc((100vh - 310px) * 1.6)); max-width: 100%; aspect-ratio: 16 / 10; border: 2px dashed #cfc6d4; border-radius: 10px; color: var(--muted); text-align: center; padding: 24px; background: #fffdfb; }
     .shot-missing strong { font-size: 14px; color: var(--ink); }
     .shot-missing span { font-size: 13px; }
 
     .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: point; }
-    .points li { counter-increment: point; display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: clamp(16px, 1.15vw, 20px); line-height: 1.5; }
+    .points li { counter-increment: point; display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: clamp(18px, 1.25vw, 22px); line-height: 1.5; }
     .points li::before { content: counter(point); width: 26px; height: 26px; border-radius: 50%; background: var(--soft); color: var(--purple); font-size: 13px; font-weight: 600; display: grid; place-items: center; margin-top: 2px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 18px; background: white; text-decoration: none; }
@@ -86,12 +91,12 @@
     .links a { display: block; break-inside: avoid; padding: 9px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: 15px; }
     .links a small { color: var(--muted); margin-left: 6px; }
 
-    .slide-foot { display: flex; align-items: center; gap: 14px; margin-top: 18px; min-height: 32px; flex-wrap: wrap; }
+    .slide-foot { display: flex; align-items: center; gap: 14px; margin-top: 10px; min-height: 32px; flex-wrap: wrap; }
     .tutorial { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: #5f5166; text-underline-offset: 3px; }
     .button { border: 1px solid var(--purple); background: var(--purple); color: white; border-radius: 7px; min-height: 38px; padding: 0 14px; font-size: 13px; }
     .button.secondary { background: white; color: var(--purple); border-color: #d9cfdd; }
 
-    .deck { border-top: 1px solid var(--line); min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 16px; position: relative; }
+    .deck { border-top: 1px solid var(--line); min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px; position: relative; }
     .progress { position: absolute; left: 0; right: 0; top: -1px; height: 2px; }
     .progress span { display: block; height: 100%; background: var(--purple); transition: width .2s; }
     .position { font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
@@ -122,7 +127,7 @@
     @media (min-width: 1700px) { :root { --scale: 1.3; } }
     @media (max-width: 900px) {
       .wrap { width: calc(100% - 32px); }
-      .body { flex-direction: column; gap: 22px; }
+      .body { display: flex; flex-direction: column; gap: 22px; }
       .body > .text-col { flex: none; min-width: 0; }
       .body > .figure-col { max-width: 100%; }
       .compare { grid-template-columns: minmax(0, 1fr); }
@@ -177,6 +182,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     </footer>
   </div>
 
+  <dialog id="image-dialog" aria-label="放大截图"><div class="sheet-header"><strong>截图</strong><button class="close-button" data-close="image-dialog" aria-label="关闭截图">×</button></div><div id="large-image"></div></dialog>
+
   <dialog id="agenda-dialog" aria-labelledby="agenda-title">
     <div class="sheet-header"><h2 id="agenda-title">目录</h2><button class="close-button" data-close="agenda-dialog" aria-label="关闭目录">×</button></div>
     <div class="sheet-body"><div class="agenda" id="agenda"></div></div>
@@ -202,11 +209,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
   <script>
     const sections = {
-      prep: { num: '0', title: '会前准备', tag: '提前发给大家做' },
-      talk: { num: '1', title: '在哪说话' },
-      notice: { num: '2', title: '别漏消息' },
-      work: { num: '3', title: '一起干活' },
-      demo: { num: '4', title: '现场演示' },
+      prep: { num: '0', title: '会前准备', tag: '提前完成' },
+      daily: { num: '1', title: '日常沟通' },
+      meetings: { num: '2', title: '日历与会议' },
+      documents: { num: '3', title: '文档与文件' },
       appendix: { num: '附录', title: '会后查阅' }
     };
 
@@ -222,7 +228,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'install', section: 'prep', label: '装 Slack 并登录', type: 'shot',
         title: '装好 Slack，用公司 Google 账号登录',
-        shot: { missing: 'Slack 登录页（「使用 Google 登录」按钮）', w: 640 },
+        shot: { src: 'assets/slack-login.jpg', size: [870, 525], alt: 'Slack 中文登录页面', w: 870, box: { x: 26, y: 74, w: 23, h: 9 } },
         points: ['电脑、手机各装一个', '登录时选「使用 Google 登录」', '用 @glorify-app.com 公司邮箱'],
         chips: [['下载 Slack', 'https://slack.com/intl/zh-cn/downloads', true]],
         tutorial: ['下载 Slack · 官方页', 'https://slack.com/intl/zh-cn/downloads']
@@ -230,129 +236,129 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'apps', section: 'prep', label: '装常用应用', type: 'shot',
         title: '把常用工具装进 Slack',
-        shot: { src: 'assets/app-directory.png', size: [1024, 891], alt: 'Slack 代理与工具里的应用列表', w: 600, box: { x: 2.6, y: 56.8, w: 5.4, h: 9.6 } },
+        shot: { src: 'assets/app-directory-redacted.png', size: [1024, 891], alt: 'Slack 代理与工具里的应用列表', w: 600, box: { x: 2.6, y: 56.8, w: 5.4, h: 9.6 } },
         points: ['左侧「代理与工具」→ 应用', '搜索 Google Calendar、Google 云端硬盘、Jira', '点「添加」；装不了找管理员'],
         chips: installLinks.map(([label, url]) => [`${label} ↗`, url]),
         tutorial: ['添加应用 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区']
       },
       {
-        id: 'hours', section: 'prep', label: '标工作时间', type: 'shot',
+        id: 'hours', section: 'meetings', label: '标工作时间', type: 'shot',
         title: '在 Google Calendar 标上工作时间',
-        shot: { missing: 'Google Calendar → 设置 → 工作时间', w: 640 },
+        shot: { src: 'assets/calendar-hours.jpg', size: [665, 500], alt: 'Google 日历工作时间和地点设置', w: 665, box: { x: 6, y: 9, w: 21, h: 9 } },
         points: ['设置 → 常规 → 工作时间 → 启用', '按自己所在时区填', '别人约会议时，能看到你几点上下班'],
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
       },
       {
         id: 'pause-prep', section: 'prep', label: '停一下：都进来了吗', type: 'pause',
         title: '停一下：确认大家都准备好了',
-        tasks: ['打开 Slack，左上角是 Glorify', '侧栏能看到频道列表', 'Google Calendar 已标好工作时间'],
+        tasks: ['打开 Slack，左上角是 Glorify', '侧栏能看到频道列表', '确认 Google Calendar 可以打开'],
         note: '没弄好的举手，旁边同事帮一下。'
       },
       {
-        id: 'where', section: 'talk', label: '频道和私信', type: 'shot',
+        id: 'where', section: 'daily', label: '频道和私信', type: 'shot',
         title: '长期的事发频道，临时的事发私信',
-        shot: { src: 'assets/sidebar.png', size: [245, 498], alt: 'Slack 侧栏的频道列表', w: 260, box: { x: 2, y: 54.6, w: 92, h: 44.6 } },
+        shot: { src: 'assets/sidebar-hd.png', size: [760, 763], alt: 'Slack 侧栏里的频道和私信分组，部分名称已遮盖', w: 760 },
         points: ['频道：按项目或部门开，新人能翻历史', '私信：一对一，或几个人临时聊', '拿不准就发频道'],
         tutorial: ['频道是什么 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360017938993']
       },
       {
-        id: 'visibility', section: 'talk', label: '公开和私密', type: 'compare',
+        id: 'visibility', section: 'daily', label: '公开和私密', type: 'compare',
         title: '# 是公开频道，锁是私密频道',
         sides: [
-          { heading: '# 公开频道', shot: { src: 'assets/channel-public.png', size: [245, 75], alt: '侧栏里带 # 的公开频道', w: 360 }, text: '公司里谁都能搜到，自己就能加入。' },
-          { heading: '🔒 私密频道', shot: { src: 'assets/channel-private.png', size: [245, 75], alt: '侧栏里带锁的私密频道', w: 360 }, text: '只有成员看得到，要成员拉你进来。' }
+          { heading: '# 公开频道', shot: { src: 'assets/channel-public-hd.png', size: [630, 65], alt: '侧栏里带 # 的公开频道', w: 360 }, text: '公司里谁都能搜到，自己就能加入。' },
+          { heading: '🔒 私密频道', shot: { src: 'assets/channel-private-hd.png', size: [630, 73], alt: '侧栏里带锁的私密频道', w: 360 }, text: '只有成员看得到，要成员拉你进来。' }
         ],
         tutorial: ['频道是什么 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360017938993']
       },
       {
-        id: 'threads', section: 'talk', label: '话题和消息列', type: 'shot',
+        id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot',
         title: '回复进话题，话题都在「消息列」',
-        shot: { src: 'assets/threads-view.png', size: [1024, 497], alt: 'Slack 消息列，集中显示参与的话题', w: 860 },
+        shot: { src: 'assets/recap-entry.png', size: [565, 230], alt: 'Slack 侧栏里的消息列入口', w: 565, box: { x: 3, y: 3, w: 42, h: 24 } },
         points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '重要结论勾选「同时发送到频道」'],
         tutorial: ['话题回复 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/115000769927']
       },
       {
-        id: 'mention', section: 'talk', label: '@ 不在频道的人', type: 'shot',
+        id: 'mention', section: 'daily', label: '@ 不在频道的人', type: 'shot',
         title: '@ 了不在频道的人，Slack 会提醒你',
-        shot: { src: 'assets/mention-prompt.png', size: [640, 228], alt: 'Slack 提示被提及的人不在私人频道中', w: 820, box: { x: 14.4, y: 69.5, w: 13.6, h: 16 } },
+        shot: { src: 'assets/mention-prompt-redacted.png', size: [640, 148], alt: 'Slack 提示被提及的人不在私人频道中，姓名已遮盖', w: 820, box: { x: 14.4, y: 55, w: 13.6, h: 24 } },
         points: ['点「添加他们」，才会拉进频道', '点「忽略」，对方收不到', '这条提示只有你看得见'],
         tutorial: ['@ 与通知 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360002063088']
       },
       {
-        id: 'pause-talk', section: 'talk', label: '停一下：发一条', type: 'pause',
+        id: 'pause-talk', section: 'daily', label: '停一下：发一条', type: 'pause',
         title: '停一下：发一条，回一条',
         tasks: ['在会上指定的测试频道发一句话', '给旁边同事的消息回一条话题', '打开侧栏「消息列」，找到这条话题'],
         note: '大家都回过一条再往下讲。'
       },
       {
-        id: 'unread', section: 'notice', label: '加粗和数字', type: 'shot',
-        title: '有新消息只加粗，有人 @ 你才有数字',
-        shot: { src: 'assets/sidebar.png', size: [245, 498], alt: 'Slack 侧栏里加粗显示的未读频道', w: 260, box: { x: 12, y: 47.8, w: 62, h: 5.6 } },
-        points: ['加粗 = 有新消息，不会响', '红色数字 = 有人 @ 你或私信你', '默认只有 @ 和私信会提醒'],
+        id: 'unread', section: 'daily', label: '加粗和数字', type: 'shot',
+        title: '加粗是未读，数字提醒你留意',
+        shot: { src: 'assets/unread-activity.png', size: [925, 600], alt: 'Slack 活动入口带有数字角标，当前主题显示为蓝色', w: 925, box: { x: 8.5, y: 60, w: 5, h: 8 } },
+        points: ['加粗表示有未读消息', '活动数字表示未读通知，颜色随主题变化', '桌面和手机提醒以个人设置为准'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
       {
-        id: 'alerts', section: 'notice', label: '重要频道开提醒', type: 'shot',
+        id: 'alerts', section: 'daily', label: '重要频道开提醒', type: 'shot',
         title: '重要频道，打开全部提醒',
-        shot: { missing: '频道名 → 通知 → 「所有新消息」', w: 640 },
-        points: ['点频道名 → 通知 → 所有新消息', '常用频道点星标，固定在侧栏上方', '不重要的频道可以静音'],
+        shot: { src: 'assets/channel-notifications.png', size: [640, 590], alt: 'Slack 频道通知菜单', w: 640, box: { x: 17, y: 25, w: 57, h: 14 } },
+        points: ['点频道右上角铃铛 → 所有新帖子', '常用频道点星标，固定在侧栏上方', '不重要的频道可以静音'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
       {
-        id: 'recap', section: 'notice', label: '要点回顾', type: 'shot',
+        id: 'recap', section: 'daily', label: '要点回顾', type: 'shot',
         title: '「要点回顾」帮你总结没看的消息',
-        shot: { src: 'assets/sidebar.png', size: [245, 498], alt: 'Slack 侧栏里的要点回顾入口', w: 260, box: { x: 1.5, y: 0, w: 46, h: 5.2 } },
+        shot: { src: 'assets/recap-entry.png', size: [565, 230], alt: 'Slack 侧栏里的要点回顾入口', w: 565, box: { x: 3, y: 56, w: 42, h: 23 } },
         points: ['侧栏点「要点回顾」', '选几个常看的频道', '先看总结，需要时点回原消息'],
         tutorial: ['官方功能目录 · 中文教程', 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack']
       },
       {
-        id: 'pause-notice', section: 'notice', label: '停一下：设提醒', type: 'pause',
+        id: 'pause-notice', section: 'daily', label: '停一下：设提醒', type: 'pause',
         title: '停一下：把提醒设好',
-        tasks: ['给自己部门频道打开「所有新消息」', '给 2–3 个常用频道点星标'],
+        tasks: ['给自己部门频道打开「所有新帖子」', '给 2–3 个常用频道点星标'],
         note: '设完看一眼侧栏，星标频道在最上面。'
       },
       {
-        id: 'share', section: 'work', label: '文档共享', type: 'shot', migration: true,
-        title: 'Google 文档共享给 Glorify，同事就能打开',
-        shot: { missing: 'Google 文档 → 共享 → 常规访问选「Glorify」', w: 640 },
-        points: ['右上角「共享」→ 常规访问', '选「Glorify」，再选查看、评论或编辑', '先设好共享，再把链接发到 Slack'],
+        id: 'share', section: 'documents', label: '文档共享', type: 'shot', migration: true,
+        title: '共享前先选对范围和权限',
+        shot: { src: 'assets/google-share.jpg', size: [516, 424], alt: 'Google 文档的共享面板，姓名和邮箱已遮盖', w: 516, box: { x: 4, y: 57, w: 75, h: 21 } },
+        points: ['右上角「共享」→ 选协作者或访问范围', '查看者不能评论；需要反馈选评论者', '先确认权限，再把链接发到 Slack'],
         tutorial: ['Google 文档共享 · 中文教程', 'https://support.google.com/a/users/answer/9283053?hl=zh-Hans']
       },
       {
-        id: 'drive', section: 'work', label: '文档消息进 Slack', type: 'shot',
+        id: 'drive', section: 'documents', label: '文档消息进 Slack', type: 'shot',
         title: '文档评论和权限申请，在 Slack 里直接处理',
-        shot: { missing: 'Slack 里「Google 云端硬盘」应用发来的评论或访问申请', w: 640 },
-        points: ['先装好「Google 云端硬盘」应用', '有人评论或申请权限，Slack 里会收到', '直接回复，或点「授予访问权限」'],
+        shot: { src: 'assets/drive-notifications.jpg', size: [1349, 592], alt: 'Google Drive 在 Slack 中发来的评论和权限申请，姓名和邮箱已遮盖', w: 1349, box: { x: 9, y: 82, w: 15, h: 11 } },
+        points: ['连接 Google 云端硬盘应用并打开通知', '评论可在消息列回复；权限申请可处理', '实际提醒取决于连接和通知设置'],
         tutorial: ['Google Drive 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/205875058']
       },
       {
-        id: 'huddle', section: 'work', label: 'Huddle 语音', type: 'shot',
+        id: 'huddle', section: 'daily', label: 'Huddle 语音', type: 'shot',
         title: '临时聊几句：点频道右上角的耳机',
-        shot: { missing: '频道右上角（耳机图标那一栏）', w: 640 },
-        points: ['点耳机就开语音，频道里的人能加入', '进去后可开摄像头、共享屏幕', '正式会议用 Google Meet'],
+        shot: { src: 'assets/huddle-header.png', size: [470, 175], alt: 'Slack 频道右上角的抱团耳机入口', w: 470, box: { x: 30, y: 12, w: 13, h: 35 } },
+        points: ['点耳机，频道里的人可加入', '可开视频或共享屏幕', 'Tada Meet 不记录 Huddle；需要纪要用 Meet'],
         tutorial: ['Huddle 抱团通话 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团']
       },
       {
-        id: 'meeting', section: 'work', label: '约会议', type: 'shot',
+        id: 'meeting', section: 'meetings', label: '约会议', type: 'shot',
         title: '约会议：Google Calendar 建活动，加 Meet',
-        shot: { missing: 'Google Calendar 新建活动（「添加 Google Meet 视频会议」）', w: 640 },
-        points: ['新建活动 → 添加 Google Meet 视频会议', '加参会人时，能看到对方的工作时间', '装了 Calendar 应用，Slack 会提醒你开会'],
+        shot: { src: 'assets/calendar-event.jpg', size: [525, 521], alt: 'Google 日历新建活动面板，包含添加 Google Meet 视频会议', w: 525, box: { x: 10, y: 48, w: 47, h: 12 } },
+        points: ['新建活动，点「添加 Google Meet 视频会议」', '确认有会议链接，再保存并邀请', '提醒取决于日历与 Slack 应用设置'],
         tutorial: ['Google Calendar 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历']
       },
       {
-        id: 'notes', section: 'work', label: '会议纪要', type: 'shot',
-        title: '会议纪要：Tada Meet 自动出中文纪要',
-        shot: { src: 'assets/tada-meet-panel.png', size: [284, 226], alt: 'Tada Meet 会议纪要面板，显示记录中', w: 380, box: { x: 64.5, y: 9.5, w: 17.5, h: 10 } },
-        points: ['用 @glorify-app.com 账号参会就行', '每场一人开记录，会后纪要发到 Slack', '想当记录者，找管理员开通']
+        id: 'notes', section: 'meetings', label: '会议纪要', type: 'shot',
+        title: 'Tada Meet：一位记录者开启字幕采集',
+        shot: { src: 'assets/tada-meet-panel-hd.png', size: [550, 345], alt: 'Tada Meet 真实面板，截图时处于准备字幕状态', w: 550, box: { x: 62, y: 9, w: 20, h: 15 } },
+        points: ['试用中：记录者先安装并连接公司账号', '图中正在准备；正式使用确认记录中、字数增长', '这是采集字幕，不是 Meet 视频录制']
       },
       {
-        id: 'pause-work', section: 'work', label: '停一下：试一次', type: 'pause',
-        title: '停一下：共享一个文档，开一次 Huddle',
-        tasks: ['新建一个 Google 文档，共享给 Glorify', '把链接发到测试频道', '在测试频道点右上角耳机，开一次 Huddle'],
-        note: '旁边同事能打开文档、能听到你，就算完成。'
+        id: 'pause-work', section: 'documents', label: '停一下：试一次', type: 'pause',
+        title: '停一下：共享文档，确认能打开',
+        tasks: ['新建文档，选择合适的共享对象和权限', '发链接到测试频道', '旁边同事确认能打开；需要评论时选择评论者'],
+        note: '确认对方能访问，再迁移旧文档。'
       },
       {
-        id: 'demo', section: 'demo', label: '翻译和语音输入', type: 'cards',
+        id: 'demo', section: 'daily', label: '翻译和语音输入', type: 'cards',
         title: '现场演示：翻译和语音输入',
         cards: [
           { heading: 'Translate 翻译', items: ['#sw-team、#random 发中文，自动出英文', '想手动翻：输入 /translate', '日期、数字、人名对照原文看'], link: ['Translate 说明（英文）', 'https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info'] },
@@ -395,6 +401,71 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       }
     ];
 
+    slides.push(
+      {
+        id: 'timezone', section: 'meetings', label: '设置时区', type: 'shot',
+        title: '先确认日历时区，再约跨时区会议',
+        shot: { src: 'assets/calendar-timezone.jpg', size: [515, 230], alt: 'Google 日历的主要时区设置，图中时区仅为示例', w: 515, box: { x: 4, y: 40, w: 72, h: 26 } },
+        points: ['设置 → 通用 → 时区', '主要时区选自己所在地区；图中为示例', '跨国协作可显示其他时区'],
+        tutorial: ['设置时区 · 中文教程', 'https://support.google.com/calendar/answer/37064?hl=zh-Hans']
+      },
+      {
+        id: 'availability', section: 'meetings', label: '查看工作时间', type: 'shot',
+        title: '约会前先看忙闲和工作时间',
+        shot: { src: 'assets/working-hours-warning.jpg', size: [672, 80], alt: '邀请对象处显示工作时间之外的提示，姓名已遮盖', w: 672, box: { x: 38, y: 12, w: 47, h: 58 } },
+        points: ['添加参会人后，用「查找时间」看忙闲', 'Outside working hours = 对方工作时间之外', '能否看到取决于对方的设置和权限'],
+        tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
+      },
+      {
+        id: 'meet-command', section: 'meetings', label: '/meet 快速建会', type: 'shot',
+        title: '临时开 Meet：在 Slack 输入 /meet',
+        shot: { src: 'assets/meet-command.jpg', size: [2010, 650], alt: 'Google Meet 在 Slack 的应用说明，展示 /meet 命令', w: 2010, box: { x: 18, y: 10, w: 5, h: 9 } },
+        points: ['先确认 Google Meet 应用可用', '在频道输入 /meet', '用生成的链接加入会议'],
+        tutorial: ['Google Meet 应用 · Slack', 'https://slack.com/marketplace/A0F7YS351']
+      },
+      {
+        id: 'meeting-reminder', section: 'meetings', label: '会前提醒', type: 'cards',
+        title: '会前：用日历和 Slack 看提醒',
+        cards: [
+          { heading: 'Google 日历', items: ['活动里设置提前多久提醒', '确认时间、时区和会议链接'], link: ['日历通知 · 中文教程', 'https://support.google.com/calendar/answer/37242?hl=zh-Hans'] },
+          { heading: 'Slack', items: ['连接 Google Calendar 应用', '提醒以应用设置和授权为准'], link: ['连接日历 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/206329808'] }
+        ]
+      },
+      {
+        id: 'recording', section: 'meetings', label: '会议录制', type: 'cards',
+        title: '视频录制与中文字幕纪要是两回事',
+        cards: [
+          { heading: 'Meet 视频录制', items: ['电脑端：会议工具 → 录制会议 → 开始', '功能取决于套餐、管理员和主持人权限', '录像保存在组织者的 Google 云端硬盘'], link: ['录制视频会议 · 中文教程', 'https://support.google.com/meet/answer/9308681?hl=zh-Hans'] },
+          { heading: 'Tada 中文字幕纪要', items: ['当前为小范围试用', '记录者开启字幕采集并确认字数增长', '会后生成文档，具体见下一页'], link: ['Meet 字幕 · 中文教程', 'https://support.google.com/meet/answer/15077804?hl=zh-Hans'] }
+        ]
+      },
+      {
+        id: 'minutes-result', section: 'meetings', label: '会后找纪要', type: 'shot',
+        title: '会后：在 Slack 或邮箱找纪要链接',
+        shot: { src: 'assets/minutes-example.jpg', size: [2700, 1410], alt: '模拟会议生成的 Google 文档纪要示例，含总结和待办', w: 1350 },
+        points: ['整场结束后生成 Google 文档；优先发 Slack', '未匹配 Slack 时查看公司邮箱', '中文摘要和字幕原文；英文版尚未确认']
+      },
+      {
+        id: 'pause-meetings', section: 'meetings', label: '停一下：试约会', type: 'pause',
+        title: '停一下：检查时区，试着建会',
+        tasks: ['确认自己的时区和工作时间', '与旁边同事找一个合适时间', '新建活动并确认已添加 Meet 链接'],
+        note: '试用 Tada 的记录者再确认字幕采集状态。'
+      },
+      {
+        id: 'migration', section: 'documents', label: '搬飞书旧文档', type: 'cards', migration: true,
+        title: '最后：需要时再搬旧文档',
+        cards: [{ heading: '飞书 → Google Drive', items: ['先选一篇试迁', '核对格式、图片和共享权限', '确认后再处理其他文档'], link: ['Google 导入文件 · 中文教程', 'https://support.google.com/drive/answer/2424368?hl=zh-Hans'] }]
+      }
+    );
+    const order = [
+      'install', 'apps', 'pause-prep',
+      'where', 'visibility', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo', 'pause-talk', 'pause-notice',
+      'timezone', 'hours', 'availability', 'meet-command', 'meeting', 'meeting-reminder', 'recording', 'notes', 'minutes-result', 'pause-meetings',
+      'share', 'drive', 'pause-work', 'migration',
+      'lark-diff', 'resources',
+    ];
+    slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
     const legacyIds = { entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo' };
 
@@ -407,7 +478,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     function shotHtml(shot) {
       if (shot.missing) return `<div class="shot-missing" style="--w:${shot.w}px"><strong>待补截图</strong><span>${escapeText(shot.missing)}</span></div>`;
       const box = shot.box ? `<span class="box" style="left:${shot.box.x}%;top:${shot.box.y}%;width:${shot.box.w}%;height:${shot.box.h}%"></span>` : '';
-      return `<figure class="shot" style="--w:${shot.w}px;--r:${shot.size[0] / shot.size[1]}"><img src="${shot.src}" alt="${escapeText(shot.alt)}">${box}</figure>`;
+      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / shot.size[1]}"><img src="${shot.src}" alt="${escapeText(shot.alt)}">${box}</button>`;
     }
 
     function bodyHtml(slide) {
@@ -469,6 +540,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     });
     slideEl.addEventListener('click', event => {
       if (event.target.closest('[data-open-migration]')) document.querySelector('#migration-dialog').showModal();
+      const shot = event.target.closest('.shot');
+      if (shot) {
+        const image = shot.cloneNode(true);
+        const figure = document.createElement('figure');
+        figure.className = image.className;
+        figure.style.cssText = image.style.cssText;
+        figure.innerHTML = image.innerHTML;
+        document.querySelector('#large-image').replaceChildren(figure);
+        document.querySelector('#image-dialog').showModal();
+      }
     });
     document.querySelector('#previous').addEventListener('click', () => go(current - 1));
     document.querySelector('#next').addEventListener('click', () => go(current + 1));
