@@ -40,55 +40,64 @@
     .kicker { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
     .kicker strong { color: var(--purple); font-weight: 600; }
     .kicker .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--soft); color: var(--purple); }
-    .slide h2 { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.3; letter-spacing: -.03em; font-weight: 650; margin: 6px 0 12px; }
-    .body { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) clamp(260px, 20vw, 340px); gap: 22px; align-items: flex-start; }
+    .slide h2 { font-size: clamp(28px, 2.4vw, 44px); line-height: 1.25; letter-spacing: -.03em; font-weight: 650; margin: 6px 0 12px; }
+    .body { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) clamp(290px, 23vw, 420px); gap: 22px; align-items: flex-start; }
     .body > .figure-col { min-width: 0; }
     .body > .text-col { min-width: 0; padding-top: 4px; }
     .body.full { display: block; }
 
     .shot { position: relative; display: block; margin: 0; padding: 0; border: 0; width: min(100%, calc((100vh - 275px) * var(--r))); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
     .shot img { display: block; width: 100%; height: auto; }
+    .shot-crop { display: block; width: 100%; overflow: hidden; }
+    .shot-detail { position: absolute; right: 2%; bottom: 8%; width: 42%; aspect-ratio: 540 / 150; overflow: hidden; border: 2px solid var(--purple); border-radius: 8px; background: white; box-shadow: 0 4px 16px #321b3840; pointer-events: none; }
+    .shot-detail img { position: absolute; width: 633.333%; max-width: none; left: -533.333%; top: -43.333%; }
+    .shot-detail .box { left: 37.2%; top: 13.7%; width: 14.6%; height: 58.5%; }
+    .shot-detail--calendar { width: 33%; aspect-ratio: 280 / 80; }
+    .shot-detail--calendar img { width: 433.93%; left: -250%; top: 0; }
+    .shot-detail--calendar .box { left: 35%; top: 15%; width: 15%; height: 59%; }
+    .shot-detail-label { position: absolute; right: 4px; bottom: 4px; padding: 2px 7px; border-radius: 4px; background: #49264fe6; color: white; font-size: clamp(11px, 1vw, 16px); }
+
     .shot::after { content: "点击放大"; position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; border-radius: 5px; background: #29232ddd; color: white; font-size: 12px; }
     #image-dialog { width: min(96vw, 1800px); max-width: none; max-height: 96vh; background: #fff; }
     #image-dialog .sheet-header { padding: 8px 16px; }
     #image-dialog .shot { width: min(100%, calc((96vh - 70px) * var(--r))); margin: 0 auto; box-shadow: none; }
     #image-dialog .shot::after { display: none; }
     .shot .neutral-focus { position: absolute; background: #92d4e3; mix-blend-mode: color; pointer-events: none; }
-    .shot-caption { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+    .shot-caption { margin: 0 0 8px; color: #5f5863; font-size: clamp(16px, 1vw, 20px); }
     .shot .box { position: absolute; border: 3px solid var(--focus); border-radius: 7px; pointer-events: none; }
     .shot-missing { display: grid; place-items: center; align-content: center; gap: 6px; width: min(calc(var(--w) * var(--scale)), calc((100vh - 310px) * 1.6)); max-width: 100%; aspect-ratio: 16 / 10; border: 2px dashed #cfc6d4; border-radius: 10px; color: var(--muted); text-align: center; padding: 24px; background: #fffdfb; }
     .shot-missing strong { font-size: 14px; color: var(--ink); }
     .shot-missing span { font-size: 13px; }
 
     .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: point; }
-    .points li { counter-increment: point; display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: clamp(18px, 1.25vw, 22px); line-height: 1.5; }
-    .points li::before { content: counter(point); width: 26px; height: 26px; border-radius: 50%; background: var(--soft); color: var(--purple); font-size: 13px; font-weight: 600; display: grid; place-items: center; margin-top: 2px; }
+    .points li { counter-increment: point; display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: clamp(24px, 1.55vw, 30px); line-height: 1.45; }
+    .points li::before { content: counter(point); width: 28px; height: 28px; border-radius: 50%; background: var(--soft); color: var(--purple); font-size: 13px; font-weight: 600; display: grid; place-items: center; margin-top: 2px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 18px; background: white; text-decoration: none; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 18px; background: white; text-decoration: none; }
     .chip.primary { background: var(--purple); border-color: var(--purple); color: white; }
     .chip:hover { border-color: #c9b9d0; }
 
     .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
     .compare section { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
-    .compare h3 { margin: 0 0 14px; font-size: 22px; }
-    .compare p { margin: 16px 0 0; font-size: clamp(16px, 1.15vw, 20px); }
+    .compare h3 { margin: 0 0 14px; font-size: clamp(24px, 1.7vw, 32px); }
+    .compare p { margin: 16px 0 0; font-size: clamp(23px, 1.5vw, 28px); line-height: 1.45; }
 
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; }
-    .card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
-    .card .tutorial[download] { font-size: 16px; font-weight: 600; }
-    .card h3 { margin: 0 0 12px; font-size: 22px; }
-    .card ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; font-size: clamp(16px, 1.1vw, 19px); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 100%; }
+    .card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: clamp(24px, 2vw, 38px); }
+    .card .tutorial[download] { font-size: clamp(18px, 1.25vw, 24px); font-weight: 600; }
+    .card h3 { margin: 0 0 16px; font-size: clamp(28px, 1.9vw, 36px); line-height: 1.3; }
+    .card ul { margin: 0; padding-left: 1.2em; display: grid; gap: 12px; font-size: clamp(27px, 1.65vw, 32px); line-height: 1.45; }
 
-    .table { max-width: 980px; border-top: 1px solid var(--line); }
-    .row { display: grid; grid-template-columns: 220px 1fr; gap: 20px; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: clamp(16px, 1.15vw, 20px); }
+    .table { max-width: 100%; border-top: 1px solid var(--line); }
+    .row { display: grid; grid-template-columns: minmax(220px, 25%) 1fr; gap: 20px; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: clamp(21px, 1.5vw, 28px); }
     .row span { color: var(--muted); }
 
-    .links { columns: 2 320px; column-gap: 32px; max-width: 1000px; }
-    .links a { display: block; break-inside: avoid; padding: 9px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: 15px; }
+    .links { columns: 3 320px; column-gap: 44px; max-width: 100%; }
+    .links a { display: block; break-inside: avoid; padding: 7px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: clamp(20px, 1.2vw, 23px); }
     .links a small { color: var(--muted); margin-left: 6px; }
 
     .slide-foot { display: flex; align-items: center; gap: 14px; margin-top: 10px; min-height: 32px; flex-wrap: wrap; }
-    .tutorial { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: #5f5166; text-underline-offset: 3px; }
+    .tutorial { display: inline-flex; align-items: center; gap: 5px; font-size: clamp(15px, .95vw, 18px); color: #5f5166; text-underline-offset: 3px; }
     .button { border: 1px solid var(--purple); background: var(--purple); color: white; border-radius: 7px; min-height: 38px; padding: 0 14px; font-size: 13px; }
     .button.secondary { background: white; color: var(--purple); border-color: #d9cfdd; }
 
@@ -128,6 +137,8 @@
       .body > .figure-col { max-width: 100%; }
       .compare { grid-template-columns: minmax(0, 1fr); }
       .row { grid-template-columns: 1fr; gap: 4px; }
+      .points li, .card ul, .compare p, .row { font-size: 18px; }
+      .card h3, .compare h3 { font-size: 22px; }
       .hint { display: none; }
       .brand-title { display: none; }
     }
@@ -313,8 +324,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'huddle', section: 'daily', label: 'Huddle 语音', type: 'shot',
         title: '临时聊几句：点频道右上角的耳机',
-        shot: { src: 'assets/huddle-channel-context.jpg', size: [3420, 1350], alt: 'Slack 频道完整界面及右上角抱团入口，名称与消息已模糊', w: 1200, neutralFocus: { x: 0, y: 62, w: 2.45, h: 14 }, box: { x: 90.1, y: 6.3, w: 2.3, h: 6.5 } },
-        points: ['点耳机，频道里的人可加入', '可开视频或共享屏幕', 'Tada Meet 不记录 Huddle；需要纪要用 Meet'],
+        shot: { src: 'assets/huddle-channel-context.jpg', size: [3420, 1350], alt: 'Slack 频道完整界面及右上角抱团入口，右下角为局部放大，名称与消息已模糊', w: 1200, neutralFocus: { x: 0, y: 62, w: 2.45, h: 14 }, detail: 'huddle' },
+        points: ['点耳机，频道成员可加入', '可开视频或共享屏幕', 'Tada Meet 不记录 Huddle；需要纪要用 Meet'],
         tutorial: ['Huddle 抱团通话 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/4402059015315-在-Slack-中使用抱团']
       },
       {
@@ -325,10 +336,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['Google Calendar 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/206329808-适用于-Slack-的-Google-日历']
       },
       {
-        id: 'notes', section: 'meetings', label: '会议纪要', type: 'shot', emphasis: [1],
-        title: 'Tada Meet：一位记录者开启字幕采集',
-        shot: { src: 'assets/tada-meet-panel-hd.png', size: [550, 345], alt: 'Tada Meet 真实面板，截图时处于准备字幕状态', w: 550, box: { x: 62, y: 9, w: 20, h: 15 } },
-        points: ['试用中：找 Ken Ge 开通并连接公司账号', '图中正在准备；正式使用确认记录中、字数增长', '这是采集字幕，不是 Meet 视频录制']
+        id: 'notes', section: 'meetings', label: '会议纪要', type: 'shot', emphasis: [0],
+        title: '会议纪要：使用 Tada Meet',
+        caption: '图为录制中的 Tada Meet 面板',
+        shot: { src: 'assets/tada-meet-panel-hd.png', size: [550, 345], cropHeight: 260, alt: 'Tada Meet 面板示例，显示暂停和结束记录按钮', w: 550 },
+        points: ['打开 Tada Meet，点击「开始录制」', '会后向参会人发送 Google 文档纪要']
       },
       {
         id: 'demo', section: 'daily', label: '翻译和语音输入', type: 'cards',
@@ -378,7 +390,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'calendar-start', section: 'meetings', label: '打开 Google 日历', type: 'shot',
         title: '约会议前，先打开 Google 日历',
-        shot: { src: 'assets/calendar-home.jpg', size: [1215, 720], alt: 'Google 日历首页和右上角设置入口，账号名称已遮盖', w: 1000, box: { x: 65.7, y: 1.7, w: 3.5, h: 6.5 } },
+        shot: { src: 'assets/calendar-home.jpg', size: [1215, 720], alt: 'Google 日历首页和右上角设置入口，右下角为局部放大，账号名称已遮盖', w: 1000, detail: 'calendar' },
         points: ['打开 Google 日历，用公司账号登录', '在 Slack 的 Google Calendar 应用里连接账号', '日历右上角齿轮 → 设置，先设置时区和工作时间'],
         chips: [['打开 Google 日历', 'https://calendar.google.com/', true]],
         tutorial: ['Google Calendar 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/206329808']
@@ -414,17 +426,17 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       {
         id: 'recording', section: 'meetings', label: '会议录制', type: 'cards',
-        title: '视频录制与中文字幕纪要是两回事',
+        title: '会议录像和会议纪要',
         cards: [
           { heading: 'Meet 视频录制', items: ['电脑端：会议工具 → 录制会议 → 开始', '功能取决于套餐与会议权限设置', '录像保存在组织者的 Google 云端硬盘'], link: ['录制视频会议 · 中文教程', 'https://support.google.com/meet/answer/9308681?hl=zh-Hans'] },
-          { heading: 'Tada 中文字幕纪要', items: ['当前为小范围试用', '记录者开启字幕采集并确认字数增长', '会后生成文档，具体见下一页'], link: ['Meet 字幕 · 中文教程', 'https://support.google.com/meet/answer/15077804?hl=zh-Hans'] }
+          { heading: 'Tada Meet 会议纪要', items: ['在 Tada Meet 点击「开始录制」', '会后参会人收到 Google 文档纪要'] }
         ]
       },
       {
         id: 'minutes-result', section: 'meetings', label: '会后找纪要', type: 'shot',
-        title: '会后：在 Slack 或邮箱找纪要链接',
+        title: '会后：参会人收到 Google 文档纪要',
         shot: { src: 'assets/minutes-example.jpg', size: [2700, 1410], alt: '模拟会议生成的 Google 文档纪要示例，含总结和待办', w: 1350 },
-        points: ['整场结束后生成 Google 文档；优先发 Slack', '未匹配 Slack 时查看公司邮箱', '中文摘要和字幕原文；英文版尚未确认']
+        points: ['会议结束后，参会人收到 Google 文档纪要', '打开文档查看摘要和待办', '中文摘要和字幕原文；英文版尚未确认']
       },
       {
         id: 'migration', section: 'documents', label: '搬飞书旧文档', type: 'cards', migration: true,
@@ -453,8 +465,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     function shotHtml(shot) {
       if (shot.missing) return `<div class="shot-missing" style="--w:${shot.w}px"><strong>待补截图</strong><span>${escapeText(shot.missing)}</span></div>`;
       const neutralFocus = shot.neutralFocus ? `<span class="neutral-focus" style="left:${shot.neutralFocus.x}%;top:${shot.neutralFocus.y}%;width:${shot.neutralFocus.w}%;height:${shot.neutralFocus.h}%"></span>` : '';
+      const image = `<img src="${shot.src}" alt="${escapeText(shot.alt)}">`;
+      const visibleImage = shot.cropHeight ? `<span class="shot-crop" style="aspect-ratio:${shot.size[0]} / ${shot.cropHeight}">${image}</span>` : image;
+      const detail = shot.detail ? `<span class="shot-detail shot-detail--${shot.detail}"><img src="${shot.src}" alt=""><span class="box"></span><span class="shot-detail-label">右上角放大</span></span>` : '';
       const box = shot.box ? `<span class="box" style="left:${shot.box.x}%;top:${shot.box.y}%;width:${shot.box.w}%;height:${shot.box.h}%"></span>` : '';
-      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / shot.size[1]}"><img src="${shot.src}" alt="${escapeText(shot.alt)}">${neutralFocus}${box}</button>`;
+      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / (shot.cropHeight || shot.size[1])}">${visibleImage}${neutralFocus}${box}${detail}</button>`;
     }
 
     function bodyHtml(slide) {
@@ -467,7 +482,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'cards') {
-        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : external(card.link[0], card.link[1], 'tutorial')}</div></section>`).join('')}</div></div>`;
+        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : card.link ? external(card.link[0], card.link[1], 'tutorial') : ''}</div></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'table') {
         return `<div class="body full"><div class="table">${slide.rows.map(([lark, slack]) => `<div class="row"><span>飞书：${escapeText(lark)}</span><strong>${escapeText(slack)}</strong></div>`).join('')}</div></div>`;
