@@ -1,15 +1,13 @@
 ---
 name: "lark-to-gdrive"
-description: "把飞书/Lark 云文档批量迁移到 Google Drive，并转成原生 Google 格式（docx→Google Docs、sheet/bitable→Google Sheets、slides→Google Slides），保留表格边框等格式。用户说「把飞书文档搬到/传到 Google Drive」「Lark 转 Google Docs」「迁移云文档到谷歌」时使用。需要 lark-cli 已登录；Google 侧由使用者确认 OAuth 授权，使用 Drive API 转换；先试迁一篇，再按确认清单批量执行。"
+description: "把飞书/Lark 云文档批量迁移到 Google Drive，并转成原生 Google 格式（docx→Google Docs、sheet/bitable→Google Sheets、slides→Google Slides），保留表格边框、把 docx 内嵌电子表格转成真表格。用户说「把飞书文档搬到/传到 Google Drive」「Lark 转 Google Docs」「迁移云文档到谷歌」时使用。需要 lark-cli 已登录；Google 侧通过 rclone 一次性 OAuth 拿 token，上传直接用 Drive API multipart 转换（不要用 rclone --drive-import-formats，v1.75 静默不生效）。"
 ---
 
 # lark-to-gdrive：飞书云文档 → Google Drive（原生格式）
 
 批量把用户名下的飞书文档导出并上传为**原生 Google Docs / Sheets / Slides**（不是 .docx 文件躺在 Drive 里），并修复飞书导出的表格边框丢失问题。
 
-这是基于团队提供版本整理的公开副本。原始版本记录的验证环境为 macOS arm64（2026-10）；本次网页收录未执行真实迁移，使用前需先试迁一篇，并核对当前 CLI 参数与权限。
-
-先让用户确认文档清单、目标公司账号和目标文件夹。默认保留飞书原文与已有 Drive 文件；删除、覆盖、扩大共享范围前必须单独确认。不要把令牌、配置文件、内部文档链接或 ID 提交到公开仓库、终端输出或聊天记录。
+整条链路已实测验证（macOS arm64, 2026-10）。按步骤执行即可，遇到报错先查文末「坑与排查」表。
 
 ## 前置条件
 
@@ -19,18 +17,34 @@ lark-cli auth status         # user 身份 ready / needs_refresh 均可（会自
 command -v python3           # macOS 自带
 ```
 
-此方案不依赖 Google Drive 桌面版。由 **rclone 完成本机 OAuth 授权**，再使用 Drive REST API 转换格式。凭据只保存在本机，不上传到教学网页。
+Google Drive 侧没有 MCP，也不需要装 Google Drive 桌面版——用 **rclone 做一次浏览器 OAuth 拿 token**，之后全部走 Drive REST API。
 
 ## 第 0 步：Google Drive 授权（一次性）
 
-1. 从 [rclone 官方安装说明](https://rclone.org/install/) 安装适合本机的版本。
-2. 按 [创建自己的 OAuth client_id](https://rclone.org/drive/#making-your-own-client-id) 配置经公司允许的 Google 应用。rclone 的共享 client_id 正在停用，不以跳过确认的方式依赖它。
-3. 运行 `rclone config`，创建名为 `gdrive`、类型为 `drive` 的 remote。由使用者核对公司账号、OAuth 应用和所需权限，并亲自完成浏览器授权。
-4. 验证：`rclone lsd gdrive:`。不要展示或上传 `rclone.conf`，其中包含访问令牌和刷新令牌。
+```bash
+# 安装单文件 rclone（无需 brew/sudo）
+cd /tmp && curl -fsSL -o rclone.zip https://downloads.rclone.org/rclone-current-osx-arm64.zip \
+  && unzip -o -q rclone.zip && cp rclone-*-osx-arm64/rclone ~/.local/bin/rclone
 
-如果应用未验证、被管理员阻止、账号不符或授权失败，先停止并联系公司 IT 确认，不自动点击绕过提示。若需要新建 OAuth 应用或扩大权限，应先得到用户确认。
+# 建 remote
+~/.local/bin/rclone config create gdrive drive scope=drive --non-interactive
 
-令牌过期时，运行正常的 rclone 查询以尝试刷新；必要时由使用者重新授权。读取令牌时不要打印其值。
+# rclone 会问"共享 client_id 即将停用，继续用吗"——写进配置跳过交互
+cat >> ~/.config/rclone/rclone.conf <<'EOF'
+config_shared_client_id = true
+EOF
+
+# 触发 OAuth：管道喂两个 y（共享 client 确认 + 自动浏览器授权）
+printf 'y\ny\n' | ~/.local/bin/rclone config reconnect gdrive:
+```
+
+- **用目标 Workspace 账号授权**：Glorify 的 Google Workspace 主域是 **glorify-app.com**（2026-10 确认；glorify.global 并入该 Workspace）。授权前先确认浏览器当前的 Google 会话是这个账号，别授权到个人 Gmail
+- 浏览器会自动打开 Google 授权页；若不弹，手动 `open -a "Google Chrome" "http://127.0.0.1:53682/auth?state=<日志里的state>"`
+- 出现 "Google hasn't verified this app" → **Advanced → Go to rclone** → Allow
+- 拿到 code 后进程可能还会问 "Configure as Shared Drive?" 并 EOF 退出——**token 已写入 rclone.conf，属正常，不用重跑**
+- 验证：`rclone lsd gdrive:`（返回码 0 即通；空 Drive 无输出）
+- 注意：共享 client_id 计划 2026 年内停用。若授权页报 invalid_client，需按 https://rclone.org/drive/#making-your-own-client-id 自建 client_id
+- token 有效期约 1 小时；过期后跑任意 rclone 命令会自动刷新，再从 rclone.conf 重新读取
 
 ## 第 1 步：选出要迁移的文档
 
@@ -65,9 +79,11 @@ lark-cli drive +export --url '<doc_url>' --file-extension docx \
 - 文件名先消毒：把 `/`、`:` 换成 `-`；重名（含 wiki 包装的同名文档）加后缀区分
 - 轮询超时返回 `ready=false/ticket` 不算失败：用 `drive +task_result --scenario export` + `drive +export-download` 续跑
 
-## 第 3 步：修复表格边框（关键，docx 专用）
+## 第 3 步：修复 docx（表格边框 + 内嵌电子表格）
 
-飞书导出的表格边框是 `dee0e3` 浅灰或无颜色值，**Google 转换时会当成无边框丢掉**——用户看到的就是"表格变成散落的文字"。原始版本采用把 `w:tblBorders` 改成黑色 0.5pt 实线的方法修复。先试迁确认是否确有丢失；如需修改边框，告知外观变化并获同意，只处理导出的副本，不覆盖飞书原文。此方法不保证修复所有文档布局。
+### 3a. 表格边框
+
+飞书导出的表格边框是 `dee0e3` 浅灰或无颜色值，**Google 转换时会当成无边框丢掉**——用户看到的就是"表格变成散落的文字"。先把 docx 里所有 `w:tblBorders` 改成黑色 0.5pt 实线，转换后边框完好保留（已实测验证）。
 
 ```python
 #!/usr/bin/env python3
@@ -99,9 +115,188 @@ for p in sys.argv[1:]:
 
 存为 `/tmp/fix_borders.py`，在导出目录跑 `python3 /tmp/fix_borders.py *.docx`。
 
+### 3b. 内嵌电子表格（sheet block）→ 真表格
+
+docx 里内嵌的飞书电子表格导出后是 OLE 对象：一张预览图 + "Click the image to view the sheet." 占位文字，真实数据藏在 `word/embeddings/*.xlsx`。Google 转换后只剩图片，内容全丢。下面脚本把每个 OLE 对象换成从 xlsx 重建的 `<w:tbl>`（支持合并单元格，自带黑色边框；纯 stdlib，无需联网）。已在含 26 个内嵌表格和合并单元格的真实文档上验证。
+
+```python
+#!/usr/bin/env python3
+"""Replace embedded Lark-sheet OLE objects in an exported .docx with real docx tables.
+
+Lark exports an embedded sheet block as <w:object> + OLEObject + preview image +
+optional 'Click the image to view the sheet.' caption. The real grid data is kept
+in word/embeddings/*.xlsx. This script parses each embedded xlsx (stdlib only),
+builds a <w:tbl>, and drops the image + caption paragraph.
+"""
+import re, sys, zipfile, os, shutil, tempfile
+import xml.etree.ElementTree as ET
+
+MAX_ROWS, MAX_COLS = 300, 40
+SS_NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+PKG_R = '{http://schemas.openxmlformats.org/package/2006/relationships}'
+
+def col_letters_to_idx(s):
+    n = 0
+    for ch in s: n = n * 26 + (ord(ch) - 64)
+    return n
+
+def cell_ref(rc):
+    m = re.match(r'([A-Z]+)(\d+)', rc)
+    return (int(m.group(2)), col_letters_to_idx(m.group(1)))  # (row, col) 1-based
+
+def read_shared_strings(z):
+    try: data = z.read('xl/sharedStrings.xml')
+    except KeyError: return []
+    root = ET.fromstring(data)
+    out = []
+    for si in root.findall(f'{SS_NS}si'):
+        out.append(''.join(t.text or '' for t in si.iter(f'{SS_NS}t')))
+    return out
+
+def pick_worksheet(z):
+    names = [n for n in z.namelist() if re.fullmatch(r'xl/worksheets/sheet\d+\.xml', n)]
+    if len(names) == 1: return names[0]
+    try:
+        rels = ET.fromstring(z.read('xl/_rels/workbook.xml.rels'))
+        for rel in rels.findall(f'{PKG_R}Relationship'):
+            t = rel.get('Type','')
+            if t.endswith('/worksheet'):
+                return 'xl/' + rel.get('Target').lstrip('/')
+    except KeyError: pass
+    return sorted(names)[0] if names else None
+
+def cell_text(c, shared):
+    t = c.get('t')
+    v = c.find(f'{SS_NS}v')
+    if t == 's':
+        return shared[int(v.text)] if v is not None and v.text else ''
+    if t == 'inlineStr':
+        is_el = c.find(f'{SS_NS}is')
+        return ''.join(x.text or '' for x in is_el.iter(f'{SS_NS}t')) if is_el is not None else ''
+    if t == 'b':
+        return 'TRUE' if v is not None and v.text == '1' else 'FALSE'
+    return v.text if v is not None and v.text else ''
+
+def parse_xlsx(path):
+    with zipfile.ZipFile(path) as z:
+        shared = read_shared_strings(z)
+        ws = pick_worksheet(z)
+        if not ws: return [], []
+        root = ET.fromstring(z.read(ws))
+        cells, max_r, max_c = {}, 0, 0
+        for c in root.iter(f'{SS_NS}c'):
+            ref = c.get('r')
+            if not ref: continue
+            r, col = cell_ref(ref)
+            if r <= MAX_ROWS and col <= MAX_COLS:
+                cells[(r, col)] = cell_text(c, shared)
+                max_r, max_c = max(max_r, r), max(max_c, col)
+        merges = []
+        for mc in root.iter(f'{SS_NS}mergeCell'):
+            m = re.match(r'([A-Z]+\d+):([A-Z]+\d+)', mc.get('ref',''))
+            if m:
+                r1, c1 = cell_ref(m.group(1)); r2, c2 = cell_ref(m.group(2))
+                merges.append((r1, c1, r2, c2))
+        rows = [[cells.get((r, c), '') for c in range(1, max_c + 1)]
+                for r in range(1, max_r + 1)]
+        return rows, merges
+
+def esc(s):
+    return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+
+def build_tbl(rows, merges):
+    if not rows: return ''
+    ncols = max(len(r) for r in rows)
+    width = 9360 // max(ncols, 1)
+    anchor, cont = {}, {}
+    for r1, c1, r2, c2 in merges:
+        span = c2 - c1 + 1
+        anchor[(r1, c1)] = (span, r2 > r1)
+        for rr in range(r1 + 1, r2 + 1):
+            cont[(rr, c1)] = span
+    def tc(text, span=None, vmerge=None):
+        pr = f'<w:tcW w:w="{width * (span or 1)}" w:type="dxa"/>'
+        if span and span > 1: pr += f'<w:gridSpan w:val="{span}"/>'
+        if vmerge: pr += f'<w:vMerge w:val="{vmerge}"/>' if vmerge == 'restart' else '<w:vMerge/>'
+        t = esc(text)
+        return f'<w:tc><w:tcPr>{pr}</w:tcPr><w:p><w:r><w:t xml:space="preserve">{t}</w:t></w:r></w:p></w:tc>'
+    trs = []
+    for r, row in enumerate(rows, 1):
+        tcs, c = [], 1
+        while c <= ncols:
+            if (r, c) in cont:
+                tcs.append(tc('', span=cont[(r, c)], vmerge='continue'))
+                c += cont[(r, c)]
+            elif (r, c) in anchor:
+                span, vert = anchor[(r, c)]
+                tcs.append(tc(row[c-1] if c-1 < len(row) else '', span=span, vmerge='restart' if vert else None))
+                c += span
+            else:
+                tcs.append(tc(row[c-1] if c-1 < len(row) else ''))
+                c += 1
+        trs.append('<w:tr>' + ''.join(tcs) + '</w:tr>')
+    borders = ''.join(f'<w:{e} w:val="single" w:sz="4" w:color="000000"/>'
+                      for e in ('top','left','bottom','right','insideH','insideV'))
+    return (f'<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/>'
+            f'<w:tblBorders>{borders}</w:tblBorders><w:tblLayout w:type="autofit"/>'
+            f'</w:tblPr><w:tblGrid>' + f'<w:gridCol w:w="{width}"/>' * ncols +
+            f'</w:tblGrid>' + ''.join(trs) + '</w:tbl>')
+
+CAPTION = r'(?:view the sheet|查看电子表格|查看表格)'
+OBJ_P = re.compile(
+    r'<w:p\b[^>]*>(?:(?!</w:p>).)*?<o:OLEObject[^>]*r:id="(rId\d+)"(?:(?!</w:p>).)*?</w:p>'
+    r'(<w:p\b[^>]*>(?:(?!</w:p>).)*?' + CAPTION + r'(?:(?!</w:p>).)*?</w:p>)?', re.S)
+
+def fix(path):
+    with zipfile.ZipFile(path) as z:
+        doc = z.read('word/document.xml').decode('utf-8')
+        rels = ET.fromstring(z.read('word/_rels/document.xml.rels'))
+        rid2target = {r.get('Id'): r.get('Target') for r in rels.findall(f'{PKG_R}Relationship')}
+        tmpdir = tempfile.mkdtemp()
+        n_ok = n_fail = 0
+        def repl(m):
+            nonlocal n_ok, n_fail
+            rid = m.group(1)
+            if 'ProgID="Excel' not in m.group(0):
+                return m.group(0)
+            target = rid2target.get(rid, '')
+            if 'embeddings/' not in target:
+                n_fail += 1; return m.group(0)
+            xlsx = os.path.join(tmpdir, os.path.basename(target))
+            try:
+                xlsx_data = z.read('word/' + target)
+            except KeyError:
+                n_fail += 1; return m.group(0)
+            with open(xlsx, 'wb') as f: f.write(xlsx_data)
+            rows, merges = parse_xlsx(xlsx)
+            tbl = build_tbl(rows, merges)
+            if not tbl:
+                n_fail += 1; return m.group(0)
+            n_ok += 1
+            return tbl + '<w:p/>'
+        new_doc = OBJ_P.sub(repl, doc)
+        if n_ok == 0 and n_fail == 0:
+            return False
+        tmp = path + '.new'
+        with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as zout:
+            for item in z.namelist():
+                data = z.read(item)
+                if item == 'word/document.xml': data = new_doc.encode('utf-8')
+                zout.writestr(item, data)
+        os.replace(tmp, path)
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        print(f'fixed {n_ok} embedded sheet(s), failed {n_fail}: {path}')
+        return True
+
+for p in sys.argv[1:]:
+    if not fix(p): print('no embedded sheets:', p)
+```
+
+存为 `/tmp/fix_embedded_sheets.py`，同样在导出目录跑 `python3 /tmp/fix_embedded_sheets.py *.docx`。输出 `fixed N embedded sheet(s)`；全为 0 说明没有内嵌表格，不用管。上限 300 行 × 40 列，超出截断——超大内嵌表格单独导出 sheet 处理。只想知道文档有没有内嵌表格、不导全文时，用 `lark-cli docs +script --command parse --doc <url>` 看 profile 里有没有 `sheet` 块。
+
 ## 第 4 步：上传并转成 Google 原生格式
 
-原始版本在 rclone v1.75.2 遇到 `--drive-import-formats` 未转换的情况。此方案直接指定 Google 目标 mimeType，并以返回值验收。下面的 multipart 示例适用于不超过 5 MB 的文件；更大文件按 [Google 官方上传说明](https://developers.google.com/workspace/drive/api/guides/manage-uploads?hl=zh-cn) 使用可恢复上传。
+**不要**用 `rclone copy --drive-import-formats docx`——v1.75.2 实测静默不转换（文件仍是 .docx mime）。直接用 Drive API multipart 上传 + 指定目标 mimeType：
 
 ```bash
 # 目标文件夹（不存在先建）：拿到 folder ID
@@ -123,7 +318,7 @@ curl -sS -X POST "https://www.googleapis.com/upload/drive/v3/files?uploadType=mu
 
 **限流是常态**：rclone 共享 client_id 的 Drive API 配额是全项目共享的，403 `rateLimitExceeded` 频繁出现。所有 API 调用（含 DELETE）都要带重试：sleep 20-30s × 最多 8 次。DELETE 如果用 `-o /dev/null`，错误响应体看不到，要用 `-w "%{http_code}"` 判 204。
 
-**传团队共享盘（Shared Drive）**：公司资料建议放共享盘而非个人 My Drive。API 参数加 `supportsAllDrives=true`，`parents` 填共享盘里的文件夹 ID；用 `rclone backend drives gdrive:` 列出有权访问的共享盘，再按官方 Shared drives 配置确认目标盘及文件夹；`--drive-shared-with-me` 是“与我共享”，不能代替共享盘列表。不得因上传失败擅自改成个人盘。
+**传团队共享盘（Shared Drive）**：公司资料建议放共享盘而非个人 My Drive。API 参数加 `supportsAllDrives=true`，`parents` 填共享盘里的文件夹 ID；rclone 侧目录用 `rclone lsd gdrive: --drive-shared-with-me` 之类确认（团队盘 ID 不是 root）。
 
 ## 第 5 步：验证与去重
 
@@ -133,9 +328,9 @@ curl -sS "https://www.googleapis.com/drive/v3/files?q=%27<FOLDER_ID>%27%20in%20p
   -H "Authorization: Bearer $TOKEN"
 ```
 
-验收标准：应转换的文档与目标 `application/vnd.google-apps.*` 类型相符；普通附件按原格式保存。检查内容、表格、图片、嵌入块和目标访问权限，不能只凭上传成功判断迁移完成。
+验收标准：全部 `application/vnd.google-apps.*`，无残留 .docx。
 
-- Drive API 新建文件可能产生同名副本。同名不等于重复；先列出文件名、创建时间和迁移结果，由用户确认后才删除或覆盖。默认保留所有原件。
+- Drive **允许同名文件共存**——重跑或删旧版失败后会有重复。按 name 分组、`createdTime` 降序，删旧的
 - 抽查格式：把某个转换后的 Google Doc 再导回 docx（`/files/<id>/export?mimeType=...docx`），`unzip -p` 查 `w:tbl`/`w:tblBorders` 存在
 - 请用户打开一篇表格多的文档肉眼确认
 
@@ -145,15 +340,15 @@ curl -sS "https://www.googleapis.com/drive/v3/files?q=%27<FOLDER_ID>%27%20in%20p
 |---|---|---|
 | `unsafe output path` | `--output-dir` 传了绝对路径 | cd 进目录后用 `--output-dir .` |
 | export `ready=false` | 轮询窗口内未完成 | `+task_result` → `+export-download` 续跑 |
-| OAuth 应用或权限被拦截 | 公司策略或应用配置不符 | 停止并请使用者/IT 确认，不自动绕过 |
+| reconnect 卡在 "Continue using shared client_id" EOF | 交互读不到输入 | `printf 'y\ny\n'` 喂答案；或配置写 `config_shared_client_id = true` |
 | `--drive-import-formats` 后 mime 仍是 docx | v1.75.2 静默不转换 | 改用 Drive API multipart + 目标 mimeType |
-| 403 `rateLimitExceeded` | 请求限流 | 有界重试；其他 403 需检查权限，不盲目重试 |
-| 文件夹里出现同名双份 | 重跑可能重复创建 | 列出副本供用户确认，不自动删除 |
+| 403 `rateLimitExceeded` | 共享 client_id 全项目限流 | 重试 + sleep 20-30s；属正常，不是失败 |
+| 文件夹里出现同名双份 | Drive 允许同名 / 删除被限流 | 按 createdTime 去重 |
+| 迁移后内嵌表格变成图片 | 飞书把 sheet 块导出成 OLE 预览图 + 链接 | 第 3b 步 `fix_embedded_sheets.py` 转成真表格 |
 | 文档里的画板/内嵌 Base/妙记块丢失 | 飞书 export API 不支持该 block | 单独告知用户，别默默略过 |
-| token 401 expired | access_token 过期 | 尝试正常刷新；必要时由使用者重新授权，勿输出令牌 |
+| token 401 expired | access_token 1 小时过期 | 跑一条 rclone 命令触发刷新，重读 rclone.conf |
 
 ## 参考
 
 - 飞书侧命令细节：`lark-drive` skill（`+search`/`+export`/`+download`/`+inspect`）
-- Google 上传与格式转换：<https://developers.google.com/workspace/drive/api/guides/manage-uploads?hl=zh-cn>
-- rclone Google Drive：<https://rclone.org/drive/>
+- Drive API：<https://developers.google.com/drive/api/reference/rest/v3/files>

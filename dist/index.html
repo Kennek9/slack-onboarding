@@ -45,6 +45,11 @@
     .body > .figure-col { min-width: 0; }
     .body > .text-col { min-width: 0; padding-top: 4px; }
     .body.full { display: block; }
+    .availability-shots { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .availability-shots p { margin: 0 0 8px; font-size: clamp(18px, 1.2vw, 23px); font-weight: 600; }
+    .availability-shots .shot { width: 100%; }
+    .availability-shots > div:first-child .shot { max-width: min(520px, calc((100vh - 470px) * 1.640625)); }
+
 
     .shot { position: relative; display: block; margin: 0; padding: 0; border: 0; width: min(100%, calc((100vh - 275px) * var(--r))); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
     .shot img { display: block; width: 100%; height: auto; }
@@ -135,7 +140,7 @@
       .body { display: flex; flex-direction: column; gap: 22px; }
       .body > .text-col { flex: none; min-width: 0; }
       .body > .figure-col { max-width: 100%; }
-      .compare { grid-template-columns: minmax(0, 1fr); }
+      .compare, .availability-shots { grid-template-columns: minmax(0, 1fr); }
       .row { grid-template-columns: 1fr; gap: 4px; }
       .points li, .card ul, .compare p, .row { font-size: 18px; }
       .card h3, .compare h3 { font-size: 22px; }
@@ -206,9 +211,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         <li><strong>先迁一篇</strong><span>核对内容、格式和共享权限</span></li>
       </ol>
       <div class="migration-actions"><a class="button" href="./skills/lark-to-gdrive/SKILL.md" download="lark-to-gdrive-SKILL.md">下载 Skill</a><a href="https://support.google.com/drive/answer/2424368?hl=zh-Hans" target="_blank" rel="noopener noreferrer">Google 导入文件 · 中文教程 ↗</a></div>
-      <p class="footnote">需已登录 lark-cli。飞书原文保留；迁移后重新确认共享。</p>
+      <p class="footnote">需已登录 lark-cli。内嵌表格超过 300 行或 40 列需单独导出。源 Skill 提及删除旧文件和绕过授权告警；请先确认，勿直接执行。</p>
       <details class="migration-prompt"><summary>给 AI 助手的指令</summary><label class="sr-only" for="migration-prompt">迁移指令</label><textarea id="migration-prompt" readonly>请加载我提供的 lark-to-gdrive Skill，将指定飞书文档迁移为原生 Google Docs / Sheets / Slides，存入我确认的公司 Google Drive 文件夹。
-先试迁一篇，核对内容、表格、图片和共享权限后，再处理我确认的清单。保留原文，任何覆盖或删除先确认。
+先试迁一篇，核对内容、表格、图片和共享权限后，再处理我确认的清单。内嵌表格超过 300 行或 40 列时单独导出。保留原文，任何覆盖或删除先确认；遇到授权警告先停下。
 飞书链接：[填写]
 目标文件夹：[填写]</textarea><button class="button secondary" id="copy-migration-prompt">复制指令</button><p class="footnote" id="migration-copy-status" role="status" aria-live="polite">授权和迁移由本人在 AI 助手中完成，网页不会读取或上传文件。</p></details>
     </div>
@@ -288,7 +293,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'unread', section: 'daily', label: '加粗和数字', type: 'shot',
         title: '加粗是未读，数字提醒你留意',
-        shot: { src: 'assets/unread-bold-and-activity.png', size: [925, 870], alt: 'Slack 侧栏中的加粗未读频道和活动数字角标', w: 925, neutralFocus: { x: 0, y: 69, w: 15.2, h: 19 }, box: { x: 21, y: 77.5, w: 35, h: 6 } },
+        shot: { src: 'assets/unread-bold-and-activity.png', size: [925, 870], alt: 'Slack 侧栏中的加粗未读频道和活动数字角标', w: 925, neutralFocus: { x: 0, y: 69, w: 15.2, h: 19 }, box: { x: 21, y: 77.5, w: 35, h: 6 }, secondBox: { x: 9, y: 41.5, w: 4.2, h: 5.1 } },
         points: ['加粗的频道表示有未读消息', '左侧活动数字表示未读通知', '提醒和角标颜色以个人设置为准'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
@@ -340,7 +345,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         title: '会议纪要：使用 Tada Meet',
         caption: '图为录制中的 Tada Meet 面板',
         shot: { src: 'assets/tada-meet-panel-hd.png', size: [550, 345], cropHeight: 260, alt: 'Tada Meet 面板示例，显示暂停和结束记录按钮', w: 550 },
-        points: ['打开 Tada Meet，点击「开始录制」', '会后向参会人发送 Google 文档纪要']
+        points: ['打开 Tada Meet，点击「开始录制」', '会后 Tada Meet 把纪要发到 Slack']
       },
       {
         id: 'demo', section: 'daily', label: '翻译和语音输入', type: 'cards',
@@ -405,6 +410,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'availability', section: 'meetings', label: '查看工作时间', type: 'shot',
         title: '约会前先看忙闲和工作时间',
+        contextShot: { src: 'assets/calendar-event.jpg', size: [525, 521], cropHeight: 320, alt: 'Google 日历新建活动里的添加邀请对象入口', w: 525, box: { x: 5, y: 66, w: 42, h: 15 } },
         shot: { src: 'assets/working-hours-warning.jpg', size: [672, 80], alt: '邀请对象处显示工作时间之外的提示，姓名已遮盖', w: 672, box: { x: 38, y: 12, w: 47, h: 58 } },
         points: ['添加参会人后，用「查找时间」看忙闲', 'Outside working hours = 对方工作时间之外', '能否看到取决于对方的设置和权限'],
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
@@ -425,36 +431,28 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         ]
       },
       {
-        id: 'recording', section: 'meetings', label: '会议录制', type: 'cards',
-        title: '会议录像和会议纪要',
-        cards: [
-          { heading: 'Meet 视频录制', items: ['电脑端：会议工具 → 录制会议 → 开始', '功能取决于套餐与会议权限设置', '录像保存在组织者的 Google 云端硬盘'], link: ['录制视频会议 · 中文教程', 'https://support.google.com/meet/answer/9308681?hl=zh-Hans'] },
-          { heading: 'Tada Meet 会议纪要', items: ['在 Tada Meet 点击「开始录制」', '会后参会人收到 Google 文档纪要'] }
-        ]
-      },
-      {
         id: 'minutes-result', section: 'meetings', label: '会后找纪要', type: 'shot',
-        title: '会后：参会人收到 Google 文档纪要',
+        title: '会后：Tada Meet 在 Slack 发送纪要',
         shot: { src: 'assets/minutes-example.jpg', size: [2700, 1410], alt: '模拟会议生成的 Google 文档纪要示例，含总结和待办', w: 1350 },
-        points: ['会议结束后，参会人收到 Google 文档纪要', '打开文档查看摘要和待办', '中文摘要和字幕原文；英文版尚未确认']
+        points: ['会议结束后，Tada Meet 把纪要发到 Slack', '打开 Google 文档查看摘要和待办', '中文摘要和字幕原文；英文版尚未确认']
       },
       {
         id: 'migration', section: 'documents', label: '搬飞书旧文档', type: 'cards', migration: true,
         title: '最后：需要时再搬旧文档',
-        cards: [{ heading: '用 lark-to-gdrive Skill 迁移', items: ['下载 Skill，交给支持本地工具的 AI 助手', '确认飞书和 Google 账号，先试迁一篇', '核对内容、格式、图片和权限，再确认批量迁移'], link: ['下载 lark-to-gdrive Skill', './skills/lark-to-gdrive/SKILL.md'], download: 'lark-to-gdrive-SKILL.md' }]
+        cards: [{ heading: '用 lark-to-gdrive Skill 迁移', items: ['下载 Skill，交给支持本地工具的 AI 助手', '先试迁；超过 300 行或 40 列的内嵌表格单独导出', '核对内容和权限；删除旧文件前先确认'], link: ['下载 lark-to-gdrive Skill', './skills/lark-to-gdrive/SKILL.md'], download: 'lark-to-gdrive-SKILL.md' }]
       }
     );
     const order = [
       'install', 'apps',
       'where', 'visibility', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo',
-      'calendar-start', 'timezone', 'hours', 'availability', 'meet-command', 'meeting', 'meeting-reminder', 'recording', 'notes', 'minutes-result',
+      'calendar-start', 'timezone', 'hours', 'availability', 'meet-command', 'meeting', 'meeting-reminder', 'notes', 'minutes-result',
       'share', 'drive', 'migration',
       'lark-diff', 'resources',
     ];
     slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
-    const legacyIds = { entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
+    const legacyIds = { recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
@@ -469,14 +467,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const visibleImage = shot.cropHeight ? `<span class="shot-crop" style="aspect-ratio:${shot.size[0]} / ${shot.cropHeight}">${image}</span>` : image;
       const detail = shot.detail ? `<span class="shot-detail shot-detail--${shot.detail}"><img src="${shot.src}" alt=""><span class="box"></span><span class="shot-detail-label">右上角放大</span></span>` : '';
       const box = shot.box ? `<span class="box" style="left:${shot.box.x}%;top:${shot.box.y}%;width:${shot.box.w}%;height:${shot.box.h}%"></span>` : '';
-      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / (shot.cropHeight || shot.size[1])}">${visibleImage}${neutralFocus}${box}${detail}</button>`;
+      const secondBox = shot.secondBox ? `<span class="box" style="left:${shot.secondBox.x}%;top:${shot.secondBox.y}%;width:${shot.secondBox.w}%;height:${shot.secondBox.h}%"></span>` : '';
+      return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / (shot.cropHeight || shot.size[1])}">${visibleImage}${neutralFocus}${box}${secondBox}${detail}</button>`;
     }
 
     function bodyHtml(slide) {
       if (slide.type === 'shot') {
         const points = `<ol class="points">${slide.points.map((point, index) => `<li>${slide.emphasis?.includes(index) ? `<strong>${escapeText(point)}</strong>` : escapeText(point)}</li>`).join('')}</ol>`;
         const chips = slide.chips ? `<div class="chips">${slide.chips.map(([label, url, primary]) => `<a class="chip ${primary ? 'primary' : ''}" href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)}</a>`).join('')}</div>` : '';
-        return `<div class="body"><div class="figure-col">${slide.caption ? `<p class="shot-caption">${escapeText(slide.caption)}</p>` : ''}${shotHtml(slide.shot)}</div><div class="text-col">${points}${chips}</div></div>`;
+        return `<div class="body"><div class="figure-col">${slide.contextShot ? `<div class="availability-shots"><div><p>新建活动：添加邀请对象</p>${shotHtml(slide.contextShot)}</div><div><p>邀请时：查看工作时间提示</p>${shotHtml(slide.shot)}</div></div>` : `${slide.caption ? `<p class="shot-caption">${escapeText(slide.caption)}</p>` : ''}${shotHtml(slide.shot)}`} </div><div class="text-col">${points}${chips}</div></div>`;
       }
       if (slide.type === 'compare') {
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div></div>`;
