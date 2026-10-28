@@ -39,6 +39,7 @@
     .slide { flex: 1; padding: 16px 0 10px; display: flex; flex-direction: column; min-height: 0; }
     .kicker { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
     .kicker strong { color: var(--purple); font-weight: 600; }
+    .kicker-prep strong { font-size: clamp(17px, 1.25vw, 22px); font-weight: 700; }
     .kicker .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--soft); color: var(--purple); }
     .slide h2 { font-size: clamp(28px, 2.4vw, 44px); line-height: 1.25; letter-spacing: -.03em; font-weight: 650; margin: 6px 0 12px; }
     .body { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) clamp(290px, 23vw, 420px); gap: 22px; align-items: flex-start; }
@@ -51,7 +52,8 @@
     .availability-shots > div:first-child .shot { max-width: min(520px, calc((100vh - 470px) * 1.640625)); }
 
 
-    .shot { position: relative; display: block; margin: 0; padding: 0; border: 0; width: min(100%, calc((100vh - 275px) * var(--r))); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
+    .shot { position: relative; display: block; margin: 0; padding: 0; border: 0; width: min(100%, calc((100vh - 290px) * var(--r))); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 10px 28px #321b380d; background: white; }
+    .shot-caption + .shot { width: min(100%, calc((100vh - 330px) * var(--r))); }
     .shot img { display: block; width: 100%; height: auto; }
     .shot-crop { display: block; width: 100%; overflow: hidden; }
     .shot-detail { position: absolute; right: 2%; bottom: 8%; width: 42%; aspect-ratio: 540 / 150; overflow: hidden; border: 2px solid var(--purple); border-radius: 8px; background: white; box-shadow: 0 4px 16px #321b3840; pointer-events: none; }
@@ -60,6 +62,15 @@
     .shot-detail--calendar { width: 33%; aspect-ratio: 280 / 80; }
     .shot-detail--calendar img { width: 433.93%; left: -250%; top: 0; }
     .shot-detail--calendar .box { left: 35%; top: 15%; width: 15%; height: 59%; }
+    .shot-detail--alerts { left: 44%; right: auto; bottom: 2%; width: 38%; aspect-ratio: 640 / 590; }
+    .shot-detail--alerts img, .shot-detail--recap img, .shot-detail--thread img { width: 100%; left: 0; top: 0; }
+    .shot-detail--alerts .box { left: 17%; top: 25%; width: 57%; height: 14%; }
+    .shot-detail--recap, .shot-detail--thread { left: 35%; right: auto; bottom: 6%; width: 48%; aspect-ratio: 565 / 230; }
+    .shot-detail--recap .box { left: 3%; top: 56%; width: 42%; height: 23%; }
+    .shot-detail--thread .box { left: 3%; top: 3%; width: 42%; height: 24%; }
+    .shot-detail--drive { width: 46%; aspect-ratio: 320 / 140; bottom: 10%; }
+    .shot-detail--drive img { width: 421.5625%; left: -25%; top: -321.43%; }
+    .shot-detail--drive .box { left: 14.7%; top: 31.4%; width: 60%; height: 40.7%; }
     .shot-detail-label { position: absolute; right: 4px; bottom: 4px; padding: 2px 7px; border-radius: 4px; background: #49264fe6; color: white; font-size: clamp(11px, 1vw, 16px); }
 
     .shot::after { content: "点击放大"; position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; border-radius: 5px; background: #29232ddd; color: white; font-size: 12px; }
@@ -249,7 +260,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'apps', section: 'prep', label: '装常用应用', type: 'shot',
         title: '把常用工具装进 Slack',
         shot: { src: 'assets/app-directory-redacted.png', size: [1024, 891], alt: 'Slack 代理与工具里的应用列表', w: 600, box: { x: 2.6, y: 56.8, w: 5.4, h: 9.6 } },
-        points: ['左侧「代理与工具」→ 应用', '搜索 Google Calendar、Google 云端硬盘、Jira', '点「添加」；装不了找 Ken Ge'],
+        points: ['应用里搜索添加；有问题找 Ken Ge', 'Calendar 连公司账号，检查会议提醒', '云端硬盘连账号并确认权限；Meet 输入 /meet'],
         chips: installLinks.map(([label, url]) => [`${label} ↗`, url]),
         tutorial: ['添加应用 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区']
       },
@@ -279,7 +290,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot', emphasis: [0],
         title: '回复进话题，话题都在「消息列」',
-        shot: { src: 'assets/recap-entry.png', size: [565, 230], alt: 'Slack 侧栏里的消息列入口', w: 565, box: { x: 3, y: 3, w: 42, h: 24 } },
+        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的消息列入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 15.2, w: 5.5, h: 3.2 }, detail: 'thread', detailSrc: 'assets/recap-entry.png', detailLabel: '消息列放大' },
         points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '重要结论勾选「同时发送到频道」'],
         tutorial: ['话题回复 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/115000769927']
       },
@@ -300,14 +311,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'alerts', section: 'daily', label: '重要频道开提醒', type: 'shot', emphasis: [0],
         title: '重要频道，打开全部提醒',
-        shot: { src: 'assets/channel-notifications.png', size: [640, 590], alt: 'Slack 频道通知菜单', w: 640, box: { x: 17, y: 25, w: 57, h: 14 } },
+        shot: { src: 'assets/notify-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整频道界面及通知菜单，通知选项局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 93, y: 5.2, w: 2.3, h: 5.2 }, detail: 'alerts', detailSrc: 'assets/channel-notifications.png', detailLabel: '通知选项放大' },
         points: ['点频道右上角铃铛 → 所有新帖子', '常用频道点星标，固定在侧栏上方', '不重要的频道可以静音'],
         tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
       },
       {
         id: 'recap', section: 'daily', label: '要点回顾', type: 'shot',
         title: '「要点回顾」帮你总结没看的消息',
-        shot: { src: 'assets/recap-entry.png', size: [565, 230], alt: 'Slack 侧栏里的要点回顾入口', w: 565, box: { x: 3, y: 56, w: 42, h: 23 } },
+        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的要点回顾入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 22.2, w: 5.7, h: 3.3 }, detail: 'recap', detailSrc: 'assets/recap-entry.png', detailLabel: '要点回顾放大' },
         points: ['侧栏点「要点回顾」', '选几个常看的频道', '先看总结，需要时点回原消息'],
         tutorial: ['官方功能目录 · 中文教程', 'https://slack.com/intl/zh-cn/help/categories/200111606-使用-Slack']
       },
@@ -321,9 +332,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'drive', section: 'documents', label: '文档消息进 Slack', type: 'shot',
         title: 'Google Drive 把文档消息发到 Slack',
-        caption: 'Slack「Google 云端硬盘」应用的消息：上方是评论，下方是权限申请（姓名已遮盖）',
-        shot: { src: 'assets/drive-notifications.jpg', size: [1349, 592], alt: 'Google Drive 在 Slack 中发来的评论和权限申请，姓名和邮箱已遮盖', w: 1349, box: { x: 9, y: 82, w: 15, h: 11 } },
-        points: ['在 Slack 的「代理与工具」找到 Google 云端硬盘，连接账号', '上方：收到文档评论，可在消息列中回复', '下方：收到权限申请，有授权权限的人可点击处理'],
+        caption: 'Slack「Google 云端硬盘」应用的消息：评论与权限申请示例（个人信息已遮盖）',
+        shot: { src: 'assets/drive-context-redacted.png', size: [1614, 1140], alt: 'Slack 中 Google Drive 应用的完整消息界面，权限申请局部放大，个人信息已遮盖', w: 1000, box: { x: 27.2, y: 11, w: 6.6, h: 4.6 }, secondBox: { x: 24, y: 90.5, w: 12.4, h: 5.8 }, detail: 'drive', detailSrc: 'assets/drive-notifications.jpg', detailLabel: '权限申请放大' },
+        points: ['打开 Google 云端硬盘应用，进入「消息」', '文档评论可在消息列中回复', '权限申请可由有授权权限的人处理'],
         tutorial: ['Google Drive 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/205875058']
       },
       {
@@ -419,7 +430,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'meet-command', section: 'meetings', label: '/meet 快速建会', type: 'shot',
         title: '临时开 Meet：在 Slack 输入 /meet',
         shot: { src: 'assets/meet-command.jpg', size: [2010, 650], alt: 'Google Meet 在 Slack 的应用说明，展示 /meet 命令', w: 2010, box: { x: 18, y: 10, w: 5, h: 9 } },
-        points: ['先确认 Google Meet 应用可用', '在频道输入 /meet', '用生成的链接加入会议'],
+        points: ['先确认 Google Meet 应用可用', '临时开会：频道输入 /meet', '提前预约：在 Google 日历创建活动'],
         tutorial: ['Google Meet 应用 · Slack', 'https://slack.com/marketplace/A0F7YS351']
       },
       {
@@ -465,7 +476,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const neutralFocus = shot.neutralFocus ? `<span class="neutral-focus" style="left:${shot.neutralFocus.x}%;top:${shot.neutralFocus.y}%;width:${shot.neutralFocus.w}%;height:${shot.neutralFocus.h}%"></span>` : '';
       const image = `<img src="${shot.src}" alt="${escapeText(shot.alt)}">`;
       const visibleImage = shot.cropHeight ? `<span class="shot-crop" style="aspect-ratio:${shot.size[0]} / ${shot.cropHeight}">${image}</span>` : image;
-      const detail = shot.detail ? `<span class="shot-detail shot-detail--${shot.detail}"><img src="${shot.src}" alt=""><span class="box"></span><span class="shot-detail-label">右上角放大</span></span>` : '';
+      const detail = shot.detail ? `<span class="shot-detail shot-detail--${shot.detail}"><img src="${shot.detailSrc || shot.src}" alt=""><span class="box"></span><span class="shot-detail-label">${escapeText(shot.detailLabel || '右上角放大')}</span></span>` : '';
       const box = shot.box ? `<span class="box" style="left:${shot.box.x}%;top:${shot.box.y}%;width:${shot.box.w}%;height:${shot.box.h}%"></span>` : '';
       const secondBox = shot.secondBox ? `<span class="box" style="left:${shot.secondBox.x}%;top:${shot.secondBox.y}%;width:${shot.secondBox.w}%;height:${shot.secondBox.h}%"></span>` : '';
       return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / (shot.cropHeight || shot.size[1])}">${visibleImage}${neutralFocus}${box}${secondBox}${detail}</button>`;
@@ -496,7 +507,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const tag = section.tag ? `<span class="tag">${section.tag}</span>` : '';
       const tutorial = slide.tutorial ? external(slide.tutorial[0], slide.tutorial[1], 'tutorial') : '';
       const migration = slide.migration ? `<button class="button secondary" data-open-migration>${slide.id === 'migration' ? '查看 Skill 使用说明' : '搬飞书旧文档'}</button>` : '';
-      slideEl.innerHTML = `<div class="kicker"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${tutorial}${migration}</div>`;
+      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${tutorial}${migration}</div>`;
       document.querySelector('#page-number').textContent = String(current + 1).padStart(2, '0');
       document.querySelector('#page-total').textContent = `/ ${slides.length}`;
       document.querySelector('#page-label').textContent = slide.label;
