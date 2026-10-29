@@ -33,7 +33,7 @@
     .brand { display: flex; align-items: baseline; gap: 14px; }
     .wordmark { font-family: Georgia, serif; font-size: 24px; font-weight: 700; letter-spacing: -1.4px; }
     .brand-title { font-size: 14px; color: var(--muted); }
-    .top-actions { display: flex; gap: 4px; }
+    .top-actions { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
     .top-link { text-decoration: none; display: inline-flex; align-items: center; border: 0; background: none; color: var(--muted); font-size: 13px; min-height: 40px; padding: 0 10px; border-radius: 6px; }
     .top-link:hover { background: var(--soft); color: var(--purple); }
 
@@ -194,6 +194,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       <div class="brand"><span class="wordmark">glorify</span><span class="brand-title">从飞书到 Slack</span></div>
       <div class="top-actions">
         <a class="top-link" href="guides.html">详细教程</a>
+        <a class="top-link" href="https://clarkus8pcpkf8xh.usttp.larksuite.com/docx/WzZXdCjjEoibuNxQXW8uTOvQteg" target="_blank" rel="noopener noreferrer">飞书手册 ↗</a>
         <button class="top-link" id="agenda-open">目录</button>
         <button class="top-link" id="resources-open">中文资料</button>
         <button class="top-link" id="presentation-mode" aria-pressed="false" title="隐藏辅助按钮，Esc 退出">投屏模式</button>
