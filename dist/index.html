@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+<link rel="icon" href="data:,">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="从飞书到 Slack：办公室宣讲版。日常沟通、日历与会议、文档协作，配真实截图和中文教程。">
   <meta name="theme-color" content="#faf9f6">
@@ -102,6 +103,7 @@
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 100%; }
     .card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: clamp(24px, 2vw, 38px); }
     .card .tutorial[download] { font-size: clamp(18px, 1.25vw, 24px); font-weight: 600; }
+    .card-logo { width: 40px; height: 40px; object-fit: contain; vertical-align: -6px; margin-right: 8px; }
     .card h3 { margin: 0 0 16px; font-size: clamp(28px, 1.9vw, 36px); line-height: 1.3; }
     .card ul { margin: 0; padding-left: 1.2em; display: grid; gap: 12px; font-size: clamp(27px, 1.65vw, 32px); line-height: 1.45; }
 
@@ -244,7 +246,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       ['Google Calendar', 'https://slack.com/marketplace/ADZ494LHY-google-calendar'],
       ['Google 云端硬盘', 'https://slack.com/marketplace/A6NL8MJ6Q-google-drive'],
       ['Jira Cloud', 'https://slack.com/marketplace/A2RPP3NFR-jira-cloud'],
-      ['Google Meet', 'https://slack.com/marketplace/search?q=Google%20Meet']
+      ['Translate', 'https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info'],
+      ['/meet for Slack', 'https://meetslack.com/']
     ];
 
     // 截图里的红框用百分比坐标：x、y 是左上角，w、h 是宽高，都相对整张图。
@@ -253,7 +256,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'install', section: 'prep', label: '装 Slack 并登录', type: 'shot', emphasis: [2],
         title: '装好 Slack，用公司 Google 账号登录',
         shot: { src: 'assets/slack-login.jpg', size: [870, 525], alt: 'Slack 中文登录页面', w: 870, box: { x: 26, y: 74, w: 23, h: 9 } },
-        points: ['电脑、手机各装一个', '登录时选「使用 Google 登录」', '用 @glorify-app.com 公司邮箱'],
+        points: ['电脑和手机都可安装 Slack', '使用 Google 登录，选 @glorify-app.com 公司邮箱', '请大家现场检查登录账号；有问题找 Ken Ge'],
         chips: [['下载 Slack', 'https://slack.com/intl/zh-cn/downloads', true]],
         tutorial: ['下载 Slack · 官方页', 'https://slack.com/intl/zh-cn/downloads']
       },
@@ -261,15 +264,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'apps', section: 'prep', label: '装常用应用', type: 'shot',
         title: '把常用工具装进 Slack',
         shot: { src: 'assets/app-directory-redacted.png', size: [1024, 891], alt: 'Slack 代理与工具里的应用列表', w: 600, box: { x: 2.6, y: 56.8, w: 5.4, h: 9.6 } },
-        points: ['应用里搜索添加；有问题找 Ken Ge', 'Calendar 连公司账号，检查会议提醒', '云端硬盘连账号并确认权限；Meet 输入 /meet'],
+        points: ['代理与工具 → 应用：搜索 Calendar、Drive、Translate', '打开应用，按提示连接公司账号并核对权限', '/meet 是另一个第三方应用，是否付费待决定'],
+        guide: ['查看应用连接步骤', 'guides.html#apps'],
         chips: installLinks.map(([label, url]) => [`${label} ↗`, url]),
         tutorial: ['添加应用 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/202035138-添加应用到-Slack-工作区']
       },
       {
         id: 'hours', section: 'meetings', label: '标工作时间', type: 'shot', emphasis: [0],
-        title: '在 Google Calendar 标上工作时间',
+        title: '设置工作时间，让同事避开你的休息时间',
         shot: { src: 'assets/calendar-hours.jpg', size: [665, 500], alt: 'Google 日历工作时间和地点设置', w: 665, box: { x: 6, y: 9, w: 21, h: 9 } },
-        points: ['设置 → 常规 → 工作时间 → 启用', '按自己所在时区填', '别人约会议时，能看到你几点上下班'],
+        points: ['跨时区约会时，系统可提示对方避开你的休息时间', '日历设置 → 工作时间和地点 → 启用工作时间', '按自己的实际工作日和时间填写'],
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
       },
       {
@@ -335,7 +339,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         title: 'Google Drive 把文档消息发到 Slack',
         caption: 'Slack「Google 云端硬盘」应用的消息：评论与权限申请示例（个人信息已遮盖）',
         shot: { src: 'assets/drive-context-redacted.png', size: [1614, 1140], alt: 'Slack 中 Google Drive 应用的完整消息界面，权限申请局部放大，个人信息已遮盖', w: 1000, box: { x: 27.2, y: 11, w: 6.6, h: 4.6 }, secondBox: { x: 24, y: 90.5, w: 12.4, h: 5.8 }, detail: 'drive', detailSrc: 'assets/drive-notifications.jpg', detailLabel: '权限申请放大' },
-        points: ['打开 Google 云端硬盘应用，进入「消息」', '文档评论可在消息列中回复', '权限申请可由有授权权限的人处理'],
+        points: ['打开 Google 云端硬盘应用，进入「消息」', '评论可在消息列回复；有权限的人可处理申请', '应用消息可用 on / off 开关通知'],
+        guide: ['查看 Drive 通知与权限', 'guides.html#drive'],
         tutorial: ['Google Drive 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/205875058']
       },
       {
@@ -354,17 +359,17 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       {
         id: 'notes', section: 'meetings', label: '会议纪要', type: 'shot', emphasis: [0],
-        title: '会议纪要：使用 Tada Meet',
+        title: '周一试用 Tada Meet 会议纪要',
         caption: '图为录制中的 Tada Meet 面板',
         shot: { src: 'assets/tada-meet-panel-hd.png', size: [550, 345], cropHeight: 260, alt: 'Tada Meet 面板示例，显示暂停和结束记录按钮', w: 550 },
-        points: ['打开 Tada Meet，点击「开始录制」', '会后 Tada Meet 把纪要发到 Slack']
+        points: ['周一现场试用：打开 Tada Meet，点「开始录制」', '会后 Tada Meet 把 Google 文档纪要发到 Slack']
       },
       {
         id: 'demo', section: 'daily', label: '翻译和语音输入', type: 'cards',
         title: '现场演示：翻译和语音输入',
         cards: [
-          { heading: 'Translate 翻译', items: ['#sw-team、#random 中文自动译英文，不用每人安装或授权', '未安装：代理与工具 → 应用 → 搜索 Translate → 添加；有问题找 Ken Ge', '/translate 手动翻；日期、数字核对原文；译文追加到原文需授权'], link: ['Translate 应用与安装说明', 'https://slack.com/marketplace/A0ZJS6Z7E-translate?tab=more_info'] },
-          { heading: 'Typeless 语音输入', items: ['官网下载、安装并登录', 'Mac 按提示开启麦克风和辅助功能', '设置目标语言，用翻译快捷键说话'], link: ['Typeless 下载 · 官方页', 'https://www.typeless.com/zh-cn/downloads'] }
+          { heading: 'Translate 翻译', logo: 'assets/guide-translate-logo.webp', items: ['现场在已启用的频道发中文，看英文译文', '配置频道需先邀请 Translate；#random 当前显示待邀请', '也可输入 /translate 手动翻，日期和数字核对原文'], link: ['Translate 频道设置步骤', './guides.html#translate'] },
+          { heading: 'Typeless 语音输入', items: ['官网下载并登录，按提示允许麦克风', '现场按快捷键说一句，展示输入效果', '选目标语言，试试语音翻译'], link: ['Typeless 下载 · 官方页', 'https://www.typeless.com/zh-cn/downloads'] }
         ]
       },
       {
@@ -415,8 +420,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'timezone', section: 'meetings', label: '设置时区', type: 'shot',
         title: '先确认日历时区，再约跨时区会议',
-        shot: { src: 'assets/calendar-timezone.jpg', size: [515, 230], alt: 'Google 日历的主要时区设置，图中时区仅为示例', w: 515, box: { x: 4, y: 40, w: 72, h: 26 } },
-        points: ['设置 → 通用 → 时区', '主要时区选自己所在地区；图中为示例', '跨国协作可显示其他时区'],
+        shot: { src: 'assets/guide-timezone-shanghai.webp', size: [1066, 360], alt: 'Google 日历时区选择上海，画面为英文界面', w: 1066, box: { x: 9, y: 59, w: 67, h: 30 } },
+        points: ['设置 → 常规 → 时区', '在中国工作的同事选择 Shanghai（上海）', '其他地区选当地时区；可显示第二时区'],
         tutorial: ['设置时区 · 中文教程', 'https://support.google.com/calendar/answer/37064?hl=zh-Hans']
       },
       {
@@ -428,11 +433,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
       },
       {
-        id: 'meet-command', section: 'meetings', label: '/meet 快速建会', type: 'shot',
-        title: '临时开 Meet：在 Slack 输入 /meet',
-        shot: { src: 'assets/meet-command.jpg', size: [2010, 650], alt: 'Google Meet 在 Slack 的应用说明，展示 /meet 命令', w: 2010, box: { x: 18, y: 10, w: 5, h: 9 } },
-        points: ['先确认 Google Meet 应用可用', '临时开会：频道输入 /meet', '提前预约：在 Google 日历创建活动'],
-        tutorial: ['Google Meet 应用 · Slack', 'https://slack.com/marketplace/A0F7YS351']
+        id: 'meet-start', section: 'meetings', label: '/meet 建会', type: 'shot',
+        title: '临时开会：在 Slack 输入 /meet',
+        shot: { src: 'assets/guide-meet-auth.webp', size: [995, 330], alt: '/meet for Slack 首次连接提示，点击 Authenticate', w: 995, box: { x: 10, y: 67, w: 24, h: 19 } },
+        points: ['频道输入 /meet；首次使用点 Authenticate', '选公司账号，查看权限后决定是否连接', '连接后按提示建会；是否购买此应用待决定'],
+        guide: ['查看连接和建会全过程', 'guides.html#meet'],
+        tutorial: ['/meet for Slack 费用说明', 'https://meetslack.com/pricing/']
       },
       {
         id: 'meeting-reminder', section: 'meetings', label: '会前提醒', type: 'cards',
@@ -451,20 +457,51 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       {
         id: 'migration', section: 'documents', label: '搬飞书旧文档', type: 'cards', migration: true,
         title: '最后：需要时再搬旧文档',
-        cards: [{ heading: '用 lark-to-gdrive Skill 迁移', items: ['下载 Skill，交给支持本地工具的 AI 助手', '先试迁；超过 300 行或 40 列的内嵌表格单独导出', '核对内容和权限；删除旧文件前先确认'], link: ['下载 lark-to-gdrive Skill', './skills/lark-to-gdrive/SKILL.md'], download: 'lark-to-gdrive-SKILL.md' }]
+        cards: [{ heading: '用 lark-to-gdrive Skill 迁移', items: ['周一用 lark-to-gdrive Skill 和 AI 试迁一篇', '核对内容、图片和共享权限；大表格单独导出', '删除或替换旧文件前先确认'], link: ['下载 lark-to-gdrive Skill', './skills/lark-to-gdrive/SKILL.md'], download: 'lark-to-gdrive-SKILL.md' }]
+      }
+    );
+    slides.push(
+      {
+        id: 'language', section: 'prep', label: '切换中文', type: 'shot',
+        title: '先把 Slack 和 Google 日历切成中文',
+        shot: { src: 'assets/guide-slack-language.webp', size: [1600, 1398], alt: 'Slack 首选项里的语言和地区，已选简体中文', w: 1000, box: { x: 30, y: 17, w: 66, h: 8 } },
+        points: ['Slack：头像 → 首选项 → 语言和地区 → 简体中文', 'Google 日历：设置 → 语言和区域 → 简体中文', '先确认登录的是 @glorify-app.com 公司账号'],
+        guide: ['查看中文设置步骤', 'guides.html#language']
+      },
+      {
+        id: 'phone', section: 'prep', label: '手机应用', type: 'cards',
+        title: '手机也装上这三个应用',
+        cards: [
+          { heading: 'Slack', items: ['在 App Store 或 Google Play 搜索 Slack', '使用公司 Google 账号登录'], link: ['Slack 手机下载', 'https://slack.com/intl/zh-cn/downloads'] },
+          { heading: 'Gmail + Google 日历', items: ['在应用商店搜索 Gmail 和 Google Calendar', '登录公司账号，按需开启通知'], link: ['Google 日历下载', 'https://support.google.com/calendar/answer/99358?hl=zh-Hans'] }
+        ]
+      },
+      {
+        id: 'home-shortcuts', section: 'daily', label: '主页快捷入口', type: 'shot',
+        title: '从主页侧栏，快速找到常用入口',
+        shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 主页侧栏及快捷入口，个人信息已遮盖', w: 1200, box: { x: 4.8, y: 15, w: 7, h: 20 }, detail: 'recap', detailSrc: 'assets/sidebar-entry-hd-20261029.png', detailLabel: '主页入口放大' },
+        points: ['消息列：查看自己参与的话题', '抱团：进入临时语音沟通', '要点回顾、草稿和已保存都在这里']
+      },
+      {
+        id: 'meet-translation', section: 'meetings', label: '会议字幕和语音翻译', type: 'cards',
+        title: 'Google Meet：听英文，看中文字幕',
+        cards: [
+          { heading: '翻译字幕', items: ['会议设置 → 字幕 → 翻译字幕', '会议语言选英语，字幕选简体中文', '现场检查账号是否支持'], link: ['Meet 翻译字幕教程', 'https://support.google.com/meet/answer/10964115?hl=zh-Hans'] },
+          { heading: '语音翻译', items: ['中文与英文可尝试双向语音翻译', '会议底部「字幕与翻译」→「语音翻译」；双方按提示开启', '是否可用取决于账号、套餐和实际开放范围'], link: ['Meet 语音翻译说明（英文）', 'https://support.google.com/meet/answer/16221730?hl=en'] }
+        ]
       }
     );
     const order = [
-      'install', 'apps',
-      'where', 'visibility', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo',
-      'calendar-start', 'timezone', 'hours', 'availability', 'meet-command', 'meeting', 'meeting-reminder', 'notes', 'minutes-result',
+      'language', 'install', 'phone', 'apps',
+      'home-shortcuts', 'where', 'visibility', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo',
+      'calendar-start', 'timezone', 'hours', 'availability', 'meet-start', 'meeting', 'meeting-reminder', 'meet-translation', 'notes', 'minutes-result',
       'share', 'drive', 'migration',
       'lark-diff', 'resources',
     ];
     slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
-    const legacyIds = { recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
+    const legacyIds = { 'meet-command': 'meet-start', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
@@ -533,7 +570,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'cards') {
-        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : card.link ? external(card.link[0], card.link[1], 'tutorial') : ''}</div></section>`).join('')}</div></div>`;
+        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${card.logo ? `<img class="card-logo" src="${card.logo}" alt=""> ` : ''}${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : card.link ? external(card.link[0], card.link[1], 'tutorial') : ''}</div></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'table') {
         return `<div class="body full"><div class="table">${slide.rows.map(([lark, slack]) => `<div class="row"><span>飞书：${escapeText(lark)}</span><strong>${escapeText(slack)}</strong></div>`).join('')}</div></div>`;
@@ -569,8 +606,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const sectionSlides = slides.filter(item => item.section === slide.section);
       const tag = section.tag ? `<span class="tag">${section.tag}</span>` : '';
       const tutorial = slide.tutorial ? external(slide.tutorial[0], slide.tutorial[1], 'tutorial') : '';
+      const guide = slide.guide ? `<a class="chip primary" href="${slide.guide[1]}">${escapeText(slide.guide[0])} →</a>` : '';
       const migration = slide.migration ? `<button class="button secondary" data-open-migration>${slide.id === 'migration' ? '查看 Skill 使用说明' : '搬飞书旧文档'}</button>` : '';
-      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${tutorial}${migration}</div>`;
+      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${guide}${tutorial}${migration}</div>`;
       document.querySelector('#page-number').textContent = String(current + 1).padStart(2, '0');
       document.querySelector('#page-total').textContent = `/ ${slides.length}`;
       document.querySelector('#page-label').textContent = slide.label;
