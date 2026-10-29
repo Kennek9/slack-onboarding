@@ -34,7 +34,7 @@
     .wordmark { font-family: Georgia, serif; font-size: 24px; font-weight: 700; letter-spacing: -1.4px; }
     .brand-title { font-size: 14px; color: var(--muted); }
     .top-actions { display: flex; gap: 4px; }
-    .top-link { border: 0; background: none; color: var(--muted); font-size: 13px; min-height: 40px; padding: 0 10px; border-radius: 6px; }
+    .top-link { text-decoration: none; display: inline-flex; align-items: center; border: 0; background: none; color: var(--muted); font-size: 13px; min-height: 40px; padding: 0 10px; border-radius: 6px; }
     .top-link:hover { background: var(--soft); color: var(--purple); }
 
     .slide { flex: 1; padding: 16px 0 10px; display: flex; flex-direction: column; min-height: 0; }
@@ -193,6 +193,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     <header class="top">
       <div class="brand"><span class="wordmark">glorify</span><span class="brand-title">从飞书到 Slack</span></div>
       <div class="top-actions">
+        <a class="top-link" href="guides.html">详细教程</a>
         <button class="top-link" id="agenda-open">目录</button>
         <button class="top-link" id="resources-open">中文资料</button>
         <button class="top-link" id="presentation-mode" aria-pressed="false" title="隐藏辅助按钮，Esc 退出">投屏模式</button>
@@ -251,7 +252,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     ];
 
     // 截图里的红框用百分比坐标：x、y 是左上角，w、h 是宽高，都相对整张图。
-    const slides = [
+    let slides = [
       {
         id: 'install', section: 'prep', label: '装 Slack 并登录', type: 'shot', emphasis: [2],
         title: '装好 Slack，用公司 Google 账号登录',
@@ -296,7 +297,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot', emphasis: [0],
         title: '回复进话题，话题都在「消息列」',
         shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的消息列入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 15.2, w: 5.5, h: 3.2 }, detail: 'thread', detailSrc: 'assets/sidebar-entry-hd-20261029.png', detailLabel: '消息列放大' },
-        points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '重要结论勾选「同时发送到频道」'],
+        points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '有未读内容时，频道名会加粗'],
         tutorial: ['话题回复 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/115000769927']
       },
       {
@@ -466,7 +467,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         title: '先把 Slack 和 Google 日历切成中文',
         shot: { src: 'assets/guide-slack-language.webp', size: [1600, 1398], alt: 'Slack 首选项里的语言和地区，已选简体中文', w: 1000, box: { x: 30, y: 17, w: 66, h: 8 } },
         points: ['Slack：头像 → 首选项 → 语言和地区 → 简体中文', 'Google 日历：设置 → 语言和区域 → 简体中文', '先确认登录的是 @glorify-app.com 公司账号'],
-        guide: ['查看中文设置步骤', 'guides.html#language']
+        guide: ['设置与应用连接步骤', 'guides.html#apps']
       },
       {
         id: 'phone', section: 'prep', label: '手机应用', type: 'cards',
@@ -499,6 +500,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       'lark-diff', 'resources',
     ];
     slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+    const allSlides = [...slides];
+    const detailMode = new URLSearchParams(location.search).get('view') === 'all';
+    const presentationOrder = [
+      'language', 'where', 'visibility', 'threads', 'unread', 'alerts', 'huddle', 'demo',
+      'timezone', 'hours', 'meeting', 'meet-translation', 'notes', 'minutes-result',
+      'share', 'drive', 'migration'
+    ];
+    if (!detailMode) slides = slides.filter(slide => presentationOrder.includes(slide.id));
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
     const legacyIds = { 'meet-command': 'meet-start', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
@@ -632,9 +641,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     function goToId(id) {
       const index = slides.findIndex(slide => slide.id === (legacyIds[id] || id));
       if (index >= 0) go(index);
+      else if (allSlides.some(slide => slide.id === (legacyIds[id] || id))) {
+        location.href = `index.html?view=all#${encodeURIComponent(legacyIds[id] || id)}`;
+      }
     }
 
-    document.querySelector('#agenda').innerHTML = Object.entries(sections).map(([key, section]) => `<section><h3>${section.num} ${section.title}</h3>${slides.map((slide, index) => slide.section === key ? `<button data-slide="${slide.id}"><span>${String(index + 1).padStart(2, '0')}</span>${escapeText(slide.label)}</button>` : '').join('')}</section>`).join('');
+    document.querySelector('#agenda').innerHTML = Object.entries(sections).filter(([key]) => slides.some(slide => slide.section === key)).map(([key, section]) => `<section><h3>${section.num} ${section.title}</h3>${slides.map((slide, index) => slide.section === key ? `<button data-slide="${slide.id}"><span>${String(index + 1).padStart(2, '0')}</span>${escapeText(slide.label)}</button>` : '').join('')}</section>`).join('');
     document.querySelector('#agenda').addEventListener('click', event => {
       const button = event.target.closest('[data-slide]');
       if (button) goToId(button.dataset.slide);
@@ -689,7 +701,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     window.addEventListener('hashchange', () => goToId(location.hash.slice(1)));
 
     const initialId = location.hash.slice(1);
-    if (initialId && slides.some(slide => slide.id === (legacyIds[initialId] || initialId))) goToId(initialId);
+    if (initialId && allSlides.some(slide => slide.id === (legacyIds[initialId] || initialId))) goToId(initialId);
     else render();
   </script>
 </body>
