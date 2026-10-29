@@ -56,9 +56,10 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 <div class="intro"><span class="eyebrow">会后参考 · 真实界面截图</span>
 <h1>一步步设置常用工具</h1>
 
-<p>截图里的个人账号信息已遮盖。界面可能因账号或版本略有不同。</p>
+<p>主页面讲重要流程；这里按步骤查看授权和设置。个人账号信息已遮盖，界面可能因版本不同。</p>
+<p><a href="index.html?view=all">查看全部详细演示页面 →</a></p>
 
-<nav class="nav" aria-label="操作目录"><a href="#language">切换中文</a><a href="#apps">添加应用</a><a href="#translate">Translate</a><a href="#meet">/meet 连接</a><a href="#drive">Drive</a></nav>
+<nav class="nav" aria-label="操作目录"><a href="#language">切换中文</a><a href="#apps">添加应用</a><a href="#calendar-auth">Calendar 连接</a><a href="#drive-auth">Drive 连接</a><a href="#translate">Translate</a><a href="#meet">/meet 连接</a><a href="#drive">Drive</a></nav>
 </div>
 
 <section class="guide" id="language">
@@ -109,54 +110,216 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="apps">
-<h2>2. 找到并添加应用</h2>
+  <h2>2. 找到 Slack 应用</h2>
 
-<p>依次检查 Google Calendar、Google 云端硬盘和 Translate。遇到问题找 Ken Ge。</p>
+<p>先确认公司账号，再依次连接日历和云端硬盘。Translate 的频道设置见下方。</p>
+
 
 <div class="steps">
+
 <article class="step">
+
 <div>
 <h3><span class="n">1</span>打开应用目录</h3>
 
-<p>在 Slack 左侧点「代理与工具」→「应用」。搜索应用名称。</p>
 
-<p>工作区已有应用时，直接打开；未添加时，按页面提示添加。</p>
+<p>在 Slack 左侧点「代理与工具」→「应用」，按名称搜索。</p>
+
+
+<p>工作区已有应用时点「前往应用」。有问题找 Ken Ge。</p>
 </div>
 
+
 <div>
-<img src="assets/app-directory-redacted.webp" alt="Slack 应用目录示例" loading="lazy"></div>
-</article>
+<img src="assets/app-directory-redacted.webp" alt="Slack 中的应用目录" loading="lazy"></div>
+
+    </article>
+
+  </div>
+
+
+<div class="links"><a href="#calendar-auth">Google Calendar 连接步骤 ↓</a><a href="#drive-auth">Google Drive 连接步骤 ↓</a><a href="#translate">Translate 设置步骤 ↓</a></div>
+
+</section>
+
+<section class="guide" id="calendar-auth">
+  <h2>3. 连接 Google Calendar</h2>
+
+<p>以下是实际连接过程。首次授权后，可在 Slack 查看日程和会议提醒。</p>
+
+
+<div class="steps">
 
 <article class="step">
 <div>
-<h3><span class="n">2</span>连接公司账号</h3>
+<h3><span class="n">1</span>打开日历应用</h3>
 
-<p>打开 Calendar 或 Google 云端硬盘应用，按提示连接 Google 账号。</p>
-
-<p>选择 <strong>@glorify-app.com</strong> 公司邮箱。先阅读请求的权限，再自行决定是否继续。</p>
+<p>在 Slack 打开 Google Calendar 的「主页」，点 Connect an account（连接账号）。</p>
 </div>
 
 <div>
-<img src="assets/guide-calendar-connect.webp" alt="Google Calendar 应用中的 Connect an account 按钮" loading="lazy">
-<small>日历应用连接入口。后续账号选择和授权页面以实际显示为准。</small></div>
+<img src="assets/guide-calendar-connect.webp" alt="Calendar 中的连接账号按钮" loading="lazy"></div>
 </article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">2</span>检查 Slack 权限</h3>
+
+<p>阅读 Google Calendar 申请的 Slack 权限。确认后点「允许」。</p>
 </div>
 
-<div class="links"><a href="https://slack.com/intl/zh-cn/help/articles/202035138">Slack 添加应用教程 ↗</a><a href="https://slack.com/help/articles/206329808">Google Calendar 连接教程 ↗</a><a href="https://slack.com/help/articles/205875058">Google Drive 连接教程 ↗</a></div>
+<div>
+<img src="assets/auth-calendar-slack.webp" alt="Google Calendar 访问 Slack 的权限确认" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">3</span>选择公司账号</h3>
+
+<p>在 Google 账号列表选择自己的 @glorify-app.com 账号。</p>
+</div>
+
+<div>
+<img src="assets/auth-calendar-account.webp" alt="Google 账号选择页，个人信息已遮盖" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">4</span>确认账号信息</h3>
+
+<p>核对 Slack 请求的账号信息，确认后点击 Continue（继续）。</p>
+</div>
+
+<div>
+<img src="assets/auth-calendar-identity.webp" alt="Google 显示 Slack 请求的账号信息" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">5</span>确认日历权限</h3>
+
+<p>页面请求查看和编辑所有日历活动，以及查看和下载可访问的日历。核对权限后按提示继续。</p>
+</div>
+
+<div>
+<img src="assets/auth-calendar-permissions.webp" alt="Slack 请求 Google 日历权限的确认页" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">6</span>回到 Slack 检查</h3>
+
+<p>连接后打开 Calendar 主页。出现 Today、Tomorrow 和日程内容，即可查看日程。</p>
+
+<p>应用也会询问是否自动同步 Slack 状态，可自行选择。</p>
+</div>
+
+<div>
+<img src="assets/auth-calendar-connected.webp" alt="连接后的 Calendar 主页" loading="lazy"></div>
+</article>
+
+  </div>
+
+
+<div class="links"><a href="https://slack.com/intl/zh-cn/help/articles/206329808">Google Calendar 官方连接说明 ↗</a></div>
+
+</section>
+
+<section class="guide" id="drive-auth">
+  <h2>4. 连接 Google Drive</h2>
+
+<p>在 Slack 中打开 Google Drive。首次连接需要选择公司账号并核对权限。</p>
+
+
+<div class="steps">
+
+<article class="step">
+<div>
+<h3><span class="n">1</span>打开 Drive 应用</h3>
+
+<p>打开应用「主页」，点击「连接 Google Drive」。</p>
+</div>
+
+<div>
+<img src="assets/auth-drive-connect.webp" alt="Slack 的 Google Drive 连接入口" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">2</span>选择公司账号</h3>
+
+<p>选择自己的 @glorify-app.com Google 账号。</p>
+</div>
+
+<div>
+<img src="assets/auth-drive-account.webp" alt="Google 账号选择页，个人信息已遮盖" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">3</span>确认账号信息</h3>
+
+<p>核对 Slack 请求的账号信息，确认后点击 Continue（继续）。</p>
+</div>
+
+<div>
+<img src="assets/auth-drive-identity.webp" alt="Google 账号信息确认页" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">4</span>确认 Drive 权限</h3>
+
+<p>图中请求查看、修改、新建和删除所有 Drive 文件，并访问活动记录。先核对权限，再决定是否继续。</p>
+</div>
+
+<div>
+<img src="assets/auth-drive-permissions.webp" alt="Slack 请求 Google Drive 权限的确认页" loading="lazy"></div>
+</article>
+
+
+<article class="step">
+<div>
+<h3><span class="n">5</span>回到 Slack 检查</h3>
+
+<p>授权后回到 Google Drive 应用，在「消息」里查看文件分享和评论提醒。</p>
+
+<p>这是之前提供的通知示例，实际显示以你的账号为准。</p>
+</div>
+
+<div>
+<img src="assets/drive-context-redacted.webp" alt="Google Drive 在 Slack 显示的文件评论和权限申请示例，个人信息已遮盖" loading="lazy"></div>
+</article>
+
+  </div>
+
+
+<div class="links"><a href="#drive">连接后：Drive 消息和通知 ↓</a><a href="https://slack.com/intl/zh-cn/help/articles/205875058">Google Drive 官方连接说明 ↗</a></div>
+
 </section>
 
 <section class="guide" id="translate">
-<h2>3. 设置 Translate 频道翻译</h2>
+<h2>5. 设置 Translate 频道翻译</h2>
 
 <p>认准蓝色和橙色的 T 图标。下面是应用当前的真实设置界面。</p>
 
 <div class="note"><strong>先看应用是否在频道里。</strong>当前截图显示 #random 需要邀请 @Translate，才能开始自动翻译；请在现场演示前检查。</div>
 
 <div class="steps">
+<article class="step"><div><h3><span class="n">1</span>搜索正确的 Translate</h3><p>在应用目录搜索 Translate，认准蓝橙色 T 图标，打开应用。</p><p>工作区已安装时可直接前往应用。</p></div><div><img src="assets/auth-translate-search.webp" alt="Slack 搜索结果中的 Translate 应用和蓝橙色 T 图标" loading="lazy"></div></article>
+
 
 <article class="step">
 <div>
-<h3><span class="n">1</span>打开应用主页</h3>
+<h3><span class="n">2</span>打开应用主页</h3>
 
 <p>在 Slack 应用列表找到 Translate，打开「主页」→ Settings。</p>
 
@@ -169,7 +332,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 
 <article class="step">
 <div>
-<h3><span class="n">2</span>新建频道翻译</h3>
+<h3><span class="n">3</span>新建频道翻译</h3>
 
 <p>在 Automatically Translate ALL Messages 一栏点 New。</p>
 
@@ -182,7 +345,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 
 <article class="step">
 <div>
-<h3><span class="n">3</span>邀请应用并测试</h3>
+<h3><span class="n">4</span>邀请应用并测试</h3>
 
 <p>确认 @Translate 已加入该频道，再按需保存设置。</p>
 
@@ -198,7 +361,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="meet">
-<h2>4. 首次连接 /meet for Slack</h2>
+<h2>6. 首次连接 /meet for Slack</h2>
 
 <p>这是第三方 Slack 应用。以下截图来自实际连接过程，不代表所有 /meet 应用的界面都相同。</p>
 
@@ -266,7 +429,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="drive">
-<h2>5. Google 云端硬盘的提醒</h2>
+<h2>7. Google 云端硬盘的提醒</h2>
 
 <p>先在 Slack 打开 Google 云端硬盘应用，并连接自己的公司 Google 账号。</p>
 
