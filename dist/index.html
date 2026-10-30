@@ -99,6 +99,9 @@
     .compare section { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
     .compare h3 { margin: 0 0 14px; font-size: clamp(24px, 1.7vw, 32px); }
     .compare p { margin: 16px 0 0; font-size: clamp(23px, 1.5vw, 28px); line-height: 1.45; }
+    .compare-notes { margin-top: 24px; display: grid; gap: 14px; }
+    .compare-note { margin: 0; padding: 18px 22px; border-radius: 10px; background: var(--soft); font-size: clamp(23px, 1.5vw, 28px); line-height: 1.4; }
+    .compare-note strong { color: var(--purple); }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 100%; }
     .card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: clamp(24px, 2vw, 38px); }
@@ -156,7 +159,7 @@
       .body > .figure-col { max-width: 100%; }
       .compare, .availability-shots { grid-template-columns: minmax(0, 1fr); }
       .row { grid-template-columns: 1fr; gap: 4px; }
-      .points li, .card ul, .compare p, .row { font-size: 18px; }
+      .points li, .card ul, .compare p, .compare-note, .row { font-size: 18px; }
       .card h3, .compare h3 { font-size: 22px; }
       .hint { display: none; }
       .brand-title { display: none; }
@@ -287,10 +290,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       {
         id: 'visibility', section: 'daily', label: '公开和私密', type: 'compare',
-        title: '# 是公开频道，锁是私密频道',
+        title: '飞书群搬到 Slack：怎么选？',
         sides: [
-          { heading: '# 公开频道', shot: { src: 'assets/channel-public-hd-20261029.png', size: [660, 85], alt: '侧栏里带 # 的公开频道', w: 360 }, text: '公司里谁都能搜到，自己就能加入。' },
-          { heading: '🔒 私密频道', shot: { src: 'assets/channel-private-hd-20261029.png', size: [660, 102], alt: '侧栏里带锁的私密频道', w: 360 }, text: '只有成员看得到，要成员拉你进来。' }
+          { heading: '# 公开频道', shot: { src: 'assets/channel-public-hd-20261029.png', size: [660, 85], alt: '侧栏里带 # 的公开频道', w: 360 }, text: '公开讨论：同事可搜索、加入。' },
+          { heading: '🔒 私密频道', shot: { src: 'assets/channel-private-hd-20261029.png', size: [660, 102], alt: '侧栏里带锁的私密频道', w: 360 }, text: '私密讨论：只有成员可见，需邀请。' }
+        ],
+        notes: [
+          ['多人私信', '临时小群，最多 9 人（包括自己）。'],
+          ['飞书工作群', '在 Slack 新建频道并邀请原成员；敏感内容选私密频道。']
         ],
         tutorial: ['频道是什么 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360017938993']
       },
@@ -577,7 +584,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         return `<div class="body"><div class="figure-col">${slide.contextShot ? `<div class="availability-shots"><div><p>新建活动：添加邀请对象</p>${shotHtml(slide.contextShot)}</div><div><p>邀请时：查看工作时间提示</p>${shotHtml(slide.shot)}</div></div>` : `${slide.caption ? `<p class="shot-caption">${escapeText(slide.caption)}</p>` : ''}${shotHtml(slide.shot)}`} </div><div class="text-col">${points}${chips}</div></div>`;
       }
       if (slide.type === 'compare') {
-        return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div></div>`;
+        return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div>${slide.notes ? `<div class="compare-notes">${slide.notes.map(([label, text]) => `<p class="compare-note"><strong>${escapeText(label)}：</strong>${escapeText(text)}</p>`).join('')}</div>` : ''}</div>`;
       }
       if (slide.type === 'cards') {
         return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${card.logo ? `<img class="card-logo" src="${card.logo}" alt=""> ` : ''}${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : card.link ? external(card.link[0], card.link[1], 'tutorial') : ''}</div></section>`).join('')}</div></div>`;
