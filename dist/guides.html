@@ -59,7 +59,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 <p>主页面讲重要流程；这里按步骤查看授权和设置。个人账号信息已遮盖，界面可能因版本不同。</p>
 <p><a href="index.html?view=all">查看全部详细演示页面 →</a> ｜ <a href="https://clarkus8pcpkf8xh.usttp.larksuite.com/docx/WzZXdCjjEoibuNxQXW8uTOvQteg" target="_blank" rel="noopener noreferrer">打开飞书协作手册 ↗</a></p>
 
-<nav class="nav" aria-label="操作目录"><a href="#language">切换中文</a><a href="#apps">添加应用</a><a href="#calendar-auth">Calendar 连接</a><a href="#drive-auth">Drive 连接</a><a href="#translate">Translate</a><a href="#meet">/meet 连接</a><a href="#drive">Drive</a></nav>
+<nav class="nav" aria-label="操作目录"><a href="#language">切换中文</a><a href="#create-channel">创建频道</a><a href="#apps">添加应用</a><a href="#calendar-auth">Calendar 连接</a><a href="#drive-auth">Drive 连接</a><a href="#translate">Translate</a><a href="#meet">/meet 连接</a><a href="#drive">Drive</a></nav>
 </div>
 
 <section class="guide" id="language">
@@ -109,8 +109,39 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 <div class="links"><a href="https://support.google.com/calendar/answer/50640?hl=zh-Hans">Google 日历语言设置 ↗</a><a href="https://support.google.com/mail/answer/17091?hl=zh-Hans">Gmail 语言设置 ↗</a></div>
 </section>
 
+<section class="guide" id="create-channel">
+  <h2>2. 创建频道</h2>
+  <p>把飞书工作群的协作搬到 Slack：新建频道，再邀请原来的成员。</p>
+  <div class="steps">
+    <article class="step">
+      <div>
+        <h3><span class="n">1</span>打开创建菜单</h3>
+        <p>在 Slack 左侧栏底部点击「＋」，选择「频道」。</p>
+      </div>
+      <div><img src="assets/channel-create-menu.webp" alt="Slack 创建菜单中的频道入口" loading="lazy"></div>
+    </article>
+    <article class="step">
+      <div>
+        <h3><span class="n">2</span>给频道起名</h3>
+        <p>输入方便大家识别的频道名称，点击「下一步」。图中名称仅作示例。</p>
+      </div>
+      <div><img src="assets/channel-create-name.webp" alt="Slack 创建频道时输入名称" loading="lazy"></div>
+    </article>
+    <article class="step">
+      <div>
+        <h3><span class="n">3</span>选择可见范围并创建</h3>
+        <p>选择「公共」或「私人」。敏感内容选择「私人」；确认后点击「创建」。</p>
+        <p>创建后按提示邀请成员，也可以暂时跳过，稍后再添加。</p>
+      </div>
+      <div><img src="assets/channel-create-privacy.webp" alt="Slack 创建频道时选择公共或私人" loading="lazy"></div>
+    </article>
+  </div>
+  <p>以上步骤只新建频道和邀请成员，不会自动带入飞书的聊天记录。无法创建时可找 Ken Ge。</p>
+  <div class="links"><a href="https://slack.com/intl/zh-cn/help/articles/201402297">Slack 创建频道 · 中文教程 ↗</a><a href="index.html#visibility">← 返回频道选择</a></div>
+</section>
+
 <section class="guide" id="apps">
-  <h2>2. 找到 Slack 应用</h2>
+  <h2>3. 找到 Slack 应用</h2>
 
 <p>先确认公司账号，再依次连接日历和云端硬盘。Translate 的频道设置见下方。</p>
 
@@ -143,7 +174,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="calendar-auth">
-  <h2>3. 连接 Google Calendar</h2>
+  <h2>4. 连接 Google Calendar</h2>
 
 <p>以下是实际连接过程。首次授权后，可在 Slack 查看日程和会议提醒。</p>
 
@@ -231,7 +262,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="drive-auth">
-  <h2>4. 连接 Google Drive</h2>
+  <h2>5. 连接 Google Drive</h2>
 
 <p>在 Slack 中打开 Google Drive。首次连接需要选择公司账号并核对权限。</p>
 
@@ -307,7 +338,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="translate">
-<h2>5. 设置 Translate 频道翻译</h2>
+<h2>6. 设置 Translate 频道翻译</h2>
 
 <p>认准蓝色和橙色的 T 图标。下面是应用当前的真实设置界面。</p>
 
@@ -361,7 +392,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="meet">
-<h2>6. 首次连接 /meet for Slack</h2>
+<h2>7. 首次连接 /meet for Slack</h2>
 
 <p>这是第三方 Slack 应用。以下截图来自实际连接过程，不代表所有 /meet 应用的界面都相同。</p>
 
@@ -429,7 +460,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </section>
 
 <section class="guide" id="drive">
-<h2>7. Google 云端硬盘的提醒</h2>
+<h2>8. Google 云端硬盘的提醒</h2>
 
 <p>先在 Slack 打开 Google 云端硬盘应用，并连接自己的公司 Google 账号。</p>
 
