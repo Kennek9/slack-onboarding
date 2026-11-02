@@ -38,7 +38,7 @@ EOF
 printf 'y\ny\n' | ~/.local/bin/rclone config reconnect gdrive:
 ```
 
-- **用目标 Workspace 账号授权**：Glorify 的 Google Workspace 主域是 **glorify-app.com**（2026-10 确认；glorify.global 并入该 Workspace）。授权前先确认浏览器当前的 Google 会话是这个账号，别授权到个人 Gmail
+- **用目标 Workspace 账号授权**：Glorify 公司账号使用 **@glorify.global**。授权前先确认浏览器当前的 Google 会话是公司账号，别授权到个人 Gmail
 - 浏览器会自动打开 Google 授权页；若不弹，手动 `open -a "Google Chrome" "http://127.0.0.1:53682/auth?state=<日志里的state>"`
 - 出现 "Google hasn't verified this app" → **Advanced → Go to rclone** → Allow
 - 拿到 code 后进程可能还会问 "Configure as Shared Drive?" 并 EOF 退出——**token 已写入 rclone.conf，属正常，不用重跑**
