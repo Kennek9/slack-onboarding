@@ -47,6 +47,15 @@
     .body > .figure-col { min-width: 0; }
     .body > .text-col { min-width: 0; padding-top: 4px; }
     .body.full { display: block; }
+    .body.hours-body { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+    .hours-body .points { gap: 8px; }
+    .hours-body .points li { font-size: clamp(19px, 1.3vw, 24px); line-height: 1.35; }
+    .timezone-example { margin-top: 18px; }
+    .timezone-example h3 { margin: 0 0 4px; font-size: clamp(20px, 1.35vw, 26px); }
+    .timezone-example p { margin: 0 0 7px; font-size: clamp(14px, .9vw, 17px); color: #5f5863; }
+    .timezone-example table { width: 100%; border-collapse: collapse; background: white; font-size: clamp(16px, 1.05vw, 21px); font-variant-numeric: tabular-nums; }
+    .timezone-example th, .timezone-example td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    .timezone-example th { color: var(--purple); background: var(--soft); font-weight: 600; }
     .availability-shots { display: grid; grid-template-columns: 1fr; gap: 12px; }
     .availability-shots p { margin: 0 0 8px; font-size: clamp(18px, 1.2vw, 23px); font-weight: 600; }
     .availability-shots .shot { width: 100%; }
@@ -157,6 +166,9 @@
       .body { display: flex; flex-direction: column; gap: 22px; }
       .body > .text-col { flex: none; min-width: 0; }
       .body > .figure-col { max-width: 100%; }
+      .hours-body .points li { font-size: 18px; }
+      .timezone-example table { font-size: 14px; }
+      .timezone-example th, .timezone-example td { padding: 6px 4px; }
       .compare, .availability-shots { grid-template-columns: minmax(0, 1fr); }
       .row { grid-template-columns: 1fr; gap: 4px; }
       .points li, .card ul, .compare p, .compare-note, .row { font-size: 18px; }
@@ -270,7 +282,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'hours', section: 'meetings', label: '标工作时间', type: 'shot', emphasis: [0],
         title: '设置工作时间，让同事避开你的休息时间',
         shot: { src: 'assets/calendar-hours.jpg', size: [665, 500], alt: 'Google 日历工作时间和地点设置', w: 665, box: { x: 6, y: 9, w: 21, h: 9 } },
-        points: ['跨时区约会时，系统可提示对方避开你的休息时间', '设置 → 工作时间和地点 → 启用；按工作日和日历时区填写', '08:00‑10:00、22:00‑24:00；建议两段都设，也可任选一段'],
+        points: ['跨时区约会时，日历可提示对方避开你的休息时间', '设置 → 工作时间和地点 → 启用', '北京时间 08:00‑10:00、22:00‑24:00；建议两段都设，也可任选一段'],
+        timeExamples: true,
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
       },
       {
@@ -305,7 +318,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'find-search', section: 'daily', label: '查找和搜索', type: 'shot',
         title: '找对话、找内容：看这两个搜索框',
         shot: { src: 'assets/search-boxes-context.webp', size: [1552, 284], alt: 'Slack 顶部搜索框和侧栏查找对话入口', w: 1552 },
-        points: ['左侧 Find a conversation：快速打开频道或私信', '顶部 Search：搜索消息、文件、人员和频道', '搜索结果取决于你有权查看的内容'],
+        points: ['左侧 Find a conversation：快速打开频道或私信', '顶部 Search：搜索消息、文件、人员和频道', '顶部搜索只能找到你有权查看的内容'],
         tutorial: ['Slack 搜索 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/202528808']
       },
       {
@@ -317,10 +330,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       },
       {
         id: 'unread', section: 'daily', label: '加粗和数字', type: 'shot',
-        title: '加粗是未读，数字提醒你留意',
+        title: '普通未读看加粗，提及留意数字',
         shot: { src: 'assets/unread-bold-and-activity.png', size: [925, 870], alt: 'Slack 侧栏中的加粗未读频道和活动数字角标', w: 925, neutralFocus: { x: 0, y: 69, w: 15.2, h: 19 }, box: { x: 21, y: 77.5, w: 35, h: 6 }, secondBox: { x: 9, y: 41.5, w: 4.2, h: 5.1 } },
-        points: ['加粗的频道表示有未读消息', '左侧活动数字表示未读通知', '提醒和角标颜色以个人设置为准'],
-        tutorial: ['通知设置 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/201355156-配置你的-Slack-通知']
+        points: ['三人及以上的频道：普通未读消息让频道名加粗', '频道旁的数字：被 @ 或命中关键词等通知', '图中「活动」数字是未读通知数，也包含私信等'],
+        tutorial: ['Slack 通知指南 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360025446073']
       },
       {
         id: 'alerts', section: 'daily', label: '重要频道开提醒', type: 'shot', emphasis: [0],
@@ -570,11 +583,47 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       return `<button type="button" class="shot" aria-label="放大截图：${escapeText(shot.alt)}" style="--w:${shot.w}px;--r:${shot.size[0] / (shot.cropHeight || shot.size[1])}">${visibleImage}${neutralFocus}${box}${secondBox}${detail}</button>`;
     }
 
+    function timezoneExamples() {
+      const dateParts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit'
+      }).formatToParts(new Date());
+      const date = Object.fromEntries(dateParts.map(part => [part.type, part.value]));
+      const beijingDay = Date.UTC(Number(date.year), Number(date.month) - 1, Number(date.day));
+      const midnight = beijingDay - 8 * 60 * 60 * 1000;
+      const cities = [
+        ['墨西哥城', 'America/Mexico_City'],
+        ['巴西·圣保罗', 'America/Sao_Paulo'],
+        ['洛杉矶', 'America/Los_Angeles'],
+        ['伦敦', 'Europe/London'],
+        ['北京', 'Asia/Shanghai']
+      ];
+      const rows = cities.map(([city, timeZone]) => {
+        const formatter = new Intl.DateTimeFormat('en-GB', {
+          timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+        });
+        const localTime = hour => {
+          const parts = Object.fromEntries(formatter.formatToParts(new Date(midnight + hour * 3600000)).map(part => [part.type, part.value]));
+          const day = (Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day)) - beijingDay) / 86400000;
+          return { day, time: `${parts.hour}:${parts.minute}` };
+        };
+        const dayLabel = day => day < 0 ? '前日 ' : day > 0 ? '次日 ' : '';
+        const range = (startHour, endHour) => {
+          const start = localTime(startHour);
+          const end = localTime(endHour);
+          const endLabel = start.day === end.day ? '' : end.day === 0 ? '当日 ' : dayLabel(end.day);
+          return `${dayLabel(start.day)}${start.time}–${endLabel}${end.time}`;
+        };
+        return `<tr><th scope="row">${city}</th><td>${range(8, 10)}</td><td>${range(22, 24)}</td></tr>`;
+      }).join('');
+      return `<section class="timezone-example"><h3>各地时间对照</h3><p>北京日期 ${date.year}-${date.month}-${date.day}；前日、次日相对北京日期。自动按夏令时换算。</p><table aria-label="北京时间与各地时间对照"><thead><tr><th scope="col">地区</th><th scope="col">北京 08:00–10:00</th><th scope="col">北京 22:00–24:00</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+    }
+
     function bodyHtml(slide) {
       if (slide.type === 'shot') {
         const points = `<ol class="points">${slide.points.map((point, index) => `<li>${slide.emphasis?.includes(index) ? `<strong>${escapeText(point)}</strong>` : escapeText(point)}</li>`).join('')}</ol>`;
         const chips = slide.chips ? `<div class="chips">${slide.chips.map(([label, url, primary]) => `<a class="chip ${primary ? 'primary' : ''}" href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)}</a>`).join('')}</div>` : '';
-        return `<div class="body"><div class="figure-col">${slide.contextShot ? `<div class="availability-shots"><div><p>新建活动：添加邀请对象</p>${shotHtml(slide.contextShot)}</div><div><p>邀请时：查看工作时间提示</p>${shotHtml(slide.shot)}</div></div>` : `${slide.caption ? `<p class="shot-caption">${escapeText(slide.caption)}</p>` : ''}${shotHtml(slide.shot)}`} </div><div class="text-col">${points}${chips}</div></div>`;
+        return `<div class="body${slide.timeExamples ? ' hours-body' : ''}"><div class="figure-col">${slide.contextShot ? `<div class="availability-shots"><div><p>新建活动：添加邀请对象</p>${shotHtml(slide.contextShot)}</div><div><p>邀请时：查看工作时间提示</p>${shotHtml(slide.shot)}</div></div>` : `${slide.caption ? `<p class="shot-caption">${escapeText(slide.caption)}</p>` : ''}${shotHtml(slide.shot)}`} </div><div class="text-col">${points}${chips}${slide.timeExamples ? timezoneExamples() : ''}</div></div>`;
       }
       if (slide.type === 'compare') {
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div>${slide.notes ? `<div class="compare-notes">${slide.notes.map(([label, text]) => `<p class="compare-note"><strong>${escapeText(label)}：</strong>${escapeText(text)}</p>`).join('')}</div>` : ''}</div>`;
