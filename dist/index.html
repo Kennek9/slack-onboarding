@@ -525,14 +525,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       'lark-diff', 'resources',
     ];
     slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
-    const allSlides = [...slides];
     const detailMode = new URLSearchParams(location.search).get('view') === 'all';
-    const presentationOrder = [
-      'language', 'where', 'visibility', 'browse-channels', 'find-search', 'threads', 'unread', 'alerts', 'huddle', 'demo',
-      'timezone', 'hours', 'meeting', 'meet-translation', 'notes', 'minutes-result',
-      'share', 'drive', 'migration'
-    ];
-    if (!detailMode) slides = slides.filter(slide => presentationOrder.includes(slide.id));
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
     const legacyIds = { 'meet-command': 'meet-start', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
@@ -674,9 +667,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     function goToId(id) {
       const index = slides.findIndex(slide => slide.id === (legacyIds[id] || id));
       if (index >= 0) go(index);
-      else if (allSlides.some(slide => slide.id === (legacyIds[id] || id))) {
-        location.href = `index.html?view=all#${encodeURIComponent(legacyIds[id] || id)}`;
-      }
     }
 
     document.querySelector('#agenda').innerHTML = Object.entries(sections).filter(([key]) => slides.some(slide => slide.section === key)).map(([key, section]) => `<section><h3>${section.num} ${section.title}</h3>${slides.map((slide, index) => slide.section === key ? `<button data-slide="${slide.id}"><span>${String(index + 1).padStart(2, '0')}</span>${escapeText(slide.label)}</button>` : '').join('')}</section>`).join('');
@@ -734,7 +724,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     window.addEventListener('hashchange', () => goToId(location.hash.slice(1)));
 
     const initialId = location.hash.slice(1);
-    if (initialId && allSlides.some(slide => slide.id === (legacyIds[initialId] || initialId))) goToId(initialId);
+    if (initialId && slides.some(slide => slide.id === (legacyIds[initialId] || initialId))) goToId(initialId);
     else render();
   </script>
 </body>
