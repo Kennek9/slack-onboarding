@@ -351,6 +351,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         shot: { src: 'assets/drive-context-redacted.png', size: [1614, 1140], alt: 'Slack 中 Google Drive 应用的完整消息界面，权限申请局部放大，个人信息已遮盖', w: 1000, box: { x: 27.2, y: 11, w: 6.6, h: 4.6 }, secondBox: { x: 24, y: 90.5, w: 12.4, h: 5.8 }, detail: 'drive', detailSrc: 'assets/drive-notifications.jpg', detailLabel: '权限申请放大' },
         points: ['打开 Google 云端硬盘应用，进入「消息」', '评论可在消息列回复；有权限的人可处理申请', '应用消息可用 on / off 开关通知'],
         guide: ['查看 Drive 通知与权限', 'guides.html#drive'],
+        extraGuide: ['Gmail 邮件发 Slack · 安装教程', 'guides.html#gmail'],
         tutorial: ['Google Drive 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/205875058']
       },
       {
@@ -632,8 +633,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const tag = section.tag ? `<span class="tag">${section.tag}</span>` : '';
       const tutorial = slide.tutorial ? external(slide.tutorial[0], slide.tutorial[1], 'tutorial') : '';
       const guide = slide.guide ? `<a class="chip primary" href="${escapeText(guideHref(slide.guide[1], slide.id))}">${escapeText(slide.guide[0])} →</a>` : '';
+      const extraGuide = slide.extraGuide ? `<a class="chip" href="${escapeText(guideHref(slide.extraGuide[1], slide.id))}">${escapeText(slide.extraGuide[0])} →</a>` : '';
       const migration = slide.migration ? `<button class="button secondary" data-open-migration>${slide.id === 'migration' ? '查看 Skill 使用说明' : '搬飞书旧文档'}</button>` : '';
-      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${guide}${tutorial}${migration}</div>`;
+      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${guide}${extraGuide}${tutorial}${migration}</div>`;
       document.querySelector('#guides-link').href = guideHref('guides.html', slide.id);
       document.querySelector('#page-number').textContent = String(current + 1).padStart(2, '0');
       document.querySelector('#page-total').textContent = `/ ${slides.length}`;
