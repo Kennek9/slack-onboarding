@@ -49,7 +49,7 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 </head>
 <body>
 
-<header class="header"><strong>glorify</strong><a href="index.html">← 返回演示</a></header>
+<header class="header"><strong>glorify</strong><a class="return-to-presentation" href="index.html">← 返回演示</a></header>
 
 <main class="wrap">
 
@@ -493,6 +493,16 @@ a:focus-visible { outline:3px solid #a58caf; outline-offset:4px}
 <div class="links"><a href="https://slack.com/intl/zh-cn/help/articles/205875058">Google Drive 在 Slack 的使用说明 ↗</a></div>
 </section>
 
-<div class="footer"><a href="index.html">← 返回演示</a></div>
+<div class="footer"><a class="return-to-presentation" href="index.html">← 返回演示</a></div>
 </main>
+<script>
+  const params = new URLSearchParams(location.search);
+  const from = params.get('from');
+  if (from && /^[a-z0-9-]+$/.test(from)) {
+    const view = params.get('view') === 'all' ? '?view=all' : '';
+    document.querySelectorAll('.return-to-presentation').forEach(link => {
+      link.href = `index.html${view}#${encodeURIComponent(from)}`;
+    });
+  }
+</script>
 </body></html>

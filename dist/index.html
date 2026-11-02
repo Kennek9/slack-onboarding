@@ -196,7 +196,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     <header class="top">
       <div class="brand"><span class="wordmark">glorify</span><span class="brand-title">从飞书到 Slack</span></div>
       <div class="top-actions">
-        <a class="top-link" href="guides.html">详细教程</a>
+        <a class="top-link" id="guides-link" href="guides.html">详细教程</a>
         <a class="top-link" href="https://clarkus8pcpkf8xh.usttp.larksuite.com/docx/WzZXdCjjEoibuNxQXW8uTOvQteg" target="_blank" rel="noopener noreferrer">飞书手册 ↗</a>
         <button class="top-link" id="agenda-open">目录</button>
         <button class="top-link" id="resources-open">中文资料</button>
@@ -566,7 +566,13 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const image = `<img src="${src}" alt="${escapeText(alt)}" decoding="async">`;
       return optimized === src ? image : `<picture><source srcset="${optimized}" type="image/webp">${image}</picture>`;
     };
-    const external = (label, url, className) => `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${escapeText(label)} <svg aria-hidden="true"><use href="#i-external"/></svg></a>`;
+    const external = (label, url, className) => `<a class="${className}" href="${escapeText(url)}" target="_blank" rel="noopener noreferrer">${escapeText(label)} <svg aria-hidden="true"><use href="#i-external"/></svg></a>`;
+    const guideHref = (url, slideId) => {
+      const [path, fragment] = url.split('#');
+      const params = new URLSearchParams({ from: slideId });
+      if (detailMode) params.set('view', 'all');
+      return `${path}?${params}${fragment ? `#${fragment}` : ''}`;
+    };
 
     function shotHtml(shot) {
       if (shot.missing) return `<div class="shot-missing" style="--w:${shot.w}px"><strong>待补截图</strong><span>${escapeText(shot.missing)}</span></div>`;
@@ -589,7 +595,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         return `<div class="body full"><div class="compare">${slide.sides.map(side => `<section><h3>${escapeText(side.heading)}</h3>${shotHtml(side.shot)}<p>${escapeText(side.text)}</p></section>`).join('')}</div>${slide.notes ? `<div class="compare-notes">${slide.notes.map(([label, text]) => `<p class="compare-note"><strong>${escapeText(label)}：</strong>${escapeText(text)}</p>`).join('')}</div>` : ''}</div>`;
       }
       if (slide.type === 'cards') {
-        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${card.logo ? `<img class="card-logo" src="${card.logo}" alt=""> ` : ''}${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : card.link ? external(card.link[0], card.link[1], 'tutorial') : ''}</div></section>`).join('')}</div></div>`;
+        return `<div class="body full"><div class="cards">${slide.cards.map(card => `<section class="card"><h3>${card.logo ? `<img class="card-logo" src="${card.logo}" alt=""> ` : ''}${escapeText(card.heading)}</h3><ul>${card.items.map(item => `<li>${escapeText(item)}</li>`).join('')}</ul><div class="slide-foot">${card.download ? `<a class="tutorial" href="${card.link[1]}" download="${card.download}">${escapeText(card.link[0])} ↓</a>` : card.link ? external(card.link[0], card.link[1].startsWith('./guides.html') ? guideHref(card.link[1], slide.id) : card.link[1], 'tutorial') : ''}</div></section>`).join('')}</div></div>`;
       }
       if (slide.type === 'table') {
         return `<div class="body full"><div class="table">${slide.rows.map(([lark, slack]) => `<div class="row"><span>飞书：${escapeText(lark)}</span><strong>${escapeText(slack)}</strong></div>`).join('')}</div></div>`;
@@ -625,9 +631,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const sectionSlides = slides.filter(item => item.section === slide.section);
       const tag = section.tag ? `<span class="tag">${section.tag}</span>` : '';
       const tutorial = slide.tutorial ? external(slide.tutorial[0], slide.tutorial[1], 'tutorial') : '';
-      const guide = slide.guide ? `<a class="chip primary" href="${slide.guide[1]}">${escapeText(slide.guide[0])} →</a>` : '';
+      const guide = slide.guide ? `<a class="chip primary" href="${escapeText(guideHref(slide.guide[1], slide.id))}">${escapeText(slide.guide[0])} →</a>` : '';
       const migration = slide.migration ? `<button class="button secondary" data-open-migration>${slide.id === 'migration' ? '查看 Skill 使用说明' : '搬飞书旧文档'}</button>` : '';
       slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${guide}${tutorial}${migration}</div>`;
+      document.querySelector('#guides-link').href = guideHref('guides.html', slide.id);
       document.querySelector('#page-number').textContent = String(current + 1).padStart(2, '0');
       document.querySelector('#page-total').textContent = `/ ${slides.length}`;
       document.querySelector('#page-label').textContent = slide.label;
