@@ -312,15 +312,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         id: 'threads', section: 'daily', label: '话题和消息列', type: 'shot', emphasis: [0],
         title: '回复进话题，话题都在「消息列」',
         shot: { src: 'assets/sidebar-context-redacted.jpg', size: [3420, 1678], alt: 'Slack 完整界面中的消息列入口，局部放大，个人信息已遮盖', w: 1200, neutralFocus: { x: 0, y: 50, w: 4, h: 10 }, box: { x: 4.8, y: 15.2, w: 5.5, h: 3.2 }, detail: 'thread', detailSrc: 'assets/sidebar-entry-hd-20261029.png', detailLabel: '消息列放大' },
-        points: ['在消息上点「回复」，频道不刷屏', '侧栏「消息列」集中看你参与的话题', '有未读内容时，频道名会加粗'],
+        points: ['在频道输入框发消息；同一件事点「回复」', '侧栏「消息列」集中看你参与的话题', '不同事情另发新消息，方便查找'],
         tutorial: ['话题回复 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/115000769927']
-      },
-      {
-        id: 'mention', section: 'daily', label: '@ 不在频道的人', type: 'shot',
-        title: '@ 了不在频道的人，Slack 会提醒你',
-        shot: { src: 'assets/mention-prompt-redacted.png', size: [640, 148], alt: 'Slack 提示被提及的人不在私人频道中，姓名已遮盖', w: 820, box: { x: 14.4, y: 55, w: 13.6, h: 24 } },
-        points: ['点「添加他们」，才会拉进频道', '点「忽略」，对方收不到', '这条提示只有你看得见'],
-        tutorial: ['@ 与通知 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/360002063088']
       },
       {
         id: 'unread', section: 'daily', label: '加粗和数字', type: 'shot',
@@ -503,7 +496,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     );
     const order = [
       'language', 'phone', 'apps',
-      'home-shortcuts', 'where', 'visibility', 'browse-channels', 'find-search', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo',
+      'where', 'visibility', 'browse-channels', 'threads', 'unread', 'alerts', 'recap', 'find-search', 'huddle', 'demo', 'home-shortcuts',
       'calendar-start', 'timezone', 'hours', 'availability', 'meeting', 'meeting-reminder', 'meet-translation', 'notes', 'minutes-result',
       'share', 'drive', 'migration',
       'lark-diff', 'resources',
@@ -512,7 +505,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     const detailMode = new URLSearchParams(location.search).get('view') === 'all';
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
-    const legacyIds = { install: 'phone', 'meet-command': 'meeting', 'meet-start': 'meeting', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
+    const legacyIds = { install: 'phone', mention: 'threads', 'meet-command': 'meeting', 'meet-start': 'meeting', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
