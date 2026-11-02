@@ -47,14 +47,14 @@
     .body > .figure-col { min-width: 0; }
     .body > .text-col { min-width: 0; padding-top: 4px; }
     .body.full { display: block; }
-    .body.hours-body { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+    .body.hours-body { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); column-gap: clamp(32px, 3vw, 56px); }
     .hours-body .points { gap: 8px; }
     .hours-body .points li { font-size: clamp(19px, 1.3vw, 24px); line-height: 1.35; }
     .timezone-example { margin-top: 18px; }
     .timezone-example h3 { margin: 0 0 4px; font-size: clamp(20px, 1.35vw, 26px); }
     .timezone-example p { margin: 0 0 7px; font-size: clamp(14px, .9vw, 17px); color: #5f5863; }
-    .timezone-example table { width: 100%; border-collapse: collapse; background: white; font-size: clamp(16px, 1.05vw, 21px); font-variant-numeric: tabular-nums; }
-    .timezone-example th, .timezone-example td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    .timezone-example table { width: auto; max-width: 100%; border-collapse: collapse; background: white; font-size: clamp(16px, 1.05vw, 21px); font-variant-numeric: tabular-nums; }
+    .timezone-example th, .timezone-example td { text-align: left; padding: 6px 16px; border-bottom: 1px solid var(--line); white-space: nowrap; }
     .timezone-example th { color: var(--purple); background: var(--soft); font-weight: 600; }
     .availability-shots { display: grid; grid-template-columns: 1fr; gap: 12px; }
     .availability-shots p { margin: 0 0 8px; font-size: clamp(18px, 1.2vw, 23px); font-weight: 600; }
@@ -79,9 +79,6 @@
     .shot-detail--recap, .shot-detail--thread { left: 35%; right: auto; bottom: 6%; width: 48%; aspect-ratio: 760 / 290; }
     .shot-detail--recap .box { left: 2%; top: 48%; width: 32%; height: 21%; }
     .shot-detail--thread .box { left: 2%; top: 2%; width: 25%; height: 19%; }
-    .shot-detail--drive { width: 46%; aspect-ratio: 320 / 140; bottom: 10%; }
-    .shot-detail--drive img { width: 421.5625%; left: -25%; top: -321.43%; }
-    .shot-detail--drive .box { left: 14.7%; top: 31.4%; width: 60%; height: 40.7%; }
     .shot-detail-label { position: absolute; right: 4px; bottom: 4px; padding: 2px 7px; border-radius: 4px; background: #49264fe6; color: white; font-size: clamp(11px, 1vw, 16px); }
 
     .shot::after { content: "点击放大"; position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; border-radius: 5px; background: #29232ddd; color: white; font-size: 12px; }
@@ -357,16 +354,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['Google 文档共享 · 中文教程', 'https://support.google.com/a/users/answer/9283053?hl=zh-Hans']
       },
       {
-        id: 'drive', section: 'documents', label: '文档消息进 Slack', type: 'shot',
-        title: 'Google Drive 把文档消息发到 Slack',
-        caption: 'Slack「Google 云端硬盘」应用的消息：评论与权限申请示例（个人信息已遮盖）',
-        shot: { src: 'assets/drive-context-redacted.png', size: [1614, 1140], alt: 'Slack 中 Google Drive 应用的完整消息界面，权限申请局部放大，个人信息已遮盖', w: 1000, box: { x: 27.2, y: 11, w: 6.6, h: 4.6 }, secondBox: { x: 24, y: 90.5, w: 12.4, h: 5.8 }, detail: 'drive', detailSrc: 'assets/drive-notifications.jpg', detailLabel: '权限申请放大' },
-        points: ['打开 Google 云端硬盘应用，进入「消息」', '评论可在消息列回复；有权限的人可处理申请', '应用消息可用 on / off 开关通知'],
-        guide: ['查看 Drive 通知与权限', 'guides.html#drive'],
-        extraGuide: ['Gmail 邮件发 Slack · 安装教程', 'guides.html#gmail'],
-        tutorial: ['Google Drive 接入 · 中文教程', 'https://slack.com/intl/zh-cn/help/articles/205875058']
-      },
-      {
         id: 'huddle', section: 'daily', label: 'Huddle 语音', type: 'shot',
         title: '临时聊几句：点频道右上角的耳机',
         shot: { src: 'assets/huddle-channel-context.jpg', size: [3420, 1350], alt: 'Slack 频道完整界面及右上角抱团入口，右下角为局部放大，名称与消息已模糊', w: 1200, neutralFocus: { x: 0, y: 62, w: 2.45, h: 14 }, detail: 'huddle' },
@@ -511,14 +498,14 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       'language', 'phone', 'apps',
       'where', 'visibility', 'browse-channels', 'threads', 'unread', 'alerts', 'recap', 'find-search', 'huddle', 'demo', 'home-shortcuts',
       'calendar-start', 'timezone', 'hours', 'availability', 'meeting', 'meeting-reminder', 'meet-translation', 'notes', 'minutes-result',
-      'share', 'drive', 'migration',
+      'share', 'migration',
       'lark-diff', 'resources',
     ];
     slides.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
     const detailMode = new URLSearchParams(location.search).get('view') === 'all';
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
-    const legacyIds = { install: 'phone', mention: 'threads', 'meet-command': 'meeting', 'meet-start': 'meeting', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
+    const legacyIds = { install: 'phone', mention: 'threads', 'meet-command': 'meeting', 'meet-start': 'meeting', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'share', drive: 'share', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
@@ -539,8 +526,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       'assets/channel-notifications.webp',
       'assets/channel-private-hd.webp',
       'assets/channel-public-hd.webp',
-      'assets/drive-context-redacted.webp',
-      'assets/drive-notifications.webp',
       'assets/google-share.webp',
       'assets/huddle-channel-context.webp',
       'assets/meet-command.webp',
@@ -665,9 +650,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       const tag = section.tag ? `<span class="tag">${section.tag}</span>` : '';
       const tutorial = slide.tutorial ? external(slide.tutorial[0], slide.tutorial[1], 'tutorial') : '';
       const guide = slide.guide ? `<a class="chip primary" href="${escapeText(guideHref(slide.guide[1], slide.id))}">${escapeText(slide.guide[0])} →</a>` : '';
-      const extraGuide = slide.extraGuide ? `<a class="chip" href="${escapeText(guideHref(slide.extraGuide[1], slide.id))}">${escapeText(slide.extraGuide[0])} →</a>` : '';
       const migration = slide.migration ? `<button class="button secondary" data-open-migration>${slide.id === 'migration' ? '查看 Skill 使用说明' : '搬飞书旧文档'}</button>` : '';
-      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${guide}${extraGuide}${tutorial}${migration}</div>`;
+      slideEl.innerHTML = `<div class="kicker${slide.section === 'prep' ? ' kicker-prep' : ''}"><strong>${section.num} ${section.title}</strong><span>${sectionSlides.indexOf(slide) + 1} / ${sectionSlides.length}</span>${tag}</div><h2>${escapeText(slide.title)}</h2>${bodyHtml(slide)}<div class="slide-foot">${guide}${tutorial}${migration}</div>`;
       document.querySelector('#guides-link').href = guideHref('guides.html', slide.id);
       document.querySelector('#page-number').textContent = String(current + 1).padStart(2, '0');
       document.querySelector('#page-total').textContent = `/ ${slides.length}`;
