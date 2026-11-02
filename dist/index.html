@@ -258,14 +258,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     // 截图里的红框用百分比坐标：x、y 是左上角，w、h 是宽高，都相对整张图。
     let slides = [
       {
-        id: 'install', section: 'prep', label: '装 Slack 并登录', type: 'shot', emphasis: [2],
-        title: '装好 Slack，用公司 Google 账号登录',
-        shot: { src: 'assets/slack-login.jpg', size: [870, 525], alt: 'Slack 中文登录页面', w: 870, box: { x: 26, y: 74, w: 23, h: 9 } },
-        points: ['电脑和手机都可安装 Slack', '使用 Google 登录，选 @glorify.global 公司邮箱', '请大家现场检查登录账号；有问题找 Ken Ge'],
-        chips: [['下载 Slack', 'https://slack.com/intl/zh-cn/downloads', true]],
-        tutorial: ['下载 Slack · 官方页', 'https://slack.com/intl/zh-cn/downloads']
-      },
-      {
         id: 'apps', section: 'prep', label: '装常用应用', type: 'shot',
         title: '把常用工具装进 Slack',
         shot: { src: 'assets/app-directory-redacted.png', size: [1024, 891], alt: 'Slack 代理与工具里的应用列表', w: 600, box: { x: 2.6, y: 56.8, w: 5.4, h: 9.6 } },
@@ -459,14 +451,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
         tutorial: ['设置工作时间 · 中文教程', 'https://support.google.com/calendar/answer/7638168?hl=zh-Hans']
       },
       {
-        id: 'meet-start', section: 'meetings', label: '/meet 建会', type: 'shot',
-        title: '临时开会：在 Slack 输入 /meet',
-        shot: { src: 'assets/guide-meet-auth.webp', size: [995, 330], alt: '/meet for Slack 首次连接提示，点击 Authenticate', w: 995, box: { x: 10, y: 67, w: 24, h: 19 } },
-        points: ['频道输入 /meet；首次使用点 Authenticate', '选公司账号，查看权限后决定是否连接', '连接后按提示建会；是否购买此应用待决定'],
-        guide: ['查看连接和建会全过程', 'guides.html#meet'],
-        tutorial: ['/meet for Slack 费用说明', 'https://meetslack.com/pricing/']
-      },
-      {
         id: 'meeting-reminder', section: 'meetings', label: '会前提醒', type: 'cards',
         title: '会前：用日历和 Slack 看提醒',
         cards: [
@@ -518,9 +502,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
       }
     );
     const order = [
-      'language', 'install', 'phone', 'apps',
+      'language', 'phone', 'apps',
       'home-shortcuts', 'where', 'visibility', 'browse-channels', 'find-search', 'threads', 'mention', 'unread', 'alerts', 'recap', 'huddle', 'demo',
-      'calendar-start', 'timezone', 'hours', 'availability', 'meet-start', 'meeting', 'meeting-reminder', 'meet-translation', 'notes', 'minutes-result',
+      'calendar-start', 'timezone', 'hours', 'availability', 'meeting', 'meeting-reminder', 'meet-translation', 'notes', 'minutes-result',
       'share', 'drive', 'migration',
       'lark-diff', 'resources',
     ];
@@ -528,7 +512,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     const detailMode = new URLSearchParams(location.search).get('view') === 'all';
 
     // 旧网址里的主题名，跳到新页面，避免已分享的链接失效。
-    const legacyIds = { 'meet-command': 'meet-start', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
+    const legacyIds = { install: 'phone', 'meet-command': 'meeting', 'meet-start': 'meeting', recording: 'notes', entry: 'where', privacy: 'visibility', thread: 'threads', follow: 'unread', habits: 'lark-diff', documents: 'drive', sharing: 'share', video: 'huddle', calendar: 'meeting', translate: 'demo', typeless: 'demo', 'pause-prep': 'apps', 'pause-talk': 'threads', 'pause-notice': 'alerts', 'pause-meetings': 'meeting', 'pause-work': 'share' };
 
     const slideEl = document.querySelector('#slide');
     let current = 0;
