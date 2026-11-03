@@ -38,11 +38,18 @@ EOF
 printf 'y\ny\n' | ~/.local/bin/rclone config reconnect gdrive:
 ```
 
-- **用目标 Workspace 账号授权**：Glorify 公司账号使用 **@glorify.global**。授权前先确认浏览器当前的 Google 会话是公司账号，别授权到个人 Gmail
+- **用目标 Workspace 账号授权**：目标账号是 **ken@glorify.global**（Managed by glorify.global，2026-11 确认）。授权前先确认浏览器当前的 Google 会话是这个账号，别授权到个人 Gmail。**注意：同机还登录着 ken@glorify-tmp.com，2026-11 曾误授权到该账号导致整批文件传错 Drive——OAuth 授权页务必看清邮箱**
 - 浏览器会自动打开 Google 授权页；若不弹，手动 `open -a "Google Chrome" "http://127.0.0.1:53682/auth?state=<日志里的state>"`
 - 出现 "Google hasn't verified this app" → **Advanced → Go to rclone** → Allow
 - 拿到 code 后进程可能还会问 "Configure as Shared Drive?" 并 EOF 退出——**token 已写入 rclone.conf，属正常，不用重跑**
-- 验证：`rclone lsd gdrive:`（返回码 0 即通；空 Drive 无输出）
+- **必做：验证授权到的真实邮箱**（浏览器会话可能登错账号，token 拿到的不一定是目标账号）：
+  ```bash
+  TOKEN=$(python3 -c "import json,re; c=open('$HOME/.config/rclone/rclone.conf').read(); \
+    print(json.loads(re.search(r'token = (\{.*\})', c).group(1))['access_token'])")
+  curl -sS "https://www.googleapis.com/drive/v3/about?fields=user" -H "Authorization: Bearer $TOKEN"
+  # user.emailAddress 必须是 ken@glorify.global；不是就重跑 reconnect 并在浏览器里换账号
+  ```
+- 验证 Drive 可读：`rclone lsd gdrive:`（返回码 0 即通；空 Drive 无输出）
 - 注意：共享 client_id 计划 2026 年内停用。若授权页报 invalid_client，需按 https://rclone.org/drive/#making-your-own-client-id 自建 client_id
 - token 有效期约 1 小时；过期后跑任意 rclone 命令会自动刷新，再从 rclone.conf 重新读取
 
